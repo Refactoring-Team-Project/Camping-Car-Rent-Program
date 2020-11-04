@@ -20,10 +20,6 @@ public class CampingCarModel {
 	int compid;
 	String registdate;
 	
-	
-
-	
-
 	public int getCarid() {
 		return carid;
 	}

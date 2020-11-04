@@ -15,6 +15,13 @@ public class Main {
 
 		CarCheckView cchkv = new CarCheckView();
 		CarCheckController cchkcon = new CarCheckController();
+		
+		RepairShopView rsv = new RepairShopView();
+		RepairShopController rscon = new RepairShopController();
+
+		RepairListView rlv = new RepairListView();
+		RepairListController rlcon = new RepairListController();
+
 	}
 
 }
