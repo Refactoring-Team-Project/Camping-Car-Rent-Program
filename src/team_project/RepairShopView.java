@@ -1,3 +1,4 @@
+package team_project;
 
 
 import java.awt.Dimension;
@@ -19,9 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-public class RepairListView extends JPanel {
+public class RepairShopView extends JPanel {
 
-	RepairListModel dataModel;
+	RepairShopModel dataModel;
 	private MainView _view;
 	DefaultTableModel model;
 	JTable dbResult;
@@ -37,10 +38,10 @@ public class RepairListView extends JPanel {
 	PreparedStatement pstmt; // insert, delete
 	ResultSet rs;
 
-	public RepairListView() {
+	public RepairShopView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
-		AppManager.getInstance().setRepairListView(this);
+		AppManager.getInstance().setRepairShopView(this);
 		_view = AppManager.getInstance().getView();
 		_conn = _view.conn;
 		model = new DefaultTableModel() {
@@ -53,31 +54,23 @@ public class RepairListView extends JPanel {
 		add(scrollPane);
 
 		updatePanel = new JPanel();
-		labels = new JLabel[10];
-		labels[0] = new JLabel("repairno");
-		labels[1] = new JLabel("carid");
-		labels[2] = new JLabel("shopid");
-		labels[3] = new JLabel("compid");
-		labels[4] = new JLabel("license_no");
-		labels[5] = new JLabel("repairdetails");
-		labels[6] = new JLabel("repairdate");
-		labels[7] = new JLabel("repaircost");
-		labels[8] = new JLabel("paymentdeadline");
-		labels[9] = new JLabel("repairhistory");
+		labels = new JLabel[6];
+		labels[0] = new JLabel("shopid:");
+		labels[1] = new JLabel("shopname:");
+		labels[2] = new JLabel("address:");
+		labels[3] = new JLabel("phone:");
+		labels[4] = new JLabel("manager_name:");
+		labels[5] = new JLabel("manager_email:");
 
-		tf = new JTextField[10];
+		tf = new JTextField[6];
 		tf[0] = new JTextField("", 3);
-		tf[1] = new JTextField("", 3);
-		tf[2] = new JTextField("", 3);
-		tf[3] = new JTextField("", 3);
-		tf[4] = new JTextField("", 3);
+		tf[1] = new JTextField("", 5);
+		tf[2] = new JTextField("", 10);
+		tf[3] = new JTextField("", 10);
+		tf[4] = new JTextField("", 7);
 		tf[5] = new JTextField("", 10);
-		tf[6] = new JTextField("", 5);
-		tf[7] = new JTextField("", 3);
-		tf[8] = new JTextField("", 5);
-		tf[9] = new JTextField("", 10);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 6; i++) {
 			updatePanel.add(labels[i]);
 			updatePanel.add(tf[i]);
 		}
@@ -86,28 +79,34 @@ public class RepairListView extends JPanel {
 
 		buttonPanel = new JPanel();
 
+		btnInput = new JButton("입력");
 		btnDelete = new JButton("삭제");
 		btnUpdate = new JButton("변경");
 
+		buttonPanel.add(btnInput);
 		buttonPanel.add(btnDelete);
 		buttonPanel.add(btnUpdate);
 
 		add(buttonPanel);
+
+		buttonPanel = new JPanel();
 
 		scrollPane.setPreferredSize(new Dimension(780, 300));
 		updatePanel.setPreferredSize(new Dimension(780, 60));
 		buttonPanel.setPreferredSize(new Dimension(780, 50));
 
 		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		dbResult.addMouseListener(new RepairListMouseListener());
+		// mouseListener 처리하기
+		dbResult.addMouseListener(new RepairShopMouseListener());
 	}
 
 	public void addButtonListener(ActionListener listener) {
+		btnInput.addActionListener(listener);
 		btnDelete.addActionListener(listener);
 		btnUpdate.addActionListener(listener);
 	}
 
-	private class RepairListMouseListener implements MouseListener {
+	private class RepairShopMouseListener implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -151,4 +150,5 @@ public class RepairListView extends JPanel {
 		}
 		repaint();
 	}
+
 }

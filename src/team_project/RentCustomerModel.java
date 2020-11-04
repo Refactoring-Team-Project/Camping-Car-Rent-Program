@@ -1,3 +1,4 @@
+package team_project;
 
 
 import java.sql.Connection;
@@ -10,13 +11,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class RepairShopModel {
-	int shopid;
-	String shopname;
+public class RentCustomerModel {
+	int license_no;
+	String name;
 	String address;
 	String phone;
-	String manager_name;
-	String manager_email;
+	String email;
 
 	ResultSet rs;
 	DefaultTableModel model;
@@ -24,17 +24,15 @@ public class RepairShopModel {
 	public ArrayList<Object[]> select(Connection conn) {
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 		try {
-			String sql = "SELECT * FROM Repairshop";
-
+			String sql = "SELECT * FROM Rent_Customer";
 			Statement stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 
-			Object column[] = { "SHOP ID", "SHOP NAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL" };
+			Object column[] = { "LICENSE_NO", "NAME", "ADDRESS", "PHONE", "EMAIL" };
 			arr.add(column);
 
 			while (rs.next()) {
-				Object[] data = { rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6) };
+				Object[] data = { rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5) };
 				arr.add(data);
 			}
 		} catch (SQLException e1) {
@@ -45,19 +43,16 @@ public class RepairShopModel {
 
 	public void insert(Connection conn) {
 		try {
-			String sql = "INSERT INTO Repairshop(shopid, shopname, address, phone, manager_name, manager_email) VALUES(?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Rent_Customer(license_no, name, address, phone, email) VALUES(?, ?, ?, ?, ?)";
 
 			PreparedStatement pstmt;
 			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, shopid);
-			pstmt.setString(2, shopname);
+			pstmt.setInt(1, license_no);
+			pstmt.setString(2, name);
 			pstmt.setString(3, address);
 			pstmt.setString(4, phone);
-			pstmt.setString(5, manager_name);
-			pstmt.setString(6, manager_email);
+			pstmt.setString(5, email);
 			pstmt.executeUpdate();
-
 			JOptionPane.showMessageDialog(null, "추가되었습니다.");
 
 		} catch (SQLException e1) {
@@ -67,7 +62,7 @@ public class RepairShopModel {
 
 	public void delete(Connection conn, Object object) {
 		try {
-			String sql = "DELETE FROM RepairShop WHERE shopid = " + object.toString() + ";";
+			String sql = "DELETE FROM Rent_Customer WHERE license_no = " + object.toString() + ";";
 
 			PreparedStatement pstmt;
 			pstmt = conn.prepareStatement(sql);
@@ -82,40 +77,39 @@ public class RepairShopModel {
 
 	public void update(Connection conn, Object object) {
 		try {
-			String sql = "UPDATE Repairshop SET shopid=?,shopname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE shopid = "
+			String sql = "UPDATE Rent_Customer SET license_no=?,name=?,address=?,phone=?,email=? WHERE license_no = "
 					+ object.toString() + ";";
 
 			PreparedStatement pstmt;
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(1, shopid);
-			pstmt.setString(2, shopname);
+			pstmt.setInt(1, license_no);
+			pstmt.setString(2, name);
 			pstmt.setString(3, address);
 			pstmt.setString(4, phone);
-			pstmt.setString(5, manager_name);
-			pstmt.setString(6, manager_email);
+			pstmt.setString(5, email);
 			pstmt.executeUpdate();
-
 			JOptionPane.showMessageDialog(null, "수정되었습니다.");
+
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
 	}
 
-	public int getShopid() {
-		return shopid;
+	public int getLicense_no() {
+		return license_no;
 	}
 
-	public void setShopid(int shopid) {
-		this.shopid = shopid;
+	public void setLicense_no(int license_no) {
+		this.license_no = license_no;
 	}
 
-	public String getShopname() {
-		return shopname;
+	public String getName() {
+		return name;
 	}
 
-	public void setShopname(String shopname) {
-		this.shopname = shopname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddress() {
@@ -134,20 +128,12 @@ public class RepairShopModel {
 		this.phone = phone;
 	}
 
-	public String getManager_name() {
-		return manager_name;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setManager_name(String manager_name) {
-		this.manager_name = manager_name;
-	}
-
-	public String getManager_email() {
-		return manager_email;
-	}
-
-	public void setManager_email(String manager_email) {
-		this.manager_email = manager_email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
