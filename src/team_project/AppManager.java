@@ -6,6 +6,10 @@ public class AppManager {
 	private CampingCompanyView _campingcompview; // DrawingPanelView�� �״�� �޾ƿͼ� ���� �� ����
 	private RentCustomerView _rentcustview;
 	private CarCheckView _carchkview;
+	private RepairShopView _repairshopview;
+	private RepairListView _repairlistview;
+	private CampingCarView _campingcarview;
+	private RentCarView _rentcarview;
 	private SearchView _searchview;
 	private CarRentListView _carrentlistview;
 	
@@ -13,6 +17,14 @@ public class AppManager {
 								// ��ȯ�� �� �Լ�
 		return _view;
 	} // getView()
+	
+	public CampingCarView getCampingCarView() {
+		return _campingcarview;
+	}
+	
+	public RentCarView getRentCarView() {
+		return _rentcarview;
+	}
 
 	public CampingCompanyView getCampingCompanyView() {// AppManager�� ���� DrawingPanelView�� �����Ϸ� �Ҷ� ��
 														// DrawingPanelView�� ��ȯ�� �� �Լ�
@@ -27,6 +39,14 @@ public class AppManager {
 		return _carchkview;
 	}
 
+	public RepairShopView getRepairShopView() {
+		return _repairshopview;
+	}
+
+	public RepairListView getRepairListView() {
+		return _repairlistview;
+	}
+	
 	public SearchView getSearchView() {
 		return _searchview;
 	}
@@ -54,6 +74,22 @@ public class AppManager {
 	public void setCarCheckView(CarCheckView carCheckView) {
 
 		_carchkview = carCheckView;
+	}
+
+	public void setRepairShopView(RepairShopView repairshopview) {
+		_repairshopview = repairshopview;
+	}
+
+	public void setRepairListView(RepairListView repairlistview) {
+		_repairlistview = repairlistview;
+	}
+	
+	public void setCampingCarView(CampingCarView campingcarview) { // AppManager�� ���� DrawingPanelView�� ������ �� �ֵ��� AppManager��
+		_campingcarview = campingcarview;
+	}
+	
+	public void setRentCarView(RentCarView rentcarview) {
+		_rentcarview = rentcarview;
 	}
 
 	public void setSearchView(SearchView searchView) {

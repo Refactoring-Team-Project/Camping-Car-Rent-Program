@@ -15,7 +15,7 @@ public class CampingCarModel {
 	String carname;
 	int carno;
 	int seat;
-	String manufacurer;
+	String manufacturer;
 	int manu_year;
 	int drivingdistance;
 	int rentcost;
@@ -27,6 +27,88 @@ public class CampingCarModel {
 	
 	ResultSet rs;
 	
+	public ArrayList<Object[]> select(Connection conn) {
+		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+		
+		try {
+			String sql = "SELECT * FROM Camping_Car";
+            
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+            
+            Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+            arr.add(column);
+            
+            while (rs.next()) {
+            	Object[] data = {rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getDate(10)};
+            	arr.add(data);
+            }
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		return arr;
+	}
+
+	public void insert(Connection conn) {
+		try {
+			String sql = "INSERT INTO Camping_Car VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+			PreparedStatement pstmt;
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, carid);
+            pstmt.setString(2, carname);
+            pstmt.setInt(3, carno);
+            pstmt.setInt(4, seat);
+            pstmt.setString(5,  manufacturer);
+            pstmt.setInt(6,  manu_year);
+            pstmt.setInt(7,  drivingdistance);
+            pstmt.setInt(8,  rentcost);
+            pstmt.setInt(9,  compid);
+            pstmt.setString(10,  registdate);
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "추가되었습니다.");
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
+	
+	public void delete(Connection conn, Object object) {
+		try {
+			String sql = "DELETE FROM Camping_Car WHERE carid = " + object.toString() + ";";
+            
+			PreparedStatement pstmt;
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+         
+            JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
+	
+	public void update(Connection conn, Object object) {
+		try {
+			String sql ="UPDATE Camping_Car SET carid=?,carname=?,carno=?,seat=?,manufacturer=?,manu_year=?,drivingdistance=?,rentcost=?,compid=?,registdate=? WHERE carid = " + object.toString() + ";";
+			PreparedStatement pstmt;
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, carid);
+            pstmt.setString(2, carname);
+            pstmt.setInt(3, carno);
+            pstmt.setInt(4, seat);
+            pstmt.setString(5,  manufacturer);
+            pstmt.setInt(6,  manu_year);
+            pstmt.setInt(7,  drivingdistance);
+            pstmt.setInt(8,  rentcost);
+            pstmt.setInt(9,  compid);
+            pstmt.setString(10,  registdate);
+            pstmt.executeUpdate();
+         
+            JOptionPane.showMessageDialog(null, "변경되었습니다.");
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
 	
 	public ArrayList<Object[]> selectRentAble(Connection conn) {
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
@@ -222,11 +304,11 @@ public class CampingCarModel {
 	public void setSeat(int seat) {
 		this.seat = seat;
 	}
-	public String getManufacurer() {
-		return manufacurer;
+	public String getManufacturer() {
+		return manufacturer;
 	}
-	public void setManufacurer(String manufacurer) {
-		this.manufacurer = manufacurer;
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 	public int getManu_year() {
 		return manu_year;

@@ -98,14 +98,15 @@ public class CampingCompanyController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			_view.changePanel(_campCompView);
+			_view.setCurRow(-1);
+			_view.setCurCol(-1);
 
 			ArrayList<Object[]> arr = campCompModel.select(_campCompView.getConn());
 			_campCompView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_campCompView.model.addRow(arr.get(i));
 			}
-			System.out.println("abcd");
-			//_view.add(AppManager.getInstance().getCampingCompanyView());
+			System.out.println("campcomp");
 			_view.revalidate();
 			_view.repaint();
 		}

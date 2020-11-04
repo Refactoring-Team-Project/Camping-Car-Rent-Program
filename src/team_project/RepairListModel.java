@@ -1,8 +1,11 @@
 package team_project;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -18,12 +21,38 @@ public class RepairListModel {
 	String paymentdeadline;
 	String repairhistory;
 
+	ResultSet rs;
+
+	public ArrayList<Object[]> select(Connection conn) {
+		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+		try {
+			String sql = "SELECT * FROM Repair_List";
+
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			Object column[] = { "REPAIR NO", "CAR ID", "SHOP ID", "COMP ID", "LICENSE NO", "REPAIR DETAILS",
+					"REPAIR DATE", "REPAIR COST", "PAYMENT DEADLINE", "REPAIRHISTORY" };
+			arr.add(column);
+
+			while (rs.next()) {
+				Object[] data = { rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
+						rs.getDate(7), rs.getInt(8), rs.getDate(9), rs.getString(10) };
+				arr.add(data);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return arr;
+	}
+
 	public void insert(Connection conn) {
 		try {
-			String sql = "INSERT INTO Repair_List(repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Repair_List(repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement pstmt;
 			pstmt = conn.prepareStatement(sql);
+
 			pstmt.setInt(1, repairno);
 			pstmt.setInt(2, carid);
 			pstmt.setInt(3, shopid);
@@ -34,6 +63,23 @@ public class RepairListModel {
 			pstmt.setInt(8, repaircost);
 			pstmt.setString(9, paymentdeadline);
 			pstmt.setString(10, repairhistory);
+
+			JOptionPane.showMessageDialog(null, "추가되었습니다.");
+
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
+
+	public void delete(Connection conn, Object object) {
+		try {
+			String sql = "DELETE FROM Repair_List WHERE repairno = " + object.toString() + ";";
+
+			PreparedStatement pstmt;
+			pstmt = conn.prepareStatement(sql);
+
+			// System.out.println(sql);
+
 			pstmt.executeUpdate();
 
 			System.out.println(sql);
@@ -41,6 +87,34 @@ public class RepairListModel {
 
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
+
+	public void update(Connection conn, Object object) {
+		try {
+			String sql = "UPDATE Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
+					+ object.toString() + ";";
+
+			PreparedStatement pstmt;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, repairno);
+			pstmt.setInt(2, carid);
+			pstmt.setInt(3, shopid);
+			pstmt.setInt(4, compid);
+			pstmt.setInt(5, license_no);
+			pstmt.setString(6, repairdetails);
+			pstmt.setString(7, repairdate);
+			pstmt.setInt(8, repaircost);
+			pstmt.setString(9, paymentdeadline);
+			pstmt.setString(10, repairhistory);
+
+			pstmt.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "수정되었습니다.");
+
+		} catch (SQLException e1) {
+
 		}
 	}
 

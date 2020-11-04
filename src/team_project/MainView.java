@@ -22,6 +22,10 @@ public class MainView extends JFrame {
 	private RentCustomerController rentCustController;
 	private CarCheckView CarChkView;
 	private CarCheckController CarChkController;
+	private RepairShopView repairShopView;
+	private RepairShopController repairShopController;
+	private RepairListView repairListView;
+	private RepairListController repairListController;
 	JButton btnCampComp, btnCustomer, btnCampCar, btnRepairshop, btnRentCar, btnCarCheck, btnRepairList, btnRentList,
 			btnSearch1, btnSearch2, btnSearch3, btnSearch4;
 	JButton btnUser_Search1, btnUser_Search2, btnUser_Search3;
@@ -176,7 +180,29 @@ public class MainView extends JFrame {
 
 		this.repaint();
 	}
+	
+	public void changeUser() {
+		getContentPane().removeAll();
+		
+		if(user == 0) {
+			add(userPanel, 0);
+			btnUser.setText("사용자");
+			add(pn2,1);
+			user = 1;
+		}
+		
+		else if (user == 1) {
+			add(userPanel, 0);
+			btnUser.setText("관리자");
+			add(pn1,1);
+			user = 0;
+		}
+		repaint();
+	}
 
+	public void addUserButtonListener(ActionListener listener) {
+		btnUser.addActionListener(listener);
+	}
 	public void addCampCompListener(ActionListener listener) {
 		btnCampComp.addActionListener(listener);
 
@@ -190,6 +216,22 @@ public class MainView extends JFrame {
 	public void addCarChkListener(ActionListener listener) {
 		btnCarCheck.addActionListener(listener);
 
+	}
+	
+	public void addRepairShopListener(ActionListener listener) {
+		btnRepairshop.addActionListener(listener);
+	}
+
+	public void addRepairListListener(ActionListener listener) {
+		btnRepairList.addActionListener(listener);
+	}
+	
+	public void addCampCarListener(ActionListener listener) {
+		btnCampCar.addActionListener(listener);
+	}
+	
+	public void addRentCarListener(ActionListener listener) {
+		btnRentCar.addActionListener(listener);
 	}
 	
 	public void addCarRentListListener(ActionListener listener) {

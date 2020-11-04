@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-
 public class CampingCompanyView extends JPanel{
 
 	CampingCompanyModel dataModel;
