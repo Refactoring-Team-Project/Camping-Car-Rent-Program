@@ -23,6 +23,11 @@ public class Main {
 		RepairListView rlv = new RepairListView();
 		RepairListController rlcon = new RepairListController();
 
+		CampingCarView campCarView = new CampingCarView();
+		CampingCarController campCarCont = new CampingCarController();
+		
+		RentCarView rentCarView = new RentCarView();
+		RentCarController rentCarCont = new RentCarController();
 	}
 
 }

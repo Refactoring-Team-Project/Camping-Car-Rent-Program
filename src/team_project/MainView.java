@@ -228,4 +228,12 @@ public class MainView extends JFrame {
 	public void addRepairListListener(ActionListener listener) {
 		btnRepairList.addActionListener(listener);
 	}
+	
+	public void addCampCarListener(ActionListener listener) {
+		btnCampCar.addActionListener(listener);
+	}
+	
+	public void addRentCarListener(ActionListener listener) {
+		btnRentCar.addActionListener(listener);
+	}
 }
