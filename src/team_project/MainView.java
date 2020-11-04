@@ -21,6 +21,10 @@ public class MainView extends JFrame {
 	private RentCustomerController rentCustController;
 	private CarCheckView CarChkView;
 	private CarCheckController CarChkController;
+	private RepairShopView repairShopView;
+	private RepairShopController repairShopController;
+	private RepairListView repairListView;
+	private RepairListController repairListController;
 	JButton btnCampComp, btnCustomer, btnCampCar, btnRepairshop, btnRentCar, btnCarCheck, btnRepairList, btnRentList,
 			btnSearch1, btnSearch2, btnSearch3, btnSearch4;
 	JButton btnUser_Search1, btnUser_Search2, btnUser_Search3;
@@ -215,5 +219,12 @@ public class MainView extends JFrame {
 		btnCarCheck.addActionListener(listener);
 
 	}
+	
+	public void addRepairShopListener(ActionListener listener) {
+		btnRepairshop.addActionListener(listener);
+	}
 
+	public void addRepairListListener(ActionListener listener) {
+		btnRepairList.addActionListener(listener);
+	}
 }

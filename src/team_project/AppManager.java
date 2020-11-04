@@ -6,6 +6,8 @@ public class AppManager {
 	private CampingCompanyView _campingcompview; // DrawingPanelView�� �״�� �޾ƿͼ� ���� �� ����
 	private RentCustomerView _rentcustview;
 	private CarCheckView _carchkview;
+	private RepairShopView _repairshopview;
+	private RepairListView _repairlistview;
 
 	public MainView getView() { // AppManager�� ���� SimplePainterView�� �����Ϸ� �Ҷ� �� SimplePainterView��
 								// ��ȯ�� �� �Լ�
@@ -25,6 +27,14 @@ public class AppManager {
 		return _carchkview;
 	}
 
+	public RepairShopView getRepairShopView() {
+		return _repairshopview;
+	}
+
+	public RepairListView getRepairListView() {
+		return _repairlistview;
+	}
+	
 	public void setView(MainView view) { // AppManager�� ���� SimplePainterView�� ������ �� �ֵ��� AppManager��
 											// SimplePainterView�� ������� �Լ�
 		_view = view;
@@ -44,6 +54,14 @@ public class AppManager {
 	public void setCarCheckView(CarCheckView carCheckView) {
 
 		_carchkview = carCheckView;
+	}
+	
+	public void setRepairShopView(RepairShopView repairshopview) {
+		_repairshopview = repairshopview;
+	}
+
+	public void setRepairListView(RepairListView repairlistview) {
+		_repairlistview = repairlistview;
 	}
 
 	public static AppManager getInstance() {

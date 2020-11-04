@@ -19,10 +19,6 @@ public class CampingCarModel {
 	int rentcost;
 	int compid;
 	String registdate;
-	
-	
-
-	
 
 	public int getCarid() {
 		return carid;
