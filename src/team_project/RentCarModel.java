@@ -26,7 +26,6 @@ public class RentCarModel {
 			String sql = "SELECT * FROM Car_Rent";
 			Statement stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-			System.out.println("hhhhhhh");
 			
 			Object column[] = {"RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE", "PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST"};
 			arr.add(column);
@@ -59,8 +58,7 @@ public class RentCarModel {
 			pstmt.setString(6,  explain_back);
 			pstmt.setString(7,  repair_required);
 			
-			JOptionPane.showMessageDialog(null, "반환정보를 점검내역에 저장하였습니다.");
-	         
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());

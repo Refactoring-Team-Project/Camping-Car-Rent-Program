@@ -49,7 +49,7 @@ public class RentCarController {
 							rentCarModel.setRepair_required(_rentCarView.tf[6].getText());
 						}
 						
-						// insert하는 거 추가하기
+						rentCarModel.insert(_rentCarView.getConn());
 						_rentCarView.fieldReset();
 						JOptionPane.showMessageDialog(null, "반환정보를 점검내역에 저장하였습니다.");
 					}
