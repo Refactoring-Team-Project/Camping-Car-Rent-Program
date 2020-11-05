@@ -1,6 +1,5 @@
 package team_project;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +21,12 @@ public class RepairListModel {
 	int repaircost;
 	String paymentdeadline;
 	String repairhistory;
+
+	String selected_reparino = null;
+	String selected_carid = null;
+	String selected_shopid = null;
+	String selected_compid = null;
+	String selected_license_no = null;
 
 	ResultSet rs;
 	DefaultTableModel model;
@@ -200,4 +205,23 @@ public class RepairListModel {
 		this.repairhistory = repairhistory;
 	}
 
+	public String getSelectedRepairno() {
+		return selected_reparino;
+	}
+
+	public String getSelectedCarid() {
+		return selected_carid;
+	}
+
+	public String getSelectedShopid() {
+		return selected_shopid;
+	}
+
+	public String getSelectedCompid() {
+		return selected_compid;
+	}
+
+	public String getSelectedLicense_no() {
+		return selected_license_no;
+	}
 }

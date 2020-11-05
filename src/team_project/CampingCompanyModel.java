@@ -1,6 +1,4 @@
 package team_project;
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class CampingCompanyModel {
 	int compid;
@@ -20,13 +17,11 @@ public class CampingCompanyModel {
 	String manager_email;
 
 	ResultSet rs;
-	DefaultTableModel model;
 
 	public ArrayList<Object[]> select(Connection conn) {
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 		try {
 			String sql = "SELECT * FROM Camping_Company";
-
 			Statement stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 
@@ -52,7 +47,6 @@ public class CampingCompanyModel {
 
 			PreparedStatement pstmt;
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setInt(1, compid);
 			pstmt.setString(2, compname);
 			pstmt.setString(3, address);
@@ -66,6 +60,66 @@ public class CampingCompanyModel {
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
+	}
+
+	public void delete(Connection conn, Object object) {
+		try {
+			String sql = "DELETE FROM Camping_Company WHERE compid = " + object.toString() + ";";
+
+			PreparedStatement pstmt;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
+
+	public void update(Connection conn, Object object) {
+		try {
+			String sql = "UPDATE Camping_Company SET compid=?,compname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE compid = "
+					+ object.toString() + ";";
+
+			PreparedStatement pstmt;
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, compid);
+			pstmt.setString(2, compname);
+			pstmt.setString(3, address);
+			pstmt.setString(4, phone);
+			pstmt.setString(5, manager_name);
+			pstmt.setString(6, manager_email);
+			pstmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "수정되었습니다.");
+
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+	}
+
+	public ArrayList<Object[]> search2(Connection conn) {
+		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+		try {
+			String sql = "select cc.compid, cc.compname, coalesce(count(*), 0) as rental_count\r\n"
+					+ "from Camping_Company cc\r\n" + "left join Car_Rent cr\r\n" + "on cc.compid = cr.compid\r\n"
+					+ "group by cc.compid, cc.compname\r\n" + "order by 3 desc\r\n" + "limit 0, 10;";
+
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			Object column[] = { "COMP ID", "COMP NAME", "TOTAL RENTAL COUNT" };
+			arr.add(column);
+
+			while (rs.next()) {
+				Object[] data = { rs.getInt(1), rs.getString(2), rs.getInt(3) };
+				arr.add(data);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return arr;
 	}
 
 	public int getCompid() {

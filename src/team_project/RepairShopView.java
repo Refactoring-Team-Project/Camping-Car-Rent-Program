@@ -1,6 +1,5 @@
 package team_project;
 
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -88,8 +87,6 @@ public class RepairShopView extends JPanel {
 		buttonPanel.add(btnUpdate);
 
 		add(buttonPanel);
-
-		buttonPanel = new JPanel();
 
 		scrollPane.setPreferredSize(new Dimension(780, 300));
 		updatePanel.setPreferredSize(new Dimension(780, 60));

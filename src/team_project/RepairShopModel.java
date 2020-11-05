@@ -1,6 +1,4 @@
 package team_project;
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class RepairShopModel {
 	int shopid;
@@ -20,7 +17,6 @@ public class RepairShopModel {
 	String manager_email;
 
 	ResultSet rs;
-	DefaultTableModel model;
 
 	public ArrayList<Object[]> select(Connection conn) {
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
@@ -101,6 +97,29 @@ public class RepairShopModel {
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
+	}
+
+	public ArrayList<Object[]> search4(Connection conn) {
+		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+		try {
+			String sql = "select rs.shopid, rs.shopname, coalesce(sum(rl.repaircost), 0) as income\r\n"
+					+ "from Repairshop rs\r\n" + "left join Repair_List rl\r\n" + "on rs.shopid = rl.shopid\r\n"
+					+ "group by rs.shopid, rs.shopname\r\n" + "order by income desc;";
+
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			Object column[] = { "SHOP ID", "SHOP NAME", "INCOME" };
+			arr.add(column);
+
+			while (rs.next()) {
+				Object[] data = { rs.getInt(1), rs.getString(2), rs.getInt(3) };
+				arr.add(data);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return arr;
 	}
 
 	public int getShopid() {

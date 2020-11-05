@@ -1,6 +1,4 @@
 package team_project;
-
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -139,5 +137,4 @@ public class RentCustomerView extends JPanel {
 		}
 
 	}
-
 }
