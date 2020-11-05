@@ -1,10 +1,10 @@
 package team_project;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -64,7 +64,9 @@ public class RepairListModel {
 			pstmt.setString(9, paymentdeadline);
 			pstmt.setString(10, repairhistory);
 
-			JOptionPane.showMessageDialog(null, "추가되었습니다.");
+			pstmt.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "수리요청되었습니다.");
 
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -83,7 +85,7 @@ public class RepairListModel {
 			pstmt.executeUpdate();
 
 			System.out.println(sql);
-			JOptionPane.showMessageDialog(null, "요청되었습니다.");
+			JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -92,7 +94,7 @@ public class RepairListModel {
 
 	public void update(Connection conn, Object object) {
 		try {
-			String sql = "UPDATE Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
+			String sql = "INSERT INTO Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
 					+ object.toString() + ";";
 
 			PreparedStatement pstmt;
@@ -114,7 +116,7 @@ public class RepairListModel {
 			JOptionPane.showMessageDialog(null, "수정되었습니다.");
 
 		} catch (SQLException e1) {
-
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
 	}
 

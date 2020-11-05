@@ -22,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class RepairShopView extends JPanel {
 
-	RepairShopModel dataModel;
 	private MainView _view;
 	DefaultTableModel model;
 	JTable dbResult;

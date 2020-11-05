@@ -1,6 +1,6 @@
 package team_project;
 
-
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -22,14 +22,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class RepairListView extends JPanel {
 
-	RepairListModel dataModel;
 	private MainView _view;
 	DefaultTableModel model;
 	JTable dbResult;
 	JScrollPane scrollPane;
 	JPanel updatePanel, buttonPanel;
 	int curRow = -1, curCol = -1;
-	JButton btnInput, btnDelete, btnUpdate;
+	JButton btnDelete, btnUpdate;
 	JLabel[] labels;
 	JTextField[] tf;
 
@@ -114,6 +113,21 @@ public class RepairListView extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			_view.setCurRow(dbResult.getSelectedRow());
 			_view.setCurCol(dbResult.getSelectedColumn());
+
+			tf[0].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 0).toString());
+			tf[0].setDisabledTextColor(Color.black);
+
+			tf[1].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 1).toString());
+			tf[1].setDisabledTextColor(Color.black);
+
+			tf[2].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 2).toString());
+			tf[2].setDisabledTextColor(Color.black);
+
+			tf[3].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 3).toString());
+			tf[3].setDisabledTextColor(Color.black);
+
+			tf[4].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 4).toString());
+			tf[4].setDisabledTextColor(Color.black);
 		}
 
 		@Override

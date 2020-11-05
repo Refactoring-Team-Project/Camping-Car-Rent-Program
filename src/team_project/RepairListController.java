@@ -1,6 +1,5 @@
 package team_project;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,58 +23,57 @@ public class RepairListController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
-			if (e.getSource() == _repairListView.btnInput) {
-				if (_repairListView.tf[0].getText().length() > 0) {
-					repairListModel.setRepairno(Integer.parseInt(_repairListView.tf[0].getText()));
+			try {
+				if (e.getSource() == _repairListView.btnDelete) {
+					if (_view.getCurRow() != -1) {
+						repairListModel.delete(_repairListView.getConn(),
+								_repairListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+						_repairListView.fieldReset();
+					} else {
+						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
+					}
+				} else if (e.getSource() == _repairListView.btnUpdate) {
+					if (_view.getCurRow() != -1) { // 변경할 데이터를 선택한 것이 있다면
+						if (_repairListView.tf[0].getText().length() > 0) {
+							repairListModel.setRepairno(Integer.parseInt(_repairListView.tf[0].getText()));
+						} else
+							throw new NullPointerException();
+						if (_repairListView.tf[1].getText().length() > 0) {
+							repairListModel.setCarid(Integer.parseInt(_repairListView.tf[1].getText()));
+						}
+						if (_repairListView.tf[2].getText().length() > 0) {
+							repairListModel.setShopid(Integer.parseInt(_repairListView.tf[2].getText()));
+						}
+						if (_repairListView.tf[3].getText().length() > 0) {
+							repairListModel.setCompid(Integer.parseInt(_repairListView.tf[3].getText()));
+						}
+						if (_repairListView.tf[4].getText().length() > 0) {
+							repairListModel.setLicense_no(Integer.parseInt(_repairListView.tf[4].getText()));
+						}
+						if (_repairListView.tf[5].getText().length() > 0) {
+							repairListModel.setRepairdetails(_repairListView.tf[5].getText());
+						}
+						if (_repairListView.tf[6].getText().length() > 0) {
+							repairListModel.setRepairdate(_repairListView.tf[6].getText());
+						}
+						if (_repairListView.tf[7].getText().length() > 0) {
+							repairListModel.setRepaircost(Integer.parseInt(_repairListView.tf[7].getText()));
+						}
+						if (_repairListView.tf[8].getText().length() > 0) {
+							repairListModel.setPaymentdeadline(_repairListView.tf[8].getText());
+						}
+						if (_repairListView.tf[9].getText().length() > 0) {
+							repairListModel.setRepairhistory(_repairListView.tf[9].getText());
+						}
+						repairListModel.update(_repairListView.getConn(),
+								_repairListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+						_repairListView.fieldReset();
+					} else {
+						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
+					}
 				}
-				if (_repairListView.tf[1].getText().length() > 0) {
-					repairListModel.setCarid(Integer.parseInt(_repairListView.tf[1].getText()));
-				}
-				if (_repairListView.tf[2].getText().length() > 0) {
-					repairListModel.setShopid(Integer.parseInt(_repairListView.tf[2].getText()));
-				}
-				if (_repairListView.tf[3].getText().length() > 0) {
-					repairListModel.setCompid(Integer.parseInt(_repairListView.tf[3].getText()));
-				}
-				if (_repairListView.tf[4].getText().length() > 0) {
-					repairListModel.setLicense_no(Integer.parseInt(_repairListView.tf[4].getText()));
-				}
-				if (_repairListView.tf[5].getText().length() > 0) {
-					repairListModel.setRepairdetails(_repairListView.tf[5].getText());
-				}
-				if (_repairListView.tf[6].getText().length() > 0) {
-					repairListModel.setRepairdate(_repairListView.tf[6].getText());
-				}
-				if (_repairListView.tf[7].getText().length() > 0) {
-					repairListModel.setRepaircost(Integer.parseInt(_repairListView.tf[7].getText()));
-				}
-				if (_repairListView.tf[8].getText().length() > 0) {
-					repairListModel.setPaymentdeadline(_repairListView.tf[8].getText());
-				}
-				if (_repairListView.tf[9].getText().length() > 0) {
-					repairListModel.setRepairhistory(_repairListView.tf[9].getText());
-				}
-
-				repairListModel.insert(_repairListView.getConn());
-
-				_repairListView.fieldReset();
-
-			} else if (e.getSource() == _repairListView.btnDelete) {
-				if (_view.getCurRow() != -1) {
-					repairListModel.delete(_repairListView.getConn(),
-							_repairListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
-					_repairListView.fieldReset();
-				} else {
-					JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
-				}
-			} else if (e.getSource() == _repairListView.btnUpdate) {
-				if (_view.getCurRow() != -1) { // 변경할 데이터를 선택한 것이 있다면
-					repairListModel.update(_repairListView.getConn(),
-							_repairListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
-				} else {
-					JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
-				}
+			} catch (NullPointerException e2) {
+				JOptionPane.showMessageDialog(null, "null");
 			}
 
 		}
