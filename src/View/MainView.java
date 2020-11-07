@@ -44,24 +44,12 @@ public class MainView extends JFrame {
 	int curRow = -1, curCol = -1;
 
 	public Connection conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
-
-	String Driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/madang?&serverTimezone=Asia/Seoul&useSSL=false";
-	String userid = "madang";
-	String pwd = "madang";
-
+	
 	public MainView() {
 		super("rafactoring");
 		AppManager.getInstance().setView(this);
 
-		connDB();
 		init();
-//	      campCompView = new CampingCompanyView();
-//	      campCompController = new CampingCompanyController();
-//	      add(campCompView);
 
 		setVisible(true);
 		setBounds(500, 200, 800, 600);
@@ -70,33 +58,6 @@ public class MainView extends JFrame {
 
 	public Connection getConn() {
 		return conn;
-	}
-
-	public void connDB() {
-		try { // 드라이버 로드
-			Class.forName(Driver);
-			System.out.println("드라이버 로드 완료");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		try { // 데이터베이스 연결
-			conn = DriverManager.getConnection(url, userid, pwd);
-			System.out.println("데이터베이스 연결 완료");
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-	}
-
-	public void closeDB() {
-		try { // 데이터베이스 연결 종료
-			if (conn != null) {
-				System.out.println("데이터베이스 연결 종료");
-			}
-		} catch (Exception e3) {
-			e3.printStackTrace();
-		}
 	}
 
 	public void init() {

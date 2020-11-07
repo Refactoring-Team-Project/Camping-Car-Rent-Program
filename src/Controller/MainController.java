@@ -4,11 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Common.AppManager;
+import Model.DatabaseConnectionModel;
 import View.MainView;
 
 public class MainController {
 	MainView _view;
-	
+	DatabaseConnectionModel connModel;
 	
 	
 	public MainController() {
@@ -16,6 +17,8 @@ public class MainController {
 		
 		this._view.addUserButtonListener(new UserButtonListener());
 		
+		connModel = new DatabaseConnectionModel();
+		this._view.conn = connModel.getConn();
 		//this._campCompView.addUserButtonListener(new UserButtonListener());
 	
 	}
