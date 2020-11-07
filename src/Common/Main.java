@@ -46,13 +46,13 @@ public class Main {
 
 		CampingCarView campCarView = new CampingCarView();
 		CampingCarController campCarCont = new CampingCarController();
-		
+
 		RentCarView rentCarView = new RentCarView();
 		RentCarController rentCarCont = new RentCarController();
-		
+
 		SearchView sv = new SearchView();
 		SearchController scon = new SearchController();
-		
+
 		CarRentListView crlv = new CarRentListView();
 		CarRentListController crlcon = new CarRentListController();
 	}
