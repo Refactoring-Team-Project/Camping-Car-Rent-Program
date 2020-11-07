@@ -4,11 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +15,6 @@ import Controller.CarCheckController;
 import Controller.RentCustomerController;
 import Controller.RepairListController;
 import Controller.RepairShopController;
-
 
 public class MainView extends JFrame {
 	private CampingCompanyView campCompView;
@@ -44,9 +38,9 @@ public class MainView extends JFrame {
 	int curRow = -1, curCol = -1;
 
 	public Connection conn;
-	
+
 	public MainView() {
-		super("rafactoring");
+		super("refactoring");
 		AppManager.getInstance().setView(this);
 
 		init();
@@ -102,8 +96,8 @@ public class MainView extends JFrame {
 		btnRentList = new JButton("Camping_Car(대여가능)");
 		btnUser_Search1 = new JButton("검색1");
 		btnUser_Search2 = new JButton("검색2");
-		btnUser_Search3 = new JButton("검색3");		
-	
+		btnUser_Search3 = new JButton("검색3");
+
 		pn2 = new JPanel();
 		pn2.add(btnRentList);
 		pn2.add(btnUser_Search1);
@@ -148,21 +142,21 @@ public class MainView extends JFrame {
 
 		this.repaint();
 	}
-	
+
 	public void changeUser() {
 		getContentPane().removeAll();
-		
-		if(user == 0) {
+
+		if (user == 0) {
 			add(userPanel, 0);
 			btnUser.setText("사용자");
-			add(pn2,1);
+			add(pn2, 1);
 			user = 1;
 		}
-		
+
 		else if (user == 1) {
 			add(userPanel, 0);
 			btnUser.setText("관리자");
-			add(pn1,1);
+			add(pn1, 1);
 			user = 0;
 		}
 		repaint();
@@ -171,6 +165,7 @@ public class MainView extends JFrame {
 	public void addUserButtonListener(ActionListener listener) {
 		btnUser.addActionListener(listener);
 	}
+
 	public void addCampCompListener(ActionListener listener) {
 		btnCampComp.addActionListener(listener);
 
@@ -185,7 +180,7 @@ public class MainView extends JFrame {
 		btnCarCheck.addActionListener(listener);
 
 	}
-	
+
 	public void addRepairShopListener(ActionListener listener) {
 		btnRepairshop.addActionListener(listener);
 	}
@@ -193,47 +188,45 @@ public class MainView extends JFrame {
 	public void addRepairListListener(ActionListener listener) {
 		btnRepairList.addActionListener(listener);
 	}
-	
+
 	public void addCampCarListener(ActionListener listener) {
 		btnCampCar.addActionListener(listener);
 	}
-	
+
 	public void addRentCarListener(ActionListener listener) {
 		btnRentCar.addActionListener(listener);
 	}
-	
+
 	public void addCarRentListListener(ActionListener listener) {
 		btnRentList.addActionListener(listener);
 	}
-	
+
 	public void addSearch1Listener(ActionListener listener) {
 		btnSearch1.addActionListener(listener);
 	}
-	
+
 	public void addSearch2Listener(ActionListener listener) {
 		btnSearch2.addActionListener(listener);
 	}
-	
+
 	public void addSearch3Listener(ActionListener listener) {
 		btnSearch3.addActionListener(listener);
 	}
-	
+
 	public void addSearch4Listener(ActionListener listener) {
 		btnSearch4.addActionListener(listener);
 	}
-	
+
 	public void addUserSearch1Listener(ActionListener listener) {
 		btnUser_Search1.addActionListener(listener);
 	}
-	
+
 	public void addUserSearch2Listener(ActionListener listener) {
 		btnUser_Search2.addActionListener(listener);
 	}
-	
+
 	public void addUserSearch3Listener(ActionListener listener) {
 		btnUser_Search3.addActionListener(listener);
 	}
-	
-
 
 }
