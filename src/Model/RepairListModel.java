@@ -91,7 +91,7 @@ public class RepairListModel {
 
 	public void update(Connection conn, Object object) {
 		try {
-			String sql = "UPDATE INTO Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
+			String sql = "UPDATE Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
 					+ object.toString() + ";";
 
 			PreparedStatement pstmt;

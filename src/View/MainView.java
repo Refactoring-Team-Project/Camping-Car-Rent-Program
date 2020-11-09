@@ -10,23 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Common.AppManager;
-import Controller.CampingCompanyController;
-import Controller.CarCheckController;
-import Controller.RentCustomerController;
-import Controller.RepairListController;
-import Controller.RepairShopController;
 
 public class MainView extends JFrame {
-	private CampingCompanyView campCompView;
-	private CampingCompanyController campCompController;
-	private RentCustomerView rentCustView;
-	private RentCustomerController rentCustController;
-	private CarCheckView CarChkView;
-	private CarCheckController CarChkController;
-	private RepairShopView repairShopView;
-	private RepairShopController repairShopController;
-	private RepairListView repairListView;
-	private RepairListController repairListController;
 	JButton btnCampComp, btnCustomer, btnCampCar, btnRepairshop, btnRentCar, btnCarCheck, btnRepairList, btnRentList,
 			btnSearch1, btnSearch2, btnSearch3, btnSearch4;
 	JButton btnUser_Search1, btnUser_Search2, btnUser_Search3;
