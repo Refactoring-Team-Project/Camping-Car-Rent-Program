@@ -33,7 +33,7 @@ public class MainView extends JFrame {
 	JButton btnReset, btnUser;
 	JPanel pn1, pn2, userPanel, pn3;
 	JPanel viewPanel;
-	int table = 0;
+
 	int user = 0; // 0은 관리자 1은 사용자
 	int curRow = -1, curCol = -1;
 
@@ -128,38 +128,38 @@ public class MainView extends JFrame {
 		curCol = selectedCol;
 	}
 
-	public void changePanel(JPanel view) {
-		this.getContentPane().removeAll();
-		this.getContentPane().add(userPanel, 0);
-		if (user == 0) {
-			this.getContentPane().remove(pn2);
-			this.getContentPane().add(pn1, 1);
-		} else if (user == 1) {
-			this.getContentPane().remove(pn1);
-			this.getContentPane().add(pn2, 1);
-		}
-		this.getContentPane().add(view, 2);
-
-		this.repaint();
-	}
-
 	public void changeUser() {
 		getContentPane().removeAll();
 
-		if (user == 0) {
+		if (user == 0) { // 관리자 모드
 			add(userPanel, 0);
 			btnUser.setText("사용자");
 			add(pn2, 1);
 			user = 1;
 		}
 
-		else if (user == 1) {
+		else if (user == 1) { // 사용자 모드
 			add(userPanel, 0);
 			btnUser.setText("관리자");
 			add(pn1, 1);
 			user = 0;
 		}
 		repaint();
+	}
+
+	public void changePanel(JPanel view) {
+		this.getContentPane().removeAll();
+		this.getContentPane().add(userPanel, 0);
+		if (user == 0) { // 관리자 모드
+			this.getContentPane().remove(pn2);
+			this.getContentPane().add(pn1, 1);
+		} else if (user == 1) { // 사용자 모드
+			this.getContentPane().remove(pn1);
+			this.getContentPane().add(pn2, 1);
+		}
+		this.getContentPane().add(view, 2);
+
+		this.repaint();
 	}
 
 	public void addUserButtonListener(ActionListener listener) {

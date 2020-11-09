@@ -80,11 +80,8 @@ public class RepairListModel {
 			PreparedStatement pstmt;
 			pstmt = conn.prepareStatement(sql);
 
-			// System.out.println(sql);
-
 			pstmt.executeUpdate();
 
-			System.out.println(sql);
 			JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 
 		} catch (SQLException e1) {
@@ -94,7 +91,7 @@ public class RepairListModel {
 
 	public void update(Connection conn, Object object) {
 		try {
-			String sql = "INSERT INTO Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
+			String sql = "UPDATE INTO Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
 					+ object.toString() + ";";
 
 			PreparedStatement pstmt;

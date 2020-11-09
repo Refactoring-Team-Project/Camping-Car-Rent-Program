@@ -79,6 +79,12 @@ public class RepairListView extends JPanel {
 		tf[8] = new JTextField("", 5);
 		tf[9] = new JTextField("", 10);
 
+		tf[0].setEnabled(false); // repairno
+		tf[1].setEnabled(false); // carid
+		tf[2].setEnabled(false); // shopid
+		tf[3].setEnabled(false); // compid
+		tf[4].setEnabled(false); // license_no
+
 		for (int i = 0; i < 10; i++) {
 			updatePanel.add(labels[i]);
 			updatePanel.add(tf[i]);

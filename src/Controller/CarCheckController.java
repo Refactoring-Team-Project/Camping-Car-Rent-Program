@@ -98,7 +98,7 @@ public class CarCheckController {
 				_carChkView.model.addRow(arr.get(i));
 			}
 			System.out.println("car check");
-			_view.add(AppManager.getInstance().getCarCheckView());
+//			_view.add(AppManager.getInstance().getCarCheckView());
 			_view.revalidate();
 			_view.repaint();
 		}
