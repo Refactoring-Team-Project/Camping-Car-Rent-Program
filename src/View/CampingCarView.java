@@ -94,13 +94,16 @@ public class CampingCarView extends JPanel {
 	    buttonPanel.setPreferredSize(new Dimension(780, 50));
 	      
 	    dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    dbResult.addMouseListener(new CampCarMouseListener());
 	}
 	
 	public void addButtonListener(ActionListener listener) {
 		btnInput.addActionListener(listener);
 		btnDelete.addActionListener(listener);
 		btnUpdate.addActionListener(listener);
+	}
+	
+	public void addMouseListener(MouseListener listener) {
+		dbResult.addMouseListener(listener);
 	}
 	
 	public Connection getConn() {
@@ -114,26 +117,6 @@ public class CampingCarView extends JPanel {
 		repaint();
 	}
 	
-	private class CampCarMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(dbResult.getSelectedRow());
-			_view.setCurCol(dbResult.getSelectedColumn());
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {}
-
-		@Override
-		public void mouseExited(MouseEvent e) {}
-		
-	}
+	
 	
 }

@@ -2,6 +2,8 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -20,6 +22,7 @@ public class CampingCompanyController {
 		this._view = AppManager.getInstance().getView();
 		this._campCompView = AppManager.getInstance().getCampingCompanyView();
 		campCompModel = new CampingCompanyModel();
+		this._campCompView.addMouseListener(new CampingCompanyMouseListener());
 		this._campCompView.addButtonListener(new ButtonListener());
 		this._view.addCampCompListener(new CampingCompanyButtonListener());
 	}
@@ -92,9 +95,35 @@ public class CampingCompanyController {
 				_campCompView.fieldReset();
 		} catch (NullPointerException e2) {
 			JOptionPane.showMessageDialog(null, "null");
-
+	
+			}
 		}
+
 	}
+	
+	private class CampingCompanyMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			_view.setCurRow(_campCompView.dbResult.getSelectedRow());
+			_view.setCurCol(_campCompView.dbResult.getSelectedColumn());
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
 
 	}
 
