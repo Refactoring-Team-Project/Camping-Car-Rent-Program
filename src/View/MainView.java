@@ -10,14 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Common.AppManager;
+// 버튼패널, 검색버튼 변수명 변경
 
 public class MainView extends JFrame {
 	JButton btnCampComp, btnCustomer, btnCampCar, btnRepairshop, btnRentCar, btnCarCheck, btnRepairList, btnRentList,
-			btnSearch1, btnSearch2, btnSearch3, btnSearch4;
-	JButton btnUser_Search1, btnUser_Search2, btnUser_Search3;
+			btnAdminUndectedCampCarSearch, btnAdminTop10CompanySearch, btnAdminBlackCusRankSearch, btnAdminRepairShopRankSearch;
+	JButton btnUserPriceSearch, btnUserManufacturingYearSearch, btnUserMileageSearch;
 	JButton btnReset, btnUser;
-	JPanel pn1, pn2, userPanel, pn3;
-	JPanel viewPanel;
+	JPanel adminBtnPanel, userBtnPanel, userChangePanel;
+
 
 	int user = 0; // 0은 관리자 1은 사용자
 	int curRow = -1, curCol = -1;
@@ -44,9 +45,9 @@ public class MainView extends JFrame {
 
 		/* 사용자 관리자 전환 panel */
 		btnUser = new JButton("관리자");
-		userPanel = new JPanel();
-		userPanel.add(btnUser);
-		add(userPanel);
+		userChangePanel = new JPanel();
+		userChangePanel.add(btnUser);
+		add(userChangePanel);
 
 		/* panel 1 */
 		btnCampComp = new JButton("Camping_Company");
@@ -56,44 +57,44 @@ public class MainView extends JFrame {
 		btnRentCar = new JButton("Rent_Car");
 		btnCarCheck = new JButton("Car_Check");
 		btnRepairList = new JButton("Repair_List");
-		btnSearch1 = new JButton("검색1");
-		btnSearch2 = new JButton("검색2");
-		btnSearch3 = new JButton("검색3");
-		btnSearch4 = new JButton("검색4");
+		btnAdminUndectedCampCarSearch = new JButton("검색1");
+		btnAdminTop10CompanySearch = new JButton("검색2");
+		btnAdminBlackCusRankSearch = new JButton("검색3");
+		btnAdminRepairShopRankSearch = new JButton("검색4");
 
 		btnReset = new JButton("초기화");
 
-		pn1 = new JPanel();
-		pn1.add(btnCampComp);
-		pn1.add(btnCampCar);
-		pn1.add(btnCustomer);
-		pn1.add(btnRepairshop);
-		pn1.add(btnRentCar);
-		pn1.add(btnCarCheck);
-		pn1.add(btnRepairList);
-		pn1.add(btnSearch1);
-		pn1.add(btnSearch2);
-		pn1.add(btnSearch3);
-		pn1.add(btnSearch4);
-		pn1.add(btnReset);
+		adminBtnPanel = new JPanel();
+		adminBtnPanel.add(btnCampComp);
+		adminBtnPanel.add(btnCampCar);
+		adminBtnPanel.add(btnCustomer);
+		adminBtnPanel.add(btnRepairshop);
+		adminBtnPanel.add(btnRentCar);
+		adminBtnPanel.add(btnCarCheck);
+		adminBtnPanel.add(btnRepairList);
+		adminBtnPanel.add(btnAdminUndectedCampCarSearch);
+		adminBtnPanel.add(btnAdminTop10CompanySearch);
+		adminBtnPanel.add(btnAdminBlackCusRankSearch);
+		adminBtnPanel.add(btnAdminRepairShopRankSearch);
+		adminBtnPanel.add(btnReset);
 
 		/* panel 2 */
 		btnRentList = new JButton("Camping_Car(대여가능)");
-		btnUser_Search1 = new JButton("검색1");
-		btnUser_Search2 = new JButton("검색2");
-		btnUser_Search3 = new JButton("검색3");
+		btnUserPriceSearch = new JButton("검색1");
+		btnUserManufacturingYearSearch = new JButton("검색2");
+		btnUserMileageSearch = new JButton("검색3");
 
-		pn2 = new JPanel();
-		pn2.add(btnRentList);
-		pn2.add(btnUser_Search1);
-		pn2.add(btnUser_Search2);
-		pn2.add(btnUser_Search3);
+		userBtnPanel = new JPanel();
+		userBtnPanel.add(btnRentList);
+		userBtnPanel.add(btnUserPriceSearch);
+		userBtnPanel.add(btnUserManufacturingYearSearch);
+		userBtnPanel.add(btnUserMileageSearch);
 
-		add(pn1);
+		add(adminBtnPanel);
 		/*** panel size ****/
-		userPanel.setPreferredSize(new Dimension(780, 50));
-		pn1.setPreferredSize(new Dimension(780, 80));
-		pn2.setPreferredSize(new Dimension(780, 80));
+		userChangePanel.setPreferredSize(new Dimension(780, 50));
+		adminBtnPanel.setPreferredSize(new Dimension(780, 80));
+		userBtnPanel.setPreferredSize(new Dimension(780, 80));
 
 	}
 
@@ -117,16 +118,16 @@ public class MainView extends JFrame {
 		getContentPane().removeAll();
 
 		if (user == 0) { // 관리자 모드
-			add(userPanel, 0);
+			add(userChangePanel, 0);
 			btnUser.setText("사용자");
-			add(pn2, 1);
+			add(userBtnPanel, 1);
 			user = 1;
 		}
 
 		else if (user == 1) { // 사용자 모드
-			add(userPanel, 0);
+			add(userChangePanel, 0);
 			btnUser.setText("관리자");
-			add(pn1, 1);
+			add(adminBtnPanel, 1);
 			user = 0;
 		}
 		repaint();
@@ -134,13 +135,13 @@ public class MainView extends JFrame {
 
 	public void changePanel(JPanel view) {
 		this.getContentPane().removeAll();
-		this.getContentPane().add(userPanel, 0);
+		this.getContentPane().add(userChangePanel, 0);
 		if (user == 0) { // 관리자 모드
-			this.getContentPane().remove(pn2);
-			this.getContentPane().add(pn1, 1);
+			this.getContentPane().remove(userBtnPanel);
+			this.getContentPane().add(adminBtnPanel, 1);
 		} else if (user == 1) { // 사용자 모드
-			this.getContentPane().remove(pn1);
-			this.getContentPane().add(pn2, 1);
+			this.getContentPane().remove(adminBtnPanel);
+			this.getContentPane().add(userBtnPanel, 1);
 		}
 		this.getContentPane().add(view, 2);
 
@@ -187,31 +188,31 @@ public class MainView extends JFrame {
 	}
 
 	public void addSearch1Listener(ActionListener listener) {
-		btnSearch1.addActionListener(listener);
+		btnAdminUndectedCampCarSearch.addActionListener(listener);
 	}
 
 	public void addSearch2Listener(ActionListener listener) {
-		btnSearch2.addActionListener(listener);
+		btnAdminTop10CompanySearch.addActionListener(listener);
 	}
 
 	public void addSearch3Listener(ActionListener listener) {
-		btnSearch3.addActionListener(listener);
+		btnAdminBlackCusRankSearch.addActionListener(listener);
 	}
 
 	public void addSearch4Listener(ActionListener listener) {
-		btnSearch4.addActionListener(listener);
+		btnAdminRepairShopRankSearch.addActionListener(listener);
 	}
 
 	public void addUserSearch1Listener(ActionListener listener) {
-		btnUser_Search1.addActionListener(listener);
+		btnUserPriceSearch.addActionListener(listener);
 	}
 
 	public void addUserSearch2Listener(ActionListener listener) {
-		btnUser_Search2.addActionListener(listener);
+		btnUserManufacturingYearSearch.addActionListener(listener);
 	}
 
 	public void addUserSearch3Listener(ActionListener listener) {
-		btnUser_Search3.addActionListener(listener);
+		btnUserMileageSearch.addActionListener(listener);
 	}
 
 }
