@@ -3,7 +3,6 @@ package View;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -94,8 +93,11 @@ public class RentCustomerView extends JPanel {
 
 		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		// mouseListener 처리하기
-		dbResult.addMouseListener(new RentCustomerMouseListener());
 
+	}
+
+	public void addMouseListener(MouseListener listener) {
+		dbResult.addMouseListener(listener);
 	}
 
 	public void addButtonListener(ActionListener listener) {
@@ -115,29 +117,4 @@ public class RentCustomerView extends JPanel {
 		repaint();
 	}
 
-	private class RentCustomerMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(dbResult.getSelectedRow());
-			_view.setCurCol(dbResult.getSelectedColumn());
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
-	}
 }

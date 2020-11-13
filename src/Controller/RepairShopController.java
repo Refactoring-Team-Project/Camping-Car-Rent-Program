@@ -1,8 +1,9 @@
 package Controller;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class RepairShopController {
 		this._repairShopView = AppManager.getInstance().getRepairShopView();
 		repairShopModel = new RepairShopModel();
 		this._repairShopView.addButtonListener(new ButtonListener());
+		this._repairShopView.addMouseListener(new RepairShopMouseListener());
 		this._view.addRepairShopListener(new RepairShopButtonListener());
 	}
 
@@ -94,6 +96,41 @@ public class RepairShopController {
 			} catch (NullPointerException e2) {
 				JOptionPane.showMessageDialog(null, "null");
 			}
+		}
+
+	}
+
+	private class RepairShopMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			_view.setCurRow(_repairShopView.dbResult.getSelectedRow());
+			_view.setCurCol(_repairShopView.dbResult.getSelectedColumn());
+			System.out.println(_view.getCurRow() + " " + _view.getCurCol());
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
 		}
 
 	}

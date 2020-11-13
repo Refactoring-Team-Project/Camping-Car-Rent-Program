@@ -2,6 +2,8 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -21,6 +23,7 @@ public class RentCustomerController {
 		this._rentCustView = AppManager.getInstance().getRentCustomerView();
 		rentCustModel = new RentCustomerModel();
 		this._rentCustView.addButtonListener(new ButtonListener());
+		this._rentCustView.addMouseListener(new RentCustomerMouseListener());
 		this._view.addRentCustListener(new RentCustomerButtonListener());
 	}
 
@@ -91,6 +94,32 @@ public class RentCustomerController {
 
 			}
 		}
+	}
+
+	private class RentCustomerMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			_view.setCurRow(_rentCustView.dbResult.getSelectedRow());
+			_view.setCurCol(_rentCustView.dbResult.getSelectedColumn());
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
+
 	}
 
 	private class RentCustomerButtonListener implements ActionListener {

@@ -1,10 +1,8 @@
 package View;
 
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -98,47 +96,16 @@ public class RepairShopView extends JPanel {
 
 		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		// mouseListener 처리하기
-		dbResult.addMouseListener(new RepairShopMouseListener());
+	}
+
+	public void addMouseListener(MouseListener listener) {
+		dbResult.addMouseListener(listener);
 	}
 
 	public void addButtonListener(ActionListener listener) {
 		btnInput.addActionListener(listener);
 		btnDelete.addActionListener(listener);
 		btnUpdate.addActionListener(listener);
-	}
-
-	private class RepairShopMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(dbResult.getSelectedRow());
-			_view.setCurCol(dbResult.getSelectedColumn());
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
 	}
 
 	public Connection getConn() {
