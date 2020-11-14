@@ -1,15 +1,10 @@
 package View;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,15 +26,11 @@ public class CarCheckView extends JPanel {
 	public JTable dbResult;
 	JScrollPane scrollPane;
 	public JPanel updatePanel, buttonPanel;
-//	int curRow = -1, curCol = -1;
 	public JButton btnRequest;
 	JLabel[] labels;
 	public JTextField[] tf;
 
 	Connection _conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
 
 	public CarCheckView() {
 		super.setLayout(new FlowLayout());
@@ -107,8 +98,7 @@ public class CarCheckView extends JPanel {
 		buttonPanel.setPreferredSize(new Dimension(780, 50));
 
 		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		// mouseListener 처리하기
-		dbResult.addMouseListener(new CarCheckMouseListener());
+
 	}
 
 	public void addButtonListener(ActionListener listener) {
@@ -126,40 +116,8 @@ public class CarCheckView extends JPanel {
 		repaint();
 	}
 
-	private class CarCheckMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(dbResult.getSelectedRow());
-			_view.setCurCol(dbResult.getSelectedColumn());
-
-			carChkModel.selectedData(getConn(), dbResult.getModel().getValueAt(_view.getCurRow(), 0));
-
-			tf[1].setText(carChkModel.getSelectedCarid());
-			tf[1].setDisabledTextColor(Color.black);
-
-			tf[3].setText(carChkModel.getSelectedCompid());
-			tf[3].setDisabledTextColor(Color.black);
-
-			tf[4].setText(carChkModel.getSelectedLicense_no());
-			tf[4].setDisabledTextColor(Color.black);
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
+	public void addMouseListener(MouseListener listener) {
+		dbResult.addMouseListener(listener);
 	}
+
 }

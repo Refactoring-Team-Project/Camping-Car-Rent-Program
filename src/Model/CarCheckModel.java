@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.table.DefaultTableModel;
-
 public class CarCheckModel {
 	int carid;
 	String explain_front;
@@ -21,7 +19,6 @@ public class CarCheckModel {
 	String selected_license_no = null;
 
 	ResultSet rs;
-	DefaultTableModel model;
 
 	public ArrayList<Object[]> select(Connection conn) {
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
@@ -122,4 +119,3 @@ public class CarCheckModel {
 	}
 
 }
-
