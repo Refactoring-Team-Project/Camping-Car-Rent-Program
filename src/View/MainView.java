@@ -115,19 +115,19 @@ public class MainView extends JFrame {
 	}
 
 	public void changeUser() {
-		getContentPane().removeAll();
+		this.getContentPane().removeAll();
 
 		if (user == 0) { // 관리자 모드
-			add(userChangePanel, 0);
+			this.getContentPane().add(userChangePanel, 0);
 			btnUser.setText("사용자");
-			add(userBtnPanel, 1);
+			this.getContentPane().add(userBtnPanel, 1);
 			user = 1;
 		}
 
 		else if (user == 1) { // 사용자 모드
-			add(userChangePanel, 0);
+			this.getContentPane().add(userChangePanel, 0);
 			btnUser.setText("관리자");
-			add(adminBtnPanel, 1);
+			this.getContentPane().add(adminBtnPanel, 1);
 			user = 0;
 		}
 		repaint();
@@ -137,15 +137,14 @@ public class MainView extends JFrame {
 		this.getContentPane().removeAll();
 		this.getContentPane().add(userChangePanel, 0);
 		if (user == 0) { // 관리자 모드
-			this.getContentPane().remove(userBtnPanel);
 			this.getContentPane().add(adminBtnPanel, 1);
 		} else if (user == 1) { // 사용자 모드
-			this.getContentPane().remove(adminBtnPanel);
 			this.getContentPane().add(userBtnPanel, 1);
 		}
 		this.getContentPane().add(view, 2);
 
-		this.repaint();
+
+		this.getContentPane().repaint();
 	}
 
 	public void addUserButtonListener(ActionListener listener) {
@@ -191,27 +190,27 @@ public class MainView extends JFrame {
 		btnAdminUndectedCampCarSearch.addActionListener(listener);
 	}
 
-	public void addSearch2Listener(ActionListener listener) {
+	public void addAdminTop10CompanySearch(ActionListener listener) {
 		btnAdminTop10CompanySearch.addActionListener(listener);
 	}
 
-	public void addSearch3Listener(ActionListener listener) {
+	public void addAdminBlackCusRankSearch(ActionListener listener) {
 		btnAdminBlackCusRankSearch.addActionListener(listener);
 	}
 
-	public void addSearch4Listener(ActionListener listener) {
+	public void addAdminRepairShopRankSearch(ActionListener listener) {
 		btnAdminRepairShopRankSearch.addActionListener(listener);
 	}
 
-	public void addUserSearch1Listener(ActionListener listener) {
+	public void addUserPriceSearch(ActionListener listener) {
 		btnUserPriceSearch.addActionListener(listener);
 	}
 
-	public void addUserSearch2Listener(ActionListener listener) {
+	public void addUserManufacturingYearSearch(ActionListener listener) {
 		btnUserManufacturingYearSearch.addActionListener(listener);
 	}
 
-	public void addUserSearch3Listener(ActionListener listener) {
+	public void addUserMileageSearch(ActionListener listener) {
 		btnUserMileageSearch.addActionListener(listener);
 	}
 

@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import Common.AppManager;
 import Model.CampingCompanyModel;
 import Model.CarRentModel;
@@ -31,9 +29,9 @@ public class SearchController {
 		repairShopModel = new RepairShopModel();
 		
 		this._view.addSearch1Listener(new Search1ButtonListener());
-		this._view.addSearch2Listener(new Search2ButtonListener());
-		this._view.addSearch3Listener(new Search3ButtonListener());
-		this._view.addSearch4Listener(new Search4ButtonListener());
+		this._view.addAdminTop10CompanySearch(new Search2ButtonListener());
+		this._view.addAdminBlackCusRankSearch(new Search3ButtonListener());
+		this._view.addAdminRepairShopRankSearch(new Search4ButtonListener());
 	}
 	
 	

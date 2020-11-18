@@ -29,9 +29,9 @@ public class CarRentListController {
 		this._carRentListView.addButtonListener(new ButtonListener());
 		this._carRentListView.addMouseListener(new CarRentListMouseListener());
 		this._view.addCarRentListListener(new CarRentListButtonListener());
-		this._view.addUserSearch1Listener(new UserSearch1ButtonListener());
-		this._view.addUserSearch2Listener(new UserSearch2ButtonListener());
-		this._view.addUserSearch3Listener(new UserSearch3ButtonListener());
+		this._view.addUserPriceSearch(new UserSearch1ButtonListener());
+		this._view.addUserManufacturingYearSearch(new UserSearch2ButtonListener());
+		this._view.addUserMileageSearch(new UserSearch3ButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {

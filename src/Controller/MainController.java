@@ -8,17 +8,17 @@ import Model.DatabaseConnectionModel;
 import View.MainView;
 
 public class MainController {
-	MainView _view;
+	MainView _mainView;
 	DatabaseConnectionModel connModel;
 	
 	
 	public MainController() {
-		this._view = AppManager.getInstance().getView();
+		this._mainView = AppManager.getInstance().getView();
 		
-		this._view.addUserButtonListener(new UserButtonListener());
+		this._mainView.addUserButtonListener(new UserButtonListener());
 		
 		connModel = new DatabaseConnectionModel();
-		this._view.conn = connModel.getConn();
+		this._mainView.conn = connModel.getConn();
 		//this._campCompView.addUserButtonListener(new UserButtonListener());
 	
 	}
@@ -29,7 +29,8 @@ public class MainController {
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			_view.changeUser();
+			_mainView.changeUser();
+
 		
 		}
 		
