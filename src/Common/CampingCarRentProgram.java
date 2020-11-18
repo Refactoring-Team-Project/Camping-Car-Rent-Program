@@ -21,7 +21,7 @@ import View.RepairListView;
 import View.RepairShopView;
 import View.SearchView;
 
-public class Main {
+public class CampingCarRentProgram {
 
 	public static void main(String[] args) {
 
