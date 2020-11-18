@@ -24,64 +24,55 @@ import Model.CampingCarModel;
 
 public class CarRentListView extends JPanel {
 
-	CampingCarModel campCarModel;
 	private MainView _view;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
+
 	JPanel updatePanel, buttonPanel;
-	int curRow = -1, curCol = -1;
 	public JButton btnRent;
 	JLabel[] labels;
 	public JTextField[] tf;
-
-	Connection _conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
+	public String[] fieldString = { "rentno", "carid", "license-no", "compid", "rent_date", "rentalperiod", "charge", "paymentdeadline", "billhistory", "billhistorycost"};
+	public int[] fieldSize = { 3, 3, 3, 3, 10, 5, 5, 10, 10, 5};
 
 	public CarRentListView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
+
 		AppManager.getInstance().setCarRentListView(this);
 		_view = AppManager.getInstance().getView();
-		_conn = _view.conn;
 
-		campCarModel = new CampingCarModel();
+		initScrollPane();
+		initUpdatePanel();
+		initButtonPanel();
+	}
+
+	public void initScrollPane() {
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
 		dbResult = new JTable(model);
+		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane = new JScrollPane(dbResult);
 		add(scrollPane);
+		scrollPane.setPreferredSize(new Dimension(780, 300));
+	}
 
+	public void initUpdatePanel() {
 		updatePanel = new JPanel();
 
 		labels = new JLabel[10];
-		labels[0] = new JLabel("rentno");
-		labels[1] = new JLabel("carid");
-		labels[2] = new JLabel("license_no");
-		labels[3] = new JLabel("compid");
-		labels[4] = new JLabel("rent_date");
-		labels[5] = new JLabel("rentalperiod");
-		labels[6] = new JLabel("charge");
-		labels[7] = new JLabel("paymentdeadline");
-		labels[8] = new JLabel("billhistory");
-		labels[9] = new JLabel("billhistorycost");
+		for(int i=0; i<labels.length; i++) {
+			labels[i] = new JLabel(fieldString[i]);
+		}
 
 		tf = new JTextField[10];
-		tf[0] = new JTextField("", 3);
-		tf[1] = new JTextField("", 3);
-		tf[2] = new JTextField("", 3);
-		tf[3] = new JTextField("", 3);
-		tf[4] = new JTextField("", 10);
-		tf[5] = new JTextField("", 5);
-		tf[6] = new JTextField("", 5);
-		tf[7] = new JTextField("", 10);
-		tf[8] = new JTextField("", 10);
-		tf[9] = new JTextField("", 5);
+		for(int i=0; i<tf.length; i++) {
+			tf[i] = new JTextField("", fieldSize[i]);
+		}
 
 		tf[1].setEnabled(false);
 		tf[3].setEnabled(false);
@@ -92,7 +83,10 @@ public class CarRentListView extends JPanel {
 		}
 
 		add(updatePanel);
+		updatePanel.setPreferredSize(new Dimension(780, 60));
+	}
 
+	public void initButtonPanel() {
 		buttonPanel = new JPanel();
 
 		btnRent = new JButton("대여");
@@ -100,21 +94,11 @@ public class CarRentListView extends JPanel {
 		buttonPanel.add(btnRent);
 
 		add(buttonPanel);
-
-		scrollPane.setPreferredSize(new Dimension(780, 300));
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 		buttonPanel.setPreferredSize(new Dimension(780, 50));
-
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		// mouseListener 처리하기
 	}
 
 	public void addButtonListener(ActionListener listener) {
 		btnRent.addActionListener(listener);
-	}
-
-	public Connection getConn() {
-		return _view.conn;
 	}
 
 	public void fieldReset() {

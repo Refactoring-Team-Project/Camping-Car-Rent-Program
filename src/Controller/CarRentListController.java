@@ -71,7 +71,7 @@ public class CarRentListController {
 						carRentModel.setBillhistorycost(_carRentListView.tf[9].getText());
 					}
 
-					carRentModel.insert(_carRentListView.getConn());
+					carRentModel.insert(_view.getConn());
 
 					_carRentListView.fieldReset();
 				} else
@@ -89,7 +89,7 @@ public class CarRentListController {
 			_view.setCurCol(_carRentListView.dbResult.getSelectedColumn());
 
 			System.out.println(_carRentListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
-			campCarModel.selectedData(_carRentListView.getConn(),
+			campCarModel.selectedData(_view.getConn(),
 					_carRentListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
 
 			_carRentListView.tf[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
@@ -132,7 +132,7 @@ public class CarRentListController {
 		public void actionPerformed(ActionEvent e) {
 			_view.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
-			ArrayList<Object[]> arr = campCarModel.selectRentAble(_carRentListView.getConn());
+			ArrayList<Object[]> arr = campCarModel.selectRentAble(_view.getConn());
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
@@ -155,7 +155,7 @@ public class CarRentListController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCarModel.search1(_carRentListView.getConn(), input);
+			ArrayList<Object[]> arr = campCarModel.search1(_view.getConn(), input);
 			if (arr.size() != 0)
 				_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
@@ -179,7 +179,7 @@ public class CarRentListController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCarModel.search2(_carRentListView.getConn(), input);
+			ArrayList<Object[]> arr = campCarModel.search2(_view.getConn(), input);
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
@@ -202,7 +202,7 @@ public class CarRentListController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCarModel.search3(_carRentListView.getConn(), input);
+			ArrayList<Object[]> arr = campCarModel.search3(_view.getConn(), input);
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));

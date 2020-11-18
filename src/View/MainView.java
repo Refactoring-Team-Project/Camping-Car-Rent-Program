@@ -36,10 +36,6 @@ public class MainView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public Connection getConn() {
-		return conn;
-	}
-
 	public void init() {
 		super.setLayout(new FlowLayout());
 
@@ -96,6 +92,10 @@ public class MainView extends JFrame {
 		adminBtnPanel.setPreferredSize(new Dimension(780, 80));
 		userBtnPanel.setPreferredSize(new Dimension(780, 80));
 
+	}
+
+	public Connection getConn() {
+		return conn;
 	}
 
 	public int getCurRow() {
