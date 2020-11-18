@@ -32,7 +32,7 @@ public class RepairListController {
 			try {
 				if (e.getSource() == _repairListView.repairListbtnDelete) {
 					if (_view.getCurRow() != -1) {
-						repairListModel.delete(_repairListView.getConn(),
+						repairListModel.delete(_view.getConn(),
 								_repairListView.repairListdbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_repairListView.fieldReset();
 					} else {
@@ -71,7 +71,7 @@ public class RepairListController {
 						if (_repairListView.repairListTextField[9].getText().length() > 0) {
 							repairListModel.setRepairhistory(_repairListView.repairListTextField[9].getText());
 						}
-						repairListModel.update(_repairListView.getConn(),
+						repairListModel.update(_view.getConn(),
 								_repairListView.repairListdbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_repairListView.fieldReset();
 					} else {
@@ -94,7 +94,7 @@ public class RepairListController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = repairListModel.select(_repairListView.getConn());
+			ArrayList<Object[]> arr = repairListModel.select(_view.getConn());
 			_repairListView.repairListModel.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_repairListView.repairListModel.addRow(arr.get(i));

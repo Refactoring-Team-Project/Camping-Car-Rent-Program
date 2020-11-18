@@ -45,7 +45,7 @@ public class SearchController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = carRentModel.search1(_searchView.getConn(), input);
+			ArrayList<Object[]> arr = carRentModel.search1(_view.getConn(), input);
 			if(arr.size() != 0) _searchView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_searchView.model.addRow(arr.get(i));
@@ -65,7 +65,7 @@ public class SearchController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCompModel.search2(_searchView.getConn());
+			ArrayList<Object[]> arr = campCompModel.search2(_view.getConn());
 			_searchView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_searchView.model.addRow(arr.get(i));
@@ -85,7 +85,7 @@ public class SearchController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = rentCustomerModel.search3(_searchView.getConn());
+			ArrayList<Object[]> arr = rentCustomerModel.search3(_view.getConn());
 			_searchView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_searchView.model.addRow(arr.get(i));
@@ -105,7 +105,7 @@ public class SearchController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = repairShopModel.search4(_searchView.getConn());
+			ArrayList<Object[]> arr = repairShopModel.search4(_view.getConn());
 			_searchView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_searchView.model.addRow(arr.get(i));

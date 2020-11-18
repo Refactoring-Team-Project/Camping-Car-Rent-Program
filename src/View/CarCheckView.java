@@ -30,7 +30,6 @@ public class CarCheckView extends JPanel {
 	JLabel[] labels;
 	public JTextField[] tf;
 
-	Connection _conn;
 
 	public CarCheckView() {
 		super.setLayout(new FlowLayout());
@@ -39,7 +38,6 @@ public class CarCheckView extends JPanel {
 		_view = AppManager.getInstance().getView();
 		carChkModel = new CarCheckModel();
 
-		_conn = _view.conn;
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -103,10 +101,6 @@ public class CarCheckView extends JPanel {
 
 	public void addButtonListener(ActionListener listener) {
 		btnRequest.addActionListener(listener);
-	}
-
-	public Connection getConn() {
-		return _view.conn;
 	}
 
 	public void fieldReset() {

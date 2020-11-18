@@ -23,11 +23,6 @@ public class CampingCarView extends JPanel {
 	JLabel[] labels;
 	public JTextField[] tf;
 	
-	Connection _conn;
-	Statement stmt;
-	PreparedStatement pstmt;
-	ResultSet rs;
-	
 	public CampingCarView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780,420));
@@ -35,7 +30,6 @@ public class CampingCarView extends JPanel {
 		campingCarModel = new CampingCarModel();
 		
 		_view = AppManager.getInstance().getView();
-		_conn = _view.conn;
 		model = new DefaultTableModel() {
 	         public boolean isCellEditable(int row, int column) {
 	            return false;
@@ -105,11 +99,7 @@ public class CampingCarView extends JPanel {
 	public void addMouseListener(MouseListener listener) {
 		dbResult.addMouseListener(listener);
 	}
-	
-	public Connection getConn() {
-		return _view.conn;
-	}
-	
+
 	public void fieldReset() {
 		for(JTextField t: tf) {
 			t.setText("");

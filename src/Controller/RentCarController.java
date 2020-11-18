@@ -58,7 +58,7 @@ public class RentCarController {
 						} else
 							throw new NullPointerException();
 
-						rentCarModel.insert(_rentCarView.getConn());
+						rentCarModel.insert(_view.getConn());
 						_rentCarView.fieldReset();
 						JOptionPane.showMessageDialog(null, "반환정보를 점검내역에 저장하였습니다.");
 					}
@@ -112,7 +112,7 @@ public class RentCarController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = rentCarModel.select(_rentCarView.getConn());
+			ArrayList<Object[]> arr = rentCarModel.select(_view.getConn());
 			_rentCarView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_rentCarView.model.addRow(arr.get(i));

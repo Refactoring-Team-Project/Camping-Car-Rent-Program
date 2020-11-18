@@ -33,17 +33,13 @@ public class RentCustomerView extends JPanel {
 	JLabel[] labels;
 	public JTextField[] tf;
 
-	Connection _conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
 
 	public RentCustomerView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRentCustomerView(this);
 		_view = AppManager.getInstance().getView();
-		_conn = _view.conn;
+
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -104,10 +100,6 @@ public class RentCustomerView extends JPanel {
 		btnInput.addActionListener(listener);
 		btnDelete.addActionListener(listener);
 		btnUpdate.addActionListener(listener);
-	}
-
-	public Connection getConn() {
-		return _view.conn;
 	}
 
 	public void fieldReset() {

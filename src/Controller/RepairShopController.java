@@ -53,12 +53,12 @@ public class RepairShopController {
 						repairShopModel.setManager_email(_repairShopView.tf[5].getText());
 					}
 
-					repairShopModel.insert(_repairShopView.getConn());
+					repairShopModel.insert(_view.getConn());
 
 					_repairShopView.fieldReset();
 				} else if (e.getSource() == _repairShopView.btnDelete) {
 					if (_view.getCurRow() != -1) {
-						repairShopModel.delete(_repairShopView.getConn(),
+						repairShopModel.delete(_view.getConn(),
 								_repairShopView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_repairShopView.fieldReset();
 					} else {
@@ -85,7 +85,7 @@ public class RepairShopController {
 						if (_repairShopView.tf[5].getText().length() > 0) {
 							repairShopModel.setManager_email(_repairShopView.tf[5].getText());
 						}
-						repairShopModel.update(_repairShopView.getConn(),
+						repairShopModel.update(_view.getConn(),
 								_repairShopView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_repairShopView.fieldReset();
 					} else {
@@ -143,7 +143,7 @@ public class RepairShopController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = repairShopModel.select(_repairShopView.getConn());
+			ArrayList<Object[]> arr = repairShopModel.select(_view.getConn());
 			_repairShopView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_repairShopView.model.addRow(arr.get(i));

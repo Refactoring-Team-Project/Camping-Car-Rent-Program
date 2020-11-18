@@ -33,17 +33,13 @@ public class RepairListView extends JPanel {
 	JLabel[] repairListlabels;
 	public JTextField[] repairListTextField;
 
-	Connection _conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
 
 	public RepairListView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRepairListView(this);
 		_mainView = AppManager.getInstance().getView();
-		_conn = _mainView.conn;
+
 		repairListModel = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -163,9 +159,6 @@ public class RepairListView extends JPanel {
 
 	}
 
-	public Connection getConn() {
-		return _mainView.conn;
-	}
 
 	public void fieldReset() {
 		for (JTextField t : repairListTextField) {

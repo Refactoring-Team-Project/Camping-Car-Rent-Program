@@ -32,17 +32,11 @@ public class RepairShopView extends JPanel {
 	JLabel[] labels;
 	public JTextField[] tf;
 
-	Connection _conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
-
 	public RepairShopView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRepairShopView(this);
 		_view = AppManager.getInstance().getView();
-		_conn = _view.conn;
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -108,9 +102,6 @@ public class RepairShopView extends JPanel {
 		btnUpdate.addActionListener(listener);
 	}
 
-	public Connection getConn() {
-		return _view.conn;
-	}
 
 	public void fieldReset() {
 		for (JTextField t : tf) {

@@ -72,7 +72,7 @@ public class CarCheckController {
 								repListModel.setRepairhistory(_carChkView.tf[9].getText());
 							}
 
-							repListModel.insert(_carChkView.getConn());
+							repListModel.insert(_mainView.getConn());
 
 						} else if (_carChkView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
 							JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
@@ -95,7 +95,7 @@ public class CarCheckController {
 			_mainView.setCurRow(_carChkView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_carChkView.dbResult.getSelectedColumn());
 
-			carChkModel.selectedData(_carChkView.getConn(),
+			carChkModel.selectedData(_mainView.getConn(),
 					_carChkView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
 			_carChkView.tf[1].setText(carChkModel.getSelectedCarid());
@@ -134,7 +134,7 @@ public class CarCheckController {
 			_mainView.setCurRow(-1);
 			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = carChkModel.select(_carChkView.getConn());
+			ArrayList<Object[]> arr = carChkModel.select(_mainView.getConn());
 			_carChkView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carChkView.model.addRow(arr.get(i));

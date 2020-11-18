@@ -29,7 +29,6 @@ public class RentCarView extends JPanel {
 	JLabel[] labels;
 	public JTextField[] tf;
 
-	Connection _conn;
 
 	public RentCarView() {
 		super.setLayout(new FlowLayout());
@@ -38,7 +37,6 @@ public class RentCarView extends JPanel {
 		_view = AppManager.getInstance().getView();
 		rentCarModel = new RentCarModel();
 
-		_conn = _view.conn;
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -94,9 +92,6 @@ public class RentCarView extends JPanel {
 		btnReturn.addActionListener(listener);
 	}
 
-	public Connection getConn() {
-		return _view.conn;
-	}
 
 	public void fieldReset() {
 		for (JTextField t : tf) {

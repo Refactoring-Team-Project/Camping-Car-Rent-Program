@@ -51,13 +51,13 @@ public class RentCustomerController {
 						rentCustModel.setEmail(_rentCustView.tf[4].getText());
 					}
 
-					rentCustModel.insert(_rentCustView.getConn());
+					rentCustModel.insert(_view.getConn());
 					_rentCustView.fieldReset();
 				}
 
 				else if (e.getSource() == _rentCustView.btnDelete) {
 					if (_view.getCurRow() != -1) {
-						rentCustModel.delete(_rentCustView.getConn(),
+						rentCustModel.delete(_view.getConn(),
 								_rentCustView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_rentCustView.fieldReset();
 					} else
@@ -82,7 +82,7 @@ public class RentCustomerController {
 						if (_rentCustView.tf[4].getText().length() > 0) {
 							rentCustModel.setEmail(_rentCustView.tf[4].getText());
 						}
-						rentCustModel.update(_rentCustView.getConn(),
+						rentCustModel.update(_view.getConn(),
 								_rentCustView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_rentCustView.fieldReset();
 					} else
@@ -130,7 +130,7 @@ public class RentCustomerController {
 			_view.setCurRow(-1);
 			_view.setCurCol(-1);
 
-			ArrayList<Object[]> arr = rentCustModel.select(_rentCustView.getConn());
+			ArrayList<Object[]> arr = rentCustModel.select(_view.getConn());
 			_rentCustView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_rentCustView.model.addRow(arr.get(i));
