@@ -39,11 +39,24 @@ public class MainView extends JFrame {
 	public void init() {
 		super.setLayout(new FlowLayout());
 
+		initChangeUserPanel();
+		initAdminButtonPanel1();
+		initUserButtonPanell();
+
+		add(userChangePanel);
+		add(adminBtnPanel);
+
+		initPanelSize();
+	}
+
+	public void initChangeUserPanel() {
 		/* 사용자 관리자 전환 panel */
 		btnUser = new JButton("관리자");
 		userChangePanel = new JPanel();
 		userChangePanel.add(btnUser);
-		add(userChangePanel);
+	}
+
+	public void initAdminButtonPanel1() {
 
 		/* panel 1 */
 		btnCampComp = new JButton("Camping_Company");
@@ -74,6 +87,9 @@ public class MainView extends JFrame {
 		adminBtnPanel.add(btnAdminRepairShopRankSearch);
 		adminBtnPanel.add(btnReset);
 
+	}
+
+	public void initUserButtonPanell() {
 		/* panel 2 */
 		btnRentList = new JButton("Camping_Car(대여가능)");
 		btnUserPriceSearch = new JButton("검색1");
@@ -86,12 +102,13 @@ public class MainView extends JFrame {
 		userBtnPanel.add(btnUserManufacturingYearSearch);
 		userBtnPanel.add(btnUserMileageSearch);
 
-		add(adminBtnPanel);
+	}
+
+	public void initPanelSize() {
 		/*** panel size ****/
 		userChangePanel.setPreferredSize(new Dimension(780, 50));
 		adminBtnPanel.setPreferredSize(new Dimension(780, 80));
 		userBtnPanel.setPreferredSize(new Dimension(780, 80));
-
 	}
 
 	public Connection getConn() {
