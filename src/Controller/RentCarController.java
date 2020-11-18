@@ -15,17 +15,17 @@ import View.MainView;
 import View.RentCarView;
 
 public class RentCarController {
-	MainView _view;
+	MainView _mainView;
 	RentCarView _rentCarView;
 	private RentCarModel rentCarModel;
 
 	public RentCarController() {
-		this._view = AppManager.getInstance().getView();
+		this._mainView = AppManager.getInstance().getView();
 		this._rentCarView = AppManager.getInstance().getRentCarView();
 		rentCarModel = new RentCarModel();
 		this._rentCarView.addButtonListener(new ButtonListener());
 		this._rentCarView.addMouseListener(new RentCarMouseListener());
-		this._view.addRentCarListener(new RentCarButtonListener());
+		this._mainView.addRentCarListener(new RentCarButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -34,7 +34,7 @@ public class RentCarController {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				if (e.getSource() == _rentCarView.btnReturn) {
-					if (_view.getCurRow() != -1) {
+					if (_mainView.getCurRow() != -1) {
 						if (_rentCarView.tf[0].getText().length() > 0) {
 							rentCarModel.setRentno(Integer.parseInt(_rentCarView.tf[0].getText()));
 						}
@@ -58,7 +58,7 @@ public class RentCarController {
 						} else
 							throw new NullPointerException();
 
-						rentCarModel.insert(_view.getConn());
+						rentCarModel.insert(_mainView.getConn());
 						_rentCarView.fieldReset();
 						JOptionPane.showMessageDialog(null, "반환정보를 점검내역에 저장하였습니다.");
 					}
@@ -76,13 +76,13 @@ public class RentCarController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(_rentCarView.dbResult.getSelectedRow());
-			_view.setCurCol(_rentCarView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_rentCarView.dbResult.getSelectedRow());
+			_mainView.setCurCol(_rentCarView.dbResult.getSelectedColumn());
 
-			_rentCarView.tf[0].setText(_rentCarView.dbResult.getModel().getValueAt(_view.getCurRow(), 0).toString());
+			_rentCarView.tf[0].setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
 			_rentCarView.tf[0].setDisabledTextColor(Color.black);
 
-			_rentCarView.tf[1].setText(_rentCarView.dbResult.getModel().getValueAt(_view.getCurRow(), 1).toString());
+			_rentCarView.tf[1].setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
 			_rentCarView.tf[1].setDisabledTextColor(Color.black);
 		}
 
@@ -108,18 +108,18 @@ public class RentCarController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			_view.changePanel(_rentCarView);
-			_view.setCurRow(-1);
-			_view.setCurCol(-1);
+			_mainView.changePanel(_rentCarView);
+			_mainView.setCurRow(-1);
+			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = rentCarModel.select(_view.getConn());
+			ArrayList<Object[]> arr = rentCarModel.select(_mainView.getConn());
 			_rentCarView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_rentCarView.model.addRow(arr.get(i));
 			}
 			System.out.println("rent carrrrrrrrrr");
-			_view.revalidate();
-			_view.repaint();
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 
 	}

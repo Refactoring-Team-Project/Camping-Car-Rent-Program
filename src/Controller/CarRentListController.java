@@ -16,22 +16,22 @@ import View.CarRentListView;
 import View.MainView;
 
 public class CarRentListController {
-	MainView _view;
+	MainView _mainView;
 	CarRentListView _carRentListView;
 	private CampingCarModel campCarModel;
 	private CarRentModel carRentModel;
 
 	public CarRentListController() {
-		this._view = AppManager.getInstance().getView();
+		this._mainView = AppManager.getInstance().getView();
 		this._carRentListView = AppManager.getInstance().getCarRentListView();
 		campCarModel = new CampingCarModel();
 		carRentModel = new CarRentModel();
 		this._carRentListView.addButtonListener(new ButtonListener());
 		this._carRentListView.addMouseListener(new CarRentListMouseListener());
-		this._view.addCarRentListListener(new CarRentListButtonListener());
-		this._view.addUserPriceSearch(new UserSearch1ButtonListener());
-		this._view.addUserManufacturingYearSearch(new UserSearch2ButtonListener());
-		this._view.addUserMileageSearch(new UserSearch3ButtonListener());
+		this._mainView.addCarRentListListener(new CarRentListButtonListener());
+		this._mainView.addUserPriceSearch(new UserSearch1ButtonListener());
+		this._mainView.addUserManufacturingYearSearch(new UserSearch2ButtonListener());
+		this._mainView.addUserMileageSearch(new UserSearch3ButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -39,7 +39,7 @@ public class CarRentListController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == _carRentListView.btnRent) {
-				if (_view.getCurRow() != -1) {
+				if (_mainView.getCurRow() != -1) {
 					if (_carRentListView.tf[0].getText().length() > 0) {
 						carRentModel.setRentno(Integer.parseInt(_carRentListView.tf[0].getText()));
 					}
@@ -71,7 +71,7 @@ public class CarRentListController {
 						carRentModel.setBillhistorycost(_carRentListView.tf[9].getText());
 					}
 
-					carRentModel.insert(_view.getConn());
+					carRentModel.insert(_mainView.getConn());
 
 					_carRentListView.fieldReset();
 				} else
@@ -85,12 +85,12 @@ public class CarRentListController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(_carRentListView.dbResult.getSelectedRow());
-			_view.setCurCol(_carRentListView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_carRentListView.dbResult.getSelectedRow());
+			_mainView.setCurCol(_carRentListView.dbResult.getSelectedColumn());
 
-			System.out.println(_carRentListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
-			campCarModel.selectedData(_view.getConn(),
-					_carRentListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+			System.out.println(_carRentListView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+			campCarModel.selectedData(_mainView.getConn(),
+					_carRentListView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
 			_carRentListView.tf[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
 			_carRentListView.tf[1].setDisabledTextColor(Color.black);
@@ -130,16 +130,16 @@ public class CarRentListController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			_view.changePanel(_carRentListView);
+			_mainView.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
-			ArrayList<Object[]> arr = campCarModel.selectRentAble(_view.getConn());
+			ArrayList<Object[]> arr = campCarModel.selectRentAble(_mainView.getConn());
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
 			}
 			System.out.println("rentablelist");
-			_view.revalidate();
-			_view.repaint();
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 
 	}
@@ -150,20 +150,20 @@ public class CarRentListController {
 		public void actionPerformed(ActionEvent e) {
 			String input = _carRentListView.SearchInput("원하는 최대 금액을 입력해주세요");
 
-			_view.changePanel(_carRentListView);
+			_mainView.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
-			_view.setCurRow(-1);
-			_view.setCurCol(-1);
+			_mainView.setCurRow(-1);
+			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCarModel.search1(_view.getConn(), input);
+			ArrayList<Object[]> arr = campCarModel.search1(_mainView.getConn(), input);
 			if (arr.size() != 0)
 				_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
 			}
 			System.out.println("search1");
-			_view.revalidate();
-			_view.repaint();
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 
 	}
@@ -174,19 +174,19 @@ public class CarRentListController {
 		public void actionPerformed(ActionEvent e) {
 			String input = _carRentListView.SearchInput("원하는 최소 제조년도를 입력해주세요");
 
-			_view.changePanel(_carRentListView);
+			_mainView.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
-			_view.setCurRow(-1);
-			_view.setCurCol(-1);
+			_mainView.setCurRow(-1);
+			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCarModel.search2(_view.getConn(), input);
+			ArrayList<Object[]> arr = campCarModel.search2(_mainView.getConn(), input);
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
 			}
 			System.out.println("search2");
-			_view.revalidate();
-			_view.repaint();
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 
 	}
@@ -197,19 +197,19 @@ public class CarRentListController {
 		public void actionPerformed(ActionEvent e) {
 			String input = _carRentListView.SearchInput("원하는 최대 주행거리를 입력해주세요");
 
-			_view.changePanel(_carRentListView);
+			_mainView.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
-			_view.setCurRow(-1);
-			_view.setCurCol(-1);
+			_mainView.setCurRow(-1);
+			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCarModel.search3(_view.getConn(), input);
+			ArrayList<Object[]> arr = campCarModel.search3(_mainView.getConn(), input);
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
 			}
 			System.out.println("search3");
-			_view.revalidate();
-			_view.repaint();
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 
 	}

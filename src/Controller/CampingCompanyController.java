@@ -14,17 +14,17 @@ import View.CampingCompanyView;
 import View.MainView;
 
 public class CampingCompanyController {
-	MainView _view;
+	MainView _mainView;
 	CampingCompanyView _campCompView;
 	private CampingCompanyModel campCompModel;
 
 	public CampingCompanyController() {
-		this._view = AppManager.getInstance().getView();
+		this._mainView = AppManager.getInstance().getView();
 		this._campCompView = AppManager.getInstance().getCampingCompanyView();
 		campCompModel = new CampingCompanyModel();
 		this._campCompView.addMouseListener(new CampingCompanyMouseListener());
 		this._campCompView.addButtonListener(new ButtonListener());
-		this._view.addCampCompListener(new CampingCompanyButtonListener());
+		this._mainView.addCampCompListener(new CampingCompanyButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -53,18 +53,18 @@ public class CampingCompanyController {
 						campCompModel.setManager_email(_campCompView.tf[5].getText());
 					}
 	
-					campCompModel.insert(_view.getConn());
+					campCompModel.insert(_mainView.getConn());
 	
 					
 				} else if (e.getSource() == _campCompView.btnDelete) {
-					if (_view.getCurRow() != -1) {
-						campCompModel.delete(_view.getConn(), _campCompView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+					if (_mainView.getCurRow() != -1) {
+						campCompModel.delete(_mainView.getConn(), _campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 	
 				} else if (e.getSource() == _campCompView.btnUpdate) {
-					if (_view.getCurRow() != -1) {
+					if (_mainView.getCurRow() != -1) {
 						if (_campCompView.tf[0].getText().length() > 0) {
 							campCompModel.setCompid(Integer.parseInt(_campCompView.tf[0].getText()));
 						} else
@@ -85,8 +85,8 @@ public class CampingCompanyController {
 						if (_campCompView.tf[5].getText().length() > 0) {
 							campCompModel.setManager_email(_campCompView.tf[5].getText());
 						}
-						campCompModel.update(_view.getConn(),
-								_campCompView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+						campCompModel.update(_mainView.getConn(),
+								_campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
@@ -105,8 +105,8 @@ public class CampingCompanyController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(_campCompView.dbResult.getSelectedRow());
-			_view.setCurCol(_campCompView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_campCompView.dbResult.getSelectedRow());
+			_mainView.setCurCol(_campCompView.dbResult.getSelectedColumn());
 		}
 
 		@Override
@@ -131,18 +131,18 @@ public class CampingCompanyController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			_view.changePanel(_campCompView);
-			_view.setCurRow(-1);
-			_view.setCurCol(-1);
+			_mainView.changePanel(_campCompView);
+			_mainView.setCurRow(-1);
+			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCompModel.select(_view.getConn());
+			ArrayList<Object[]> arr = campCompModel.select(_mainView.getConn());
 			_campCompView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_campCompView.model.addRow(arr.get(i));
 			}
 			System.out.println("campcomp");
-			_view.revalidate();
-			_view.repaint();
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 
 	}

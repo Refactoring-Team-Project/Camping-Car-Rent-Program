@@ -14,17 +14,17 @@ import View.MainView;
 import View.RepairShopView;
 
 public class RepairShopController {
-	MainView _view;
+	MainView _mainView;
 	RepairShopView _repairShopView;
 	private RepairShopModel repairShopModel;
 
 	public RepairShopController() {
-		this._view = AppManager.getInstance().getView();
+		this._mainView = AppManager.getInstance().getView();
 		this._repairShopView = AppManager.getInstance().getRepairShopView();
 		repairShopModel = new RepairShopModel();
 		this._repairShopView.addButtonListener(new ButtonListener());
 		this._repairShopView.addMouseListener(new RepairShopMouseListener());
-		this._view.addRepairShopListener(new RepairShopButtonListener());
+		this._mainView.addRepairShopListener(new RepairShopButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -53,19 +53,19 @@ public class RepairShopController {
 						repairShopModel.setManager_email(_repairShopView.tf[5].getText());
 					}
 
-					repairShopModel.insert(_view.getConn());
+					repairShopModel.insert(_mainView.getConn());
 
 					_repairShopView.fieldReset();
 				} else if (e.getSource() == _repairShopView.btnDelete) {
-					if (_view.getCurRow() != -1) {
-						repairShopModel.delete(_view.getConn(),
-								_repairShopView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+					if (_mainView.getCurRow() != -1) {
+						repairShopModel.delete(_mainView.getConn(),
+								_repairShopView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_repairShopView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 					}
 				} else if (e.getSource() == _repairShopView.btnUpdate) {
-					if (_view.getCurRow() != -1) { // 변경할 데이터를 선택한 것이 있다면
+					if (_mainView.getCurRow() != -1) { // 변경할 데이터를 선택한 것이 있다면
 						if (_repairShopView.tf[0].getText().length() > 0) {
 							repairShopModel.setShopid(Integer.parseInt(_repairShopView.tf[0].getText()));
 						} else
@@ -85,8 +85,8 @@ public class RepairShopController {
 						if (_repairShopView.tf[5].getText().length() > 0) {
 							repairShopModel.setManager_email(_repairShopView.tf[5].getText());
 						}
-						repairShopModel.update(_view.getConn(),
-								_repairShopView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+						repairShopModel.update(_mainView.getConn(),
+								_repairShopView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_repairShopView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
@@ -104,9 +104,9 @@ public class RepairShopController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(_repairShopView.dbResult.getSelectedRow());
-			_view.setCurCol(_repairShopView.dbResult.getSelectedColumn());
-			System.out.println(_view.getCurRow() + " " + _view.getCurCol());
+			_mainView.setCurRow(_repairShopView.dbResult.getSelectedRow());
+			_mainView.setCurCol(_repairShopView.dbResult.getSelectedColumn());
+			System.out.println(_mainView.getCurRow() + " " + _mainView.getCurCol());
 		}
 
 		@Override
@@ -139,19 +139,19 @@ public class RepairShopController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			_view.changePanel(_repairShopView);
-			_view.setCurRow(-1);
-			_view.setCurCol(-1);
+			_mainView.changePanel(_repairShopView);
+			_mainView.setCurRow(-1);
+			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = repairShopModel.select(_view.getConn());
+			ArrayList<Object[]> arr = repairShopModel.select(_mainView.getConn());
 			_repairShopView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_repairShopView.model.addRow(arr.get(i));
 			}
 			System.out.println("repairShop");
-			_view.add(AppManager.getInstance().getRepairShopView());
-			_view.revalidate();
-			_view.repaint();
+			_mainView.add(AppManager.getInstance().getRepairShopView());
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 
 	}

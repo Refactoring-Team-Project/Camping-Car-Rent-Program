@@ -102,7 +102,6 @@ public class RepairListView extends JPanel {
 		repairListButtonPanel.setPreferredSize(new Dimension(780, 50));
 
 		repairListdbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		repairListdbResult.addMouseListener(new RepairListMouseListener());
 	}
 
 	public void addButtonListener(ActionListener listener) {
@@ -110,55 +109,9 @@ public class RepairListView extends JPanel {
 		repairListbtnUpdate.addActionListener(listener);
 	}
 
-	private class RepairListMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(repairListdbResult.getSelectedRow());
-			_mainView.setCurCol(repairListdbResult.getSelectedColumn());
-
-			repairListTextField[0].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
-			repairListTextField[0].setDisabledTextColor(Color.black);
-
-			repairListTextField[1].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
-			repairListTextField[1].setDisabledTextColor(Color.black);
-
-			repairListTextField[2].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 2).toString());
-			repairListTextField[2].setDisabledTextColor(Color.black);
-
-			repairListTextField[3].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 3).toString());
-			repairListTextField[3].setDisabledTextColor(Color.black);
-
-			repairListTextField[4].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 4).toString());
-			repairListTextField[4].setDisabledTextColor(Color.black);
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
+	public void addMouseListener(MouseListener listener) {
+		repairListdbResult.addMouseListener(listener);
 	}
-
 
 	public void fieldReset() {
 		for (JTextField t : repairListTextField) {
