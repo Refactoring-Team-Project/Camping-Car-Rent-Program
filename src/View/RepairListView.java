@@ -24,13 +24,12 @@ import Common.AppManager;
 // 라벨, 텍스트필드 변수명 변경
 public class RepairListView extends JPanel {
 
-	private MainView _view;
-	public DefaultTableModel model;
-	public JTable dbResult;
-	JScrollPane scrollPane;
-	JPanel updatePanel, buttonPanel;
-	int curRow = -1, curCol = -1;
-	public JButton btnDelete, btnUpdate;
+	private MainView _mainView;
+	public DefaultTableModel repairListModel;
+	public JTable repairListdbResult;
+	JScrollPane repairListScrollPane;
+	JPanel repairListUpdatePanel, repairListButtonPanel;
+	public JButton repairListbtnDelete, repairListbtnUpdate;
 	JLabel[] repairListlabels;
 	public JTextField[] repairListTextField;
 
@@ -43,18 +42,18 @@ public class RepairListView extends JPanel {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRepairListView(this);
-		_view = AppManager.getInstance().getView();
-		_conn = _view.conn;
-		model = new DefaultTableModel() {
+		_mainView = AppManager.getInstance().getView();
+		_conn = _mainView.conn;
+		repairListModel = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dbResult = new JTable(model);
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
+		repairListdbResult = new JTable(repairListModel);
+		repairListScrollPane = new JScrollPane(repairListdbResult);
+		add(repairListScrollPane);
 
-		updatePanel = new JPanel();
+		repairListUpdatePanel = new JPanel();
 		repairListlabels = new JLabel[10];
 		repairListlabels[0] = new JLabel("repairno");
 		repairListlabels[1] = new JLabel("carid");
@@ -86,55 +85,55 @@ public class RepairListView extends JPanel {
 		repairListTextField[4].setEnabled(false); // license_no
 
 		for (int i = 0; i < 10; i++) {
-			updatePanel.add(repairListlabels[i]);
-			updatePanel.add(repairListTextField[i]);
+			repairListUpdatePanel.add(repairListlabels[i]);
+			repairListUpdatePanel.add(repairListTextField[i]);
 		}
 
-		add(updatePanel);
+		add(repairListUpdatePanel);
 
-		buttonPanel = new JPanel();
+		repairListButtonPanel = new JPanel();
 
-		btnDelete = new JButton("삭제");
-		btnUpdate = new JButton("변경");
+		repairListbtnDelete = new JButton("삭제");
+		repairListbtnUpdate = new JButton("변경");
 
-		buttonPanel.add(btnDelete);
-		buttonPanel.add(btnUpdate);
+		repairListButtonPanel.add(repairListbtnDelete);
+		repairListButtonPanel.add(repairListbtnUpdate);
 
-		add(buttonPanel);
+		add(repairListButtonPanel);
 
-		scrollPane.setPreferredSize(new Dimension(780, 300));
-		updatePanel.setPreferredSize(new Dimension(780, 60));
-		buttonPanel.setPreferredSize(new Dimension(780, 50));
+		repairListScrollPane.setPreferredSize(new Dimension(780, 300));
+		repairListUpdatePanel.setPreferredSize(new Dimension(780, 60));
+		repairListButtonPanel.setPreferredSize(new Dimension(780, 50));
 
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		dbResult.addMouseListener(new RepairListMouseListener());
+		repairListdbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		repairListdbResult.addMouseListener(new RepairListMouseListener());
 	}
 
 	public void addButtonListener(ActionListener listener) {
-		btnDelete.addActionListener(listener);
-		btnUpdate.addActionListener(listener);
+		repairListbtnDelete.addActionListener(listener);
+		repairListbtnUpdate.addActionListener(listener);
 	}
 
 	private class RepairListMouseListener implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(dbResult.getSelectedRow());
-			_view.setCurCol(dbResult.getSelectedColumn());
+			_mainView.setCurRow(repairListdbResult.getSelectedRow());
+			_mainView.setCurCol(repairListdbResult.getSelectedColumn());
 
-			repairListTextField[0].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 0).toString());
+			repairListTextField[0].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
 			repairListTextField[0].setDisabledTextColor(Color.black);
 
-			repairListTextField[1].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 1).toString());
+			repairListTextField[1].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
 			repairListTextField[1].setDisabledTextColor(Color.black);
 
-			repairListTextField[2].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 2).toString());
+			repairListTextField[2].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 2).toString());
 			repairListTextField[2].setDisabledTextColor(Color.black);
 
-			repairListTextField[3].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 3).toString());
+			repairListTextField[3].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 3).toString());
 			repairListTextField[3].setDisabledTextColor(Color.black);
 
-			repairListTextField[4].setText(dbResult.getModel().getValueAt(_view.getCurRow(), 4).toString());
+			repairListTextField[4].setText(repairListdbResult.getModel().getValueAt(_mainView.getCurRow(), 4).toString());
 			repairListTextField[4].setDisabledTextColor(Color.black);
 		}
 
@@ -165,7 +164,7 @@ public class RepairListView extends JPanel {
 	}
 
 	public Connection getConn() {
-		return _view.conn;
+		return _mainView.conn;
 	}
 
 	public void fieldReset() {

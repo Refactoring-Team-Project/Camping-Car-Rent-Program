@@ -30,15 +30,15 @@ public class RepairListController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (e.getSource() == _repairListView.btnDelete) {
+				if (e.getSource() == _repairListView.repairListbtnDelete) {
 					if (_view.getCurRow() != -1) {
 						repairListModel.delete(_repairListView.getConn(),
-								_repairListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+								_repairListView.repairListdbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_repairListView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 					}
-				} else if (e.getSource() == _repairListView.btnUpdate) {
+				} else if (e.getSource() == _repairListView.repairListbtnUpdate) {
 					if (_view.getCurRow() != -1) { // 변경할 데이터를 선택한 것이 있다면
 						if (_repairListView.repairListTextField[0].getText().length() > 0) {
 							repairListModel.setRepairno(Integer.parseInt(_repairListView.repairListTextField[0].getText()));
@@ -72,7 +72,7 @@ public class RepairListController {
 							repairListModel.setRepairhistory(_repairListView.repairListTextField[9].getText());
 						}
 						repairListModel.update(_repairListView.getConn(),
-								_repairListView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+								_repairListView.repairListdbResult.getModel().getValueAt(_view.getCurRow(), 0));
 						_repairListView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
@@ -95,9 +95,9 @@ public class RepairListController {
 			_view.setCurCol(-1);
 
 			ArrayList<Object[]> arr = repairListModel.select(_repairListView.getConn());
-			_repairListView.model.setDataVector(null, arr.get(0));
+			_repairListView.repairListModel.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_repairListView.model.addRow(arr.get(i));
+				_repairListView.repairListModel.addRow(arr.get(i));
 			}
 			System.out.println("repairList");
 			_view.add(AppManager.getInstance().getRepairListView());
