@@ -22,7 +22,6 @@ import Common.AppManager;
 
 public class RepairShopView extends JPanel {
 
-	private MainView _view;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
@@ -36,7 +35,6 @@ public class RepairShopView extends JPanel {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRepairShopView(this);
-		_view = AppManager.getInstance().getView();
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;

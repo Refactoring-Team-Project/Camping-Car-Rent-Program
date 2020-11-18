@@ -23,7 +23,7 @@ import Common.AppManager;
 public class RentCustomerView extends JPanel {
 
 //	RentCustomerModel dataModel;
-	private MainView _view;
+	private MainView _mainView;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
@@ -38,7 +38,7 @@ public class RentCustomerView extends JPanel {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRentCustomerView(this);
-		_view = AppManager.getInstance().getView();
+		_mainView = AppManager.getInstance().getView();
 
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {

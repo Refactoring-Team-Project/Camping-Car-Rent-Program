@@ -20,8 +20,6 @@ import Model.CarCheckModel;
 
 public class CarCheckView extends JPanel {
 
-	private CarCheckModel carChkModel;
-	private MainView _view;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
@@ -35,8 +33,6 @@ public class CarCheckView extends JPanel {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setCarCheckView(this);
-		_view = AppManager.getInstance().getView();
-		carChkModel = new CarCheckModel();
 
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {

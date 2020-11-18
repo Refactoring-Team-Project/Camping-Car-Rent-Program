@@ -26,7 +26,6 @@ import Common.AppManager;
 
 public class SearchView extends JPanel{
 
-	private MainView _view;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
@@ -42,9 +41,6 @@ public class SearchView extends JPanel{
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setSearchView(this);
 		
-		_view = AppManager.getInstance().getView();
-		_conn = _view.conn;
-		
 		model = new DefaultTableModel() {
 	         public boolean isCellEditable(int row, int column) {
 	            return false;
@@ -59,10 +55,6 @@ public class SearchView extends JPanel{
 	      
 	      dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	      // mouseListener 처리하기
-	}
-
-	public Connection getConn() {
-		return _view.conn;
 	}
 	
 	public String SearchInput(String str) {

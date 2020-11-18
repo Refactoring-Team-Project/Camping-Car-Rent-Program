@@ -27,7 +27,6 @@ import Model.CampingCompanyModel;
 public class CampingCompanyView extends JPanel{
 
 	CampingCompanyModel dataModel;
-	private MainView _view;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
@@ -42,7 +41,6 @@ public class CampingCompanyView extends JPanel{
 		super.setLayout(new FlowLayout()); 
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setCampingCompanyView(this);
-		_view = AppManager.getInstance().getView();
 		model = new DefaultTableModel() {
 	         public boolean isCellEditable(int row, int column) {
 	            return false;

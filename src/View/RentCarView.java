@@ -20,7 +20,7 @@ import Model.RentCarModel;
 
 public class RentCarView extends JPanel {
 	private RentCarModel rentCarModel;
-	private MainView _view;
+	private MainView _mainView;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
@@ -34,7 +34,7 @@ public class RentCarView extends JPanel {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRentCarView(this);
-		_view = AppManager.getInstance().getView();
+		_mainView = AppManager.getInstance().getView();
 		rentCarModel = new RentCarModel();
 
 		model = new DefaultTableModel() {

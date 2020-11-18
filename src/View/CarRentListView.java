@@ -24,7 +24,7 @@ import Model.CampingCarModel;
 
 public class CarRentListView extends JPanel {
 
-	private MainView _view;
+	private MainView _mainView;
 	public DefaultTableModel model;
 	public JTable dbResult;
 	JScrollPane scrollPane;
@@ -41,7 +41,7 @@ public class CarRentListView extends JPanel {
 		setPreferredSize(new Dimension(780, 420));
 
 		AppManager.getInstance().setCarRentListView(this);
-		_view = AppManager.getInstance().getView();
+		_mainView = AppManager.getInstance().getView();
 
 		initScrollPane();
 		initUpdatePanel();
