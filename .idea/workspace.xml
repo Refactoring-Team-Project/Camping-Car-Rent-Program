@@ -27,6 +27,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1kRzFuNGVz7X5zdwTEC4hEcshUO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -36,7 +37,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="C:/Program Files/Java/jdk-12.0.2/lib/mysql-connector-java-8.0.15.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -209,10 +210,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605688758261" />
-    <state x="483" y="321" key="FileChooserDialogImpl" timestamp="1605683454057">
+    <state x="483" y="321" key="FileChooserDialogImpl" timestamp="1606408462551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="483" y="321" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605683454056" />
+    <state x="483" y="321" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606408462551" />
     <state x="789" y="417" key="Github.ShareDialog" timestamp="1606407205941">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -237,6 +238,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="42" y="73" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605684548590" />
+    <state x="898" y="252" key="MultipleFileMergeDialog" timestamp="1606408497506">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="898" y="252" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606408497506" />
     <state x="1046" y="202" key="RollbackChangesDialog" timestamp="1605684427424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
