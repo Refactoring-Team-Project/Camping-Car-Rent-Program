@@ -1,22 +1,30 @@
-package team_project;
+package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import Common.AppManager;
+import Model.RentCustomerModel;
+import View.MainView;
+import View.RentCustomerView;
+
 public class RentCustomerController {
-	MainView _view;
+	MainView _mainView;
 	RentCustomerView _rentCustView;
 	private RentCustomerModel rentCustModel;
 
 	public RentCustomerController() {
-		this._view = AppManager.getInstance().getView();
+		this._mainView = AppManager.getInstance().getView();
 		this._rentCustView = AppManager.getInstance().getRentCustomerView();
 		rentCustModel = new RentCustomerModel();
 		this._rentCustView.addButtonListener(new ButtonListener());
-		this._view.addRentCustListener(new RentCustomerButtonListener());
+		this._rentCustView.addMouseListener(new RentCustomerMouseListener());
+		this._mainView.addRentCustListener(new RentCustomerButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -43,20 +51,20 @@ public class RentCustomerController {
 						rentCustModel.setEmail(_rentCustView.tf[4].getText());
 					}
 
-					rentCustModel.insert(_rentCustView.getConn());
+					rentCustModel.insert(_mainView.getConn());
 					_rentCustView.fieldReset();
 				}
 
 				else if (e.getSource() == _rentCustView.btnDelete) {
-					if (_view.getCurRow() != -1) {
-						rentCustModel.delete(_rentCustView.getConn(),
-								_rentCustView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+					if (_mainView.getCurRow() != -1) {
+						rentCustModel.delete(_mainView.getConn(),
+								_rentCustView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_rentCustView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 
 				} else if (e.getSource() == _rentCustView.btnUpdate) {
-					if (_view.getCurRow() != -1) {
+					if (_mainView.getCurRow() != -1) {
 						if (_rentCustView.tf[0].getText().length() > 0) {
 							rentCustModel.setLicense_no(Integer.parseInt(_rentCustView.tf[0].getText()));
 						} else
@@ -74,8 +82,8 @@ public class RentCustomerController {
 						if (_rentCustView.tf[4].getText().length() > 0) {
 							rentCustModel.setEmail(_rentCustView.tf[4].getText());
 						}
-						rentCustModel.update(_rentCustView.getConn(),
-								_rentCustView.dbResult.getModel().getValueAt(_view.getCurRow(), 0));
+						rentCustModel.update(_mainView.getConn(),
+								_rentCustView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_rentCustView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
@@ -88,23 +96,49 @@ public class RentCustomerController {
 		}
 	}
 
+	private class RentCustomerMouseListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			_mainView.setCurRow(_rentCustView.dbResult.getSelectedRow());
+			_mainView.setCurCol(_rentCustView.dbResult.getSelectedColumn());
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
+
+	}
+
 	private class RentCustomerButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			_view.changePanel(_rentCustView);
-			_view.setCurRow(-1);
-			_view.setCurCol(-1);
+			_mainView.changePanel(_rentCustView);
+			_mainView.setCurRow(-1);
+			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = rentCustModel.select(_rentCustView.getConn());
+			ArrayList<Object[]> arr = rentCustModel.select(_mainView.getConn());
 			_rentCustView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_rentCustView.model.addRow(arr.get(i));
 			}
 			System.out.println("cust");
-			_view.add(AppManager.getInstance().getRentCustomerView());
-			_view.revalidate();
-			_view.repaint();
+			_mainView.add(AppManager.getInstance().getRentCustomerView());
+			_mainView.revalidate();
+			_mainView.repaint();
 		}
 	}
 

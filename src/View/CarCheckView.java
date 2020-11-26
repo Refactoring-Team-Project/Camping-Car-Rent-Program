@@ -1,15 +1,10 @@
-package team_project;
+package View;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,32 +15,25 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import Common.AppManager;
+import Model.CarCheckModel;
+
 public class CarCheckView extends JPanel {
 
-	private CarCheckModel carChkModel;
-	private MainView _view;
-	DefaultTableModel model;
-	JTable dbResult;
+	public DefaultTableModel model;
+	public JTable dbResult;
 	JScrollPane scrollPane;
-	JPanel updatePanel, buttonPanel;
-//	int curRow = -1, curCol = -1;
-	JButton btnRequest;
+	public JPanel updatePanel, buttonPanel;
+	public JButton btnRequest;
 	JLabel[] labels;
-	JTextField[] tf;
+	public JTextField[] tf;
 
-	Connection _conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
 
 	public CarCheckView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setCarCheckView(this);
-		_view = AppManager.getInstance().getView();
-		carChkModel = new CarCheckModel();
 
-		_conn = _view.conn;
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -104,16 +92,11 @@ public class CarCheckView extends JPanel {
 		buttonPanel.setPreferredSize(new Dimension(780, 50));
 
 		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		// mouseListener 처리하기
-		dbResult.addMouseListener(new CarCheckMouseListener());
+
 	}
 
 	public void addButtonListener(ActionListener listener) {
 		btnRequest.addActionListener(listener);
-	}
-
-	public Connection getConn() {
-		return _view.conn;
 	}
 
 	public void fieldReset() {
@@ -123,40 +106,8 @@ public class CarCheckView extends JPanel {
 		repaint();
 	}
 
-	private class CarCheckMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(dbResult.getSelectedRow());
-			_view.setCurCol(dbResult.getSelectedColumn());
-
-			carChkModel.selectedData(getConn(), dbResult.getModel().getValueAt(_view.getCurRow(), 0));
-
-			tf[1].setText(carChkModel.getSelectedCarid());
-			tf[1].setDisabledTextColor(Color.black);
-
-			tf[3].setText(carChkModel.getSelectedCompid());
-			tf[3].setDisabledTextColor(Color.black);
-
-			tf[4].setText(carChkModel.getSelectedLicense_no());
-			tf[4].setDisabledTextColor(Color.black);
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
+	public void addMouseListener(MouseListener listener) {
+		dbResult.addMouseListener(listener);
 	}
+
 }

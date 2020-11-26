@@ -1,9 +1,8 @@
-package team_project;
+package View;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,30 +18,28 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import Common.AppManager;
+
 public class RentCustomerView extends JPanel {
 
 //	RentCustomerModel dataModel;
-	private MainView _view;
-	DefaultTableModel model;
-	JTable dbResult;
+	private MainView _mainView;
+	public DefaultTableModel model;
+	public JTable dbResult;
 	JScrollPane scrollPane;
 	JPanel updatePanel, buttonPanel;
 	int curRow = -1, curCol = -1;
-	JButton btnInput, btnDelete, btnUpdate;
+	public JButton btnInput, btnDelete, btnUpdate;
 	JLabel[] labels;
-	JTextField[] tf;
+	public JTextField[] tf;
 
-	Connection _conn;
-	Statement stmt; // select
-	PreparedStatement pstmt; // insert, delete
-	ResultSet rs;
 
 	public RentCustomerView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setRentCustomerView(this);
-		_view = AppManager.getInstance().getView();
-		_conn = _view.conn;
+		_mainView = AppManager.getInstance().getView();
+
 		model = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -92,18 +89,17 @@ public class RentCustomerView extends JPanel {
 
 		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		// mouseListener 처리하기
-		dbResult.addMouseListener(new RentCustomerMouseListener());
 
+	}
+
+	public void addMouseListener(MouseListener listener) {
+		dbResult.addMouseListener(listener);
 	}
 
 	public void addButtonListener(ActionListener listener) {
 		btnInput.addActionListener(listener);
 		btnDelete.addActionListener(listener);
 		btnUpdate.addActionListener(listener);
-	}
-
-	public Connection getConn() {
-		return _view.conn;
 	}
 
 	public void fieldReset() {
@@ -113,29 +109,4 @@ public class RentCustomerView extends JPanel {
 		repaint();
 	}
 
-	private class RentCustomerMouseListener implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_view.setCurRow(dbResult.getSelectedRow());
-			_view.setCurCol(dbResult.getSelectedColumn());
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
-	}
 }
