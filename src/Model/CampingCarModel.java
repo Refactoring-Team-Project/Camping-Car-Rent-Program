@@ -1,10 +1,8 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Common.DbUtil;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -28,232 +26,82 @@ public class CampingCarModel {
 	ResultSet rs;
 	
 	public ArrayList<Object[]> select(Connection conn) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		
-		try {
 			String sql = "SELECT * FROM Camping_Car";
-            
-            Statement stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            
-            Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
-            arr.add(column);
-            
-            while (rs.next()) {
-            	Object[] data = {rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getDate(10)};
-            	arr.add(data);
-            }
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		
-		return arr;
+			return DbUtil.getRows(conn, sql);
 	}
 
 	public void insert(Connection conn) {
-		try {
 			String sql = "INSERT INTO Camping_Car VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            
-			PreparedStatement pstmt;
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, carid);
-            pstmt.setString(2, carname);
-            pstmt.setInt(3, carno);
-            pstmt.setInt(4, seat);
-            pstmt.setString(5,  manufacturer);
-            pstmt.setInt(6,  manu_year);
-            pstmt.setInt(7,  drivingdistance);
-            pstmt.setInt(8,  rentcost);
-            pstmt.setInt(9,  compid);
-            pstmt.setString(10,  registdate);
-            pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "추가되었습니다.");
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
+
+			String[] types = {"int", "string", "int", "int", "string", "int", "int", "int", "int", "string"};
+			Object[] values = {carid, carname, carno, seat, manufacturer, manu_year, drivingdistance, rentcost, compid, registdate};
+
+			DbUtil.execute(conn, sql, types, values);
+
 	}
 	
 	public void delete(Connection conn, Object object) {
-		try {
 			String sql = "DELETE FROM Camping_Car WHERE carid = " + object.toString() + ";";
             
-			PreparedStatement pstmt;
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeUpdate();
+			DbUtil.execute(conn, sql, null, null);
          
-            JOptionPane.showMessageDialog(null, "삭제되었습니다.");
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
+
 	}
 	
 	public void update(Connection conn, Object object) {
-		try {
-			String sql ="UPDATE Camping_Car SET carid=?,carname=?,carno=?,seat=?,manufacturer=?,manu_year=?,drivingdistance=?,rentcost=?,compid=?,registdate=? WHERE carid = " + object.toString() + ";";
-			PreparedStatement pstmt;
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, carid);
-            pstmt.setString(2, carname);
-            pstmt.setInt(3, carno);
-            pstmt.setInt(4, seat);
-            pstmt.setString(5,  manufacturer);
-            pstmt.setInt(6,  manu_year);
-            pstmt.setInt(7,  drivingdistance);
-            pstmt.setInt(8,  rentcost);
-            pstmt.setInt(9,  compid);
-            pstmt.setString(10,  registdate);
-            pstmt.executeUpdate();
-         
-            JOptionPane.showMessageDialog(null, "변경되었습니다.");
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
+
+			String sql = "UPDATE Camping_Car SET carid=?,carname=?,carno=?,seat=?,manufacturer=?,manu_year=?,drivingdistance=?,rentcost=?,compid=?,registdate=? WHERE carid = " + object.toString() + ";";
+
+			String[] types = {"int", "string", "int", "int", "string", "int", "int", "int", "int", "string"};
+			Object[] values = {carid, carname, carno, seat, manufacturer, manu_year, drivingdistance, rentcost, compid, registdate};
+
+			DbUtil.execute(conn, sql, types, values);
 	}
+
 	
 	public ArrayList<Object[]> selectRentAble(Connection conn) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		try {
-			String sql = "select *\r\n" + 
-                    "from Camping_Car c\r\n" + 
-                    "where not exists (select 1 from Car_Rent r\r\n" + 
+			String sql = "select c.carid, c.carname, c.carno, c.seat, c.manufacturer, c.manu_year, c.drivingdistance, c.rentcost, c.compid, c.registdate\r\n" +
+                    "from Camping_Car c\r\n" +
+                    "where not exists (select 1 from Car_Rent r\r\n" +
                     "left join Car_Check cc on r.rentno = cc.rentno\r\n" + 
                     "where r.carid = c.carid\r\n" + 
                     "and cc.rentno is null\r\n" + 
                     ")\r\n" + 
                     "order by carid;";
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-
-			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
-			arr.add(column);
-
-			while (rs.next()) {
-				Object[] data = {
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getInt(6),
-                        rs.getInt(7),
-                        rs.getInt(8),
-                        rs.getInt(9),
-                        rs.getDate(10)
-                  };
-				arr.add(data);
-			}
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
-		return arr;
+			return DbUtil.getRows(conn, sql);
 	}
 
 	public ArrayList<Object[]> search1(Connection conn, String maxPrice) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 		if(maxPrice!=null) {
-			try {
 				String sql = "select * from Camping_car c where c.rentcost <= "+ maxPrice +" and "
                     + "c.carid not in (select r.carid from Car_Rent r "
                     + "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
-                 
-                 Statement stmt = conn.createStatement();
-                 rs = stmt.executeQuery(sql);
-                 
-                 Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
-                 arr.add(column);
-                 
-                 while(rs.next()) {
-                    Object[] data = {
-                          rs.getInt(1),
-                          rs.getString(2),
-                          rs.getInt(3),
-                          rs.getInt(4),
-                          rs.getString(5),
-                          rs.getInt(6),
-                          rs.getInt(7),
-                          rs.getInt(8),
-                          rs.getInt(9),
-                          rs.getDate(10)
-                    };
-                    arr.add(data);
-                 }
-              } catch (SQLException e1) {
-            	  JOptionPane.showMessageDialog(null, e1.getMessage());
-              }
+
+				return DbUtil.getRows(conn, sql);
 		 } else JOptionPane.showMessageDialog(null, "금액을 입력하세요");
-		return arr;
+		return null;
 	}
 	
 	public ArrayList<Object[]> search2(Connection conn, String year) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 		if(year!=null) {
-	         try {
 	        	 String sql = "select * from Camping_car c where c.manu_year >= "+ year +" and "
 	                     + "c.carid not in (select r.carid from Car_Rent r "
 	                     + "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
-	                  
-	        	 Statement stmt = conn.createStatement();
-                 rs = stmt.executeQuery(sql);
-                 
-                 Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
-                 arr.add(column);
-                 
-                 while(rs.next()) {
-                    Object[] data = {
-                          rs.getInt(1),
-                          rs.getString(2),
-                          rs.getInt(3),
-                          rs.getInt(4),
-                          rs.getString(5),
-                          rs.getInt(6),
-                          rs.getInt(7),
-                          rs.getInt(8),
-                          rs.getInt(9),
-                          rs.getDate(10)
-                    };
-                    arr.add(data);
-                 }
-	          } catch (SQLException e1) {
-	        	  JOptionPane.showMessageDialog(null, e1.getMessage());
-	          }
+
+				 return DbUtil.getRows(conn, sql);
 		 } else JOptionPane.showMessageDialog(null, "년도를 입력하세요");
-		return arr;
+		return null;
 	}
 	
 	public ArrayList<Object[]> search3(Connection conn, String distance) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
 		if(distance!=null) {
-	         try {
 	        	String sql = "select * from Camping_car c where c.drivingdistance <= "+ distance +" and "
 	                     + "c.carid not in (select r.carid from Car_Rent r "
 	                     + "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
-	                  
-	        	Statement stmt = conn.createStatement();
-                rs = stmt.executeQuery(sql);
-                
-                Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
-                arr.add(column);
-                
-                while(rs.next()) {
-                   Object[] data = {
-                         rs.getInt(1),
-                         rs.getString(2),
-                         rs.getInt(3),
-                         rs.getInt(4),
-                         rs.getString(5),
-                         rs.getInt(6),
-                         rs.getInt(7),
-                         rs.getInt(8),
-                         rs.getInt(9),
-                         rs.getDate(10)
-                   };
-                   arr.add(data);
-                }
-	          } catch (SQLException e1) {
-	        	  JOptionPane.showMessageDialog(null, e1.getMessage());
-	          }
+
+				 return DbUtil.getRows(conn, sql);
 		 } else JOptionPane.showMessageDialog(null, "거리를 입력하세요");
-		return arr;
+		return null;
 	}
 	
 	public void selectedData(Connection conn, Object object) {

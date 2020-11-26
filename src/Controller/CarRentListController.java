@@ -133,7 +133,10 @@ public class CarRentListController {
 			_mainView.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
 			ArrayList<Object[]> arr = campCarModel.selectRentAble(_mainView.getConn());
+//			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+//			arr.add(0, column);
 			_carRentListView.model.setDataVector(null, arr.get(0));
+
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
 			}
