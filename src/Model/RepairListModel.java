@@ -1,5 +1,7 @@
 package Model;
 
+import Common.DbUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,97 +26,41 @@ public class RepairListModel {
 	ResultSet rs;
 
 	public ArrayList<Object[]> select(Connection conn) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		try {
-			String sql = "SELECT * FROM Repair_List";
 
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+		String sql = "SELECT * FROM Repair_List";
 
-			Object column[] = { "REPAIR NO", "CAR ID", "SHOP ID", "COMP ID", "LICENSE NO", "REPAIR DETAILS",
-					"REPAIR DATE", "REPAIR COST", "PAYMENT DEADLINE", "REPAIRHISTORY" };
-			arr.add(column);
+		return DbUtil.getRows(conn, sql);
 
-			while (rs.next()) {
-				Object[] data = { rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
-						rs.getDate(7), rs.getInt(8), rs.getDate(9), rs.getString(10) };
-				arr.add(data);
-			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		return arr;
 	}
 
 	public void insert(Connection conn) {
-		try {
-			String sql = "INSERT INTO Repair_List(repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO Repair_List(repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-			PreparedStatement pstmt;
-			pstmt = conn.prepareStatement(sql);
+		String[] types = {"int","int", "int", "int", "int", "string", "string" ,"int", "string", "string"};
+		Object[] values = {repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory};
 
-			pstmt.setInt(1, repairno);
-			pstmt.setInt(2, carid);
-			pstmt.setInt(3, shopid);
-			pstmt.setInt(4, compid);
-			pstmt.setInt(5, license_no);
-			pstmt.setString(6, repairdetails);
-			pstmt.setString(7, repairdate);
-			pstmt.setInt(8, repaircost);
-			pstmt.setString(9, paymentdeadline);
-			pstmt.setString(10, repairhistory);
+		DbUtil.execute(conn, sql, types, values);
 
-			pstmt.executeUpdate();
-
-			JOptionPane.showMessageDialog(null, "수리요청되었습니다.");
-
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
 	}
 
 	public void delete(Connection conn, Object object) {
-		try {
-			String sql = "DELETE FROM Repair_List WHERE repairno = " + object.toString() + ";";
 
-			PreparedStatement pstmt;
-			pstmt = conn.prepareStatement(sql);
+		String sql = "DELETE FROM Repair_List WHERE repairno = " + object.toString() + ";";
+		DbUtil.execute(conn, sql, null, null);
 
-			pstmt.executeUpdate();
-
-			JOptionPane.showMessageDialog(null, "삭제되었습니다.");
-
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
 	}
 
 	public void update(Connection conn, Object object) {
-		try {
-			String sql = "UPDATE Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
-					+ object.toString() + ";";
 
-			PreparedStatement pstmt;
-			pstmt = conn.prepareStatement(sql);
+		String sql = "UPDATE Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
+				+ object.toString() + ";";
 
-			pstmt.setInt(1, repairno);
-			pstmt.setInt(2, carid);
-			pstmt.setInt(3, shopid);
-			pstmt.setInt(4, compid);
-			pstmt.setInt(5, license_no);
-			pstmt.setString(6, repairdetails);
-			pstmt.setString(7, repairdate);
-			pstmt.setInt(8, repaircost);
-			pstmt.setString(9, paymentdeadline);
-			pstmt.setString(10, repairhistory);
+		String[] types = {"int","int", "int", "int", "int", "string", "string" ,"int", "string", "string"};
+		Object[] values = {repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory};
 
-			pstmt.executeUpdate();
+		DbUtil.execute(conn, sql, types, values);
 
-			JOptionPane.showMessageDialog(null, "수정되었습니다.");
 
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
 	}
 
 	public int getRepairno() {

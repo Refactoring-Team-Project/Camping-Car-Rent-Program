@@ -1,15 +1,14 @@
 package Controller;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import Common.AppManager;
+import Model.CampingCarModel;
+import Model.CarRentModel;
 import Model.RepairListModel;
 import View.MainView;
 import View.RepairListView;
@@ -110,7 +109,7 @@ public class RepairListController {
 
 	}
 
-	private class RepairListMouseListener implements MouseListener {
+	private class RepairListMouseListener extends MouseAdapter {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -134,29 +133,7 @@ public class RepairListController {
 			_repairListView.repairListTextField[4].setDisabledTextColor(Color.black);
 		}
 
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
 
 	}
 
