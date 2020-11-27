@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Common.DbUtil;
+
 public class CarCheckModel {
 	int carid;
 	String explain_front;
@@ -14,31 +16,15 @@ public class CarCheckModel {
 	String explain_back;
 	String repair_required;
 
-	String selected_carid = null;
-	String selected_compid = null;
-	String selected_license_no = null;
+	int selected_carid;
+	int selected_compid;
+	int selected_license_no;
 
 	ResultSet rs;
 
 	public ArrayList<Object[]> select(Connection conn) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		try {
-			String sql = "SELECT * FROM Car_Check c order by c.rentno";
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-
-			Object column[] = { "RENT NO", "CAR ID", "FRONT EX", "LEFT EX", "RIGHT EX", "BACK EX", "REPAIR REQUIRED" };
-			arr.add(column);
-
-			while (rs.next()) {
-				Object[] data = { rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getString(7), };
-				arr.add(data);
-			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		return arr;
+		String sql = "SELECT * FROM Car_Check c order by c.rentno";
+		return DbUtil.getRows(conn, sql);
 	}
 
 	public void selectedData(Connection conn, Object object) {
@@ -48,9 +34,9 @@ public class CarCheckModel {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				selected_carid = Integer.toString(rs.getInt(1));
-				selected_compid = Integer.toString(rs.getInt(2));
-				selected_license_no = Integer.toString(rs.getInt(3));
+				selected_carid = rs.getInt(1);
+				selected_compid = rs.getInt(2);
+				selected_license_no = rs.getInt(3);
 			}
 
 		} catch (SQLException e1) {
@@ -58,15 +44,15 @@ public class CarCheckModel {
 		}
 	}
 
-	public String getSelectedCarid() {
+	public int getSelectedCarid() {
 		return selected_carid;
 	}
 
-	public String getSelectedCompid() {
+	public int getSelectedCompid() {
 		return selected_compid;
 	}
 
-	public String getSelectedLicense_no() {
+	public int getSelectedLicense_no() {
 		return selected_license_no;
 	}
 

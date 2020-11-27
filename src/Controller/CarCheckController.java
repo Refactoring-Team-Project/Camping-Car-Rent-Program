@@ -3,8 +3,8 @@ package Controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -88,7 +88,7 @@ public class CarCheckController {
 		}
 	}
 
-	private class CarCheckMouseListener implements MouseListener {
+	private class CarCheckMouseListener extends MouseAdapter {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -98,32 +98,15 @@ public class CarCheckController {
 			carChkModel.selectedData(_mainView.getConn(),
 					_carChkView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
-			_carChkView.tf[1].setText(carChkModel.getSelectedCarid());
+			_carChkView.tf[1].setText(Integer.toString(carChkModel.getSelectedCarid()));
 			_carChkView.tf[1].setDisabledTextColor(Color.black);
 
-			_carChkView.tf[3].setText(carChkModel.getSelectedCompid());
+			_carChkView.tf[3].setText(Integer.toString(carChkModel.getSelectedCompid()));
 			_carChkView.tf[3].setDisabledTextColor(Color.black);
 
-			_carChkView.tf[4].setText(carChkModel.getSelectedLicense_no());
+			_carChkView.tf[4].setText(Integer.toString(carChkModel.getSelectedLicense_no()));
 			_carChkView.tf[4].setDisabledTextColor(Color.black);
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
 	}
 
 	private class CarCheckButtonListener implements ActionListener {

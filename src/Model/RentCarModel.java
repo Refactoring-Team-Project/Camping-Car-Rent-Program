@@ -1,18 +1,15 @@
 package Model;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
+import Common.DbUtil;
 
 public class RentCarModel {
 	int rentno;
 	int carid;
-	String explain_front;
+	String explain_front = null;
 	String explain_left;
 	String explain_right;
 	String explain_back;
@@ -21,46 +18,18 @@ public class RentCarModel {
 	ResultSet rs;
 
 	public ArrayList<Object[]> select(Connection conn) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		try {
-			String sql = "SELECT * FROM Car_Rent";
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-
-			Object column[] = { "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
-					"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
-			arr.add(column);
-
-			while (rs.next()) {
-				Object[] data = { rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getInt(6),
-						rs.getInt(7), rs.getDate(8), rs.getString(9), rs.getInt(10) };
-				arr.add(data);
-			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		return arr;
+		String sql = "SELECT * FROM Car_Rent";
+		return DbUtil.getRows(conn, sql);
 	}
 
 	public void insert(Connection conn) {
-		try {
-			String sql = "INSERT INTO Car_Check VALUES(?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO Car_Check VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement pstmt;
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, rentno);
-			pstmt.setInt(2, carid);
-			pstmt.setString(3, explain_front);
-			pstmt.setString(4, explain_left);
-			pstmt.setString(5, explain_right);
-			pstmt.setString(6, explain_back);
-			pstmt.setString(7, repair_required);
+		String[] types = { "int", "int", "string", "string", "string", "string", "string" };
+		Object[] values = { rentno, carid, explain_front, explain_left, explain_right, explain_back, repair_required };
 
-			pstmt.executeUpdate();
+		DbUtil.execute(conn, sql, types, values);
 
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-		}
 	}
 
 	public void setRentno(int rentno) {
