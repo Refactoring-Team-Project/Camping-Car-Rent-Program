@@ -15,58 +15,58 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import Common.AppManager;
-import Model.CampingCarModel;
 
 public class CampingCarView extends JPanel {
-	CampingCarModel campingCarModel;
-	public DefaultTableModel model;
+
+	public DefaultTableModel campingCarDefaultTable;
 	public JTable dbResult;
 	JScrollPane scrollPane;
 	public JPanel updatePanel, buttonPanel;
-	// int curRow = -1, curCol = -1;
 	public JButton btnInput, btnDelete, btnUpdate;
 	JLabel[] labels;
 	public JTextField[] tf;
+	public String[] fieldString = { "carid", "carname", "carno", "seat", "manufacturer", "manu_year", "drivingdistance",
+			"rentcost", "compid", "registdate" };
+	public int[] fieldSize = { 3, 5, 3, 3, 10, 5, 7, 5, 3, 10 };
 
 	public CampingCarView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
-		AppManager.getInstance().setCampingCarView(this);
-		campingCarModel = new CampingCarModel();
 
-		model = new DefaultTableModel() {
+		AppManager.getInstance().setCampingCarView(this);
+
+		initScrollPane();
+		initUpdatePanel();
+		initButtonPanel();
+	}
+
+	public void initScrollPane() {
+		campingCarDefaultTable = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dbResult = new JTable(model);
+
+		dbResult = new JTable(campingCarDefaultTable);
+		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		scrollPane = new JScrollPane(dbResult);
 		add(scrollPane);
+		scrollPane.setPreferredSize(new Dimension(780, 300));
+	}
 
+	public void initUpdatePanel() {
 		updatePanel = new JPanel();
+
 		labels = new JLabel[10];
-		labels[0] = new JLabel("carid:");
-		labels[1] = new JLabel("carname:");
-		labels[2] = new JLabel("carno:");
-		labels[3] = new JLabel("seat:");
-		labels[4] = new JLabel("manufacturer:");
-		labels[5] = new JLabel("manu_year:");
-		labels[6] = new JLabel("drivingdistance:");
-		labels[7] = new JLabel("rentcost:");
-		labels[8] = new JLabel("compid:");
-		labels[9] = new JLabel("registdate:");
+		for (int i = 0; i < labels.length; i++) {
+			labels[i] = new JLabel(fieldString[i]);
+		}
 
 		tf = new JTextField[10];
-		tf[0] = new JTextField("", 3);
-		tf[1] = new JTextField("", 5);
-		tf[2] = new JTextField("", 3);
-		tf[3] = new JTextField("", 3);
-		tf[4] = new JTextField("", 10);
-		tf[5] = new JTextField("", 5);
-		tf[6] = new JTextField("", 7);
-		tf[7] = new JTextField("", 5);
-		tf[8] = new JTextField("", 3);
-		tf[9] = new JTextField("", 10);
+		for (int i = 0; i < tf.length; i++) {
+			tf[i] = new JTextField(fieldSize[i]);
+		}
 
 		for (int i = 0; i < 10; i++) {
 			updatePanel.add(labels[i]);
@@ -74,7 +74,10 @@ public class CampingCarView extends JPanel {
 		}
 
 		add(updatePanel);
+		updatePanel.setPreferredSize(new Dimension(780, 60));
+	}
 
+	public void initButtonPanel() {
 		btnInput = new JButton("입력");
 		btnDelete = new JButton("삭제");
 		btnUpdate = new JButton("변경");
@@ -86,12 +89,7 @@ public class CampingCarView extends JPanel {
 		buttonPanel.add(btnUpdate);
 
 		add(buttonPanel);
-
-		scrollPane.setPreferredSize(new Dimension(780, 300));
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 		buttonPanel.setPreferredSize(new Dimension(780, 50));
-
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	}
 
 	public void addButtonListener(ActionListener listener) {

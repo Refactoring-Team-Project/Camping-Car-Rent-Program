@@ -1,9 +1,6 @@
 package Controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.sql.Types;
 import java.util.ArrayList;
 
@@ -146,26 +143,11 @@ public class CampingCarController {
 		}
 	}
 	
-	private class CampCarMouseListener implements MouseListener {
-
-		@Override
+	private class CampCarMouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_campCarView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_campCarView.dbResult.getSelectedColumn());
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {}
-
-		@Override
-		public void mouseExited(MouseEvent e) {}
-		
 	}
 	
 	
@@ -178,9 +160,9 @@ public class CampingCarController {
 			_mainView.setCurCol(-1);
 			
 			ArrayList<Object[]> arr = campCarModel.select(_mainView.getConn());
-			_campCarView.model.setDataVector(null, arr.get(0));
+			_campCarView.campingCarDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_campCarView.model.addRow(arr.get(i));
+				_campCarView.campingCarDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("camping carrrrrrrrrrr");
 			_mainView.add(AppManager.getInstance().getCampingCarView());

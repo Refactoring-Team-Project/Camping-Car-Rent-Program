@@ -1,9 +1,6 @@
 package Controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -101,30 +98,11 @@ public class CampingCompanyController {
 
 	}
 	
-	private class CampingCompanyMouseListener implements MouseListener {
-
-		@Override
+	private class CampingCompanyMouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_campCompView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_campCompView.dbResult.getSelectedColumn());
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
 	}
 
 	private class CampingCompanyButtonListener implements ActionListener {
@@ -136,9 +114,9 @@ public class CampingCompanyController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = campCompModel.select(_mainView.getConn());
-			_campCompView.model.setDataVector(null, arr.get(0));
+			_campCompView.campingCompanyDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_campCompView.model.addRow(arr.get(i));
+				_campCompView.campingCompanyDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("campcomp");
 			_mainView.revalidate();
