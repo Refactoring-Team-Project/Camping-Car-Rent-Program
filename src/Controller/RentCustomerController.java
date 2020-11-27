@@ -115,6 +115,8 @@ public class RentCustomerController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = rentCustModel.select(_mainView.getConn());
+			Object column[] = { "LICENSE_NO", "NAME", "ADDRESS", "PHONE", "EMAIL" };
+			arr.add(0, column);
 			_rentCustView.rentCustomerDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_rentCustView.rentCustomerDefaultTable.addRow(arr.get(i));

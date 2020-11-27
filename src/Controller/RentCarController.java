@@ -10,19 +10,22 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import Common.AppManager;
-import Model.RentCarModel;
+import Model.CarCheckModel;
+import Model.CarRentModel;
 import View.MainView;
 import View.RentCarView;
 
 public class RentCarController {
 	MainView _mainView;
 	RentCarView _rentCarView;
-	private RentCarModel rentCarModel;
+	private CarRentModel carRentModel;
+	private CarCheckModel carCheckModel;
 
 	public RentCarController() {
 		this._mainView = AppManager.getInstance().getView();
 		this._rentCarView = AppManager.getInstance().getRentCarView();
-		rentCarModel = new RentCarModel();
+		carRentModel = new CarRentModel();
+		carCheckModel = new CarCheckModel();
 		this._rentCarView.addButtonListener(new ButtonListener());
 		this._rentCarView.addMouseListener(new RentCarMouseListener());
 		this._mainView.addRentCarListener(new RentCarButtonListener());
@@ -36,35 +39,34 @@ public class RentCarController {
 				if (e.getSource() == _rentCarView.btnReturn) {
 					if (_mainView.getCurRow() != -1) {
 						if (_rentCarView.tf[0].getText().length() > 0) {
-							rentCarModel.setRentno(Integer.parseInt(_rentCarView.tf[0].getText()));
+							carCheckModel.setRentno(Integer.parseInt(_rentCarView.tf[0].getText()));
 						}
 						if (_rentCarView.tf[1].getText().length() > 0) {
-							rentCarModel.setCarid(Integer.parseInt(_rentCarView.tf[1].getText()));
+							carCheckModel.setCarid(Integer.parseInt(_rentCarView.tf[1].getText()));
 						}
 						if (_rentCarView.tf[2].getText().length() > 0) {
-							rentCarModel.setExplain_front(_rentCarView.tf[2].getText());
+							carCheckModel.setExplain_front(_rentCarView.tf[2].getText());
 						}
 						if (_rentCarView.tf[3].getText().length() > 0) {
-							rentCarModel.setExplain_left(_rentCarView.tf[3].getText());
+							carCheckModel.setExplain_left(_rentCarView.tf[3].getText());
 						}
 						if (_rentCarView.tf[4].getText().length() > 0) {
-							rentCarModel.setExplain_right(_rentCarView.tf[4].getText());
+							carCheckModel.setExplain_right(_rentCarView.tf[4].getText());
 						}
 						if (_rentCarView.tf[5].getText().length() > 0) {
-							rentCarModel.setExplain_back(_rentCarView.tf[5].getText());
+							carCheckModel.setExplain_back(_rentCarView.tf[5].getText());
 						}
 						if (_rentCarView.tf[6].getText().length() > 0) {
-							rentCarModel.setRepair_required(_rentCarView.tf[6].getText());
-						} else
-							throw new NullPointerException();
+							carCheckModel.setRepair_required(_rentCarView.tf[6].getText());
+						} else throw new NullPointerException();
 
-						rentCarModel.insert(_mainView.getConn());
+						carCheckModel.insert(_mainView.getConn());
 						_rentCarView.fieldReset();
 						JOptionPane.showMessageDialog(null, "반환정보를 점검내역에 저장하였습니다.");
 					}
 				}
-			} catch (NullPointerException e2) {
-				JOptionPane.showMessageDialog(null, "null");
+			} catch (NullPointerException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
 
 			}
 
@@ -97,7 +99,10 @@ public class RentCarController {
 			_mainView.setCurRow(-1);
 			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = rentCarModel.select(_mainView.getConn());
+			ArrayList<Object[]> arr = carRentModel.select(_mainView.getConn());
+			Object column[] = { "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
+					"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
+			arr.add(0, column);
 			_rentCarView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_rentCarView.model.addRow(arr.get(i));

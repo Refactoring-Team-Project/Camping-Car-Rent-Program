@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import Common.DbUtil;
 
 public class CarCheckModel {
+	int rentno;
 	int carid;
 	String explain_front;
 	String explain_left;
@@ -25,6 +26,16 @@ public class CarCheckModel {
 	public ArrayList<Object[]> select(Connection conn) {
 		String sql = "SELECT * FROM Car_Check c order by c.rentno";
 		return DbUtil.getRows(conn, sql);
+	}
+
+	public void insert(Connection conn) {
+		String sql = "INSERT INTO Car_Check VALUES(?, ?, ?, ?, ?, ?, ?)";
+
+		String[] types = { "int", "int", "string", "string", "string", "string", "string" };
+		Object[] values = { rentno, carid, explain_front, explain_left, explain_right, explain_back, repair_required };
+
+		DbUtil.execute(conn, sql, types, values);
+
 	}
 
 	public void selectedData(Connection conn, Object object) {
@@ -54,6 +65,14 @@ public class CarCheckModel {
 
 	public int getSelectedLicense_no() {
 		return selected_license_no;
+	}
+
+	public int getRentno() {
+		return rentno;
+	}
+
+	public void setRentno(int rentno) {
+		this.rentno = rentno;
 	}
 
 	public int getCarid() {

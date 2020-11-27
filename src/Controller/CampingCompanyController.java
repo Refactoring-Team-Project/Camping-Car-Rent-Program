@@ -114,6 +114,8 @@ public class CampingCompanyController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = campCompModel.select(_mainView.getConn());
+			Object column[] = {"COMPID", "COMPNAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
+			arr.add(0, column);
 			_campCompView.campingCompanyDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_campCompView.campingCompanyDefaultTable.addRow(arr.get(i));

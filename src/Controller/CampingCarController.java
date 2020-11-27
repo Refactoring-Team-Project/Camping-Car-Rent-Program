@@ -160,6 +160,7 @@ public class CampingCarController {
 			_mainView.setCurCol(-1);
 			
 			ArrayList<Object[]> arr = campCarModel.select(_mainView.getConn());
+			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};			arr.add(0, column);
 			_campCarView.campingCarDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_campCarView.campingCarDefaultTable.addRow(arr.get(i));

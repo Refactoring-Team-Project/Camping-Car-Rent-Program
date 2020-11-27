@@ -97,6 +97,8 @@ public class RepairListController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = repairListModel.select(_mainView.getConn());
+			Object column[] = { "REPAIR NO", "CAR ID", "SHOP ID", "COMP ID", "LICENSE NO", "REPAIR DETAILS",
+					"REPAIR DATE", "REPAIR COST", "PAYMENT DEADLINE", "REPAIRHISTORY" };			arr.add(0, column);
 			_repairListView.repairListModel.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_repairListView.repairListModel.addRow(arr.get(i));

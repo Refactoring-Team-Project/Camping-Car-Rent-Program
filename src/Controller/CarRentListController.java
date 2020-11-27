@@ -109,8 +109,8 @@ public class CarRentListController {
 			_mainView.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
 			ArrayList<Object[]> arr = campCarModel.selectRentAble(_mainView.getConn());
-//			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
-//			arr.add(0, column);
+			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+			arr.add(0, column);
 			_carRentListView.model.setDataVector(null, arr.get(0));
 
 			for (int i = 1; i < arr.size(); i++) {
@@ -135,8 +135,10 @@ public class CarRentListController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = campCarModel.search1(_mainView.getConn(), input);
-			if (arr.size() != 0)
-				_carRentListView.model.setDataVector(null, arr.get(0));
+			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+			arr.add(0, column);
+
+			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
 			}
@@ -159,6 +161,9 @@ public class CarRentListController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = campCarModel.search2(_mainView.getConn(), input);
+			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+			arr.add(0, column);
+
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));
@@ -182,6 +187,8 @@ public class CarRentListController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = campCarModel.search3(_mainView.getConn(), input);
+			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+			arr.add(0, column);
 			_carRentListView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carRentListView.model.addRow(arr.get(i));

@@ -21,11 +21,6 @@ public class DbUtil {
 			ResultSetMetaData rsm = rs.getMetaData();
 
 			int columnCount = rsm.getColumnCount();
-			Object[] columns = new String[columnCount];
-			for (int i = 0; i < columnCount; i++) {
-				columns[i] = rsm.getColumnLabel(i + 1);
-			}
-			arr.add(columns);
 
 			while (rs.next()) {
 				Object[] data = new Object[columnCount];

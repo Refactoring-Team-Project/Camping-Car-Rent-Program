@@ -119,6 +119,8 @@ public class RepairShopController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = repairShopModel.select(_mainView.getConn());
+			Object column[] = {"SHOP ID", "SHOP NAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
+			arr.add(0, column);
 			_repairShopView.repairShopDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_repairShopView.repairShopDefaultTable.addRow(arr.get(i));

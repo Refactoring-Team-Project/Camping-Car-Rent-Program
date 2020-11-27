@@ -118,6 +118,7 @@ public class CarCheckController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = carChkModel.select(_mainView.getConn());
+			Object column[] = { "RENT NO", "CAR ID", "FRONT EX", "LEFT EX", "RIGHT EX", "BACK EX", "REPAIR REQUIRED" };			arr.add(0, column);
 			_carChkView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_carChkView.model.addRow(arr.get(i));

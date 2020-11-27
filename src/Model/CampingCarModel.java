@@ -71,7 +71,7 @@ public class CampingCarModel {
 	}
 
 	public ArrayList<Object[]> search1(Connection conn, String maxPrice) {
-		if (maxPrice != null) {
+		if (!maxPrice.isBlank()) {
 			String sql = "select * from Camping_car c where c.rentcost <= " + maxPrice + " and "
 					+ "c.carid not in (select r.carid from Car_Rent r "
 					+ "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
@@ -79,11 +79,11 @@ public class CampingCarModel {
 			return DbUtil.getRows(conn, sql);
 		} else
 			JOptionPane.showMessageDialog(null, "금액을 입력하세요");
-		return null;
+		return new ArrayList<Object[]>();
 	}
 
 	public ArrayList<Object[]> search2(Connection conn, String year) {
-		if (year != null) {
+		if (!year.isBlank()) {
 			String sql = "select * from Camping_car c where c.manu_year >= " + year + " and "
 					+ "c.carid not in (select r.carid from Car_Rent r "
 					+ "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
@@ -91,11 +91,11 @@ public class CampingCarModel {
 			return DbUtil.getRows(conn, sql);
 		} else
 			JOptionPane.showMessageDialog(null, "년도를 입력하세요");
-		return null;
+		return new ArrayList<Object[]>();
 	}
 
 	public ArrayList<Object[]> search3(Connection conn, String distance) {
-		if (distance != null) {
+		if (!distance.isBlank()) {
 			String sql = "select * from Camping_car c where c.drivingdistance <= " + distance + " and "
 					+ "c.carid not in (select r.carid from Car_Rent r "
 					+ "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
@@ -103,7 +103,7 @@ public class CampingCarModel {
 			return DbUtil.getRows(conn, sql);
 		} else
 			JOptionPane.showMessageDialog(null, "거리를 입력하세요");
-		return null;
+		return new ArrayList<Object[]>();
 	}
 
 	public void selectedData(Connection conn, Object object) {
