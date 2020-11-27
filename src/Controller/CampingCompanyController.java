@@ -53,12 +53,12 @@ public class CampingCompanyController {
 						campCompModel.setManager_email(_campCompView.tf[5].getText());
 					}
 	
-					campCompModel.insert(_mainView.getConn());
+					campCompModel.insert(_campCompView.getConn());
 	
 					
 				} else if (e.getSource() == _campCompView.btnDelete) {
 					if (_mainView.getCurRow() != -1) {
-						campCompModel.delete(_mainView.getConn(), _campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCompModel.delete(_campCompView.getConn(), _campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
@@ -85,7 +85,7 @@ public class CampingCompanyController {
 						if (_campCompView.tf[5].getText().length() > 0) {
 							campCompModel.setManager_email(_campCompView.tf[5].getText());
 						}
-						campCompModel.update(_mainView.getConn(),
+						campCompModel.update(_campCompView.getConn(),
 								_campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
@@ -135,7 +135,7 @@ public class CampingCompanyController {
 			_mainView.setCurRow(-1);
 			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCompModel.select(_mainView.getConn());
+			ArrayList<Object[]> arr = campCompModel.select(_campCompView.getConn());
 			_campCompView.model.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_campCompView.model.addRow(arr.get(i));

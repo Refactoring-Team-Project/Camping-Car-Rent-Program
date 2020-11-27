@@ -1,9 +1,6 @@
 package Controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.sql.Types;
 import java.util.ArrayList;
 
@@ -77,13 +74,13 @@ public class CampingCarController {
 						campCarModel.setRegistdate(_campCarView.tf[9].getText());
 					}
 
-					campCarModel.insert(_mainView.getConn());
+					campCarModel.insert(_campCarView.getConn());
 					_campCarView.fieldReset();
 				}
 				else if (e.getSource() == _campCarView.btnDelete)
 				{
 					if (_mainView.getCurRow() != -1) {
-						campCarModel.delete(_mainView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCarModel.delete(_campCarView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCarView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
@@ -133,7 +130,7 @@ public class CampingCarController {
 						if(_campCarView.tf[9].getText().length() > 0) {
 							campCarModel.setRegistdate(_campCarView.tf[9].getText());
 						}
-						campCarModel.update(_mainView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCarModel.update(_campCarView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCarView.fieldReset();
 					}
 					
@@ -146,26 +143,13 @@ public class CampingCarController {
 		}
 	}
 	
-	private class CampCarMouseListener implements MouseListener {
+	private class CampCarMouseListener extends MouseAdapter {
 
-		@Override
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_campCarView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_campCarView.dbResult.getSelectedColumn());
 		}
 
-		@Override
-		public void mousePressed(MouseEvent e) {}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {}
-
-		@Override
-		public void mouseExited(MouseEvent e) {}
-		
 	}
 	
 	
@@ -177,10 +161,10 @@ public class CampingCarController {
 			_mainView.setCurRow(-1);
 			_mainView.setCurCol(-1);
 			
-			ArrayList<Object[]> arr = campCarModel.select(_mainView.getConn());
-			_campCarView.model.setDataVector(null, arr.get(0));
+			ArrayList<Object[]> arr = campCarModel.select(_campCarView.getConn());
+			_campCarView.campingCarDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_campCarView.model.addRow(arr.get(i));
+				_campCarView.campingCarDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("camping carrrrrrrrrrr");
 			_mainView.add(AppManager.getInstance().getCampingCarView());

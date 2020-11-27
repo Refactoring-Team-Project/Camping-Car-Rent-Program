@@ -12,28 +12,34 @@ import Common.AppManager;
 import Model.CampingCarModel;
 
 public class CampingCarView extends JPanel {
-	CampingCarModel campingCarModel;
-	public DefaultTableModel model;
+
+	private MainView _mainView;
+	public DefaultTableModel campingCarDefaultTable;
 	public JTable dbResult;
 	JScrollPane scrollPane;
 	public JPanel updatePanel, buttonPanel;
-	//int curRow = -1, curCol = -1;
 	public JButton btnInput, btnDelete, btnUpdate;
 	JLabel[] labels;
 	public JTextField[] tf;
+	
+	Connection _conn;
+	Statement stmt;
+	PreparedStatement pstmt;
+	ResultSet rs;
 	
 	public CampingCarView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780,420));
 		AppManager.getInstance().setCampingCarView(this);
-		campingCarModel = new CampingCarModel();
 
-		model = new DefaultTableModel() {
+		_mainView = AppManager.getInstance().getView();
+		_conn = _mainView.conn;
+		campingCarDefaultTable = new DefaultTableModel() {
 	         public boolean isCellEditable(int row, int column) {
 	            return false;
 	         }
 	      };
-	    dbResult = new JTable(model);
+	    dbResult = new JTable(campingCarDefaultTable);
 	    scrollPane = new JScrollPane(dbResult);
 	    add(scrollPane);
 	    
@@ -97,7 +103,11 @@ public class CampingCarView extends JPanel {
 	public void addMouseListener(MouseListener listener) {
 		dbResult.addMouseListener(listener);
 	}
-
+	
+	public Connection getConn() {
+		return _mainView.conn;
+	}
+	
 	public void fieldReset() {
 		for(JTextField t: tf) {
 			t.setText("");
