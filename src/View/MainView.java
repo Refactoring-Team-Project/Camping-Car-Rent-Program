@@ -18,8 +18,13 @@ public class MainView extends JFrame {
 	JButton btnUserPriceSearch, btnUserManufacturingYearSearch, btnUserMileageSearch;
 	JButton btnReset, btnUser;
 	JPanel adminBtnPanel, userBtnPanel, userChangePanel;
+	JPanel[] tableBtnPanel = new JPanel[2];
 
-
+	public enum Admin {
+		관리자,
+		사용자
+	}
+	Admin admin;
 	int user = 0; // 0은 관리자 1은 사용자
 	int curRow = -1, curCol = -1;
 
@@ -39,10 +44,12 @@ public class MainView extends JFrame {
 	public void init() {
 		super.setLayout(new FlowLayout());
 
+		admin = Admin.관리자;
 		initChangeUserPanel();
 		initAdminButtonPanel1();
 		initUserButtonPanell();
-
+		tableBtnPanel[0] =adminBtnPanel;
+		tableBtnPanel[1] =userBtnPanel;
 		add(userChangePanel);
 		add(adminBtnPanel);
 
@@ -51,7 +58,7 @@ public class MainView extends JFrame {
 
 	public void initChangeUserPanel() {
 		/* 사용자 관리자 전환 panel */
-		btnUser = new JButton("관리자");
+		btnUser = new JButton(admin.name());
 		userChangePanel = new JPanel();
 		userChangePanel.add(btnUser);
 	}
@@ -133,25 +140,19 @@ public class MainView extends JFrame {
 
 	public void changeUser() {
 
-		if (user == 0) { // 관리자 모드
-			btnUser.setText("사용자");
-			user = 1;
+		if (admin.name().equals("관리자")) { // 관리자 모드
+			admin = Admin.사용자;
 		}
-
-		else if (user == 1) { // 사용자 모드
-			btnUser.setText("관리자");
-			user = 0;
+		else if (admin.name().equals("사용자")) { // 사용자 모드
+			admin = Admin.관리자;
 		}
+		btnUser.setText(admin.name());
 	}
 
 	public void changePanel(JPanel view) {
 		this.getContentPane().removeAll();
 		this.getContentPane().add(userChangePanel, 0);
-		if (user == 0) { // 관리자 모드
-			this.getContentPane().add(adminBtnPanel, 1);
-		} else if (user == 1) { // 사용자 모드
-			this.getContentPane().add(userBtnPanel, 1);
-		}
+		this.getContentPane().add(tableBtnPanel[admin.ordinal()], 1);
 		if(view != null) this.getContentPane().add(view, 2);
 
 
