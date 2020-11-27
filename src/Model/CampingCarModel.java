@@ -6,7 +6,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class CampingCarModel {
 	int carid;
@@ -103,7 +102,8 @@ public class CampingCarModel {
 		 } else JOptionPane.showMessageDialog(null, "거리를 입력하세요");
 		return null;
 	}
-	
+
+
 	public void selectedData(Connection conn, Object object) {
 		try {
 			String sql = "select carid, compid from Camping_Car where carid = " + object.toString() + ";";
@@ -119,7 +119,7 @@ public class CampingCarModel {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	public int getSelectedCarid() {
 		return selected_carid;
 	}

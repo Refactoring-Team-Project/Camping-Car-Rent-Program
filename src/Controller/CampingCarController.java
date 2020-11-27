@@ -74,13 +74,13 @@ public class CampingCarController {
 						campCarModel.setRegistdate(_campCarView.tf[9].getText());
 					}
 
-					campCarModel.insert(_campCarView.getConn());
+					campCarModel.insert(_mainView.getConn());
 					_campCarView.fieldReset();
 				}
 				else if (e.getSource() == _campCarView.btnDelete)
 				{
 					if (_mainView.getCurRow() != -1) {
-						campCarModel.delete(_campCarView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCarModel.delete(_mainView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCarView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
@@ -130,7 +130,7 @@ public class CampingCarController {
 						if(_campCarView.tf[9].getText().length() > 0) {
 							campCarModel.setRegistdate(_campCarView.tf[9].getText());
 						}
-						campCarModel.update(_campCarView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCarModel.update(_mainView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCarView.fieldReset();
 					}
 					
@@ -144,12 +144,10 @@ public class CampingCarController {
 	}
 	
 	private class CampCarMouseListener extends MouseAdapter {
-
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_campCarView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_campCarView.dbResult.getSelectedColumn());
 		}
-
 	}
 	
 	
@@ -161,7 +159,7 @@ public class CampingCarController {
 			_mainView.setCurRow(-1);
 			_mainView.setCurCol(-1);
 			
-			ArrayList<Object[]> arr = campCarModel.select(_campCarView.getConn());
+			ArrayList<Object[]> arr = campCarModel.select(_mainView.getConn());
 			_campCarView.campingCarDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_campCarView.campingCarDefaultTable.addRow(arr.get(i));

@@ -1,5 +1,7 @@
 package Model;
 
+import Common.DbUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,123 +23,43 @@ public class CampingCompanyModel {
 	ResultSet rs; 
 	
 	public ArrayList<Object[]> select(Connection conn) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		try {
-		       String sql = "SELECT * FROM Camping_Company";
-		       Statement stmt = conn.createStatement();
-		       rs = stmt.executeQuery(sql);	       
-		       
-		       Object column[] = {"COMPID", "COMPNAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
-		       arr.add(column);
-     
-		       while(rs.next()) {
-		          Object[] data = {
-		                rs.getInt(1),
-		                rs.getString(2),
-		                rs.getString(3),
-		                rs.getString(4),
-		                rs.getString(5),
-		                rs.getString(6)
-		                };
-		          arr.add(data);
-		       }
-		       
-		    } catch (SQLException e1) {
-		       e1.printStackTrace();
-		    }
-		return arr;
-
+		String sql = "SELECT * FROM Camping_Company";
+		return DbUtil.getRows(conn, sql);
 	}
 	
 	public void insert(Connection conn) {
-		try {
-            String sql = "INSERT INTO Camping_Company(compid, compname, address, phone, manager_name, manager_email) VALUES(?, ?, ?, ?, ?, ?)";
-           
-            PreparedStatement pstmt;
-            pstmt = conn.prepareStatement(sql);    
-            pstmt.setInt(1, compid);
-            pstmt.setString(2, compname);
-            pstmt.setString(3, address);
-            pstmt.setString(4, phone);
-            pstmt.setString(5, manager_name);
-            pstmt.setString(6, manager_email);
-            pstmt.executeUpdate();
-         
-            JOptionPane.showMessageDialog(null, "추가되었습니다.");
-            
-            
-            
-         } catch (SQLException e1) {
-            JOptionPane.showMessageDialog(null, e1.getMessage());
-         }
+		String sql = "INSERT INTO Camping_Company(compid, compname, address, phone, manager_name, manager_email) VALUES(?, ?, ?, ?, ?, ?)";
+
+		String[] types = {"int", "string", "string", "string", "string", "string"};
+		Object[] values = {compid, compname, address, phone, manager_name, manager_email};
+
+		DbUtil.execute(conn, sql, types, values);
 	}
 	
 	public void delete(Connection conn, Object object) {
-		try {
-			String sql = "DELETE FROM Camping_Company WHERE compid = " + object.toString() + ";";
-
-			PreparedStatement pstmt;
-			pstmt = conn.prepareStatement(sql);
-			pstmt.executeUpdate();
-
-			JOptionPane.showMessageDialog(null, "삭제되었습니다.");
-
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
+		String sql = "DELETE FROM Camping_Company WHERE compid = " + object.toString() + ";";
+		DbUtil.execute(conn, sql, null, null);
 	}
 
 	public void update(Connection conn, Object object) {
-		try {
-			String sql = "UPDATE Camping_Company SET compid=?,compname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE compid = "
-					+ object.toString() + ";";
+		String sql = "UPDATE Camping_Company SET compid=?,compname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE compid = "
+				+ object.toString() + ";";
 
-			PreparedStatement pstmt;
-			pstmt = conn.prepareStatement(sql);
+		String[] types = {"int", "string", "string", "string", "string", "string"};
+		Object[] values = {compid, compname, address, phone, manager_name, manager_email};
 
-			pstmt.setInt(1, compid);
-			pstmt.setString(2, compname);
-			pstmt.setString(3, address);
-			pstmt.setString(4, phone);
-			pstmt.setString(5, manager_name);
-			pstmt.setString(6, manager_email);
-			pstmt.executeUpdate();
-			JOptionPane.showMessageDialog(null, "수정되었습니다.");
-
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
-		}
+		DbUtil.execute(conn, sql, types, values);
 	}
 	
 	public ArrayList<Object[]> search2(Connection conn) {
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
-		try {
-            String sql = "select cc.compid, cc.compname, coalesce(count(*), 0) as rental_count\r\n" + 
-                  "from Camping_Company cc\r\n" + 
-                  "left join Car_Rent cr\r\n" + 
-                  "on cc.compid = cr.compid\r\n" + 
-                  "group by cc.compid, cc.compname\r\n" + 
-                  "order by 3 desc\r\n" + 
-                  "limit 0, 10;";
-
-            Statement stmt = conn.createStatement();
-		    rs = stmt.executeQuery(sql);	 
-
-            Object column[] = {"COMP ID", "COMP NAME", "TOTAL RENTAL COUNT"};
-            arr.add(column);
-        
-            while(rs.next()) {
-               Object[] data = {
-                     rs.getInt(1),
-                     rs.getString(2),
-                     rs.getInt(3)
-               };
-               arr.add(data);
-            }
-          } catch (SQLException e1) {
-             e1.printStackTrace();
-          }
-		return arr;
+		String sql = "select cc.compid, cc.compname, coalesce(count(*), 0) as rental_count\r\n" +
+				"from Camping_Company cc\r\n" +
+				"left join Car_Rent cr\r\n" +
+				"on cc.compid = cr.compid\r\n" +
+				"group by cc.compid, cc.compname\r\n" +
+				"order by 3 desc\r\n" +
+				"limit 0, 10;";
+		return DbUtil.getRows(conn, sql);
 	}
 	
 	public int getCompid() {

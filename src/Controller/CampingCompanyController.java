@@ -1,9 +1,6 @@
 package Controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -53,12 +50,12 @@ public class CampingCompanyController {
 						campCompModel.setManager_email(_campCompView.tf[5].getText());
 					}
 	
-					campCompModel.insert(_campCompView.getConn());
+					campCompModel.insert(_mainView.getConn());
 	
 					
 				} else if (e.getSource() == _campCompView.btnDelete) {
 					if (_mainView.getCurRow() != -1) {
-						campCompModel.delete(_campCompView.getConn(), _campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCompModel.delete(_mainView.getConn(), _campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
@@ -85,7 +82,7 @@ public class CampingCompanyController {
 						if (_campCompView.tf[5].getText().length() > 0) {
 							campCompModel.setManager_email(_campCompView.tf[5].getText());
 						}
-						campCompModel.update(_campCompView.getConn(),
+						campCompModel.update(_mainView.getConn(),
 								_campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
@@ -101,30 +98,11 @@ public class CampingCompanyController {
 
 	}
 	
-	private class CampingCompanyMouseListener implements MouseListener {
-
-		@Override
+	private class CampingCompanyMouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_campCompView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_campCompView.dbResult.getSelectedColumn());
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
 	}
 
 	private class CampingCompanyButtonListener implements ActionListener {
@@ -135,10 +113,10 @@ public class CampingCompanyController {
 			_mainView.setCurRow(-1);
 			_mainView.setCurCol(-1);
 
-			ArrayList<Object[]> arr = campCompModel.select(_campCompView.getConn());
-			_campCompView.model.setDataVector(null, arr.get(0));
+			ArrayList<Object[]> arr = campCompModel.select(_mainView.getConn());
+			_campCompView.campingCompanyDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_campCompView.model.addRow(arr.get(i));
+				_campCompView.campingCompanyDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("campcomp");
 			_mainView.revalidate();
