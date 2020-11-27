@@ -4,10 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,47 +18,54 @@ import Common.AppManager;
 
 public class RentCustomerView extends JPanel {
 
-//	RentCustomerModel dataModel;
-	private MainView _mainView;
-	public DefaultTableModel model;
+	public DefaultTableModel rentCustomerDefaultTable;
 	public JTable dbResult;
 	JScrollPane scrollPane;
-	JPanel updatePanel, buttonPanel;
-	int curRow = -1, curCol = -1;
+	public JPanel updatePanel, buttonPanel;
 	public JButton btnInput, btnDelete, btnUpdate;
 	JLabel[] labels;
 	public JTextField[] tf;
-
+	public String[] fieldString = { "license_no", "name", "address", "phone", "email" };
+	public int[] fieldSize = { 3, 7, 10, 10, 10 };
 
 	public RentCustomerView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
-		AppManager.getInstance().setRentCustomerView(this);
-		_mainView = AppManager.getInstance().getView();
 
-		model = new DefaultTableModel() {
+		AppManager.getInstance().setRentCustomerView(this);
+
+		initScrollPane();
+		initUpdatePanel();
+		initButtonPanel();
+	}
+
+	public void initScrollPane() {
+		rentCustomerDefaultTable = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dbResult = new JTable(model);
+
+		dbResult = new JTable(rentCustomerDefaultTable);
+		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 		scrollPane = new JScrollPane(dbResult);
 		add(scrollPane);
+		scrollPane.setPreferredSize(new Dimension(780, 300));
+	}
 
+	public void initUpdatePanel() {
 		updatePanel = new JPanel();
+
 		labels = new JLabel[5];
-		labels[0] = new JLabel("license_no:");
-		labels[1] = new JLabel("name:");
-		labels[2] = new JLabel("address:");
-		labels[3] = new JLabel("phone:");
-		labels[4] = new JLabel("email:");
+		for (int i = 0; i < labels.length; i++) {
+			labels[i] = new JLabel(fieldString[i]);
+		}
 
 		tf = new JTextField[5];
-		tf[0] = new JTextField("", 3);
-		tf[1] = new JTextField("", 7);
-		tf[2] = new JTextField("", 10);
-		tf[3] = new JTextField("", 10);
-		tf[4] = new JTextField("", 10);
+		for (int i = 0; i < tf.length; i++) {
+			tf[i] = new JTextField(fieldSize[i]);
+		}
 
 		for (int i = 0; i < 5; i++) {
 			updatePanel.add(labels[i]);
@@ -70,6 +73,10 @@ public class RentCustomerView extends JPanel {
 		}
 
 		add(updatePanel);
+		updatePanel.setPreferredSize(new Dimension(780, 60));
+	}
+
+	public void initButtonPanel() {
 
 		buttonPanel = new JPanel();
 
@@ -82,14 +89,7 @@ public class RentCustomerView extends JPanel {
 		buttonPanel.add(btnUpdate);
 
 		add(buttonPanel);
-
-		scrollPane.setPreferredSize(new Dimension(780, 300));
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 		buttonPanel.setPreferredSize(new Dimension(780, 50));
-
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		// mouseListener 처리하기
-
 	}
 
 	public void addMouseListener(MouseListener listener) {

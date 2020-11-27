@@ -2,8 +2,8 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -96,28 +96,12 @@ public class RentCustomerController {
 		}
 	}
 
-	private class RentCustomerMouseListener implements MouseListener {
+	private class RentCustomerMouseListener extends MouseAdapter {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_rentCustView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_rentCustView.dbResult.getSelectedColumn());
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
 		}
 
 	}
@@ -131,9 +115,9 @@ public class RentCustomerController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = rentCustModel.select(_mainView.getConn());
-			_rentCustView.model.setDataVector(null, arr.get(0));
+			_rentCustView.rentCustomerDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_rentCustView.model.addRow(arr.get(i));
+				_rentCustView.rentCustomerDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("cust");
 			_mainView.add(AppManager.getInstance().getRentCustomerView());

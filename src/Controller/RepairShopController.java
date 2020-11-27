@@ -2,8 +2,8 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -100,37 +100,12 @@ public class RepairShopController {
 
 	}
 
-	private class RepairShopMouseListener implements MouseListener {
+	private class RepairShopMouseListener extends MouseAdapter {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_repairShopView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_repairShopView.dbResult.getSelectedColumn());
-			System.out.println(_mainView.getCurRow() + " " + _mainView.getCurCol());
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 	}
@@ -144,9 +119,9 @@ public class RepairShopController {
 			_mainView.setCurCol(-1);
 
 			ArrayList<Object[]> arr = repairShopModel.select(_mainView.getConn());
-			_repairShopView.model.setDataVector(null, arr.get(0));
+			_repairShopView.repairShopDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_repairShopView.model.addRow(arr.get(i));
+				_repairShopView.repairShopDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("repairShop");
 			_mainView.add(AppManager.getInstance().getRepairShopView());
