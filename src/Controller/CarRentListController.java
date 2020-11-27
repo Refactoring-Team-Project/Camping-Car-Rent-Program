@@ -31,10 +31,13 @@ public class CarRentListController {
 		this._mainView.addUserMileageSearch(new UserSearch3ButtonListener());
 	}
 
+
+
 	private class ButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+
 			if (e.getSource() == _carRentListView.btnRent) {
 				if (_mainView.getCurRow() != -1) {
 					if (_carRentListView.tf[0].getText().length() > 0) {
