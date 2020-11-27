@@ -3,8 +3,8 @@ package Controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -72,36 +72,21 @@ public class RentCarController {
 
 	}
 
-	private class RentCarMouseListener implements MouseListener {
+	private class RentCarMouseListener extends MouseAdapter {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_rentCarView.dbResult.getSelectedRow());
 			_mainView.setCurCol(_rentCarView.dbResult.getSelectedColumn());
 
-			_rentCarView.tf[0].setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
+			_rentCarView.tf[0]
+					.setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
 			_rentCarView.tf[0].setDisabledTextColor(Color.black);
 
-			_rentCarView.tf[1].setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
+			_rentCarView.tf[1]
+					.setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
 			_rentCarView.tf[1].setDisabledTextColor(Color.black);
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-
 	}
 
 	private class RentCarButtonListener implements ActionListener {
