@@ -132,22 +132,16 @@ public class MainView extends JFrame {
 	}
 
 	public void changeUser() {
-		this.getContentPane().removeAll();
 
 		if (user == 0) { // 관리자 모드
-			this.getContentPane().add(userChangePanel, 0);
 			btnUser.setText("사용자");
-			this.getContentPane().add(userBtnPanel, 1);
 			user = 1;
 		}
 
 		else if (user == 1) { // 사용자 모드
-			this.getContentPane().add(userChangePanel, 0);
 			btnUser.setText("관리자");
-			this.getContentPane().add(adminBtnPanel, 1);
 			user = 0;
 		}
-		repaint();
 	}
 
 	public void changePanel(JPanel view) {
@@ -158,7 +152,7 @@ public class MainView extends JFrame {
 		} else if (user == 1) { // 사용자 모드
 			this.getContentPane().add(userBtnPanel, 1);
 		}
-		this.getContentPane().add(view, 2);
+		if(view != null) this.getContentPane().add(view, 2);
 
 
 		this.getContentPane().repaint();

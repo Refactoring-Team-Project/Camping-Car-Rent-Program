@@ -30,7 +30,7 @@ public class MainController {
 			
 			
 			_mainView.changeUser();
-
+			_mainView.changePanel(null);
 		
 		}
 		
