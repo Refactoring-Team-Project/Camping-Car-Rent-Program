@@ -15,19 +15,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
+import common.Constants;
 
 public class CarCheckView extends JPanel {
 
-	public DefaultTableModel model;
-	public JTable dbResult;
-	JScrollPane scrollPane;
+	public DefaultTableModel carCheckDefaultTable;
+	public JTable carCheckDBResult;
+	JScrollPane carCheckScrollPane;
 	public JPanel updatePanel, buttonPanel;
 	public JButton btnRequest;
-	JLabel[] labels;
-	public JTextField[] tf;
-	public String[] fieldString = { "repairno", "carid", "shopid", "compid", "license_no", "repairdetails",
-			"repairdate", "repaircost", "paymentdeadline", "repairhistory" };
-	public int[] fieldSize = { 3, 3, 3, 3, 3, 10, 5, 3, 5, 10 };
+	JLabel[] carCheckFieldName;
+	public JTextField[] carCheckInputField;
 
 	public CarCheckView() {
 		super.setLayout(new FlowLayout());
@@ -41,42 +39,40 @@ public class CarCheckView extends JPanel {
 	}
 
 	public void initScrollPane() {
-		model = new DefaultTableModel() {
+		carCheckDefaultTable = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dbResult = new JTable(model);
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(780, 300));
+		carCheckDBResult = new JTable(carCheckDefaultTable);
+		carCheckDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		carCheckScrollPane = new JScrollPane(carCheckDBResult);
+		add(carCheckScrollPane);
+		carCheckScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
+		updatePanel.setPreferredSize(new Dimension(780, 60));
 
-		labels = new JLabel[10];
-		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(fieldString[i]);
+		carCheckFieldName = new JLabel[Constants.CARCHECK_FIELDNUM];
+		carCheckInputField = new JTextField[Constants.CARCHECK_FIELDNUM];
+
+		for (int i = 0; i < Constants.CARCHECK_FIELDNUM; i++) {
+			carCheckFieldName[i] = new JLabel(Constants.CARCHECK_FIELDSTRING [i]);
+			updatePanel.add(carCheckFieldName[i]);
+
+			carCheckInputField[i] = new JTextField("", Constants.CARCHECK_FIELDLENGTH[i]);
+			updatePanel.add(carCheckInputField[i]);
 		}
 
-		tf = new JTextField[10];
-		for (int i = 0; i < tf.length; i++) {
-			tf[i] = new JTextField("", fieldSize[i]);
-		}
-		tf[1].setEnabled(false);
-		tf[3].setEnabled(false);
-		tf[4].setEnabled(false);
-
-		for (int i = 0; i < 10; i++) {
-			updatePanel.add(labels[i]);
-			updatePanel.add(tf[i]);
-		}
+		carCheckInputField[1].setEnabled(false);
+		carCheckInputField[3].setEnabled(false);
+		carCheckInputField[4].setEnabled(false);
 
 		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
 	public void initButtonPanel() {
@@ -93,15 +89,15 @@ public class CarCheckView extends JPanel {
 		btnRequest.addActionListener(listener);
 	}
 
-	public void fieldReset() {
-		for (JTextField t : tf) {
-			t.setText("");
-		}
-		repaint();
+	public void addMouseListener(MouseListener listener) {
+		carCheckDBResult.addMouseListener(listener);
 	}
 
-	public void addMouseListener(MouseListener listener) {
-		dbResult.addMouseListener(listener);
+	public void fieldReset() {
+		for (JTextField inputField : carCheckInputField) {
+			inputField.setText("");
+		}
+		repaint();
 	}
 
 }

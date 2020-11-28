@@ -15,18 +15,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
+import common.Constants;
 
 public class CampingCompanyView extends JPanel{
 
 	public DefaultTableModel campingCompanyDefaultTable;
-	public JTable dbResult;
-	JScrollPane scrollPane;
+	public JTable campingCompanyDBResult;
+	JScrollPane campingCompanyScrollPane;
 	JPanel updatePanel, buttonPanel;
 	public JButton btnInput, btnDelete, btnUpdate;
-	JLabel[] labels;
-	public JTextField[] tf;
-	public String[] fieldString = {"compid", "compname", "address", "phone", "manager_name", "manager_email"};
-	public int[] fieldSize = {3, 7, 10, 10, 7, 10};
+	JLabel[] campingCompanyFieldName;
+	public JTextField[] campingCompanyInputField;
 
 	public CampingCompanyView() {
 		super.setLayout(new FlowLayout()); 
@@ -45,35 +44,30 @@ public class CampingCompanyView extends JPanel{
 				return false;
 			}
 		};
-		dbResult = new JTable(campingCompanyDefaultTable);
+		campingCompanyDBResult = new JTable(campingCompanyDefaultTable);
+		campingCompanyDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(780, 300));
-
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		campingCompanyScrollPane = new JScrollPane(campingCompanyDBResult);
+		add(campingCompanyScrollPane);
+		campingCompanyScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
-		labels = new JLabel[6];
-		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(fieldString[i]);
-		}
+		updatePanel.setPreferredSize(new Dimension(780, 60));
 
-		tf = new JTextField[6];
-		for (int i = 0; i < tf.length; i++) {
-			tf[i] = new JTextField(fieldSize[i]);
-		}
+		campingCompanyFieldName = new JLabel[Constants.CAMPINGCOMPANY_FIELDNUM];
+		campingCompanyInputField = new JTextField[Constants.CAMPINGCOMPANY_FIELDNUM];
 
+		for (int i = 0; i < Constants.CAMPINGCOMPANY_FIELDNUM; i++) {
+			campingCompanyFieldName[i] = new JLabel(Constants.CAMPINGCOMPANY_FIELDSTRING[i]);
+			updatePanel.add(campingCompanyFieldName[i]);
 
-		for (int i = 0; i < 6; i++) {
-			updatePanel.add(labels[i]);
-			updatePanel.add(tf[i]);
+			campingCompanyInputField[i] = new JTextField(Constants.CAMPINGCOMPANY_FIELDLENGTH[i]);
+			updatePanel.add(campingCompanyInputField[i]);
 		}
 
 		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
 	public void initButtonPanel() {
@@ -98,12 +92,12 @@ public class CampingCompanyView extends JPanel{
 	}
 	
 	public void addMouseListener(MouseListener listener) {
-		dbResult.addMouseListener(listener);
+		campingCompanyDBResult.addMouseListener(listener);
 	}
 
 	public void fieldReset() {
-		for(JTextField t: tf) {
-			t.setText("");
+		for(JTextField inputField: campingCompanyInputField) {
+			inputField.setText("");
         }
 		repaint();
 	}

@@ -40,35 +40,35 @@ public class CarRentListController {
 
 			if (e.getSource() == _carRentListView.btnRent) {
 				if (_mainView.getCurRow() != -1) {
-					if (_carRentListView.tf[0].getText().length() > 0) {
-						carRentModel.setRentno(Integer.parseInt(_carRentListView.tf[0].getText()));
+					if (_carRentListView.carRentListInputField[0].getText().length() > 0) {
+						carRentModel.setRentno(Integer.parseInt(_carRentListView.carRentListInputField[0].getText()));
 					}
-					if (_carRentListView.tf[1].getText().length() > 0) {
-						carRentModel.setCarid(Integer.parseInt(_carRentListView.tf[1].getText()));
+					if (_carRentListView.carRentListInputField[1].getText().length() > 0) {
+						carRentModel.setCarid(Integer.parseInt(_carRentListView.carRentListInputField[1].getText()));
 					}
-					if (_carRentListView.tf[2].getText().length() > 0) {
-						carRentModel.setLicense_no(Integer.parseInt(_carRentListView.tf[2].getText()));
+					if (_carRentListView.carRentListInputField[2].getText().length() > 0) {
+						carRentModel.setLicense_no(Integer.parseInt(_carRentListView.carRentListInputField[2].getText()));
 					}
-					if (_carRentListView.tf[3].getText().length() > 0) {
-						carRentModel.setCompid(Integer.parseInt(_carRentListView.tf[3].getText()));
+					if (_carRentListView.carRentListInputField[3].getText().length() > 0) {
+						carRentModel.setCompid(Integer.parseInt(_carRentListView.carRentListInputField[3].getText()));
 					}
-					if (_carRentListView.tf[4].getText().length() > 0) {
-						carRentModel.setRentdate(_carRentListView.tf[4].getText());
+					if (_carRentListView.carRentListInputField[4].getText().length() > 0) {
+						carRentModel.setRentdate(_carRentListView.carRentListInputField[4].getText());
 					}
-					if (_carRentListView.tf[5].getText().length() > 0) {
-						carRentModel.setRentalperiod(Integer.parseInt(_carRentListView.tf[5].getText()));
+					if (_carRentListView.carRentListInputField[5].getText().length() > 0) {
+						carRentModel.setRentalperiod(Integer.parseInt(_carRentListView.carRentListInputField[5].getText()));
 					}
-					if (_carRentListView.tf[6].getText().length() > 0) {
-						carRentModel.setCharge(Integer.parseInt(_carRentListView.tf[6].getText()));
+					if (_carRentListView.carRentListInputField[6].getText().length() > 0) {
+						carRentModel.setCharge(Integer.parseInt(_carRentListView.carRentListInputField[6].getText()));
 					}
-					if (_carRentListView.tf[7].getText().length() > 0) {
-						carRentModel.setPaymentdeadline(_carRentListView.tf[7].getText());
+					if (_carRentListView.carRentListInputField[7].getText().length() > 0) {
+						carRentModel.setPaymentdeadline(_carRentListView.carRentListInputField[7].getText());
 					}
-					if (_carRentListView.tf[8].getText().length() > 0) {
-						carRentModel.setBillhistory(_carRentListView.tf[8].getText());
+					if (_carRentListView.carRentListInputField[8].getText().length() > 0) {
+						carRentModel.setBillhistory(_carRentListView.carRentListInputField[8].getText());
 					}
-					if (_carRentListView.tf[9].getText().length() > 0) {
-						carRentModel.setBillhistorycost(_carRentListView.tf[9].getText());
+					if (_carRentListView.carRentListInputField[9].getText().length() > 0) {
+						carRentModel.setBillhistorycost(_carRentListView.carRentListInputField[9].getText());
 					}
 
 					carRentModel.insert(_mainView.getConn());
@@ -85,18 +85,18 @@ public class CarRentListController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_carRentListView.dbResult.getSelectedRow());
-			_mainView.setCurCol(_carRentListView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_carRentListView.carRentListDBResult.getSelectedRow());
+			_mainView.setCurCol(_carRentListView.carRentListDBResult.getSelectedColumn());
 
-			System.out.println(_carRentListView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+			System.out.println(_carRentListView.carRentListDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 			campCarModel.selectedData(_mainView.getConn(),
-					_carRentListView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+					_carRentListView.carRentListDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
-			_carRentListView.tf[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
-			_carRentListView.tf[1].setDisabledTextColor(Color.black);
+			_carRentListView.carRentListInputField[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
+			_carRentListView.carRentListInputField[1].setDisabledTextColor(Color.black);
 
-			_carRentListView.tf[3].setText(Integer.toString(campCarModel.getSelectedCompid()));
-			_carRentListView.tf[3].setDisabledTextColor(Color.black);
+			_carRentListView.carRentListInputField[3].setText(Integer.toString(campCarModel.getSelectedCompid()));
+			_carRentListView.carRentListInputField[3].setDisabledTextColor(Color.black);
 
 		}
 
@@ -108,13 +108,14 @@ public class CarRentListController {
 		public void actionPerformed(ActionEvent e) {
 			_mainView.changePanel(_carRentListView);
 			_carRentListView.fieldReset();
+
 			ArrayList<Object[]> arr = campCarModel.selectRentAble(_mainView.getConn());
 			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
 			arr.add(0, column);
-			_carRentListView.model.setDataVector(null, arr.get(0));
+			_carRentListView.carRentListDefaultTable.setDataVector(null, arr.get(0));
 
 			for (int i = 1; i < arr.size(); i++) {
-				_carRentListView.model.addRow(arr.get(i));
+				_carRentListView.carRentListDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("rentablelist");
 			_mainView.revalidate();
@@ -138,9 +139,9 @@ public class CarRentListController {
 			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
 			arr.add(0, column);
 
-			_carRentListView.model.setDataVector(null, arr.get(0));
+			_carRentListView.carRentListDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_carRentListView.model.addRow(arr.get(i));
+				_carRentListView.carRentListDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("search1");
 			_mainView.revalidate();
@@ -164,9 +165,9 @@ public class CarRentListController {
 			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
 			arr.add(0, column);
 
-			_carRentListView.model.setDataVector(null, arr.get(0));
+			_carRentListView.carRentListDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_carRentListView.model.addRow(arr.get(i));
+				_carRentListView.carRentListDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("search2");
 			_mainView.revalidate();
@@ -189,9 +190,9 @@ public class CarRentListController {
 			ArrayList<Object[]> arr = campCarModel.search3(_mainView.getConn(), input);
 			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
 			arr.add(0, column);
-			_carRentListView.model.setDataVector(null, arr.get(0));
+			_carRentListView.carRentListDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_carRentListView.model.addRow(arr.get(i));
+				_carRentListView.carRentListDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("search3");
 			_mainView.revalidate();

@@ -55,23 +55,20 @@ public class CampingCarView extends JPanel {
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
+		updatePanel.setPreferredSize(new Dimension(780, 60));
 
 		campingCarFieldName = new JLabel[Constants.CAMPINGCAR_FIELDNUM];
 		campingCarInputField = new JTextField[Constants.CAMPINGCAR_FIELDNUM];
 
 		for (int i = 0; i < Constants.CAMPINGCAR_FIELDNUM; i++) {
 			campingCarFieldName[i] = new JLabel(Constants.CAMPINGCAR_FIELDSTRING[i]);
-			campingCarInputField[i] = new JTextField(Constants.CAMPINGCAR_FIELDLENGTH[i]);
-		}
-
-
-		for (int i = 0; i < Constants.CAMPINGCAR_FIELDNUM; i++) {
 			updatePanel.add(campingCarFieldName[i]);
+
+			campingCarInputField[i] = new JTextField(Constants.CAMPINGCAR_FIELDLENGTH[i]);
 			updatePanel.add(campingCarInputField[i]);
 		}
 
 		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
 	public void initButtonPanel() {

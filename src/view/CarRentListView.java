@@ -16,27 +16,23 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
+import common.Constants;
 
 public class CarRentListView extends JPanel {
 
-	private MainView _mainView;
-	public DefaultTableModel model;
-	public JTable dbResult;
-	JScrollPane scrollPane;
-
+	public DefaultTableModel carRentListDefaultTable;
+	public JTable carRentListDBResult;
+	JScrollPane carRentListScrollPane;
 	JPanel updatePanel, buttonPanel;
 	public JButton btnRent;
-	JLabel[] labels;
-	public JTextField[] tf;
-	public String[] fieldString = { "rentno", "carid", "license-no", "compid", "rent_date", "rentalperiod", "charge", "paymentdeadline", "billhistory", "billhistorycost"};
-	public int[] fieldSize = { 3, 3, 3, 3, 10, 5, 5, 10, 10, 5};
+	JLabel[] carRentListFieldName;
+	public JTextField[] carRentListInputField;
 
 	public CarRentListView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 
 		AppManager.getInstance().setCarRentListView(this);
-		_mainView = AppManager.getInstance().getView();
 
 		initScrollPane();
 		initUpdatePanel();
@@ -44,41 +40,39 @@ public class CarRentListView extends JPanel {
 	}
 
 	public void initScrollPane() {
-		model = new DefaultTableModel() {
+		carRentListDefaultTable = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dbResult = new JTable(model);
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(780, 300));
+
+		carRentListDBResult = new JTable(carRentListDefaultTable);
+		carRentListDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		carRentListScrollPane = new JScrollPane(carRentListDBResult);
+		add(carRentListScrollPane);
+		carRentListScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
+		updatePanel.setPreferredSize(new Dimension(780, 60));
 
-		labels = new JLabel[10];
-		for(int i=0; i<labels.length; i++) {
-			labels[i] = new JLabel(fieldString[i]);
+		carRentListFieldName = new JLabel[Constants.CARRENTLIST_FIELDNUM];
+		carRentListInputField = new JTextField[Constants.CARRENTLIST_FIELDNUM];
+
+		for(int i=0; i<Constants.CARRENTLIST_FIELDNUM; i++) {
+			carRentListFieldName[i] = new JLabel(Constants.CARRENTLIST_FIELDSTRING[i]);
+			updatePanel.add(carRentListFieldName[i]);
+
+			carRentListInputField[i] = new JTextField("", Constants.CARRENTLIST_FIELDLENGTH[i]);
+			updatePanel.add(carRentListInputField[i]);
 		}
 
-		tf = new JTextField[10];
-		for(int i=0; i<tf.length; i++) {
-			tf[i] = new JTextField("", fieldSize[i]);
-		}
-
-		tf[1].setEnabled(false);
-		tf[3].setEnabled(false);
-
-		for (int i = 0; i < 10; i++) {
-			updatePanel.add(labels[i]);
-			updatePanel.add(tf[i]);
-		}
+		carRentListInputField[1].setEnabled(false);
+		carRentListInputField[3].setEnabled(false);
 
 		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
 	public void initButtonPanel() {
@@ -97,14 +91,14 @@ public class CarRentListView extends JPanel {
 	}
 
 	public void fieldReset() {
-		for (JTextField t : tf) {
-			t.setText("");
+		for (JTextField inputField : carRentListInputField) {
+			inputField.setText("");
 		}
 		repaint();
 	}
 
 	public void addMouseListener(MouseListener listener) {
-		dbResult.addMouseListener(listener);
+		carRentListDBResult.addMouseListener(listener);
 	}
 
 	public String SearchInput(String str) {

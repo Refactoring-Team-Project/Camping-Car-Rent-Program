@@ -31,23 +31,23 @@ public class CampingCompanyController {
 
 			try {
 				if (e.getSource() == _campCompView.btnInput) {
-					if (_campCompView.tf[0].getText().length() > 0) {
-						campCompModel.setCompid(Integer.parseInt(_campCompView.tf[0].getText()));
+					if (_campCompView.campingCompanyInputField[0].getText().length() > 0) {
+						campCompModel.setCompid(Integer.parseInt(_campCompView.campingCompanyInputField[0].getText()));
 					}
-					if (_campCompView.tf[1].getText().length() > 0) {
-						campCompModel.setCompname(_campCompView.tf[1].getText());
+					if (_campCompView.campingCompanyInputField[1].getText().length() > 0) {
+						campCompModel.setCompname(_campCompView.campingCompanyInputField[1].getText());
 					}
-					if (_campCompView.tf[2].getText().length() > 0) {
-						campCompModel.setAddress(_campCompView.tf[2].getText());
+					if (_campCompView.campingCompanyInputField[2].getText().length() > 0) {
+						campCompModel.setAddress(_campCompView.campingCompanyInputField[2].getText());
 					}
-					if (_campCompView.tf[3].getText().length() > 0) {
-						campCompModel.setPhone(_campCompView.tf[3].getText());
+					if (_campCompView.campingCompanyInputField[3].getText().length() > 0) {
+						campCompModel.setPhone(_campCompView.campingCompanyInputField[3].getText());
 					}
-					if (_campCompView.tf[4].getText().length() > 0) {
-						campCompModel.setManager_name(_campCompView.tf[4].getText());
+					if (_campCompView.campingCompanyInputField[4].getText().length() > 0) {
+						campCompModel.setManager_name(_campCompView.campingCompanyInputField[4].getText());
 					}
-					if (_campCompView.tf[5].getText().length() > 0) {
-						campCompModel.setManager_email(_campCompView.tf[5].getText());
+					if (_campCompView.campingCompanyInputField[5].getText().length() > 0) {
+						campCompModel.setManager_email(_campCompView.campingCompanyInputField[5].getText());
 					}
 	
 					campCompModel.insert(_mainView.getConn());
@@ -55,35 +55,35 @@ public class CampingCompanyController {
 					
 				} else if (e.getSource() == _campCompView.btnDelete) {
 					if (_mainView.getCurRow() != -1) {
-						campCompModel.delete(_mainView.getConn(), _campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCompModel.delete(_mainView.getConn(), _campCompView.campingCompanyDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 	
 				} else if (e.getSource() == _campCompView.btnUpdate) {
 					if (_mainView.getCurRow() != -1) {
-						if (_campCompView.tf[0].getText().length() > 0) {
-							campCompModel.setCompid(Integer.parseInt(_campCompView.tf[0].getText()));
+						if (_campCompView.campingCompanyInputField[0].getText().length() > 0) {
+							campCompModel.setCompid(Integer.parseInt(_campCompView.campingCompanyInputField[0].getText()));
 						} else
 							throw new NullPointerException();
 					
-						if (_campCompView.tf[1].getText().length() > 0) {
-							campCompModel.setCompname(_campCompView.tf[1].getText());
+						if (_campCompView.campingCompanyInputField[1].getText().length() > 0) {
+							campCompModel.setCompname(_campCompView.campingCompanyInputField[1].getText());
 						}
-						if (_campCompView.tf[2].getText().length() > 0) {
-							campCompModel.setAddress(_campCompView.tf[2].getText());
+						if (_campCompView.campingCompanyInputField[2].getText().length() > 0) {
+							campCompModel.setAddress(_campCompView.campingCompanyInputField[2].getText());
 						}
-						if (_campCompView.tf[3].getText().length() > 0) {
-							campCompModel.setPhone(_campCompView.tf[3].getText());
+						if (_campCompView.campingCompanyInputField[3].getText().length() > 0) {
+							campCompModel.setPhone(_campCompView.campingCompanyInputField[3].getText());
 						}
-						if (_campCompView.tf[4].getText().length() > 0) {
-							campCompModel.setManager_name(_campCompView.tf[4].getText());
+						if (_campCompView.campingCompanyInputField[4].getText().length() > 0) {
+							campCompModel.setManager_name(_campCompView.campingCompanyInputField[4].getText());
 						}
-						if (_campCompView.tf[5].getText().length() > 0) {
-							campCompModel.setManager_email(_campCompView.tf[5].getText());
+						if (_campCompView.campingCompanyInputField[5].getText().length() > 0) {
+							campCompModel.setManager_email(_campCompView.campingCompanyInputField[5].getText());
 						}
 						campCompModel.update(_mainView.getConn(),
-								_campCompView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+								_campCompView.campingCompanyDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCompView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
@@ -100,8 +100,8 @@ public class CampingCompanyController {
 	
 	private class CampingCompanyMouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_campCompView.dbResult.getSelectedRow());
-			_mainView.setCurCol(_campCompView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_campCompView.campingCompanyDBResult.getSelectedRow());
+			_mainView.setCurCol(_campCompView.campingCompanyDBResult.getSelectedColumn());
 		}
 	}
 

@@ -38,43 +38,43 @@ public class CarCheckController {
 			try {
 				if (e.getSource() == _carChkView.btnRequest) {
 					if (_mainView.getCurRow() != -1) {
-						if (_carChkView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
-							if (_carChkView.tf[0].getText().length() > 0) {
-								repListModel.setRepairno(Integer.parseInt(_carChkView.tf[0].getText()));
+						if (_carChkView.carCheckDBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
+							if (_carChkView.carCheckInputField[0].getText().length() > 0) {
+								repListModel.setRepairno(Integer.parseInt(_carChkView.carCheckInputField[0].getText()));
 							} else
 								throw new NullPointerException();
 
-							if (_carChkView.tf[1].getText().length() > 0) {
-								repListModel.setCarid(Integer.parseInt(_carChkView.tf[1].getText()));
+							if (_carChkView.carCheckInputField[1].getText().length() > 0) {
+								repListModel.setCarid(Integer.parseInt(_carChkView.carCheckInputField[1].getText()));
 							}
-							if (_carChkView.tf[2].getText().length() > 0) {
-								repListModel.setShopid(Integer.parseInt(_carChkView.tf[2].getText()));
+							if (_carChkView.carCheckInputField[2].getText().length() > 0) {
+								repListModel.setShopid(Integer.parseInt(_carChkView.carCheckInputField[2].getText()));
 							}
-							if (_carChkView.tf[3].getText().length() > 0) {
-								repListModel.setCompid(Integer.parseInt(_carChkView.tf[3].getText()));
+							if (_carChkView.carCheckInputField[3].getText().length() > 0) {
+								repListModel.setCompid(Integer.parseInt(_carChkView.carCheckInputField[3].getText()));
 							}
-							if (_carChkView.tf[4].getText().length() > 0) {
-								repListModel.setLicense_no(Integer.parseInt(_carChkView.tf[4].getText()));
+							if (_carChkView.carCheckInputField[4].getText().length() > 0) {
+								repListModel.setLicense_no(Integer.parseInt(_carChkView.carCheckInputField[4].getText()));
 							}
-							if (_carChkView.tf[5].getText().length() > 0) {
-								repListModel.setRepairdetails(_carChkView.tf[5].getText());
+							if (_carChkView.carCheckInputField[5].getText().length() > 0) {
+								repListModel.setRepairdetails(_carChkView.carCheckInputField[5].getText());
 							}
-							if (_carChkView.tf[6].getText().length() > 0) {
-								repListModel.setRepairdate(_carChkView.tf[6].getText());
+							if (_carChkView.carCheckInputField[6].getText().length() > 0) {
+								repListModel.setRepairdate(_carChkView.carCheckInputField[6].getText());
 							}
-							if (_carChkView.tf[7].getText().length() > 0) {
-								repListModel.setRepaircost(Integer.parseInt(_carChkView.tf[7].getText()));
+							if (_carChkView.carCheckInputField[7].getText().length() > 0) {
+								repListModel.setRepaircost(Integer.parseInt(_carChkView.carCheckInputField[7].getText()));
 							}
-							if (_carChkView.tf[8].getText().length() > 0) {
-								repListModel.setPaymentdeadline(_carChkView.tf[8].getText());
+							if (_carChkView.carCheckInputField[8].getText().length() > 0) {
+								repListModel.setPaymentdeadline(_carChkView.carCheckInputField[8].getText());
 							}
-							if (_carChkView.tf[9].getText().length() > 0) {
-								repListModel.setRepairhistory(_carChkView.tf[9].getText());
+							if (_carChkView.carCheckInputField[9].getText().length() > 0) {
+								repListModel.setRepairhistory(_carChkView.carCheckInputField[9].getText());
 							}
 
 							repListModel.insert(_mainView.getConn());
 
-						} else if (_carChkView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
+						} else if (_carChkView.carCheckDBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
 							JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
 					} else
 						JOptionPane.showMessageDialog(null, "요청할 데이터를 선택해 주세요.");
@@ -92,20 +92,20 @@ public class CarCheckController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_carChkView.dbResult.getSelectedRow());
-			_mainView.setCurCol(_carChkView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_carChkView.carCheckDBResult.getSelectedRow());
+			_mainView.setCurCol(_carChkView.carCheckDBResult.getSelectedColumn());
 
 			carChkModel.selectedData(_mainView.getConn(),
-					_carChkView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+					_carChkView.carCheckDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
-			_carChkView.tf[1].setText(Integer.toString(carChkModel.getSelectedCarid()));
-			_carChkView.tf[1].setDisabledTextColor(Color.black);
+			_carChkView.carCheckInputField[1].setText(Integer.toString(carChkModel.getSelectedCarid()));
+			_carChkView.carCheckInputField[1].setDisabledTextColor(Color.black);
 
-			_carChkView.tf[3].setText(Integer.toString(carChkModel.getSelectedCompid()));
-			_carChkView.tf[3].setDisabledTextColor(Color.black);
+			_carChkView.carCheckInputField[3].setText(Integer.toString(carChkModel.getSelectedCompid()));
+			_carChkView.carCheckInputField[3].setDisabledTextColor(Color.black);
 
-			_carChkView.tf[4].setText(Integer.toString(carChkModel.getSelectedLicense_no()));
-			_carChkView.tf[4].setDisabledTextColor(Color.black);
+			_carChkView.carCheckInputField[4].setText(Integer.toString(carChkModel.getSelectedLicense_no()));
+			_carChkView.carCheckInputField[4].setDisabledTextColor(Color.black);
 		}
 	}
 
@@ -119,9 +119,9 @@ public class CarCheckController {
 
 			ArrayList<Object[]> arr = carChkModel.select(_mainView.getConn());
 			Object column[] = { "RENT NO", "CAR ID", "FRONT EX", "LEFT EX", "RIGHT EX", "BACK EX", "REPAIR REQUIRED" };			arr.add(0, column);
-			_carChkView.model.setDataVector(null, arr.get(0));
+			_carChkView.carCheckDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_carChkView.model.addRow(arr.get(i));
+				_carChkView.carCheckDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("car check");
 			_mainView.revalidate();
