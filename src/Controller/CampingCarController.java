@@ -32,46 +32,12 @@ public class CampingCarController {
 			try {
 				if (e.getSource() == _campCarView.btnInput)
 				{
-					if(_campCarView.tf[0].getText().length() > 0) {
-						campCarModel.setCarid(Integer.parseInt(_campCarView.tf[0].getText()));
-					}
-					else throw new NullPointerException();
-					
-					if (_campCarView.tf[1].getText().length() > 0) {
-			            campCarModel.setCarname(_campCarView.tf[1].getText());
-			        }
-					
-					if(_campCarView.tf[2].getText().length() > 0) {
-			            campCarModel.setCarno(Integer.parseInt(_campCarView.tf[2].getText()));
-			        }
-					
-					if(_campCarView.tf[3].getText().length() > 0) {
-						campCarModel.setSeat(Integer.parseInt(_campCarView.tf[3].getText()));
-					}
-					
-					if(_campCarView.tf[4].getText().length() > 0) {
-						campCarModel.setManufacturer(_campCarView.tf[4].getText());
-					}
-					
-					if(_campCarView.tf[5].getText().length() > 0) {
-						campCarModel.setManu_year(Integer.parseInt(_campCarView.tf[5].getText()));
-					}
-			        
-					if(_campCarView.tf[6].getText().length() > 0) {
-						campCarModel.setDrivingdistance(Integer.parseInt(_campCarView.tf[6].getText()));
-					}
-					
-					if(_campCarView.tf[7].getText().length() > 0) {
-						campCarModel.setRentcost(Integer.parseInt(_campCarView.tf[7].getText()));
-					}
-					
-					if (_campCarView.tf[8].getText().length() > 0) {
-						campCarModel.setCompid(Integer.parseInt(_campCarView.tf[8].getText()));
-					}
-					else throw new NullPointerException();
-
-					if(_campCarView.tf[9].getText().length() > 0) {
-						campCarModel.setRegistdate(_campCarView.tf[9].getText());
+					for(int i=0;i<_campCarView.tf.length; i++) {
+						String value = _campCarView.tf[i].getText();
+						if(value.length() > 0) {
+							setModel(_campCarView.fieldString[i], value);
+						}
+						else throw new NullPointerException();
 					}
 
 					campCarModel.insert(_mainView.getConn());
@@ -89,47 +55,15 @@ public class CampingCarController {
 				else if (e.getSource() == _campCarView.btnUpdate)
 				{
 					if(_mainView.getCurRow() != -1) {
-						if(_campCarView.tf[0].getText().length() > 0) {
-							campCarModel.setCarid(Integer.parseInt(_campCarView.tf[0].getText()));
-						}
-						else throw new NullPointerException();
-						
-						if (_campCarView.tf[1].getText().length() > 0) {
-				            campCarModel.setCarname(_campCarView.tf[1].getText());
-				        }
-						
-						if(_campCarView.tf[2].getText().length() > 0) {
-				            campCarModel.setCarno(Integer.parseInt(_campCarView.tf[2].getText()));
-				        }
-						
-						if(_campCarView.tf[3].getText().length() > 0) {
-							campCarModel.setSeat(Integer.parseInt(_campCarView.tf[3].getText()));
-						}
-						
-						if(_campCarView.tf[4].getText().length() > 0) {
-							campCarModel.setManufacturer(_campCarView.tf[4].getText());
-						}
-						
-						if(_campCarView.tf[5].getText().length() > 0) {
-							campCarModel.setManu_year(Integer.parseInt(_campCarView.tf[5].getText()));
-						}
-				        
-						if(_campCarView.tf[6].getText().length() > 0) {
-							campCarModel.setDrivingdistance(Integer.parseInt(_campCarView.tf[6].getText()));
-						}
-						
-						if(_campCarView.tf[7].getText().length() > 0) {
-							campCarModel.setRentcost(Integer.parseInt(_campCarView.tf[7].getText()));
-						}
-						
-						if (_campCarView.tf[8].getText().length() > 0) {
-							campCarModel.setCompid(Integer.parseInt(_campCarView.tf[8].getText()));
-						}
-						else throw new NullPointerException();
 
-						if(_campCarView.tf[9].getText().length() > 0) {
-							campCarModel.setRegistdate(_campCarView.tf[9].getText());
+						for(int i=0;i<_campCarView.tf.length; i++) {
+							String value = _campCarView.tf[i].getText();
+							if(value.length() > 0) {
+								setModel(_campCarView.fieldString[i], value);
+							}
+							else throw new NullPointerException();
 						}
+
 						campCarModel.update(_mainView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCarView.fieldReset();
 					}
@@ -142,7 +76,41 @@ public class CampingCarController {
 			}
 		}
 	}
-	
+
+	private void setModel(String column, String value) {
+		switch(column) {
+			case "carid":
+				campCarModel.setCarid(Integer.parseInt(value));
+				break;
+			case "carname":
+				campCarModel.setCarname(value);
+				break;
+			case "carno":
+				campCarModel.setCarno(Integer.parseInt(value));
+				break;
+			case "seat":
+				campCarModel.setSeat(Integer.parseInt(value));
+				break;
+			case "manufacturer":
+				campCarModel.setManufacturer(value);
+				break;
+			case "manu_year":
+				campCarModel.setManu_year(Integer.parseInt(value));
+				break;
+			case "drivingdistance":
+				campCarModel.setDrivingdistance(Integer.parseInt(value));
+				break;
+			case "rentcost":
+				campCarModel.setRentcost(Integer.parseInt(value));
+				break;
+			case "compid":
+				campCarModel.setCompid(Integer.parseInt(value));
+				break;
+			case "registdate":
+				campCarModel.setRegistdate(value);
+				break;
+		}
+	}
 	private class CampCarMouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
 			_mainView.setCurRow(_campCarView.dbResult.getSelectedRow());
@@ -156,17 +124,16 @@ public class CampingCarController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			_mainView.changePanel(_campCarView);
-			_mainView.setCurRow(-1);
-			_mainView.setCurCol(-1);
 			
 			ArrayList<Object[]> arr = campCarModel.select(_mainView.getConn());
-			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};			arr.add(0, column);
+			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+			arr.add(0, column);
 			_campCarView.campingCarDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
 				_campCarView.campingCarDefaultTable.addRow(arr.get(i));
 			}
+
 			System.out.println("camping carrrrrrrrrrr");
-			_mainView.add(AppManager.getInstance().getCampingCarView());
 			_mainView.revalidate();
 			_mainView.repaint();
 			

@@ -155,6 +155,9 @@ public class MainView extends JFrame {
 		if (view != null)
 			this.getContentPane().add(view, 2);
 
+		setCurCol(-1);
+		setCurRow(-1);
+
 		this.getContentPane().repaint();
 	}
 

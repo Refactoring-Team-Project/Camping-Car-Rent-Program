@@ -122,6 +122,7 @@ public class CampingCarModel {
 		}
 	}
 
+
 	public int getSelectedCarid() {
 		return selected_carid;
 	}
