@@ -24,7 +24,8 @@ public class CampingCarController {
 		this._campCarView.addMouseListener(new CampCarMouseListener());
 		this._mainView.addCampCarListener(new CampingCarButtonListener());
 	}
-	
+
+
 	private class ButtonListener implements ActionListener {
 
 		@Override
@@ -124,14 +125,9 @@ public class CampingCarController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			_mainView.changePanel(_campCarView);
-			
-			ArrayList<Object[]> arr = campCarModel.select(_mainView.getConn());
-			Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
-			arr.add(0, column);
-			_campCarView.campingCarDefaultTable.setDataVector(null, arr.get(0));
-			for (int i = 1; i < arr.size(); i++) {
-				_campCarView.campingCarDefaultTable.addRow(arr.get(i));
-			}
+
+			setDataTableColumnName();
+			getDataTableValues();
 
 			System.out.println("camping carrrrrrrrrrr");
 			_mainView.revalidate();
@@ -139,5 +135,17 @@ public class CampingCarController {
 			
 		}
 		
+	}
+
+	private void setDataTableColumnName() {
+		Object column[] = {"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+		_campCarView.campingCarDefaultTable.setDataVector(null, column);
+	}
+	private void getDataTableValues() {
+		ArrayList<Object[]> arr = campCarModel.select(_mainView.getConn());
+		for (int i = 1; i < arr.size(); i++) {
+			_campCarView.campingCarDefaultTable.addRow(arr.get(i));
+		}
+
 	}
 }
