@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 abstract public class View extends JPanel {
     public DefaultTableModel tableModel;
@@ -14,8 +15,8 @@ abstract public class View extends JPanel {
     JScrollPane scrollPane;
     public JPanel updatePanel, buttonPanel;
     public JButton[] buttons;
-    public JLabel[] FieldName;
-    public JTextField[] InputField;
+    public JLabel[] fieldName;
+    public JTextField[] inputField;
 
     public View() {
         super.setLayout(new FlowLayout());
@@ -43,13 +44,14 @@ abstract public class View extends JPanel {
         updatePanel = new JPanel();
         updatePanel.setPreferredSize(new Dimension(780, 60));
         setInputFiledName();
-        for (int i = 0; i < FieldName.length; i++) {
-            updatePanel.add(FieldName[i]);
-            updatePanel.add(InputField[i]);
+        for (int i = 0; i < fieldName.length; i++) {
+            updatePanel.add(fieldName[i]);
+            updatePanel.add(inputField[i]);
         }
         add(updatePanel);
     }
 
+    //여기서 fielidName, InputField new하고 for문으로 이름설정해주기
     abstract public void setInputFiledName();
 
     public void initButtonPanel() {
@@ -62,6 +64,7 @@ abstract public class View extends JPanel {
         buttonPanel.setPreferredSize(new Dimension(780, 50));
     }
 
+    //btnInput, Delete 같은거 여기서 new하고 buttons배열에 넣어주기
     abstract public void setButtons();
 
     public void addButtonListener(ActionListener listener) {
@@ -69,9 +72,12 @@ abstract public class View extends JPanel {
             buttons[i].addActionListener(listener);
         }
     }
+    public void addMouseListener(MouseListener listener) {
+        DBResult.addMouseListener(listener);
+    }
 
     public void fieldReset() {
-        for (JTextField inputField : InputField) {
+        for (JTextField inputField : inputField) {
             inputField.setText("");
         }
         repaint();

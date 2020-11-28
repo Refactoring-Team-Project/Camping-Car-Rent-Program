@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import common.DbUtil;
 
-public class CampingCarModel {
+public class CampingCarModel extends Model {
 	int carid;
 	String carname;
 	int carno;

@@ -9,6 +9,8 @@ import view.View;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public abstract class Controller {
@@ -21,55 +23,39 @@ public abstract class Controller {
         setMainView();
         initModel();
         initView();
+        setColumnName();
     }
 
     public void setMainView() {
         this._mainView = AppManager.getInstance().getView();
-        //this._mainView.addButtonListener("", new listener);
+        //this._mainView.addButtonListener("", new MainButtonListener());
     }
 
     abstract public void initModel();
     abstract public void initView();
+    abstract public void setColumnName();
 
-    abstract public class ButtonListener implements ActionListener();
-
-    public void dataInsert() {
-        setModel();
-        Model.insert(_mainView.getConn());
-        thisView.fieldReset();
-    }
-
-    public void dataDelete() {
-        if (_mainView.getCurRow() != -1) {
-            dataModel.delete(_mainView.getConn(), thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-            thisView.fieldReset();
-        } else {
-            JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
-        }
-    }
-
-    public void dataUpdate() {
-        if(_mainView.getCurRow() != -1) {
-            setModel();
-            dataModel.update(_mainView.getConn(), thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-            thisView.fieldReset();
-        }
-
-        else JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
-    }
+    //abstract public class ButtonListener implements ActionListener {};
 
     public void setModel() {
-        for(int i = 0; i< thisView.InputField.length; i++) {
-            String value = thisView.InputField[i].getText();
+        for(int i = 0; i< thisView.inputField.length; i++) {
+            String value = thisView.inputField[i].getText();
             if(value.length() > 0) {
-                setModelColumn(thisView.FieldName[i].getText(), value);
+                setModelColumn(thisView.fieldName[i].getText(), value);
             }
             else throw new NullPointerException();
         }
     }
     abstract public void setModelColumn(String column, String value);
 
-    public class MainButtonListener implements ActionListener {
+    public class mainMouseListener extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            _mainView.setCurRow(thisView.DBResult.getSelectedRow());
+            _mainView.setCurCol(thisView.DBResult.getSelectedColumn());
+        }
+    }
+
+    public class mainButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -88,7 +74,7 @@ public abstract class Controller {
     }
     public void getDataTableValues() {
         ArrayList<Object[]> arr = dataModel.select(_mainView.getConn());
-        for (int i = 1; i < arr.size(); i++) {
+        for (int i = 0; i < arr.size(); i++) {
             thisView.tableModel.addRow(arr.get(i));
         }
 
