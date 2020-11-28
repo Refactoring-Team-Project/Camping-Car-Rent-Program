@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import common.AppManager;
+import common.Constants;
 import model.CarCheckModel;
 import model.CarRentModel;
 import view.MainView;
@@ -28,8 +29,11 @@ public class RentCarController {
 		carCheckModel = new CarCheckModel();
 		this._rentCarView.addButtonListener(new ButtonListener());
 		this._rentCarView.addMouseListener(new RentCarMouseListener());
-		this._mainView.addRentCarListener(new RentCarButtonListener());
+//		this._mainView.addRentCarListener(new RentCarButtonListener());
+		this._mainView.addAdminButtonListener(Constants.RENTCAR, new RentCarButtonListener());
+
 	}
+
 
 	private class ButtonListener implements ActionListener {
 

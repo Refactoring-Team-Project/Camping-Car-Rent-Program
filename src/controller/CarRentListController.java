@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import common.AppManager;
+import common.Constants;
 import model.CampingCarModel;
 import model.CarRentModel;
 import view.CarRentListView;
@@ -25,10 +26,11 @@ public class CarRentListController {
 		carRentModel = new CarRentModel();
 		this._carRentListView.addButtonListener(new ButtonListener());
 		this._carRentListView.addMouseListener(new CarRentListMouseListener());
-		this._mainView.addCarRentListListener(new CarRentListButtonListener());
-		this._mainView.addUserPriceSearch(new UserSearch1ButtonListener());
-		this._mainView.addUserManufacturingYearSearch(new UserSearch2ButtonListener());
-		this._mainView.addUserMileageSearch(new UserSearch3ButtonListener());
+
+		this._mainView.addUserButtonListener(Constants.RENTLIST, new CarRentListButtonListener());
+		this._mainView.addUserButtonListener(Constants.SEARCH1, new UserSearch1ButtonListener());
+		this._mainView.addUserButtonListener(Constants.SEARCH2,new UserSearch2ButtonListener());
+		this._mainView.addUserButtonListener(Constants.SEARCH3,new UserSearch3ButtonListener());
 	}
 
 

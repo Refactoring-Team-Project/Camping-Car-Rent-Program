@@ -25,7 +25,8 @@ public class RepairShopController {
 		repairShopModel = new RepairShopModel();
 		this._repairShopView.addButtonListener(new ButtonListener());
 		this._repairShopView.addMouseListener(new RepairShopMouseListener());
-		this._mainView.addRepairShopListener(new RepairShopButtonListener());
+//		this._mainView.addRepairShopListener(new RepairShopButtonListener());
+		this._mainView.addAdminButtonListener(Constants.REPAIRSHOP, new RepairShopButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {

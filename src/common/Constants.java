@@ -1,6 +1,28 @@
 package common;
 
+import javax.swing.*;
 public class Constants {
+
+    public static final String CAMPCOMP = "Camping_Company";
+    public static final String CAMPCAR = "Camping_Car";
+    public static final String CUSTOMER = "Rent_Customer";
+    public static final String REPAIRSHOP = "Repairshop";
+    public static final String RENTCAR = "Rent_Car";
+    public static final String CARCHECK = "Car_Check";
+    public static final String REPAIRLIST = "Repair_List";
+
+    public static final String RENTLIST = "Camping_Car(대여가능)";
+    public static final String SEARCH1 = "검색1";
+    public static final String SEARCH2 = "검색2";
+    public static final String SEARCH3 = "검색3";
+    public static final String SEARCH4 = "검색4";
+
+
+    public static final String[] ADMIN_BUTTON_NAME = {
+                 "Camping_Company", "Camping_Car", "Rent_Customer", "Repairshop", "Rent_Car", "Car_Check", "Repair_List", "검색1", "검색2", "검색3", "검색4" };
+
+    public static final String[] USER_BUTTON_NAME = {"Camping_Car(대여가능)", "검색1", "검색2", "검색3"};
+
     public static final String[] CAMPINGCAR_FIELDSTRING = { "carid", "carname", "carno", "seat", "manufacturer", "manu_year", "drivingdistance",
             "rentcost", "compid", "registdate" };
     public static final int[] CAMPINGCAR_FIELDLENGTH = { 3, 5, 3, 3, 10, 5, 7, 5, 3, 10 };
