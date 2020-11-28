@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import common.AppManager;
+import common.Constants;
 import model.CampingCompanyModel;
 import model.CarRentModel;
 import model.RentCustomerModel;
@@ -27,11 +28,12 @@ public class SearchController {
 		rentCustomerModel = new RentCustomerModel();
 		carRentModel = new CarRentModel();
 		repairShopModel = new RepairShopModel();
-		
-		this._mainView.addSearch1Listener(new Search1ButtonListener());
-		this._mainView.addAdminTop10CompanySearch(new Search2ButtonListener());
-		this._mainView.addAdminBlackCusRankSearch(new Search3ButtonListener());
-		this._mainView.addAdminRepairShopRankSearch(new Search4ButtonListener());
+
+		this._mainView.addAdminButtonListener(Constants.SEARCH1, new Search1ButtonListener());
+		this._mainView.addAdminButtonListener(Constants.SEARCH2, new Search1ButtonListener());
+		this._mainView.addAdminButtonListener(Constants.SEARCH3, new Search1ButtonListener());
+		this._mainView.addAdminButtonListener(Constants.SEARCH4, new Search1ButtonListener());
+
 	}
 	
 	

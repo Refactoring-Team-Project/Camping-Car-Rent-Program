@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import common.AppManager;
+import common.Constants;
 import model.CarCheckModel;
 import model.RepairListModel;
 import view.CarCheckView;
@@ -28,7 +29,8 @@ public class CarCheckController {
 		repListModel = new RepairListModel();
 		this._carChkView.addButtonListener(new ButtonListener());
 		this._carChkView.addMouseListener(new CarCheckMouseListener());
-		this._mainView.addCarChkListener(new CarCheckButtonListener());
+//		this._mainView.addCarChkListener(new CarCheckButtonListener());
+		this._mainView.addAdminButtonListener(Constants.CARCHECK, new CarCheckButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import common.AppManager;
+import common.Constants;
 import model.CampingCompanyModel;
 import view.CampingCompanyView;
 import view.MainView;
@@ -21,7 +22,8 @@ public class CampingCompanyController {
 		campCompModel = new CampingCompanyModel();
 		this._campCompView.addMouseListener(new CampingCompanyMouseListener());
 		this._campCompView.addButtonListener(new ButtonListener());
-		this._mainView.addCampCompListener(new CampingCompanyButtonListener());
+
+		this._mainView.addAdminButtonListener(Constants.CAMPCOMP, new CampingCompanyButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {

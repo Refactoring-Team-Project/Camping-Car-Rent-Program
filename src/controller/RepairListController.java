@@ -23,7 +23,8 @@ public class RepairListController {
 		repairListModel = new RepairListModel();
 		this._repairListView.addButtonListener(new ButtonListener());
 		this._repairListView.addMouseListener(new RepairListMouseListener());
-		this._mainView.addRepairListListener(new RepairListButtonListener());
+//		this._mainView.addRepairListListener(new RepairListButtonListener());
+		this._mainView.addAdminButtonListener(Constants.REPAIRLIST, new RepairListButtonListener());
 	}
 
 	private class ButtonListener implements ActionListener {

@@ -22,7 +22,9 @@ public class CampingCarController {
 		campCarModel = new CampingCarModel();
 		this._campCarView.addButtonListener(new ButtonListener());
 		this._campCarView.addMouseListener(new CampCarMouseListener());
-		this._mainView.addCampCarListener(new CampingCarButtonListener());
+//		this._mainView.addCampCarListener(new CampingCarButtonListener());
+		this._mainView.addAdminButtonListener(Constants.CAMPCAR, new CampingCarButtonListener());
+
 	}
 
 

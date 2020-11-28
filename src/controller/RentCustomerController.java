@@ -25,7 +25,9 @@ public class RentCustomerController {
 		rentCustModel = new RentCustomerModel();
 		this._rentCustView.addButtonListener(new ButtonListener());
 		this._rentCustView.addMouseListener(new RentCustomerMouseListener());
-		this._mainView.addRentCustListener(new RentCustomerButtonListener());
+//		this._mainView.addRentCustListener(new RentCustomerButtonListener());
+		this._mainView.addAdminButtonListener(Constants.CUSTOMER, new RentCustomerButtonListener());
+
 	}
 
 	private class ButtonListener implements ActionListener {
