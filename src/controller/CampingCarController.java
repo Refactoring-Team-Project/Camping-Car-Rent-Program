@@ -17,15 +17,24 @@ public class CampingCarController {
 	private CampingCarModel campCarModel;
 	
 	public CampingCarController() {
-		this._mainView = AppManager.getInstance().getView();
-		this._campCarView = AppManager.getInstance().getCampingCarView();
-		campCarModel = new CampingCarModel();
-		this._campCarView.addButtonListener(new ButtonListener());
-		this._campCarView.addMouseListener(new CampCarMouseListener());
-		this._mainView.addCampCarListener(new CampingCarButtonListener());
+		setMainView();
+		initModel();
+		initView();
 	}
 
+	private void setMainView() {
+		this._mainView = AppManager.getInstance().getView();
+		this._mainView.addCampCarListener(new CampingCarButtonListener());
+	}
+	private void initModel() {
+		campCarModel = new CampingCarModel();
+	}
 
+	private void initView() {
+		this._campCarView = AppManager.getInstance().getCampingCarView();
+		this._campCarView.addButtonListener(new ButtonListener());
+		this._campCarView.addMouseListener(new CampCarMouseListener());
+	}
 	private class ButtonListener implements ActionListener {
 
 		@Override
