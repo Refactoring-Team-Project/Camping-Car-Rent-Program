@@ -15,19 +15,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
+import common.Constants;
 
 public class CampingCarView extends JPanel {
 
 	public DefaultTableModel campingCarDefaultTable;
-	public JTable dbResult;
-	JScrollPane scrollPane;
+	public JTable campingCarDBResult;
+	JScrollPane campingCarScrollPane;
 	public JPanel updatePanel, buttonPanel;
 	public JButton btnInput, btnDelete, btnUpdate;
-	JLabel[] labels;
-	public JTextField[] tf;
-	public String[] fieldString = { "carid", "carname", "carno", "seat", "manufacturer", "manu_year", "drivingdistance",
-			"rentcost", "compid", "registdate" };
-	public int[] fieldSize = { 3, 5, 3, 3, 10, 5, 7, 5, 3, 10 };
+	JLabel[] campingCarFieldName;
+	public JTextField[] campingCarInputField;
 
 	public CampingCarView() {
 		super.setLayout(new FlowLayout());
@@ -47,30 +45,29 @@ public class CampingCarView extends JPanel {
 			}
 		};
 
-		dbResult = new JTable(campingCarDefaultTable);
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		campingCarDBResult = new JTable(campingCarDefaultTable);
+		campingCarDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(780, 300));
+		campingCarScrollPane = new JScrollPane(campingCarDBResult);
+		add(campingCarScrollPane);
+		campingCarScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
 
-		labels = new JLabel[10];
-		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(fieldString[i]);
+		campingCarFieldName = new JLabel[Constants.CAMPINGCAR_FIELDNUM];
+		campingCarInputField = new JTextField[Constants.CAMPINGCAR_FIELDNUM];
+
+		for (int i = 0; i < Constants.CAMPINGCAR_FIELDNUM; i++) {
+			campingCarFieldName[i] = new JLabel(Constants.CAMPINGCAR_FIELDSTRING[i]);
+			campingCarInputField[i] = new JTextField(Constants.CAMPINGCAR_FIELDLENGTH[i]);
 		}
 
-		tf = new JTextField[10];
-		for (int i = 0; i < tf.length; i++) {
-			tf[i] = new JTextField(fieldSize[i]);
-		}
 
-		for (int i = 0; i < 10; i++) {
-			updatePanel.add(labels[i]);
-			updatePanel.add(tf[i]);
+		for (int i = 0; i < Constants.CAMPINGCAR_FIELDNUM; i++) {
+			updatePanel.add(campingCarFieldName[i]);
+			updatePanel.add(campingCarInputField[i]);
 		}
 
 		add(updatePanel);
@@ -99,12 +96,12 @@ public class CampingCarView extends JPanel {
 	}
 
 	public void addMouseListener(MouseListener listener) {
-		dbResult.addMouseListener(listener);
+		campingCarDBResult.addMouseListener(listener);
 	}
 
 	public void fieldReset() {
-		for (JTextField t : tf) {
-			t.setText("");
+		for (JTextField inputField : campingCarInputField) {
+			inputField.setText("");
 		}
 		repaint();
 	}

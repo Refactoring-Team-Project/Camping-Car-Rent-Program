@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import common.AppManager;
+import common.Constants;
 import model.CampingCarModel;
 import view.CampingCarView;
 import view.MainView;
@@ -31,10 +32,10 @@ public class CampingCarController {
 			try {
 				if (e.getSource() == _campCarView.btnInput)
 				{
-					for(int i=0;i<_campCarView.tf.length; i++) {
-						String value = _campCarView.tf[i].getText();
+					for(int i = 0; i< Constants.CAMPINGCAR_FIELDNUM; i++) {
+						String value = _campCarView.campingCarInputField[i].getText();
 						if(value.length() > 0) {
-							setModel(_campCarView.fieldString[i], value);
+							setModel(Constants.CAMPINGCAR_FIELDSTRING[i], value);
 						}
 						else throw new NullPointerException();
 					}
@@ -45,7 +46,7 @@ public class CampingCarController {
 				else if (e.getSource() == _campCarView.btnDelete)
 				{
 					if (_mainView.getCurRow() != -1) {
-						campCarModel.delete(_mainView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCarModel.delete(_mainView.getConn(), _campCarView.campingCarDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCarView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
@@ -55,15 +56,15 @@ public class CampingCarController {
 				{
 					if(_mainView.getCurRow() != -1) {
 
-						for(int i=0;i<_campCarView.tf.length; i++) {
-							String value = _campCarView.tf[i].getText();
+						for(int i=0;i<Constants.CAMPINGCAR_FIELDNUM; i++) {
+							String value = _campCarView.campingCarInputField[i].getText();
 							if(value.length() > 0) {
-								setModel(_campCarView.fieldString[i], value);
+								setModel(Constants.CAMPINGCAR_FIELDSTRING[i], value);
 							}
 							else throw new NullPointerException();
 						}
 
-						campCarModel.update(_mainView.getConn(), _campCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campCarModel.update(_mainView.getConn(), _campCarView.campingCarDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_campCarView.fieldReset();
 					}
 					
@@ -112,8 +113,8 @@ public class CampingCarController {
 	}
 	private class CampCarMouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_campCarView.dbResult.getSelectedRow());
-			_mainView.setCurCol(_campCarView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_campCarView.campingCarDBResult.getSelectedRow());
+			_mainView.setCurCol(_campCarView.campingCarDBResult.getSelectedColumn());
 		}
 	}
 	
