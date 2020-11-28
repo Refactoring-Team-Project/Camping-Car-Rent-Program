@@ -15,18 +15,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
+import common.Constants;
 
 public class RentCustomerView extends JPanel {
 
 	public DefaultTableModel rentCustomerDefaultTable;
-	public JTable dbResult;
-	JScrollPane scrollPane;
+	public JTable rentCustomerDBResult;
+	JScrollPane rentCustomerScrollPane;
 	public JPanel updatePanel, buttonPanel;
 	public JButton btnInput, btnDelete, btnUpdate;
-	JLabel[] labels;
-	public JTextField[] tf;
-	public String[] fieldString = { "license_no", "name", "address", "phone", "email" };
-	public int[] fieldSize = { 3, 7, 10, 10, 10 };
+	JLabel[] rentCustomerFieldName;
+	public JTextField[] rentCustomerInputField;
+
 
 	public RentCustomerView() {
 		super.setLayout(new FlowLayout());
@@ -46,34 +46,30 @@ public class RentCustomerView extends JPanel {
 			}
 		};
 
-		dbResult = new JTable(rentCustomerDefaultTable);
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		rentCustomerDBResult = new JTable(rentCustomerDefaultTable);
+		rentCustomerDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(780, 300));
+		rentCustomerScrollPane = new JScrollPane(rentCustomerDBResult);
+		add(rentCustomerScrollPane);
+		rentCustomerScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
+		updatePanel.setPreferredSize(new Dimension(780, 60));
 
-		labels = new JLabel[5];
-		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(fieldString[i]);
-		}
+		rentCustomerFieldName = new JLabel[Constants.RENTCUSTOMER_FIELDNUM];
+		rentCustomerInputField = new JTextField[Constants.RENTCUSTOMER_FIELDNUM];
 
-		tf = new JTextField[5];
-		for (int i = 0; i < tf.length; i++) {
-			tf[i] = new JTextField(fieldSize[i]);
-		}
+		for (int i = 0; i < Constants.RENTCUSTOMER_FIELDNUM; i++) {
+			rentCustomerFieldName[i] = new JLabel(Constants.RENTCUSTOMER_FIELDSTIRNG[i]);
+			updatePanel.add(rentCustomerFieldName[i]);
 
-		for (int i = 0; i < 5; i++) {
-			updatePanel.add(labels[i]);
-			updatePanel.add(tf[i]);
+			rentCustomerInputField[i] = new JTextField(Constants.RENTCUSTOMER_FIELDLENGTH[i]);
+			updatePanel.add(rentCustomerInputField[i]);
 		}
 
 		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
 	public void initButtonPanel() {
@@ -93,7 +89,7 @@ public class RentCustomerView extends JPanel {
 	}
 
 	public void addMouseListener(MouseListener listener) {
-		dbResult.addMouseListener(listener);
+		rentCustomerDBResult.addMouseListener(listener);
 	}
 
 	public void addButtonListener(ActionListener listener) {
@@ -103,8 +99,8 @@ public class RentCustomerView extends JPanel {
 	}
 
 	public void fieldReset() {
-		for (JTextField t : tf) {
-			t.setText("");
+		for (JTextField inputField : rentCustomerInputField) {
+			inputField.setText("");
 		}
 		repaint();
 	}

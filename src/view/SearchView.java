@@ -18,34 +18,28 @@ import common.AppManager;
 
 public class SearchView extends JPanel{
 
-	public DefaultTableModel model;
-	public JTable dbResult;
-	JScrollPane scrollPane;
-	int curRow=-1, curCol=-1;
-	   
-	Connection _conn;
-	Statement stmt; //select
-	PreparedStatement pstmt; //insert, delete
-	ResultSet rs; 
-	   
+	public DefaultTableModel searchDefaultTable;
+	public JTable searchDBResult;
+	JScrollPane searchScrollPane;
+
 	public SearchView() {
 		super.setLayout(new FlowLayout()); 
 		setPreferredSize(new Dimension(780, 420));
 		AppManager.getInstance().setSearchView(this);
-		
-		model = new DefaultTableModel() {
+
+		searchDefaultTable = new DefaultTableModel() {
 	         public boolean isCellEditable(int row, int column) {
 	            return false;
 	         }
 	      };
-		dbResult = new JTable(model);
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		
-	      
-	      scrollPane.setPreferredSize(new Dimension(780, 300));
-	      
-	      dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		searchDBResult = new JTable(searchDefaultTable);
+		searchScrollPane = new JScrollPane(searchDBResult);
+		add(searchScrollPane);
+
+
+		searchScrollPane.setPreferredSize(new Dimension(780, 300));
+
+		searchDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	      // mouseListener 처리하기
 	}
 	

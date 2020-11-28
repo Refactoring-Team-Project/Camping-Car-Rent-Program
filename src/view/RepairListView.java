@@ -15,28 +15,24 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
-// 라벨, 텍스트필드 변수명 변경
+import common.Constants;
+
 public class RepairListView extends JPanel {
 
-	private MainView _mainView;
-	public DefaultTableModel repairListModel;
-	public JTable repairListdbResult;
+	public DefaultTableModel repairListDefaultTable;
+	public JTable repairListDBResult;
 	JScrollPane repairListScrollPane;
-	JPanel repairListUpdatePanel, repairListButtonPanel;
-	public JButton repairListbtnDelete, repairListbtnUpdate;
-	JLabel[] repairListlabels;
-	public JTextField[] repairListTextField;
-	public String[] fieldString = {"repairno", "carid", "shopid", "compid", "license_no", "repairdetails", "repairdate",
-									"repaircost", "paymentdeadline", "repairhistory"};
-	public int[] fieldSize = {3, 3, 3, 3, 3, 10, 5, 3, 5, 10};
+	JPanel updatePanel, buttonPanel;
+	public JButton btnDelete, btnUpdate;
+	JLabel[] repairListFieldName;
+	public JTextField[] repairListInputField;
+
 
 	public RepairListView() {
 		super.setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(780, 420));
 
 		AppManager.getInstance().setRepairListView(this);
-		_mainView = AppManager.getInstance().getView();
-
 
 		initScrollPane();
 		initUpdatePanel();
@@ -44,77 +40,68 @@ public class RepairListView extends JPanel {
 
 	}
 	public void initUpdatePanel() {
-		repairListUpdatePanel = new JPanel();
+		updatePanel = new JPanel();
 
-		repairListlabels = new JLabel[10];
-		for (int i = 0; i < repairListlabels.length; i++) {
-			repairListlabels[i] = new JLabel(fieldString[i]);
+		repairListFieldName = new JLabel[Constants.REPAIRLIST_FIELDNUM];
+		repairListInputField = new JTextField[Constants.REPAIRLIST_FIELDNUM];
 
+		for (int i = 0; i < Constants.REPAIRLIST_FIELDNUM; i++) {
+			repairListFieldName[i] = new JLabel(Constants.REPAIRLIST_FIELDSTIRNG[i]);
+			updatePanel.add(repairListFieldName[i]);
+
+			repairListInputField[i] = new JTextField("", Constants.REPAIRLIST_FIELDLENGTH[i]);
+			updatePanel.add(repairListInputField[i]);
 		}
 
-		repairListTextField = new JTextField[10];
-
-		for (int i = 0; i < repairListTextField.length; i++) {
-			repairListTextField[i] = new JTextField("", fieldSize[i]);
-
-		}
-
-		for (int i = 0; i < 10; i++) {
-			repairListUpdatePanel.add(repairListlabels[i]);
-			repairListUpdatePanel.add(repairListTextField[i]);
-		}
 		for(int i = 0; i < 5; i++) {
-			repairListTextField[i].setEnabled(false);
-
+			repairListInputField[i].setEnabled(false);
 		}
 
-		add(repairListUpdatePanel);
-		repairListUpdatePanel.setPreferredSize(new Dimension(780, 60));
+		add(updatePanel);
+		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
 	public void initScrollPane() {
-		repairListModel = new DefaultTableModel() {
+		repairListDefaultTable = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		repairListdbResult = new JTable(repairListModel);
-		repairListdbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		repairListScrollPane = new JScrollPane(repairListdbResult);
-
-
+		repairListDBResult = new JTable(repairListDefaultTable);
+		repairListDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		repairListScrollPane = new JScrollPane(repairListDBResult);
 
 		add(repairListScrollPane);
 		repairListScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initButtonPanel() {
-		repairListButtonPanel = new JPanel();
+		buttonPanel = new JPanel();
 
-		repairListbtnDelete = new JButton("삭제");
-		repairListbtnUpdate = new JButton("변경");
+		btnDelete = new JButton("삭제");
+		btnUpdate = new JButton("변경");
 
-		repairListButtonPanel.add(repairListbtnDelete);
-		repairListButtonPanel.add(repairListbtnUpdate);
+		buttonPanel.add(btnDelete);
+		buttonPanel.add(btnUpdate);
 
-		add(repairListButtonPanel);
+		add(buttonPanel);
 
-		repairListButtonPanel.setPreferredSize(new Dimension(780, 50));
+		buttonPanel.setPreferredSize(new Dimension(780, 50));
 	}
 
 
 	public void addButtonListener(ActionListener listener) {
-		repairListbtnDelete.addActionListener(listener);
-		repairListbtnUpdate.addActionListener(listener);
+		btnDelete.addActionListener(listener);
+		btnUpdate.addActionListener(listener);
 	}
 
 	public void addMouseListener(MouseListener listener) {
-		repairListdbResult.addMouseListener(listener);
+		repairListDBResult.addMouseListener(listener);
 	}
 
 	public void fieldReset() {
-		for (JTextField t : repairListTextField) {
-			t.setText("");
+		for (JTextField inputField : repairListInputField) {
+			inputField.setText("");
 		}
 		repaint();
 	}

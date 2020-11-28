@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import common.AppManager;
+import common.Constants;
 import model.RentCustomerModel;
 import view.MainView;
 import view.RentCustomerView;
@@ -33,22 +34,22 @@ public class RentCustomerController {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				if (e.getSource() == _rentCustView.btnInput) {
-					if (_rentCustView.tf[0].getText().length() > 0) {
-						rentCustModel.setLicense_no(Integer.parseInt(_rentCustView.tf[0].getText()));
+					if (_rentCustView.rentCustomerInputField[0].getText().length() > 0) {
+						rentCustModel.setLicense_no(Integer.parseInt(_rentCustView.rentCustomerInputField[0].getText()));
 					} else
 						throw new NullPointerException();
 
-					if (_rentCustView.tf[1].getText().length() > 0) {
-						rentCustModel.setName(_rentCustView.tf[1].getText());
+					if (_rentCustView.rentCustomerInputField[1].getText().length() > 0) {
+						rentCustModel.setName(_rentCustView.rentCustomerInputField[1].getText());
 					}
-					if (_rentCustView.tf[2].getText().length() > 0) {
-						rentCustModel.setAddress(_rentCustView.tf[2].getText());
+					if (_rentCustView.rentCustomerInputField[2].getText().length() > 0) {
+						rentCustModel.setAddress(_rentCustView.rentCustomerInputField[2].getText());
 					}
-					if (_rentCustView.tf[3].getText().length() > 0) {
-						rentCustModel.setPhone(_rentCustView.tf[3].getText());
+					if (_rentCustView.rentCustomerInputField[3].getText().length() > 0) {
+						rentCustModel.setPhone(_rentCustView.rentCustomerInputField[3].getText());
 					}
-					if (_rentCustView.tf[4].getText().length() > 0) {
-						rentCustModel.setEmail(_rentCustView.tf[4].getText());
+					if (_rentCustView.rentCustomerInputField[4].getText().length() > 0) {
+						rentCustModel.setEmail(_rentCustView.rentCustomerInputField[4].getText());
 					}
 
 					rentCustModel.insert(_mainView.getConn());
@@ -58,32 +59,32 @@ public class RentCustomerController {
 				else if (e.getSource() == _rentCustView.btnDelete) {
 					if (_mainView.getCurRow() != -1) {
 						rentCustModel.delete(_mainView.getConn(),
-								_rentCustView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+								_rentCustView.rentCustomerDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_rentCustView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 
 				} else if (e.getSource() == _rentCustView.btnUpdate) {
 					if (_mainView.getCurRow() != -1) {
-						if (_rentCustView.tf[0].getText().length() > 0) {
-							rentCustModel.setLicense_no(Integer.parseInt(_rentCustView.tf[0].getText()));
+						if (_rentCustView.rentCustomerInputField[0].getText().length() > 0) {
+							rentCustModel.setLicense_no(Integer.parseInt(_rentCustView.rentCustomerInputField[0].getText()));
 						} else
 							throw new NullPointerException();
 
-						if (_rentCustView.tf[1].getText().length() > 0) {
-							rentCustModel.setName(_rentCustView.tf[1].getText());
+						if (_rentCustView.rentCustomerInputField[1].getText().length() > 0) {
+							rentCustModel.setName(_rentCustView.rentCustomerInputField[1].getText());
 						}
-						if (_rentCustView.tf[2].getText().length() > 0) {
-							rentCustModel.setAddress(_rentCustView.tf[2].getText());
+						if (_rentCustView.rentCustomerInputField[2].getText().length() > 0) {
+							rentCustModel.setAddress(_rentCustView.rentCustomerInputField[2].getText());
 						}
-						if (_rentCustView.tf[3].getText().length() > 0) {
-							rentCustModel.setPhone(_rentCustView.tf[3].getText());
+						if (_rentCustView.rentCustomerInputField[3].getText().length() > 0) {
+							rentCustModel.setPhone(_rentCustView.rentCustomerInputField[3].getText());
 						}
-						if (_rentCustView.tf[4].getText().length() > 0) {
-							rentCustModel.setEmail(_rentCustView.tf[4].getText());
+						if (_rentCustView.rentCustomerInputField[4].getText().length() > 0) {
+							rentCustModel.setEmail(_rentCustView.rentCustomerInputField[4].getText());
 						}
 						rentCustModel.update(_mainView.getConn(),
-								_rentCustView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+								_rentCustView.rentCustomerDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						_rentCustView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
@@ -100,8 +101,8 @@ public class RentCustomerController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_rentCustView.dbResult.getSelectedRow());
-			_mainView.setCurCol(_rentCustView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_rentCustView.rentCustomerDBResult.getSelectedRow());
+			_mainView.setCurCol(_rentCustView.rentCustomerDBResult.getSelectedColumn());
 		}
 
 	}

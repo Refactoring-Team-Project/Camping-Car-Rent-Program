@@ -49,9 +49,9 @@ public class SearchController {
 			Object column[] = { "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
 					"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
 			arr.add(0, column);
-			if(arr.size() != 0) _searchView.model.setDataVector(null, arr.get(0));
+			if(arr.size() != 0) _searchView.searchDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_searchView.model.addRow(arr.get(i));
+				_searchView.searchDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("search1");
 			_mainView.revalidate();
@@ -71,9 +71,9 @@ public class SearchController {
 			ArrayList<Object[]> arr = campCompModel.search2(_mainView.getConn());
 			Object column[] = {"COMP ID", "COMP NAME", "TOTAL RENTAL COUNT"};
 			arr.add(0, column);
-			_searchView.model.setDataVector(null, arr.get(0));
+			_searchView.searchDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_searchView.model.addRow(arr.get(i));
+				_searchView.searchDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("search2");
 			_mainView.revalidate();
@@ -93,9 +93,9 @@ public class SearchController {
 			ArrayList<Object[]> arr = rentCustomerModel.search3(_mainView.getConn());
 			Object column[] = {"NAME", "LICENSE NO", "TOTAL RENTAL COUNT", "REPAIR COUNT"};
 			arr.add(0, column);
-			_searchView.model.setDataVector(null, arr.get(0));
+			_searchView.searchDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_searchView.model.addRow(arr.get(i));
+				_searchView.searchDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("search3");
 			_mainView.revalidate();
@@ -115,9 +115,9 @@ public class SearchController {
 			ArrayList<Object[]> arr = repairShopModel.search4(_mainView.getConn());
 			Object column[] = {"SHOP ID", "SHOP NAME", "INCOME"};
 			arr.add(0, column);
-			_searchView.model.setDataVector(null, arr.get(0));
+			_searchView.searchDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_searchView.model.addRow(arr.get(i));
+				_searchView.searchDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("search4");
 			_mainView.revalidate();

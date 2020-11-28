@@ -15,18 +15,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
+import common.Constants;
 
 public class RepairShopView extends JPanel {
 
 	public DefaultTableModel repairShopDefaultTable;
-	public JTable dbResult;
-	JScrollPane scrollPane;
+	public JTable repairShopDBResult;
+	JScrollPane repairShopScrollPane;
 	JPanel updatePanel, buttonPanel;
 	public JButton btnInput, btnDelete, btnUpdate;
-	JLabel[] labels;
-	public JTextField[] tf;
-	public String[] fieldString = { "shopid", "shopname", "address", "phone", "manager_name", "manager_email" };
-	public int[] fieldSize = { 3, 5, 10, 10, 7, 10 };
+	JLabel[] repairShopFieldName;
+	public JTextField[] repairShopInputField;
 
 	public RepairShopView() {
 		super.setLayout(new FlowLayout());
@@ -46,30 +45,26 @@ public class RepairShopView extends JPanel {
 			}
 		};
 
-		dbResult = new JTable(repairShopDefaultTable);
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		repairShopDBResult = new JTable(repairShopDefaultTable);
+		repairShopDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(780, 300));
+		repairShopScrollPane = new JScrollPane(repairShopDBResult);
+		add(repairShopScrollPane);
+		repairShopScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
 
-		labels = new JLabel[6];
-		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(fieldString[i]);
-		}
+		repairShopFieldName = new JLabel[Constants.REPAIRSHOP_FIELDNUM];
+		repairShopInputField = new JTextField[Constants.REPAIRSHOP_FIELDNUM];
 
-		tf = new JTextField[6];
-		for (int i = 0; i < tf.length; i++) {
-			tf[i] = new JTextField(fieldSize[i]);
-		}
+		for (int i = 0; i < Constants.REPAIRSHOP_FIELDNUM; i++) {
+			repairShopFieldName[i] = new JLabel(Constants.REPAIRSHOP_FIELDSTIRNG[i]);
+			updatePanel.add(repairShopFieldName[i]);
 
-		for (int i = 0; i < 6; i++) {
-			updatePanel.add(labels[i]);
-			updatePanel.add(tf[i]);
+			repairShopInputField[i] = new JTextField(Constants.REPAIRSHOP_FIELDLENGTH[i]);
+			updatePanel.add(repairShopInputField[i]);
 		}
 
 		add(updatePanel);
@@ -92,7 +87,7 @@ public class RepairShopView extends JPanel {
 	}
 
 	public void addMouseListener(MouseListener listener) {
-		dbResult.addMouseListener(listener);
+		repairShopDBResult.addMouseListener(listener);
 	}
 
 	public void addButtonListener(ActionListener listener) {
@@ -102,8 +97,8 @@ public class RepairShopView extends JPanel {
 	}
 
 	public void fieldReset() {
-		for (JTextField t : tf) {
-			t.setText("");
+		for (JTextField inputField : repairShopInputField) {
+			inputField.setText("");
 		}
 		repaint();
 	}
