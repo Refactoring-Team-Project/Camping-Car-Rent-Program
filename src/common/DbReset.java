@@ -184,21 +184,21 @@ public class DbReset {
         Statement stmt;
         ArrayList<String> sql = new ArrayList<String>();
 
-        sql.add("insert into camping_company value(1,\"abc컴퍼니\",\"서울특별시 강서구 염창동\",\"010-1234-0987\",\"김진아\",\"jina@naver.com\");");
-        sql.add("insert into camping_company value(2,\"뉴에이지\",\"인천광역시 연수구 송도동\",\"010-4322-2354\",\"이우진\",\"woojin@naver.com\");");
-        sql.add("insert into camping_company value(3,\"paper컴퍼니\",\"경기도 프라하시\",\"010-2134-2343\",\"김이나\",\"inna@naver.com\");");
-        sql.add("insert into camping_company value(4,\"콜미컴퍼니\",\"경기도 수원시\",\"010-3426-8754\",\"송주우\",\"juwo@naver.com\");");
-        sql.add("insert into camping_company value(5,\"뉴원컴퍼니\",\"제주특별시 제주동\",\"010-1237-4367\",\"안지아\",\"jia@naver.com\");");
-        sql.add("insert into camping_company value(6,\"무사고컴퍼니\",\"대전광역시 노잼동\",\"010-2148-6534\",\"오아나\",\"ana@naver.com\");");
-        sql.add("insert into camping_company value(7,\"사랑컴퍼니\",\"강원도 삼척시 동춘동\",\"010-2363-3126\",\"주비\",\"rain@yahoo.com\");");
-        sql.add("insert into camping_company value(8,\"제주렌트\",\"강원도 춘천시 잠실동\",\"010-2354-2342\",\"마성민\",\"sungmin@gmail.com\");");
-        sql.add("insert into camping_company value(9,\"블라디컴퍼니\",\"서울특별시 광진구 세종동\",\"010-2137-3478\",\"서지아\",\"jia123@naver.com\");");
-        sql.add("insert into camping_company value(10,\"오호렌트\",\"서울특별시 강남동 건대동\",\"010-2138-4326\",\"임하리\",\"hari@naver.com\");");
-        sql.add("insert into camping_company value(11,\"주지컴퍼니\",\"부산광역시 해운대구\",\"010-8738-4347\",\"주우주\",\"blackhole@naver.com\");");
-        sql.add("insert into camping_company value(12,\"아에렌트\",\"부산광역시 목포구\",\"010-1238-5643\",\"이진아\",\"jinna@gmail.com\");");
-        sql.add("insert into camping_company value(13,\"오이렌트\",\"서울특별시 뉴욕구\",\"010-6574-2346\",\"김성훈\",\"sunghun1998@naver.com\");");
-        sql.add("insert into camping_company value(14,\"원츄렌트\",\"서울특별시 캘리포니아주\",\"010-3246-2745\",\"김효경\",\"hyo@naver.com\");");
-        sql.add("insert into camping_company value(15,\"추노렌트\",\"인천광역시 말리부동\",\"010-2316-1235\",\"이우식\",\"sik@naver.com\");");
+        sql.add("insert into camping_company values(1,\"abc컴퍼니\",\"서울특별시 강서구 염창동\",\"010-1234-0987\",\"김진아\",\"jina@naver.com\");");
+        sql.add("insert into camping_company values(2,\"뉴에이지\",\"인천광역시 연수구 송도동\",\"010-4322-2354\",\"이우진\",\"woojin@naver.com\");");
+        sql.add("insert into camping_company values(3,\"paper컴퍼니\",\"경기도 프라하시\",\"010-2134-2343\",\"김이나\",\"inna@naver.com\");");
+        sql.add("insert into camping_company values(4,\"콜미컴퍼니\",\"경기도 수원시\",\"010-3426-8754\",\"송주우\",\"juwo@naver.com\");");
+        sql.add("insert into camping_company values(5,\"뉴원컴퍼니\",\"제주특별시 제주동\",\"010-1237-4367\",\"안지아\",\"jia@naver.com\");");
+        sql.add("insert into camping_company values(6,\"무사고컴퍼니\",\"대전광역시 노잼동\",\"010-2148-6534\",\"오아나\",\"ana@naver.com\");");
+        sql.add("insert into camping_company values(7,\"사랑컴퍼니\",\"강원도 삼척시 동춘동\",\"010-2363-3126\",\"주비\",\"rain@yahoo.com\");");
+        sql.add("insert into camping_company values(8,\"제주렌트\",\"강원도 춘천시 잠실동\",\"010-2354-2342\",\"마성민\",\"sungmin@gmail.com\");");
+        sql.add("insert into camping_company values(9,\"블라디컴퍼니\",\"서울특별시 광진구 세종동\",\"010-2137-3478\",\"서지아\",\"jia123@naver.com\");");
+        sql.add("insert into camping_company values(10,\"오호렌트\",\"서울특별시 강남동 건대동\",\"010-2138-4326\",\"임하리\",\"hari@naver.com\");");
+        sql.add("insert into camping_company values(11,\"주지컴퍼니\",\"부산광역시 해운대구\",\"010-8738-4347\",\"주우주\",\"blackhole@naver.com\");");
+        sql.add("insert into camping_company values(12,\"아에렌트\",\"부산광역시 목포구\",\"010-1238-5643\",\"이진아\",\"jinna@gmail.com\");");
+        sql.add("insert into camping_company values(13,\"오이렌트\",\"서울특별시 뉴욕구\",\"010-6574-2346\",\"김성훈\",\"sunghun1998@naver.com\");");
+        sql.add("insert into camping_company values(14,\"원츄렌트\",\"서울특별시 캘리포니아주\",\"010-3246-2745\",\"김효경\",\"hyo@naver.com\");");
+        sql.add("insert into camping_company values(15,\"추노렌트\",\"인천광역시 말리부동\",\"010-2316-1235\",\"이우식\",\"sik@naver.com\");");
 
         sql.add("INSERT INTO camping_company VALUES (16, '김캠핑카', '서울시 노원구', '02-5463-5234', '김김김', 'kim@camp.com')");
         sql.add("INSERT INTO camping_company VALUES (17, '님캠핑카', '서울시 용산구', '02-8788-5287', '님님님', 'nim@camp.com')");
@@ -215,6 +215,22 @@ public class DbReset {
         sql.add("INSERT INTO camping_company VALUES (28, '핌캠핑카', '서울시 강동구', '02-3078-5621', '핌핌핌', 'fim@camp.com')");
         sql.add("INSERT INTO camping_company VALUES (29, '힘캠핑카', '서울시 강남구', '02-4560-4520', '힘힘힘', 'him@camp.com')");
         sql.add("INSERT INTO camping_company VALUES (30, '금캠핑카', '서울시 은평구', '02-4560-7800', '금금금', 'km@camp.com')");
+
+        sql.add("insert into camping_company values(31, '포레스트 캠핑카', '서울 노원구', '02-933-0000', '김민수', 'minsu@naver.com');");
+        sql.add("insert into camping_company values(32, '그린 캠핑카', '서울 중랑구', '02-936-0000', '박정현', 'parkjh@gmail.com');");
+        sql.add("insert into camping_company values(33, '플레이 캠핑카', '경기 의정부시', '031-222-3333', '이승현', 'seunghyunlee@hanmail.net');");
+        sql.add("insert into camping_company values(34, '투게더 캠핑카', '인천 남동구', '032-333-4444', '최나라', 'choiworld@naver.com');");
+        sql.add("insert into camping_company values(35, '행복 캠핑카', '서울 강남구', '02-999-8888', '안성현', 'Annnsh@naver.com');");
+        sql.add("insert into camping_company values(36, '케이원 캠핑카', '경기 남양주시', '031-932-7777', '이수빈', 'subini@gmail.com');");
+        sql.add("insert into camping_company values(37, '피크닉 캠핑카', '서울 강서구 ', '02-936-2323', '조재관', 'jkcho@naver.com');");
+        sql.add("insert into camping_company values(38, '파스텔 캠핑카', '인천 미추홀구', '032-222-1111', '이승준', 'junjuly@gmail.com');");
+        sql.add("insert into camping_company values(39, ' 스타캠핑카', '경기 수원시 ', '031-111-2222', '박보검', 'bobo123@gmail.com');");
+        sql.add("insert into camping_company values(40, '투어 캠핑카', '대구 달서구', '053-000-5555', '이동건', 'twodong@hanmail.net');");
+        sql.add("insert into camping_company values(41, '아폴로 캠핑카', '충청남도 천안시', '041-222-3333', '공지철', 'gongong@gmail.com');");
+        sql.add("insert into camping_company values(42, '미즈 캠핑카', '부산 동구 ', '051-555-1111', '한예슬', 'hanbeautiful@naver.com');");
+        sql.add("insert into camping_company values(43, '시티 캠핑카', '강원도 원주시', '033-666-8888', '이진욱', 'leejinwook63@naver.com');");
+        sql.add("insert into camping_company values(44, '프리덤 캠핑카', '강원도 강릉시', '033-222-1111', '김동욱', 'dongdong2@gmail.com');");
+        sql.add("insert into camping_company values(45, '사랑 캠핑카', '전라남도 여수시', '061-111-8888', '김태희', 'nothuman@naver.com');");
 
         for(String s : sql) {
             try {
@@ -259,6 +275,32 @@ public class DbReset {
         sql.add("INSERT INTO camping_car VALUES (29, '훙훙이', 23154, 6, '궁제조회사', 2017, 45, 590000, 14, '2017-05-01')");
         sql.add("INSERT INTO camping_car VALUES (30, '공공이', 68765, 5, '눙제조회사', 2018, 34, 560000, 15, '2018-10-05')");
 
+        sql.add("insert into camping_car VALUES(31, 'RAY18', '2942',2, 'KIA', 2018, 28000, 170000, 2, '2018-07-01');");
+        sql.add("insert into camping_car VALUES(32, '포터2', '4824', 5, '현대', 2020, 8000, 270000, 1, '2020-03-04');");
+        sql.add("insert into camping_car VALUES(33, 'T5', '5902', 7, '폭스바겐', 2019, 16000, 190000, 14, '2019-06-01');");
+        sql.add("insert into camping_car VALUES(34, 'A7', '1934', 20, '아우디', 2017, 35000, 250000, 13, '2017-12-08');");
+        sql.add("insert into camping_car VALUES(35, '마스터19', '9908', 5, '르노', 2019, 13000, 160000, 15, '2019-02-22');");
+        sql.add("insert into camping_car VALUES(36, '코란도', '8837', 10, '쌍용', 2016, 44000, 300000, 5, '2016-06-03');");
+        sql.add("insert into camping_car VALUES(37, 'RAY16', '1812', 4, 'KIA', 2016, 52000, 230000, 2, '2016-08-10');");
+        sql.add("insert into camping_car VALUES(38, 'A9', '2214', 25, '아우디', 2019, 12000, 180000, 5, '2019-09-24');");
+        sql.add("insert into camping_car VALUES(39, '마스터19', '8293', 7, '르노', 2019, 19000, 200000, 10, '2019-10-05');");
+        sql.add("insert into camping_car VALUES(40, 'T6', '2014', 9, '폭스바겐', 2020, 9000, 150000, 7, '2020-01-05');");
+        sql.add("insert into camping_car VALUES(41, '렉스턴', '4492', 5, '쌍용', 2018, 29000, 190000, 9, '2018-02-06');");
+        sql.add("insert into camping_car VALUES(42, '포터2', '5666', 10, '현대', 2017, 36000, 210000, 3, '2017-03-26');");
+        sql.add("insert into camping_car VALUES(43, 'A7', '3611', 11, '아우디', 2018, 29000, 170000, 8, '2018-02-09');");
+        sql.add("insert into camping_car VALUES(44, 'RAY19', '2298', 25, 'KIA', 2019, 17000, 160000, 12, '2019-07-21');");
+        sql.add("insert into camping_car VALUES(45, '마스터18', '1222', 7, '르노', 2018, 49000, 200000, 11, '2018-05-13');");
+        sql.add("insert into camping_car VALUES(46, 'T4', '3211', 9, '폭스바겐', 2014, 56000, 240000, 6, '2014-04-29');");
+        sql.add("insert into camping_car VALUES(47, 'A7', '5883', 20, '아우디', 2017, 33000, 150000, 4, '2017-11-06');");
+        sql.add("insert into camping_car VALUES(48, 'RAY15', '4881', 2, 'KIA', 2015, 52000, 270000, 8, '2015-12-12');");
+        sql.add("insert into camping_car VALUES(49, 'A6', '8399', 5, '아우디', 2016, 49000, 250000, 4, '2016-06-19');");
+        sql.add("insert into camping_car VALUES(50, 'RAY15', '4408', 21, 'KIA', 2015, 58000, 230000, 13, '2015-03-17');");
+        sql.add("insert into camping_car VALUES(51, '코란도', '2186', 11, '쌍용', 2020, 10000, 190000, 1, '2020-11-20');");
+        sql.add("insert into camping_car VALUES(52, 'A9', '6782', 2, '아우디', 2019, 11000, 160000, 7, '2019-07-18');");
+        sql.add("insert into camping_car VALUES(53, '포터2', '2902', 7, '현대', 2016, 45000, 210000, 9, '2016-08-17');");
+        sql.add("insert into camping_car VALUES(54, 'RAY13', '9572', 10, 'KIA', 2013, 51000, 300000, 3, '2013-07-21');");
+        sql.add("insert into camping_car VALUES(55, '마스터19', '8888', 4, '르노', 2020, 54000, 290000, 12, '2020-04-11');");
+
         try {
             stmt = conn.createStatement();
             for(String s:sql) {
@@ -271,21 +313,21 @@ public class DbReset {
         sql.clear();
 
 
-        sql.add("insert into Rent_Customer value(1,\"김성훈\",\"인천광역시 연수구 송도동\",\"010-9657-8412\",\"sunghun1998@naver.com\");");
-        sql.add("insert into Rent_Customer value(2,\"김효경\",\"서울특별시 성동구 뉴욕동\",\"010-1234-1234\",\"hyobbang@naver.com\");");
-        sql.add("insert into Rent_Customer value(3,\"이우식\",\"강원도 삼척시\",\"010-3246-4321\",\"sik@naver.com\");");
-        sql.add("insert into Rent_Customer value(4,\"이진아\",\"서울특별시 엘에이주\",\"010-1237-4363\",\"jinna@naver.com\");");
-        sql.add("insert into Rent_Customer value(5,\"우리나\",\"인천광역시 오하이오주\",\"010-2365-4364\",\"rina@naver.com\");");
-        sql.add("insert into Rent_Customer value(6,\"황소진\",\"인천광역시 미시간주\",\"010-2374-3765\",\"sojin@naver.com\");");
-        sql.add("insert into Rent_Customer value(7,\"우아나\",\"서울특별시 도쿄구\",\"010-2378-3263\",\"anaa@naver.com\");");
-        sql.add("insert into Rent_Customer value(8,\"하나경\",\"제주특별시 감귤주\",\"010-4263-4364\",\"nakyung@yahoo.com\");");
-        sql.add("insert into Rent_Customer value(9,\"이민지\",\"대전광역시 수정구\",\"010-4236-3263\",\"minji@naver.com\");");
-        sql.add("insert into Rent_Customer value(10,\"이소진\",\"부산광역시 해운대구\",\"010-4327-3425\",\"sojin@gmail.com\");");
-        sql.add("insert into Rent_Customer value(11,\"장광진\",\"광주광역시 기아동\",\"010-3248-3474\",\"gang@naver.com\");");
-        sql.add("insert into Rent_Customer value(12,\"김자아\",\"경상북도 창원시\",\"010-2348-7543\",\"jaa@gmail.com\");");
-        sql.add("insert into Rent_Customer value(13,\"빅비빅\",\"경기도 수원시\",\"010-4328-5465\",\"bibibik@naver.com\");");
-        sql.add("insert into Rent_Customer value(14,\"진진아\",\"경기도 과천시\",\"010-3248-4374\",\"jinjin@naver.com\");");
-        sql.add("insert into Rent_Customer value(15,\"노진구\",\"강원도 동해시\",\"010-3428-4537\",\"jingu@yahoo.com\");");
+        sql.add("insert into Rent_Customer values(1,\"김성훈\",\"인천광역시 연수구 송도동\",\"010-9657-8412\",\"sunghun1998@naver.com\");");
+        sql.add("insert into Rent_Customer values(2,\"김효경\",\"서울특별시 성동구 뉴욕동\",\"010-1234-1234\",\"hyobbang@naver.com\");");
+        sql.add("insert into Rent_Customer values(3,\"이우식\",\"강원도 삼척시\",\"010-3246-4321\",\"sik@naver.com\");");
+        sql.add("insert into Rent_Customer values(4,\"이진아\",\"서울특별시 엘에이주\",\"010-1237-4363\",\"jinna@naver.com\");");
+        sql.add("insert into Rent_Customer values(5,\"우리나\",\"인천광역시 오하이오주\",\"010-2365-4364\",\"rina@naver.com\");");
+        sql.add("insert into Rent_Customer values(6,\"황소진\",\"인천광역시 미시간주\",\"010-2374-3765\",\"sojin@naver.com\");");
+        sql.add("insert into Rent_Customer values(7,\"우아나\",\"서울특별시 도쿄구\",\"010-2378-3263\",\"anaa@naver.com\");");
+        sql.add("insert into Rent_Customer values(8,\"하나경\",\"제주특별시 감귤주\",\"010-4263-4364\",\"nakyung@yahoo.com\");");
+        sql.add("insert into Rent_Customer values(9,\"이민지\",\"대전광역시 수정구\",\"010-4236-3263\",\"minji@naver.com\");");
+        sql.add("insert into Rent_Customer values(10,\"이소진\",\"부산광역시 해운대구\",\"010-4327-3425\",\"sojin@gmail.com\");");
+        sql.add("insert into Rent_Customer values(11,\"장광진\",\"광주광역시 기아동\",\"010-3248-3474\",\"gang@naver.com\");");
+        sql.add("insert into Rent_Customer values(12,\"김자아\",\"경상북도 창원시\",\"010-2348-7543\",\"jaa@gmail.com\");");
+        sql.add("insert into Rent_Customer values(13,\"빅비빅\",\"경기도 수원시\",\"010-4328-5465\",\"bibibik@naver.com\");");
+        sql.add("insert into Rent_Customer values(14,\"진진아\",\"경기도 과천시\",\"010-3248-4374\",\"jinjin@naver.com\");");
+        sql.add("insert into Rent_Customer values(15,\"노진구\",\"강원도 동해시\",\"010-3428-4537\",\"jingu@yahoo.com\");");
 
         sql.add("INSERT INTO Rent_Customer VALUES (16, '신희연', '서울시 송파구', '010-1234-5678', 'yoni@sjcamp.com')");
         sql.add("INSERT INTO Rent_Customer VALUES (17, '신민경', '서울시 광진구', '010-9090-2929', 'ming@sjcamp.com')");
@@ -302,6 +344,22 @@ public class DbReset {
         sql.add("INSERT INTO Rent_Customer VALUES (28, '안치홍', '서울시 도봉구', '010-2344-5464', 'anchi@sjcamp.com')");
         sql.add("INSERT INTO Rent_Customer VALUES (29, '봉광현', '서울시 노원구', '010-0057-7684', 'light@sjcamp.com')");
         sql.add("INSERT INTO Rent_Customer VALUES (30, '추민하', '서울시 용산구', '010-4578-5642', 'fall@sjcamp.com')");
+
+        sql.add("insert into Rent_Customer VALUES(31, '조유나', '서울 노원구', '010-5000-8777', 'choyn@naver.com');");
+        sql.add("insert into Rent_Customer VALUES(32, '신민경', '강원도 춘천시', '010-6666-7777', 'shinming@gmail.com');");
+        sql.add("insert into Rent_Customer VALUES(33, '신희연', '서울시 송파구', '010-2333-1111', 'hyshin@naver.com');");
+        sql.add("insert into Rent_Customer VALUES(34, '김민수', '인천 남동구', '010-3434-0000', 'minsukim@hanmail.net');");
+        sql.add("insert into Rent_Customer VALUES(35, '홍성철', '충청남도 아산시', '010-1212-1111', 'honghong@naver.com');");
+        sql.add("insert into Rent_Customer VALUES(36, '박은정', '서울 강서구', '010-4545-2222', 'eundong@gmail.com');");
+        sql.add("insert into Rent_Customer VALUES(37, '허정민', '서울 강남구', '010-2323-9999', 'huhhuh@gmail.com');");
+        sql.add("insert into Rent_Customer VALUES(38, '정지호', '서울 광진구', '010-7878-0000', 'jihohoho@hanmail.net');");
+        sql.add("insert into Rent_Customer VALUES(39, '김준호', '경기도 수원시', '010-6767-3333', 'junhohoho@naver.com');");
+        sql.add("insert into Rent_Customer VALUES(40, '정예원', '서울 도봉구', '010-3888-3999', 'yeahone@naver.com');");
+        sql.add("insert into Rent_Customer VALUES(41, '박소영', '경기도 의정부시', '010-5656-3838', 'romii@gmail.com');");
+        sql.add("insert into Rent_Customer VALUES(42, '김지호', '서울 노원구', '010-7898-0000', 'jjihooo@naver.com');");
+        sql.add("insert into Rent_Customer VALUES(43, '최순영', '서울 강서구', '010-2580-0000', 'sunsun0@hanmail.net');");
+        sql.add("insert into Rent_Customer VALUES(44, '이승빈', '경기도 남양주시', '010-9090-8080', 'bean123@naver.com');");
+        sql.add("insert into Rent_Customer VALUES(45, '임서정', '서울 강동구', '010-3444-3444', 'sjlim@naver.com');");
 
         try {
             stmt = conn.createStatement();
@@ -352,6 +410,27 @@ public class DbReset {
         sql.add("INSERT INTO Car_Rent VALUES (34, 14, 14, 14, '2020-03-03', 6, 640000, '2020-03-18', '타이어 펑크', 240000)");
         sql.add("INSERT INTO Car_Rent VALUES (35, 15, 15, 15, '2018-07-08', 10, 770000, '2018-07-21', '청구내역없음', 0)");
 
+        sql.add("insert into Car_Rent VALUES(36, 1, 31, 2, '2020-01-08', 1, 170000, '2020-01-10', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(37, 7, 36, 2, '2020-01-18', 3, 690000, '2020-01-24', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(38, 13, 33, 8, '2020-01-20', 4, 680000, '2020-01-28', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(39, 10, 41, 7, '2020-02-01', 10, 1500000, '2020-02-21', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(40, 18, 45, 8, '2020-02-22', 2, 540000, '2020-02-26', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(41, 21, 42, 1, '2020-03-14', 2, 380000, '2020-03-18', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(42, 11, 32, 9, '2020-03-17', 3, 570000, '2020-03-23', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(43, 8, 37, 5, '2020-03-21', 5, 900000, '2020-03-31', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(44, 25, 38, 12, '2020-03-26', 2, 580000, '2020-03-30', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(45, 17, 35, 4, '2020-04-05', 3, 450000, '2020-04-11', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(46, 6, 44, 5, '2020-05-13', 1, 300000, '2020-05-15', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(47, 23, 42, 9, '2020-05-15', 3, 630000, '2020-05-21', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(48, 14, 34, 12, '2020-05-18', 2, 320000, '2020-05-22', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(49, 5, 40, 15, '2020-05-24', 5, 800000, '2020-06-04', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(50, 2, 39, 1, '2020-06-03', 2, 540000, '2020-06-07', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(51, 13, 36, 8, '2020-06-06', 1, 540000, '2020-06-08', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(52, 24, 42, 3, '2020-06-09', 3, 540000, '2020-06-15', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(53, 7, 38, 10, '2020-06-11', 3, 540000, '2020-06-17', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(54, 3, 35, 14, '2020-06-14', 2, 540000, '2020-06-18', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(55, 18, 43, 8, '2020-06-20', 1, 540000, '2020-06-22', 'X', 0);");
+
 
         try {
             stmt = conn.createStatement();
@@ -363,7 +442,6 @@ public class DbReset {
             e.printStackTrace();
         }
         sql.clear();
-
 
         sql.add("insert into Car_Check values(1,1,\"Clear\",\"Clear\",\"Clear\",\"Clear\",\"Y\");");
         sql.add("insert into Car_Check values(2,15,\"Clear\",\"Door scratch\",\"Clear\",\"Clear\",\"Y\");");
@@ -397,7 +475,26 @@ public class DbReset {
         sql.add("INSERT INTO Car_Check VALUES (29, 27, '정상', '정상', '정상', '정상', 'X')");
         sql.add("INSERT INTO Car_Check VALUES (30, 26, '정상', '정상', '정상', '정상', 'X')");
 
-
+        sql.add("insert into Car_Check values(31, 31, 'Clear', '손잡이 깨짐', 'Clear', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(32, 7, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("insert into Car_Check values(33, 13, 'Clear', 'Clear', 'Clear', '트렁크 안닫힘', 'Y')");
+        sql.add("insert into Car_Check values(34, 10, 'Clear', 'Clear', '조수석 창문 깨짐', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(35, 18, '와이퍼 고장남', 'Clear', 'Clear', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(36, 21, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("insert into Car_Check values(37, 11, 'Clear', '운전석 손잡이 밑부분 긁혀서 도색 벗겨짐', 'Clear', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(38, 8, 'Clear', 'Clear', '사이드 미러 깨짐', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(39, 25, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("insert into Car_Check values(40, 17, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("insert into Car_Check values(41, 6, 'Clear', 'Clear', 'Clear', '뒷범퍼 찌그러짐', 'Y')");
+        sql.add("insert into Car_Check values(42, 23, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("insert into Car_Check values(43, 14, 'Clear', '사이드 미러 부러짐', 'Clear', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(44, 5, 'Clear', '발 받침대 찌그러짐', 'Clear', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(45, 2, '왼쪽 라이트 깨짐', 'Clear', 'Clear', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(46, 13, 'Clear', 'Clear', '운전석 창문 작동 안됨', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(47, 24, '보닛 찌그러짐', 'Clear', 'Clear', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(48, 7, 'Clear', 'Clear', 'Clear', '번호판 떨어짐', 'Y')");
+        sql.add("insert into Car_Check values(49, 3, 'Clear', '뒤 타이어 펑크', '뒤 타이어 펑크', 'Clear', 'Y')");
+        sql.add("insert into Car_Check values(50, 18, 'Clear', '주유구 고장', 'Clear', 'Clear', 'Y')");
 
         try {
             stmt = conn.createStatement();
@@ -409,7 +506,6 @@ public class DbReset {
             e.printStackTrace();
         }
         sql.clear();
-
 
         sql.add("insert into Repairshop values(1,\"성훈이네\",\"인천광역시 연수구 송도동\",\"02-3665-8412\",\"김성훈\",\"sunghun1998@naver.com\");");
         sql.add("insert into Repairshop values(2,\"하이카\",\"서울특별시 광진구 세종동\",\"02-3242-3241\",\"이하이\",\"hihi@naver.com\");");
@@ -442,6 +538,22 @@ public class DbReset {
         sql.add("INSERT INTO Repairshop VALUES (28, '팜정비소', '서울시 은평구', '02-2487-7821', '팜팜팜', 'pam@sjgar.com')");
         sql.add("INSERT INTO Repairshop VALUES (29, '함정비소', '서울시 마포구', '02-2264-1345', '함함함', 'ham@sjgar.com')");
         sql.add("INSERT INTO Repairshop VALUES (30, '검정비소', '서울시 강서구', '02-5464-8701', '검검검', 'kum@sjgar.com')");
+
+        sql.add("insert into Repairshop values(31, '모터스 정비소', '서울 서초구', '02-1111-0000', '김정현', 'hyunii@naver.com');");
+        sql.add("insert into Repairshop values(32, '애니카 정비소', '경기 의정부시', '031-2222-1111', '김재환', 'kimjae@gmail.com');");
+        sql.add("insert into Repairshop values(33, '그린카 정비소', '서울 강동구', '02-3333-4444', '안지영', 'jiiyoung@gmail.com');");
+        sql.add("insert into Repairshop values(34, '하이카 정비소', '서울 중랑구', '02-4444-5555', '이지은', 'dlwldms@naver.com');");
+        sql.add("insert into Repairshop values(35, '카포스 정비소', '인천 남동구', '032-2222-6666', '박승우', 'qkrtmddn@hanmail.net');");
+        sql.add("insert into Repairshop values(36, ' 카앤텍 정비소', '서울 성동구', '032-2222-6666', '최승준', 'tmdwns@hanmail.net');");
+        sql.add("insert into Repairshop values(37, '보람 정비소', '인천 남동구', '032-1111-9999', '임지윤', 'limjiji@hanmail.net');");
+        sql.add("insert into Repairshop values(38, '블루핸즈 정비소', '경기 남양주시', '031 8888-1111', '이민욱', 'wook2@hanmail.net');");
+        sql.add("insert into Repairshop values(39, '유림 정비소', '대구 서구', '053-2222-0000', '안동윤', 'dong939@hanmail.net');");
+        sql.add("insert into Repairshop values(40, '차박사 정비소', '충청남도 아산', '041-3333-6666', '신지민', 'shinzimin@hanmail.net');");
+        sql.add("insert into Repairshop values(41, '세븐자동차 정비소', '전라남도 여수시', '061-1111-0000', '김영진', 'yjkim@hanmail.net');");
+        sql.add("insert into Repairshop values(42, '세종 정비소', '강원도 원주시', '033-1212-2323', '강지원', 'kangji1@hanmail.net');");
+        sql.add("insert into Repairshop values(43, '프라자 정비소', '부산 서구', '051-1111-5555', '이찬원', 'leechan1@hanmail.net');");
+        sql.add("insert into Repairshop values(44, '킹콩 정비소', '강원도 원주시', '033-977-6666', '장민호', 'jangminho23@hanmail.net');");
+        sql.add("insert into Repairshop values(45, '올카 정비소', '경기 수원시', '031-2222-3333', '임영웅', 'limhero@hanmail.net');");
 
         try {
             stmt = conn.createStatement();
@@ -486,6 +598,22 @@ public class DbReset {
         sql.add("INSERT INTO Repair_List VALUES (28, 23, 23, 23, 23, '네비게이션 수리', '2020-04-03', 130000, '2020-04-13', '없음')");
         sql.add("INSERT INTO Repair_List VALUES (29, 24, 24, 24, 24, '내부 수리', '2019-05-01', 210000, '2019-05-11', '없음')");
         sql.add("INSERT INTO Repair_List VALUES (30, 25, 25, 25, 25, '엔진 교체', '2019-10-05', 312000, '2019-10-15', '없음')");
+
+        sql.add("insert into Repair_List values(31, 1, 3, 2, 31, 'Window change', '2020-01-10', 200000, '2020-01-13', 'Nothing');");
+        sql.add("insert into Repair_List values(32, 13, 4, 8, 33, 'Bumper', '2020-01-25', 150000, '2020-01-27', 'Nothing');");
+        sql.add("insert into Repair_List values(33, 10, 10, 7, 41, 'Window change', '2020-02-12', 500000, '2020-02-18', 'Nothing');");
+        sql.add("insert into Repair_List values(34, 18, 3, 8, 45, 'Bumper', '2020-02-25', 320000, '2020-03-01', 'Nothing');");
+        sql.add("insert into Repair_List values(35, 11, 11, 9, 32, 'Window change', '2020-03-21', 160000, '2020-03-23', 'Nothing');");
+        sql.add("insert into Repair_List values(36, 8, 3, 5, 37, 'Bumper', '2020-03-27', 240000, '2020-03-30', 'Nothing');");
+        sql.add("insert into Repair_List values(37, 6, 8, 5, 44, 'Bumper', '2020-05-15', 550000, '2020-05-21', 'Nothing');");
+        sql.add("insert into Repair_List values(38, 14, 14, 12, 34, 'Window change', '2020-05-21', 230000, '2020-05-24', 'Nothing');");
+        sql.add("insert into Repair_List values(39, 5, 5, 15, 40, 'Bumper', '2020-05-30', 110000, '2020-06-02', 'Nothing');");
+        sql.add("insert into Repair_List values(40, 2, 3, 1, 39, 'Bumper', '2020-06-06', 360000, '2020-06-10', 'Nothing');");
+        sql.add("insert into Repair_List values(41, 13, 2, 8, 36, 'Window change', '2020-06-08', 340000, '2020-06-12', 'Nothing');");
+        sql.add("insert into Repair_List values(42, 24, 11, 3, 42, 'Bumper', '2020-06-13', 80000, '2020-06-14', 'Nothing');");
+        sql.add("insert into Repair_List values(43, 7, 12, 2, 38, 'Window change', '2020-06-15', 200000, '2020-06-18', 'Nothing');");
+        sql.add("insert into Repair_List values(44, 3, 7, 14, 35, 'Bumper', '2020-06-17', 180000, '2020-06-19', 'Nothing');");
+        sql.add("insert into Repair_List values(45, 18, 6, 8, 43, 'Window change', '2020-06-22', 100000, '2020-06-24', 'Nothing');");
 
         try {
             stmt = conn.createStatement();
