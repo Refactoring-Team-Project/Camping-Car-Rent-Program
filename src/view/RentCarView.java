@@ -64,7 +64,7 @@ public class RentCarView extends JPanel {
 			rentCarFieldName[i] = new JLabel(Constants.RENTCAR_FIELDSTRING[i]);
 			updatePanel.add(rentCarFieldName[i]);
 
-			rentCarListInputField[i] = new JTextField("", Constants.CARRENTLIST_FIELDLENGTH[i]);
+			rentCarListInputField[i] = new JTextField("", Constants.RENTCAR_FIELDLENGTH[i]);
 			updatePanel.add(rentCarListInputField[i]);
 		}
 
