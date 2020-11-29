@@ -41,6 +41,11 @@ public class Constants {
     public static final int[] CARRENTLIST_FIELDLENGTH = { 3, 3, 3, 3, 10, 5, 5, 10, 10, 5};
     public static final int CARRENTLIST_FIELDNUM = 10;
 
+    public static final String[] RENTCAR_FIELDSTRING = { "rentno", "carid", "explain_front", "explain_left", "explain_right", "explain_back",
+            "repair_required" };
+    public static final int[] RENTCAR_FIELDLENGTH = { 3, 3, 10, 10, 10, 10, 2 };
+    public static final int RENTCAR_FIELDNUM = 7;
+
     public static final String[] RENTCUSTOMER_FIELDSTIRNG = { "license_no", "name", "address", "phone", "email" };
     public static final int[] RENTCUSTOMER_FIELDLENGTH = { 3, 7, 10, 10, 10 };
     public static final int RENTCUSTOMER_FIELDNUM = 5;

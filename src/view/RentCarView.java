@@ -15,19 +15,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import common.AppManager;
+import common.Constants;
 
 public class RentCarView extends JPanel {
 
-	public DefaultTableModel model;
-	public JTable dbResult;
-	JScrollPane scrollPane;
+	public DefaultTableModel rentCarDefaultTable;
+	public JTable rentCarDBResult;
+	JScrollPane rentCarScrollPane;
 	public JPanel updatePanel, buttonPanel;
 	public JButton btnReturn;
-	JLabel[] labels;
-	public JTextField[] tf;
-	public String[] fieldString = { "rentno", "carid", "explain_front", "explain_left", "explain_right", "explain_back",
-			"repair_required" };
-	public int[] fieldSize = { 3, 3, 10, 10, 10, 10, 2 };
+	JLabel[] rentCarFieldName;
+	public JTextField[] rentCarListInputField;
+
 
 	public RentCarView() {
 		super.setLayout(new FlowLayout());
@@ -41,41 +40,38 @@ public class RentCarView extends JPanel {
 	}
 
 	public void initScrollPane() {
-		model = new DefaultTableModel() {
+		rentCarDefaultTable = new DefaultTableModel() {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dbResult = new JTable(model);
-		dbResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane = new JScrollPane(dbResult);
-		add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(780, 300));
+
+		rentCarDBResult = new JTable(rentCarDefaultTable);
+		rentCarDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+		rentCarScrollPane = new JScrollPane(rentCarDBResult);
+		add(rentCarScrollPane);
+		rentCarScrollPane.setPreferredSize(new Dimension(780, 300));
 	}
 
 	public void initUpdatePanel() {
 		updatePanel = new JPanel();
+		updatePanel.setPreferredSize(new Dimension(780, 60));
 
-		labels = new JLabel[7];
-		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(fieldString[i]);
+		rentCarFieldName = new JLabel[Constants.RENTCAR_FIELDNUM];
+		rentCarListInputField = new JTextField[Constants.RENTCAR_FIELDNUM];
+		for (int i = 0; i < rentCarFieldName.length; i++) {
+			rentCarFieldName[i] = new JLabel(Constants.RENTCAR_FIELDSTRING[i]);
+			updatePanel.add(rentCarFieldName[i]);
+
+			rentCarListInputField[i] = new JTextField("", Constants.CARRENTLIST_FIELDLENGTH[i]);
+			updatePanel.add(rentCarListInputField[i]);
 		}
 
-		tf = new JTextField[7];
-		for (int i = 0; i < tf.length; i++) {
-			tf[i] = new JTextField("", fieldSize[i]);
-		}
-
-		tf[0].setEnabled(false);
-		tf[1].setEnabled(false);
-
-		for (int i = 0; i < 7; i++) {
-			updatePanel.add(labels[i]);
-			updatePanel.add(tf[i]);
-		}
+		rentCarListInputField[0].setEnabled(false);
+		rentCarListInputField[1].setEnabled(false);
 
 		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
 	public void initButtonPanel() {
@@ -92,13 +88,13 @@ public class RentCarView extends JPanel {
 	}
 
 	public void fieldReset() {
-		for (JTextField t : tf) {
-			t.setText("");
+		for (JTextField inputField : rentCarListInputField) {
+			inputField.setText("");
 		}
 		repaint();
 	}
 
 	public void addMouseListener(MouseListener listener) {
-		dbResult.addMouseListener(listener);
+		rentCarDBResult.addMouseListener(listener);
 	}
 }
