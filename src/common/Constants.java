@@ -11,6 +11,7 @@ public class Constants {
     public static final String CARCHECK = "Car_Check";
     public static final String REPAIRLIST = "Repair_List";
 
+    
     public static final String RENTLIST = "Camping_Car(대여가능)";
     public static final String SEARCH1 = "검색1";
     public static final String SEARCH2 = "검색2";
@@ -19,7 +20,7 @@ public class Constants {
 
 
     public static final String[] ADMIN_BUTTON_NAME = {
-                 "Camping_Company", "Camping_Car", "Rent_Customer", "Repairshop", "Rent_Car", "Car_Check", "Repair_List", "검색1", "검색2", "검색3", "검색4" };
+                 "Camping_Company", "Camping_Car", "Rent_Customer", "Repairshop", "Rent_Car", "Car_Check", "Repair_List", "검색1", "검색2", "검색3", "검색4"};
 
     public static final String[] USER_BUTTON_NAME = {"Camping_Car(대여가능)", "검색1", "검색2", "검색3"};
 
