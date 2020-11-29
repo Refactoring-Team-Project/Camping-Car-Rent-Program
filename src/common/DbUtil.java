@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 public class DbUtil {
 
+	/******메서드를 메서드 객체로 전환******/
 	public static ArrayList<Object[]> getRows(Connection conn, String sql) {
 		ResultSet rs;
 		ArrayList<Object[]> arr = new ArrayList<Object[]>();
