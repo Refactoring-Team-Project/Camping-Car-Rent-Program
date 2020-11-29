@@ -19,7 +19,7 @@ public class CampingCarController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addCampCarListener(new mainButtonListener());
+		this._mainView.addAdminButtonListener(Constants.CAMPCAR, new mainButtonListener());
 	}
 	@Override
 	public void initModel() {
