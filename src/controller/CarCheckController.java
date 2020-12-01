@@ -11,26 +11,80 @@ import javax.swing.JOptionPane;
 
 import common.AppManager;
 import common.Constants;
+import model.CampingCompanyModel;
 import model.CarCheckModel;
 import model.RepairListModel;
 import view.CarCheckView;
 import view.MainView;
 
-public class CarCheckController {
-	MainView _mainView;
-	CarCheckView _carChkView;
-	private CarCheckModel carChkModel;
-	private RepairListModel repListModel;
+public class CarCheckController extends Controller {
 
-	public CarCheckController() {
-		this._mainView = AppManager.getInstance().getView();
-		this._carChkView = AppManager.getInstance().getCarCheckView();
-		carChkModel = new CarCheckModel();
-		repListModel = new RepairListModel();
-		this._carChkView.addButtonListener(new ButtonListener());
-		this._carChkView.addMouseListener(new CarCheckMouseListener());
-//		this._mainView.addCarChkListener(new CarCheckButtonListener());
-		this._mainView.addAdminButtonListener(Constants.CARCHECK, new CarCheckButtonListener());
+	private CarCheckView carCheckView;
+	private CarCheckModel carCheckModel;
+	private RepairListModel repairListModel;
+
+	@Override
+	public void setMainView() {
+		super.setMainView();
+		this._mainView.addAdminButtonListener(Constants.CARCHECK, new mainButtonListener());
+	}
+
+	@Override
+	public void initModel() {
+		dataModel = new RepairListModel();
+		repairListModel = (RepairListModel) dataModel;
+
+		dataModel = new CarCheckModel();
+		carCheckModel = (CarCheckModel) dataModel;
+	}
+
+	@Override
+	public void initView() {
+		this.thisView = AppManager.getInstance().getCarCheckView();
+		carCheckView = (CarCheckView) this.thisView;
+		this.thisView.addButtonListener(new ButtonListener());
+		this.thisView.addMouseListener(new mainMouseListener());
+	}
+
+	@Override
+	public void setColumnName() {
+		column = new Object[]{"RENT NO", "CAR ID", "FRONT EX", "LEFT EX", "RIGHT EX", "BACK EX", "REPAIR REQUIRED"};
+	}
+
+	@Override
+	public void setModelColumn(String column, String value) {
+		switch (column) {
+			case "repairno":
+				repairListModel.setRepairno(Integer.parseInt(value));
+				break;
+			case "carid":
+				repairListModel.setCarid(Integer.parseInt(value));
+				break;
+			case "shopid":
+				repairListModel.setShopid(Integer.parseInt(value));
+				break;
+			case "compid":
+				repairListModel.setCompid(Integer.parseInt(value));
+				break;
+			case "license_no":
+				repairListModel.setLicense_no(Integer.parseInt(value));
+				break;
+			case "repairdetails":
+				repairListModel.setRepairdetails(value);
+				break;
+			case "repairdate":
+				repairListModel.setRepairdate(value);
+				break;
+			case "repaircost":
+				repairListModel.setRepaircost(Integer.parseInt(value));
+				break;
+			case "paymentdeadline":
+				repairListModel.setPaymentdeadline(value);
+				break;
+			case "repairhistory":
+				repairListModel.setRepairhistory(value);
+				break;
+		}
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -38,97 +92,44 @@ public class CarCheckController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (e.getSource() == _carChkView.btnRequest) {
+				if (e.getSource() == carCheckView.btnRequest) {
 					if (_mainView.getCurRow() != -1) {
-						if (_carChkView.carCheckDBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
-							if (_carChkView.carCheckInputField[0].getText().length() > 0) {
-								repListModel.setRepairno(Integer.parseInt(_carChkView.carCheckInputField[0].getText()));
-							} else
-								throw new NullPointerException();
-
-							if (_carChkView.carCheckInputField[1].getText().length() > 0) {
-								repListModel.setCarid(Integer.parseInt(_carChkView.carCheckInputField[1].getText()));
-							}
-							if (_carChkView.carCheckInputField[2].getText().length() > 0) {
-								repListModel.setShopid(Integer.parseInt(_carChkView.carCheckInputField[2].getText()));
-							}
-							if (_carChkView.carCheckInputField[3].getText().length() > 0) {
-								repListModel.setCompid(Integer.parseInt(_carChkView.carCheckInputField[3].getText()));
-							}
-							if (_carChkView.carCheckInputField[4].getText().length() > 0) {
-								repListModel.setLicense_no(Integer.parseInt(_carChkView.carCheckInputField[4].getText()));
-							}
-							if (_carChkView.carCheckInputField[5].getText().length() > 0) {
-								repListModel.setRepairdetails(_carChkView.carCheckInputField[5].getText());
-							}
-							if (_carChkView.carCheckInputField[6].getText().length() > 0) {
-								repListModel.setRepairdate(_carChkView.carCheckInputField[6].getText());
-							}
-							if (_carChkView.carCheckInputField[7].getText().length() > 0) {
-								repListModel.setRepaircost(Integer.parseInt(_carChkView.carCheckInputField[7].getText()));
-							}
-							if (_carChkView.carCheckInputField[8].getText().length() > 0) {
-								repListModel.setPaymentdeadline(_carChkView.carCheckInputField[8].getText());
-							}
-							if (_carChkView.carCheckInputField[9].getText().length() > 0) {
-								repListModel.setRepairhistory(_carChkView.carCheckInputField[9].getText());
-							}
-
-							repListModel.insert(_mainView.getConn());
-
-						} else if (_carChkView.carCheckDBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
+						if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
+							setModel();
+							repairListModel.insert(_mainView.getConn());
+							//	thisView.fieldReset();
+						} else if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
 							JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
 					} else
 						JOptionPane.showMessageDialog(null, "요청할 데이터를 선택해 주세요.");
-					_carChkView.fieldReset();
 
+					thisView.fieldReset();
 				}
 			} catch (NullPointerException e2) {
 				JOptionPane.showMessageDialog(null, "null");
-
 			}
 		}
+
 	}
 
-	private class CarCheckMouseListener extends MouseAdapter {
-
-		@Override
+	public class mainMouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_carChkView.carCheckDBResult.getSelectedRow());
-			_mainView.setCurCol(_carChkView.carCheckDBResult.getSelectedColumn());
+			_mainView.setCurRow(thisView.DBResult.getSelectedRow());
+			_mainView.setCurCol(thisView.DBResult.getSelectedColumn());
 
-			carChkModel.selectedData(_mainView.getConn(),
-					_carChkView.carCheckDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+			carCheckModel.selectedData(_mainView.getConn(),
+					carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
-			_carChkView.carCheckInputField[1].setText(Integer.toString(carChkModel.getSelectedCarid()));
-			_carChkView.carCheckInputField[1].setDisabledTextColor(Color.black);
+			carCheckView.inputField[1].setText(Integer.toString(carCheckModel.getSelectedCarid()));
+			carCheckView.inputField[1].setDisabledTextColor(Color.black);
 
-			_carChkView.carCheckInputField[3].setText(Integer.toString(carChkModel.getSelectedCompid()));
-			_carChkView.carCheckInputField[3].setDisabledTextColor(Color.black);
+			carCheckView.inputField[3].setText(Integer.toString(carCheckModel.getSelectedCompid()));
+			carCheckView.inputField[3].setDisabledTextColor(Color.black);
 
-			_carChkView.carCheckInputField[4].setText(Integer.toString(carChkModel.getSelectedLicense_no()));
-			_carChkView.carCheckInputField[4].setDisabledTextColor(Color.black);
+			carCheckView.inputField[4].setText(Integer.toString(carCheckModel.getSelectedLicense_no()));
+			carCheckView.inputField[4].setDisabledTextColor(Color.black);
 		}
 	}
 
-	private class CarCheckButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			_mainView.changePanel(_carChkView);
-			_mainView.setCurRow(-1);
-			_mainView.setCurCol(-1);
-
-			ArrayList<Object[]> arr = carChkModel.select(_mainView.getConn());
-			Object column[] = { "RENT NO", "CAR ID", "FRONT EX", "LEFT EX", "RIGHT EX", "BACK EX", "REPAIR REQUIRED" };			arr.add(0, column);
-			_carChkView.carCheckDefaultTable.setDataVector(null, arr.get(0));
-			for (int i = 1; i < arr.size(); i++) {
-				_carChkView.carCheckDefaultTable.addRow(arr.get(i));
-			}
-			System.out.println("car check");
-			_mainView.revalidate();
-			_mainView.repaint();
-		}
-	}
 
 }
