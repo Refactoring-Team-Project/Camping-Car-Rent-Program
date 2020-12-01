@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class RepairListModel {
+public class RepairListModel extends Model {
 	int repairno;
 	int carid;
 	int shopid;

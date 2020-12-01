@@ -1,15 +1,6 @@
 package common;
 
-import view.CampingCarView;
-import view.CampingCompanyView;
-import view.CarCheckView;
-import view.CarRentListView;
-import view.MainView;
-import view.RentCarView;
-import view.RentCustomerView;
-import view.RepairListView;
-import view.RepairShopView;
-import view.SearchView;
+import view.*;
 
 public class AppManager {
 	private static AppManager s_instance; // AppManager �ڽ��� ��Ÿ���� ����

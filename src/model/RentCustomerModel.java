@@ -48,7 +48,6 @@ public class RentCustomerModel extends Model{
 	}
 
 	public ArrayList<Object[]> search3(Connection conn) {
-
 		String sql = "select rc.name, cr.license_no, count(*) as total_count, count(case when cc.repair_required = 'Y' then 1 end) as repair_count\r\n"
 				+ "from Car_Rent cr, Car_Check cc, Rent_Customer rc\r\n" + "where cr.rentno = cc.rentno\r\n"
 				+ "and cr.license_no = rc.license_no\r\n" + "group by cr.license_no\r\n" + "order by 4 desc;";

@@ -47,8 +47,8 @@ public class MainView extends JFrame {
 		initChangeUserPanel();
 		initAdminButtonPanel1();
 		initUserButtonPanell();
-		tableBtnPanel[Admin.관리자.ordinal()] = adminBtnPanel;
-		tableBtnPanel[Admin.사용자.ordinal()] = userBtnPanel;
+		tableBtnPanel[0] = adminBtnPanel;
+		tableBtnPanel[1] = userBtnPanel;
 		add(userChangePanel);
 		add(adminBtnPanel);
 
