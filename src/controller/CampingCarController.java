@@ -91,7 +91,7 @@ public class CampingCarController extends Controller {
 				else if (e.getSource() == campingCarView.btnDelete)
 				{
 					if (_mainView.getCurRow() != -1) {
-						campingCarModel.delete(_mainView.getConn(), campingCarView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						campingCarModel.delete(_mainView.getConn(), thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						thisView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");

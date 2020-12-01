@@ -80,7 +80,7 @@ public class RentCustomerController extends Controller{
 				else if (e.getSource() == rentCustomerView.btnDelete) {
 					if (_mainView.getCurRow() != -1) {
 						rentCustomerModel.delete(_mainView.getConn(),
-								rentCustomerView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+								thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 						thisView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
