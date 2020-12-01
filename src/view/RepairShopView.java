@@ -17,90 +17,31 @@ import javax.swing.table.DefaultTableModel;
 import common.AppManager;
 import common.Constants;
 
-public class RepairShopView extends JPanel {
+public class RepairShopView extends View {
 
-	public DefaultTableModel repairShopDefaultTable;
-	public JTable repairShopDBResult;
-	JScrollPane repairShopScrollPane;
-	JPanel updatePanel, buttonPanel;
 	public JButton btnInput, btnDelete, btnUpdate;
-	JLabel[] repairShopFieldName;
-	public JTextField[] repairShopInputField;
 
 	public RepairShopView() {
-		super.setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(780, 420));
-
 		AppManager.getInstance().setRepairShopView(this);
-
-		initScrollPane();
-		initUpdatePanel();
-		initButtonPanel();
 	}
 
-	public void initScrollPane() {
-		repairShopDefaultTable = new DefaultTableModel() {
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
-		repairShopDBResult = new JTable(repairShopDefaultTable);
-		repairShopDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-		repairShopScrollPane = new JScrollPane(repairShopDBResult);
-		add(repairShopScrollPane);
-		repairShopScrollPane.setPreferredSize(new Dimension(780, 300));
-	}
-
-	public void initUpdatePanel() {
-		updatePanel = new JPanel();
-
-		repairShopFieldName = new JLabel[Constants.REPAIRSHOP_FIELDNUM];
-		repairShopInputField = new JTextField[Constants.REPAIRSHOP_FIELDNUM];
-
+	@Override
+	public void setInputFiledName() {
+		fieldName = new JLabel[Constants.REPAIRSHOP_FIELDNUM];
+		inputField = new JTextField[Constants.REPAIRSHOP_FIELDNUM];
 		for (int i = 0; i < Constants.REPAIRSHOP_FIELDNUM; i++) {
-			repairShopFieldName[i] = new JLabel(Constants.REPAIRSHOP_FIELDSTIRNG[i]);
-			updatePanel.add(repairShopFieldName[i]);
-
-			repairShopInputField[i] = new JTextField(Constants.REPAIRSHOP_FIELDLENGTH[i]);
-			updatePanel.add(repairShopInputField[i]);
+			fieldName[i] = new JLabel(Constants.REPAIRSHOP_FIELDSTIRNG[i]);
+			inputField[i] = new JTextField(Constants.REPAIRSHOP_FIELDLENGTH[i]);
 		}
-
-		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
-	public void initButtonPanel() {
-		buttonPanel = new JPanel();
-
-		btnInput = new JButton("입력");
-		btnDelete = new JButton("삭제");
-		btnUpdate = new JButton("변경");
-
-		buttonPanel.add(btnInput);
-		buttonPanel.add(btnDelete);
-		buttonPanel.add(btnUpdate);
-
-		add(buttonPanel);
-		buttonPanel.setPreferredSize(new Dimension(780, 50));
-	}
-
-	public void addMouseListener(MouseListener listener) {
-		repairShopDBResult.addMouseListener(listener);
-	}
-
-	public void addButtonListener(ActionListener listener) {
-		btnInput.addActionListener(listener);
-		btnDelete.addActionListener(listener);
-		btnUpdate.addActionListener(listener);
-	}
-
-	public void fieldReset() {
-		for (JTextField inputField : repairShopInputField) {
-			inputField.setText("");
-		}
-		repaint();
+	@Override
+	public void setButtons() {
+		buttons = new JButton[] {
+				btnInput = new JButton("입력"),
+				btnDelete = new JButton("삭제"),
+				btnUpdate = new JButton("변경")
+		};
 	}
 
 }

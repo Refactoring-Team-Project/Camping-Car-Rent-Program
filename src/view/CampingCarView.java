@@ -20,7 +20,6 @@ import common.Constants;
 public class CampingCarView extends View {
 	public JButton btnInput, btnDelete, btnUpdate;
 	public CampingCarView() {
-		super();
 		AppManager.getInstance().setCampingCarView(this);
 	}
 	@Override

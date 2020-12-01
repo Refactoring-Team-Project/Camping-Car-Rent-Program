@@ -21,7 +21,6 @@ public class RentCustomerView extends View {
 	public JButton btnInput, btnDelete, btnUpdate;
 
 	public RentCustomerView() {
-		super();
 		AppManager.getInstance().setRentCustomerView(this);
 	}
 
