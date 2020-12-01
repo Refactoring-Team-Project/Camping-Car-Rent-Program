@@ -4,7 +4,6 @@ import common.AppManager;
 import common.Constants;
 import model.CampingCarModel;
 import model.CarRentModel;
-import view.CarCheckView;
 import view.CarRentListView;
 
 import javax.swing.*;
