@@ -13,7 +13,7 @@ import view.MainView;
 
 public class CampingCarController extends Controller {
 
-	private CampingCarView campinCarView;
+	private CampingCarView campingCarView;
 	private CampingCarModel campingCarModel;
 
 	@Override
@@ -30,7 +30,7 @@ public class CampingCarController extends Controller {
 	@Override
 	public void initView() {
 		this.thisView = AppManager.getInstance().getCampingCarView();
-		campinCarView = (CampingCarView) this.thisView;
+		campingCarView = (CampingCarView) this.thisView;
 		this.thisView.addButtonListener(new ButtonListener());
 		this.thisView.addMouseListener(new mainMouseListener());
 	}
@@ -82,22 +82,22 @@ public class CampingCarController extends Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (e.getSource() == campinCarView.btnInput)
+				if (e.getSource() == campingCarView.btnInput)
 				{
 					setModel();
 					campingCarModel.insert(_mainView.getConn());
 					thisView.fieldReset();
 				}
-				else if (e.getSource() == campinCarView.btnDelete)
+				else if (e.getSource() == campingCarView.btnDelete)
 				{
 					if (_mainView.getCurRow() != -1) {
-						campingCarModel.delete(_mainView.getConn(), campinCarView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-						campinCarView.fieldReset();
+						campingCarModel.delete(_mainView.getConn(), campingCarView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						thisView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 					}
 				}
-				else if (e.getSource() == campinCarView.btnUpdate) {
+				else if (e.getSource() == campingCarView.btnUpdate) {
 					if(_mainView.getCurRow() != -1) {
 						setModel();
 						campingCarModel.update(_mainView.getConn(), thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));

@@ -17,92 +17,31 @@ import javax.swing.table.DefaultTableModel;
 import common.AppManager;
 import common.Constants;
 
-public class RentCustomerView extends JPanel {
-
-	public DefaultTableModel rentCustomerDefaultTable;
-	public JTable rentCustomerDBResult;
-	JScrollPane rentCustomerScrollPane;
-	public JPanel updatePanel, buttonPanel;
+public class RentCustomerView extends View {
 	public JButton btnInput, btnDelete, btnUpdate;
-	JLabel[] rentCustomerFieldName;
-	public JTextField[] rentCustomerInputField;
-
 
 	public RentCustomerView() {
-		super.setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(780, 420));
-
+		super();
 		AppManager.getInstance().setRentCustomerView(this);
-
-		initScrollPane();
-		initUpdatePanel();
-		initButtonPanel();
 	}
 
-	public void initScrollPane() {
-		rentCustomerDefaultTable = new DefaultTableModel() {
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
-		rentCustomerDBResult = new JTable(rentCustomerDefaultTable);
-		rentCustomerDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-		rentCustomerScrollPane = new JScrollPane(rentCustomerDBResult);
-		add(rentCustomerScrollPane);
-		rentCustomerScrollPane.setPreferredSize(new Dimension(780, 300));
-	}
-
-	public void initUpdatePanel() {
-		updatePanel = new JPanel();
-		updatePanel.setPreferredSize(new Dimension(780, 60));
-
-		rentCustomerFieldName = new JLabel[Constants.RENTCUSTOMER_FIELDNUM];
-		rentCustomerInputField = new JTextField[Constants.RENTCUSTOMER_FIELDNUM];
-
+	@Override
+	public void setInputFiledName() {
+		fieldName = new JLabel[Constants.RENTCUSTOMER_FIELDNUM];
+		inputField = new JTextField[Constants.RENTCUSTOMER_FIELDNUM];
 		for (int i = 0; i < Constants.RENTCUSTOMER_FIELDNUM; i++) {
-			rentCustomerFieldName[i] = new JLabel(Constants.RENTCUSTOMER_FIELDSTIRNG[i]);
-			updatePanel.add(rentCustomerFieldName[i]);
-
-			rentCustomerInputField[i] = new JTextField(Constants.RENTCUSTOMER_FIELDLENGTH[i]);
-			updatePanel.add(rentCustomerInputField[i]);
+			fieldName[i] = new JLabel(Constants.RENTCUSTOMER_FIELDSTIRNG[i]);
+			inputField[i] = new JTextField(Constants.RENTCUSTOMER_FIELDLENGTH[i]);
 		}
-
-		add(updatePanel);
 	}
 
-	public void initButtonPanel() {
-
-		buttonPanel = new JPanel();
-
-		btnInput = new JButton("입력");
-		btnDelete = new JButton("삭제");
-		btnUpdate = new JButton("변경");
-
-		buttonPanel.add(btnInput);
-		buttonPanel.add(btnDelete);
-		buttonPanel.add(btnUpdate);
-
-		add(buttonPanel);
-		buttonPanel.setPreferredSize(new Dimension(780, 50));
-	}
-
-	public void addMouseListener(MouseListener listener) {
-		rentCustomerDBResult.addMouseListener(listener);
-	}
-
-	public void addButtonListener(ActionListener listener) {
-		btnInput.addActionListener(listener);
-		btnDelete.addActionListener(listener);
-		btnUpdate.addActionListener(listener);
-	}
-
-	public void fieldReset() {
-		for (JTextField inputField : rentCustomerInputField) {
-			inputField.setText("");
-		}
-		repaint();
+	@Override
+	public void setButtons() {
+		buttons = new JButton[] {
+				btnInput = new JButton("입력"),
+				btnDelete = new JButton("삭제"),
+				btnUpdate = new JButton("변경")
+		};
 	}
 
 }
