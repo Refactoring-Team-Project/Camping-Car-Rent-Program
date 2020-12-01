@@ -59,14 +59,18 @@ public abstract class Controller {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            _mainView.changePanel(thisView);
-
-            setDataTableColumnName();
-            getDataTableValues();
-
-            _mainView.revalidate();
-            _mainView.repaint();
+           mainViewButtonEvent(e);
         }
+    }
+
+    public void mainViewButtonEvent(ActionEvent e) {
+        _mainView.changePanel(thisView);
+
+        setDataTableColumnName();
+        getDataTableValues();
+
+        _mainView.revalidate();
+        _mainView.repaint();
     }
 
     public void setDataTableColumnName() {

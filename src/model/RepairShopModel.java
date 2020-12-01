@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import common.DbUtil;
 
-public class RepairShopModel {
+public class RepairShopModel extends Model {
 	int shopid;
 	String shopname;
 	String address;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import common.DbUtil;
 
-public class RentCustomerModel {
+public class RentCustomerModel extends Model {
 	int license_no;
 	String name;
 	String address;

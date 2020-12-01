@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import common.DbUtil;
 
-public class CarCheckModel {
+public class CarCheckModel extends Model {
 	int rentno;
 	int carid;
 	String explain_front;

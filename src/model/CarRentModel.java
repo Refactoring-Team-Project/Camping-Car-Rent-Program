@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class CarRentModel {
+public class CarRentModel extends Model {
 	int rentno;
 	int carid;
 	int license_no;
@@ -38,7 +38,7 @@ public class CarRentModel {
 	}
 	
 	public ArrayList<Object[]> search1(Connection conn, String day) {
-		if(day.isBlank() && (day.matches("\\d{4}-\\d{2}-\\d{2}"))) {
+		if(!day.isBlank() && (day.matches("\\d{4}-\\d{2}-\\d{2}"))) {
 			  String sql = "select *\r\n" +
 					"from Car_Rent r\r\n" +
 					"where r.rentno not in (select c.rentno from Car_Check c) and date_format('"+day+"', '%Y-%m-%d') > date_add(r.rentdate, interval rentalperiod day);";

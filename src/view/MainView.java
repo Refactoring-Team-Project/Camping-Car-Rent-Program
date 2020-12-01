@@ -13,7 +13,7 @@ import common.AppManager;
 // 버튼패널, 검색버튼 변수명 변경
 
 public class MainView extends JFrame {
-	JButton btnCampComp, btnCustomer, btnCampCar, btnRepairshop, btnRentCar, btnCarCheck, btnRepairList, btnRentList,
+	public JButton btnCampComp, btnCustomer, btnCampCar, btnRepairshop, btnRentCar, btnCarCheck, btnRepairList, btnRentList,
 			btnAdminUndectedCampCarSearch, btnAdminTop10CompanySearch, btnAdminBlackCusRankSearch,
 			btnAdminRepairShopRankSearch;
 	JButton btnUserPriceSearch, btnUserManufacturingYearSearch, btnUserMileageSearch;
