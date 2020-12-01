@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +18,7 @@ import common.Constants;
 public class MainView extends JFrame {
 	public JButton btnReset;
 	JButton btnUser;
-	JButton[] btnAdmins, btnUsers;
+	public JButton[] btnAdmins, btnUsers;
 	JPanel adminBtnPanel, userBtnPanel, userChangePanel;
 	JPanel[] tableBtnPanel = new JPanel[2];
 
@@ -149,19 +151,13 @@ public class MainView extends JFrame {
 	}
 
 	public void addAdminButtonListener(String btnName, ActionListener listener){
-		for(int i=0;i<Constants.ADMIN_BUTTON_NAME.length;i++) {
-			if(btnName.contains(Constants.ADMIN_BUTTON_NAME[i])){
-				btnAdmins[i].addActionListener(listener);
-			}
-		}
+		int idx = Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(btnName);
+		btnAdmins[idx].addActionListener(listener);
 	}
 
 	public void addUserButtonListener(String btnName, ActionListener listener){
-		for(int i=0;i<Constants.USER_BUTTON_NAME.length;i++) {
-			if(btnName.contains(Constants.USER_BUTTON_NAME[i])){
-				btnUsers[i].addActionListener(listener);
-			}
-		}
+		int idx = Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(btnName);
+		btnUsers[idx].addActionListener(listener);
 	}
 
 
