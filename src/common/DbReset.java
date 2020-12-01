@@ -285,16 +285,16 @@ public class DbReset {
         sql.add("insert into camping_car VALUES(43, 'A7', '3611', 11, '아우디', 2018, 29000, 170000, 43, '2018-02-09');");
         sql.add("insert into camping_car VALUES(44, 'RAY19', '2298', 25, 'KIA', 2019, 17000, 160000, 44, '2019-07-21');");
         sql.add("insert into camping_car VALUES(45, '마스터18', '1222', 7, '르노', 2018, 49000, 200000, 45, '2018-05-13');");
-        sql.add("insert into camping_car VALUES(46, 'T4', '3211', 9, '폭스바겐', 2014, 56000, 240000, 46, '2014-04-29');");
-        sql.add("insert into camping_car VALUES(47, 'A7', '5883', 20, '아우디', 2017, 33000, 150000, 47, '2017-11-06');");
-        sql.add("insert into camping_car VALUES(48, 'RAY15', '4881', 2, 'KIA', 2015, 52000, 270000, 48, '2015-12-12');");
-        sql.add("insert into camping_car VALUES(49, 'A6', '8399', 5, '아우디', 2016, 49000, 250000, 49, '2016-06-19');");
-        sql.add("insert into camping_car VALUES(50, 'RAY15', '4408', 21, 'KIA', 2015, 58000, 230000, 50, '2015-03-17');");
-        sql.add("insert into camping_car VALUES(51, '코란도', '2186', 11, '쌍용', 2020, 10000, 190000, 51, '2020-11-20');");
-        sql.add("insert into camping_car VALUES(52, 'A9', '6782', 2, '아우디', 2019, 11000, 160000, 52, '2019-07-18');");
-        sql.add("insert into camping_car VALUES(53, '포터2', '2902', 7, '현대', 2016, 45000, 210000, 53, '2016-08-17');");
-        sql.add("insert into camping_car VALUES(54, 'RAY13', '9572', 10, 'KIA', 2013, 51000, 300000, 54, '2013-07-21');");
-        sql.add("insert into camping_car VALUES(55, '마스터19', '8888', 4, '르노', 2020, 54000, 290000, 55, '2020-04-11');");
+        sql.add("insert into camping_car VALUES(46, 'T4', '3211', 9, '폭스바겐', 2014, 56000, 240000, 1, '2014-04-29');");
+        sql.add("insert into camping_car VALUES(47, 'A7', '5883', 20, '아우디', 2017, 33000, 150000, 2, '2017-11-06');");
+        sql.add("insert into camping_car VALUES(48, 'RAY15', '4881', 2, 'KIA', 2015, 52000, 270000, 3, '2015-12-12');");
+        sql.add("insert into camping_car VALUES(49, 'A6', '8399', 5, '아우디', 2016, 49000, 250000, 4, '2016-06-19');");
+        sql.add("insert into camping_car VALUES(50, 'RAY15', '4408', 21, 'KIA', 2015, 58000, 230000, 5, '2015-03-17');");
+        sql.add("insert into camping_car VALUES(51, '코란도', '2186', 11, '쌍용', 2020, 10000, 190000, 6, '2020-11-20');");
+        sql.add("insert into camping_car VALUES(52, 'A9', '6782', 2, '아우디', 2019, 11000, 160000, 7, '2019-07-18');");
+        sql.add("insert into camping_car VALUES(53, '포터2', '2902', 7, '현대', 2016, 45000, 210000, 8, '2016-08-17');");
+        sql.add("insert into camping_car VALUES(54, 'RAY13', '9572', 10, 'KIA', 2013, 51000, 300000, 9, '2013-07-21');");
+        sql.add("insert into camping_car VALUES(55, '마스터19', '8888', 4, '르노', 2020, 54000, 290000, 10, '2020-04-11');");
 
         try {
             stmt = conn.createStatement();
@@ -391,7 +391,6 @@ public class DbReset {
 
         sql.add("INSERT INTO Car_Rent VALUES (22, 22, 22, 22, '2019-10-05', 10, 780000, '2019-10-20', '청구내역없음', 0)");
         sql.add("INSERT INTO Car_Rent VALUES (23, 23, 23, 23, '2018-10-05', 8, 580000, '2018-10-18', '차 긁힘', 150000)");
-        sql.add("INSERT INTO Car_Rent VALUES (56, 56, 56, 56, '2019-11-04', 15, 470000, '2019-11-19', '청구내역없음', 0)");
         sql.add("INSERT INTO Car_Rent VALUES (24, 24, 24, 24, '2020-05-05', 21, 1200000, '2020-05-20', '청구내역없음', 0)");
         sql.add("INSERT INTO Car_Rent VALUES (25, 25, 25, 25, '2019-05-19', 7, 780000, '2019-06-05', '유리 깨짐', 540000)");
         sql.add("INSERT INTO Car_Rent VALUES (26, 26, 26, 26, '2018-09-18', 10, 640000, '2018-09-30', '범퍼 긁힘', 670000)");
@@ -415,16 +414,16 @@ public class DbReset {
         sql.add("insert into Car_Rent VALUES(43, 43, 43, 43, '2020-03-21', 5, 900000, '2020-03-31', 'X', 0);");
         sql.add("insert into Car_Rent VALUES(44, 44, 44, 44, '2020-03-26', 2, 580000, '2020-03-30', 'X', 0);");
         sql.add("insert into Car_Rent VALUES(45, 45, 45, 45, '2020-04-05', 3, 450000, '2020-04-11', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(46, 46, 46, 46, '2020-05-13', 1, 300000, '2020-05-15', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(47, 47, 47, 47, '2020-05-15', 3, 630000, '2020-05-21', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(48, 48, 48, 48, '2020-05-18', 2, 320000, '2020-05-22', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(49, 49, 49, 49, '2020-05-24', 5, 800000, '2020-06-04', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(50, 50, 50, 50, '2020-06-03', 2, 540000, '2020-06-07', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(51, 51, 51, 51, '2020-06-06', 1, 540000, '2020-06-08', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(52, 52, 52, 52, '2020-06-09', 3, 540000, '2020-06-15', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(53, 53, 53, 53, '2020-06-11', 3, 540000, '2020-06-17', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(54, 54, 54, 54, '2020-06-14', 2, 540000, '2020-06-18', 'X', 0);");
-        sql.add("insert into Car_Rent VALUES(55, 55, 55, 55, '2020-06-20', 1, 540000, '2020-06-22', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(46, 46, 1, 1, '2020-05-13', 1, 300000, '2020-05-15', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(47, 47, 2, 2, '2020-05-15', 3, 630000, '2020-05-21', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(48, 48, 3, 3, '2020-05-18', 2, 320000, '2020-05-22', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(49, 49, 4, 4, '2020-05-24', 5, 800000, '2020-06-04', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(50, 50, 5, 5, '2020-06-03', 2, 540000, '2020-06-07', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(51, 51, 6, 6, '2020-06-06', 1, 540000, '2020-06-08', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(52, 52, 7, 7, '2020-06-09', 3, 540000, '2020-06-15', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(53, 53, 8, 8, '2020-06-11', 3, 540000, '2020-06-17', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(54, 54, 9, 9, '2020-06-14', 2, 540000, '2020-06-18', 'X', 0);");
+        sql.add("insert into Car_Rent VALUES(55, 55, 10, 10, '2020-06-20', 1, 540000, '2020-06-22', 'X', 0);");
 
 
         try {
@@ -460,15 +459,15 @@ public class DbReset {
         sql.add("INSERT INTO Car_Check VALUES (19, 19, 'Bumber Broken', 'Clear', 'Clear', 'Clear', 'Y')");
         sql.add("INSERT INTO Car_Check VALUES (20, 20, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
         sql.add("INSERT INTO Car_Check VALUES (21, 21, 'Clear', 'Window scratch', 'Clear', 'Clear', 'Y')");
-        sql.add("INSERT INTO Car_Check VALUES (22, 25, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
-        sql.add("INSERT INTO Car_Check VALUES (23, 24, 'Clear', 'Window scratch', 'Clear', 'Clear', 'Y')");
-        sql.add("INSERT INTO Car_Check VALUES (24, 23, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
-        sql.add("INSERT INTO Car_Check VALUES (25, 22, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
-        sql.add("INSERT INTO Car_Check VALUES (26, 30, 'Clear', 'Window scratch', 'Clear', 'Clear', 'Y')");
-        sql.add("INSERT INTO Car_Check VALUES (27, 29, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("INSERT INTO Car_Check VALUES (22, 22, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("INSERT INTO Car_Check VALUES (23, 23, 'Clear', 'Window scratch', 'Clear', 'Clear', 'Y')");
+        sql.add("INSERT INTO Car_Check VALUES (24, 24, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("INSERT INTO Car_Check VALUES (25, 25, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("INSERT INTO Car_Check VALUES (26, 26, 'Clear', 'Window scratch', 'Clear', 'Clear', 'Y')");
+        sql.add("INSERT INTO Car_Check VALUES (27, 27, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
         sql.add("INSERT INTO Car_Check VALUES (28, 28, 'Clear', 'Clear', 'Door scratch', 'Clear', 'Y')");
-        sql.add("INSERT INTO Car_Check VALUES (29, 27, 'Clear', 'Clear', 'Door scratch', 'Clear', 'Y')");
-        sql.add("INSERT INTO Car_Check VALUES (30, 26, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
+        sql.add("INSERT INTO Car_Check VALUES (29, 29, 'Clear', 'Clear', 'Door scratch', 'Clear', 'Y')");
+        sql.add("INSERT INTO Car_Check VALUES (30, 30, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
 
         sql.add("insert into Car_Check values(31, 31, 'Clear', '손잡이 깨짐', 'Clear', 'Clear', 'Y')");
         sql.add("insert into Car_Check values(32, 32, 'Clear', 'Clear', 'Clear', 'Clear', 'N')");
@@ -584,15 +583,15 @@ public class DbReset {
         sql.add("INSERT INTO Repair_List VALUES (19, 19, 19, 19, 19, '범퍼 교체', '2017-06-11', 216200, '2017-06-21', '없음')");
         sql.add("INSERT INTO Repair_List VALUES (20, 20, 20, 20, 20, '타이어 교체', '2020-01-11', 216200, '2020-01-21', '없음')");
         sql.add("INSERT INTO Repair_List VALUES (21, 21, 21, 21, 21, '타이어 교체', '2020-05-01', 210600, '2020-05-11', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (22, 27, 27, 27, 27, '엔진 교체', '2020-06-15', 216310, '2020-06-25', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (23, 28, 28, 28, 28, '유리 교체', '2019-06-11', 123000, '2019-06-21', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (24, 29, 29, 29, 29, '유리 교체', '2020-02-23', 321600, '2020-03-03', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (25, 30, 30, 30, 30, '범퍼 교체', '2019-12-16', 130000, '2019-12-26', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (27, 27, 27, 27, 27, '엔진 교체', '2020-06-15', 216310, '2020-06-25', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (28, 28, 28, 28, 28, '유리 교체', '2019-06-11', 123000, '2019-06-21', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (29, 29, 29, 29, 29, '유리 교체', '2020-02-23', 321600, '2020-03-03', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (30, 30, 30, 30, 30, '범퍼 교체', '2019-12-16', 130000, '2019-12-26', '없음')");
         sql.add("INSERT INTO Repair_List VALUES (26, 26, 26, 26, 26, '엔진 교체', '2018-12-11', 213000, '2018-12-21', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (27, 22, 22, 22, 22, '내부 수리', '2020-05-12', 234500, '2020-05-22', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (28, 23, 23, 23, 23, '네비게이션 수리', '2020-04-03', 130000, '2020-04-13', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (29, 24, 24, 24, 24, '내부 수리', '2019-05-01', 210000, '2019-05-11', '없음')");
-        sql.add("INSERT INTO Repair_List VALUES (30, 25, 25, 25, 25, '엔진 교체', '2019-10-05', 312000, '2019-10-15', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (22, 22, 22, 22, 22, '내부 수리', '2020-05-12', 234500, '2020-05-22', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (23, 23, 23, 23, 23, '네비게이션 수리', '2020-04-03', 130000, '2020-04-13', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (24, 24, 24, 24, 24, '내부 수리', '2019-05-01', 210000, '2019-05-11', '없음')");
+        sql.add("INSERT INTO Repair_List VALUES (25, 25, 25, 25, 25, '엔진 교체', '2019-10-05', 312000, '2019-10-15', '없음')");
 
         sql.add("insert into Repair_List values(31, 31, 31, 31, 31, 'Window change', '2020-01-10', 200000, '2020-01-13', 'Nothing');");
         sql.add("insert into Repair_List values(32, 32, 32, 32, 32, 'Bumper', '2020-01-25', 150000, '2020-01-27', 'Nothing');");
