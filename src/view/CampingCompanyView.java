@@ -22,7 +22,6 @@ public class CampingCompanyView extends View{
 	public JButton btnInput, btnDelete, btnUpdate;
 
 	public CampingCompanyView() {
-		super();
 		AppManager.getInstance().setCampingCompanyView(this);
 	}
 
