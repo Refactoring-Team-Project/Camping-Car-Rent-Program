@@ -17,92 +17,29 @@ import javax.swing.table.DefaultTableModel;
 import common.AppManager;
 import common.Constants;
 
-public class RepairListView extends JPanel {
+public class RepairListView extends View {
 
-	public DefaultTableModel repairListDefaultTable;
-	public JTable repairListDBResult;
-	JScrollPane repairListScrollPane;
-	JPanel updatePanel, buttonPanel;
 	public JButton btnDelete, btnUpdate;
-	JLabel[] repairListFieldName;
-	public JTextField[] repairListInputField;
-
 
 	public RepairListView() {
-		super.setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(780, 420));
-
 		AppManager.getInstance().setRepairListView(this);
-
-		initScrollPane();
-		initUpdatePanel();
-		initButtonPanel();
-
 	}
-	public void initUpdatePanel() {
-		updatePanel = new JPanel();
 
-		repairListFieldName = new JLabel[Constants.REPAIRLIST_FIELDNUM];
-		repairListInputField = new JTextField[Constants.REPAIRLIST_FIELDNUM];
-
+	@Override
+	public void setInputFiledName() {
+		fieldName = new JLabel[Constants.REPAIRLIST_FIELDNUM];
+		inputField = new JTextField[Constants.REPAIRLIST_FIELDNUM];
 		for (int i = 0; i < Constants.REPAIRLIST_FIELDNUM; i++) {
-			repairListFieldName[i] = new JLabel(Constants.REPAIRLIST_FIELDSTIRNG[i]);
-			updatePanel.add(repairListFieldName[i]);
-
-			repairListInputField[i] = new JTextField("", Constants.REPAIRLIST_FIELDLENGTH[i]);
-			updatePanel.add(repairListInputField[i]);
+			fieldName[i] = new JLabel(Constants.REPAIRLIST_FIELDSTIRNG[i]);
+			inputField[i] = new JTextField(Constants.REPAIRLIST_FIELDLENGTH[i]);
 		}
-
-		for(int i = 0; i < 5; i++) {
-			repairListInputField[i].setEnabled(false);
-		}
-
-		add(updatePanel);
-		updatePanel.setPreferredSize(new Dimension(780, 60));
 	}
 
-	public void initScrollPane() {
-		repairListDefaultTable = new DefaultTableModel() {
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
+	@Override
+	public void setButtons() {
+		buttons = new JButton[] {
+				btnDelete = new JButton("삭제"),
+		btnUpdate = new JButton("변경")
 		};
-		repairListDBResult = new JTable(repairListDefaultTable);
-		repairListDBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		repairListScrollPane = new JScrollPane(repairListDBResult);
-
-		add(repairListScrollPane);
-		repairListScrollPane.setPreferredSize(new Dimension(780, 300));
-	}
-
-	public void initButtonPanel() {
-		buttonPanel = new JPanel();
-
-		btnDelete = new JButton("삭제");
-		btnUpdate = new JButton("변경");
-
-		buttonPanel.add(btnDelete);
-		buttonPanel.add(btnUpdate);
-
-		add(buttonPanel);
-
-		buttonPanel.setPreferredSize(new Dimension(780, 50));
-	}
-
-
-	public void addButtonListener(ActionListener listener) {
-		btnDelete.addActionListener(listener);
-		btnUpdate.addActionListener(listener);
-	}
-
-	public void addMouseListener(MouseListener listener) {
-		repairListDBResult.addMouseListener(listener);
-	}
-
-	public void fieldReset() {
-		for (JTextField inputField : repairListInputField) {
-			inputField.setText("");
-		}
-		repaint();
 	}
 }

@@ -11,26 +11,70 @@ import javax.swing.JOptionPane;
 
 import common.AppManager;
 import common.Constants;
+import model.CampingCarModel;
 import model.CarCheckModel;
 import model.CarRentModel;
+import view.CampingCarView;
 import view.MainView;
 import view.RentCarView;
 
-public class RentCarController {
-	MainView _mainView;
-	RentCarView _rentCarView;
+public class RentCarController extends Controller {
+	private RentCarView rentCarView;
 	private CarRentModel carRentModel;
 	private CarCheckModel carCheckModel;
 
-	public RentCarController() {
-		this._mainView = AppManager.getInstance().getView();
-		this._rentCarView = AppManager.getInstance().getRentCarView();
-		carRentModel = new CarRentModel();
-		carCheckModel = new CarCheckModel();
-		this._rentCarView.addButtonListener(new ButtonListener());
-		this._rentCarView.addMouseListener(new RentCarMouseListener());
-		this._mainView.addAdminButtonListener(Constants.RENTCAR, new RentCarButtonListener());
+	@Override
+	public void setMainView() {
+		super.setMainView();
+		this._mainView.addAdminButtonListener(Constants.RENTCAR, new mainButtonListener());
+	}
 
+	@Override
+	public void initModel() {
+		dataModel = new CarRentModel();
+		carRentModel = (CarRentModel) dataModel;
+
+		carCheckModel = new CarCheckModel();
+	}
+
+	@Override
+	public void initView() {
+		this.thisView = AppManager.getInstance().getRentCarView();
+		rentCarView = (RentCarView) this.thisView;
+		this.thisView.addButtonListener(new ButtonListener());
+		this.thisView.addMouseListener(new RentCarMouseListener());
+	}
+
+	@Override
+	public void setColumnName() {
+		column = new Object[]{ "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
+				"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
+	}
+	@Override
+	public void setModelColumn(String column, String value) {
+		switch(column){
+			case "rentno":
+				carCheckModel.setRentno(Integer.parseInt(value));
+				break;
+			case "carid":
+				carCheckModel.setCarid(Integer.parseInt(value));
+				break;
+			case "explain_front":
+				carCheckModel.setExplain_front(value);
+				break;
+			case "explain_left":
+				carCheckModel.setExplain_left(value);
+				break;
+			case "explain_right":
+				carCheckModel.setExplain_right(value);
+				break;
+			case "explain_back":
+				carCheckModel.setExplain_back(value);
+				break;
+			case "repair_required":
+				carCheckModel.setRepair_required(value);
+				break;
+		}
 	}
 
 
@@ -39,32 +83,11 @@ public class RentCarController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (e.getSource() == _rentCarView.btnReturn) {
+				if (e.getSource() == rentCarView.btnReturn) {
 					if (_mainView.getCurRow() != -1) {
-						if (_rentCarView.rentCarListInputField[0].getText().length() > 0) {
-							carCheckModel.setRentno(Integer.parseInt(_rentCarView.rentCarListInputField[0].getText()));
-						}
-						if (_rentCarView.rentCarListInputField[1].getText().length() > 0) {
-							carCheckModel.setCarid(Integer.parseInt(_rentCarView.rentCarListInputField[1].getText()));
-						}
-						if (_rentCarView.rentCarListInputField[2].getText().length() > 0) {
-							carCheckModel.setExplain_front(_rentCarView.rentCarListInputField[2].getText());
-						}
-						if (_rentCarView.rentCarListInputField[3].getText().length() > 0) {
-							carCheckModel.setExplain_left(_rentCarView.rentCarListInputField[3].getText());
-						}
-						if (_rentCarView.rentCarListInputField[4].getText().length() > 0) {
-							carCheckModel.setExplain_right(_rentCarView.rentCarListInputField[4].getText());
-						}
-						if (_rentCarView.rentCarListInputField[5].getText().length() > 0) {
-							carCheckModel.setExplain_back(_rentCarView.rentCarListInputField[5].getText());
-						}
-						if (_rentCarView.rentCarListInputField[6].getText().length() > 0) {
-							carCheckModel.setRepair_required(_rentCarView.rentCarListInputField[6].getText());
-						} else throw new NullPointerException();
-
+						setModel();
 						carCheckModel.insert(_mainView.getConn());
-						_rentCarView.fieldReset();
+						thisView.fieldReset();
 						JOptionPane.showMessageDialog(null, "반환정보를 점검내역에 저장하였습니다.");
 					}
 				}
@@ -81,39 +104,18 @@ public class RentCarController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_rentCarView.rentCarDBResult.getSelectedRow());
-			_mainView.setCurCol(_rentCarView.rentCarDBResult.getSelectedColumn());
+			_mainView.setCurRow(thisView.DBResult.getSelectedRow());
+			_mainView.setCurCol(thisView.DBResult.getSelectedColumn());
 
-			_rentCarView.rentCarListInputField[0]
-					.setText(_rentCarView.rentCarDBResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
-			_rentCarView.rentCarListInputField[0].setDisabledTextColor(Color.black);
+			rentCarView.inputField[0]
+					.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
+			rentCarView.inputField[0].setDisabledTextColor(Color.black);
 
-			_rentCarView.rentCarListInputField[1]
-					.setText(_rentCarView.rentCarDBResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
-			_rentCarView.rentCarListInputField[1].setDisabledTextColor(Color.black);
+			rentCarView.inputField[1]
+					.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
+			rentCarView.inputField[1].setDisabledTextColor(Color.black);
 		}
 	}
 
-	private class RentCarButtonListener implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			_mainView.changePanel(_rentCarView);
-			_mainView.setCurRow(-1);
-			_mainView.setCurCol(-1);
-
-			ArrayList<Object[]> arr = carRentModel.select(_mainView.getConn());
-			Object column[] = { "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
-					"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
-			arr.add(0, column);
-			_rentCarView.rentCarDefaultTable.setDataVector(null, arr.get(0));
-			for (int i = 1; i < arr.size(); i++) {
-				_rentCarView.rentCarDefaultTable.addRow(arr.get(i));
-			}
-			System.out.println("rent carrrrrrrrrr");
-			_mainView.revalidate();
-			_mainView.repaint();
-		}
-
-	}
 }
