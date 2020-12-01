@@ -52,11 +52,12 @@ public abstract class Controller {
         public void mouseClicked(MouseEvent e) {
             _mainView.setCurRow(thisView.DBResult.getSelectedRow());
             _mainView.setCurCol(thisView.DBResult.getSelectedColumn());
+            mainMouseEvent(e);
         }
     }
+    public void mainMouseEvent(MouseEvent e) {}
 
     public class mainButtonListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
            mainViewButtonEvent(e);

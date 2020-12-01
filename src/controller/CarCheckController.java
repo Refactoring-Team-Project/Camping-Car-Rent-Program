@@ -31,8 +31,7 @@ public class CarCheckController extends Controller {
 
 	@Override
 	public void initModel() {
-		dataModel = new RepairListModel();
-		repairListModel = (RepairListModel) dataModel;
+		repairListModel = new RepairListModel();
 
 		dataModel = new CarCheckModel();
 		carCheckModel = (CarCheckModel) dataModel;
@@ -97,13 +96,11 @@ public class CarCheckController extends Controller {
 						if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
 							setModel();
 							repairListModel.insert(_mainView.getConn());
-							//	thisView.fieldReset();
+							thisView.fieldReset();
 						} else if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
 							JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
 					} else
 						JOptionPane.showMessageDialog(null, "요청할 데이터를 선택해 주세요.");
-
-					thisView.fieldReset();
 				}
 			} catch (NullPointerException e2) {
 				JOptionPane.showMessageDialog(null, "null");
@@ -112,23 +109,20 @@ public class CarCheckController extends Controller {
 
 	}
 
-	public class mainMouseListener extends MouseAdapter {
-		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(thisView.DBResult.getSelectedRow());
-			_mainView.setCurCol(thisView.DBResult.getSelectedColumn());
+	@Override
+	public void mainMouseEvent(MouseEvent e) {
+		super.mainMouseEvent(e);
+		carCheckModel.selectedData(_mainView.getConn(),
+				thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
-			carCheckModel.selectedData(_mainView.getConn(),
-					carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+		thisView.inputField[1].setText(Integer.toString(carCheckModel.getSelectedCarid()));
+		thisView.inputField[1].setDisabledTextColor(Color.black);
 
-			carCheckView.inputField[1].setText(Integer.toString(carCheckModel.getSelectedCarid()));
-			carCheckView.inputField[1].setDisabledTextColor(Color.black);
+		thisView.inputField[3].setText(Integer.toString(carCheckModel.getSelectedCompid()));
+		thisView.inputField[3].setDisabledTextColor(Color.black);
 
-			carCheckView.inputField[3].setText(Integer.toString(carCheckModel.getSelectedCompid()));
-			carCheckView.inputField[3].setDisabledTextColor(Color.black);
-
-			carCheckView.inputField[4].setText(Integer.toString(carCheckModel.getSelectedLicense_no()));
-			carCheckView.inputField[4].setDisabledTextColor(Color.black);
-		}
+		thisView.inputField[4].setText(Integer.toString(carCheckModel.getSelectedLicense_no()));
+		thisView.inputField[4].setDisabledTextColor(Color.black);
 	}
 
 
