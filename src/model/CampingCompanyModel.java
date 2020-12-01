@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class CampingCompanyModel {
+public class CampingCompanyModel extends Model {
 	int compid;
 	String compname;
 	String address;

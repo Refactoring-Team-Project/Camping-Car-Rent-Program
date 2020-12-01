@@ -14,20 +14,56 @@ import model.RentCustomerModel;
 import view.MainView;
 import view.RentCustomerView;
 
-public class RentCustomerController {
-	MainView _mainView;
-	RentCustomerView _rentCustView;
-	private RentCustomerModel rentCustModel;
+public class RentCustomerController extends Controller{
 
-	public RentCustomerController() {
-		this._mainView = AppManager.getInstance().getView();
-		this._rentCustView = AppManager.getInstance().getRentCustomerView();
-		rentCustModel = new RentCustomerModel();
-		this._rentCustView.addButtonListener(new ButtonListener());
-		this._rentCustView.addMouseListener(new RentCustomerMouseListener());
-//		this._mainView.addRentCustListener(new RentCustomerButtonListener());
-		this._mainView.addAdminButtonListener(Constants.CUSTOMER, new RentCustomerButtonListener());
+	private RentCustomerView rentCustomerView;
+	private RentCustomerModel rentCustomerModel;
 
+	@Override
+	public void setMainView() {
+		super.setMainView();
+		this._mainView.addAdminButtonListener(Constants.CUSTOMER, new mainButtonListener());
+	}
+
+	@Override
+	public void initModel() {
+		dataModel = new RentCustomerModel();
+		rentCustomerModel = (RentCustomerModel) dataModel;
+	}
+
+	@Override
+	public void initView() {
+		this.thisView = AppManager.getInstance().getRentCustomerView();
+		rentCustomerView = (RentCustomerView) this.thisView;
+		this.thisView.addButtonListener(new ButtonListener());
+		this.thisView.addMouseListener(new mainMouseListener());
+	}
+
+	@Override
+	public void setColumnName() {
+		column = new Object[]{ "LICENSE_NO", "NAME", "ADDRESS", "PHONE", "EMAIL" };
+
+	}
+
+	@Override
+	public void setModelColumn(String column, String value) {
+		switch (column){
+		case "license_no":
+			rentCustomerModel.setLicense_no(Integer.parseInt(value));
+			break;
+		case "name":
+			rentCustomerModel.setName(value);
+			break;
+		case "address":
+			rentCustomerModel.setAddress(value);
+			break;
+		case "phone":
+			rentCustomerModel.setPhone(value);
+			break;
+		case "email":
+			rentCustomerModel.setEmail(value);
+			break;
+		}
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -35,59 +71,26 @@ public class RentCustomerController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (e.getSource() == _rentCustView.btnInput) {
-					if (_rentCustView.rentCustomerInputField[0].getText().length() > 0) {
-						rentCustModel.setLicense_no(Integer.parseInt(_rentCustView.rentCustomerInputField[0].getText()));
-					} else
-						throw new NullPointerException();
-
-					if (_rentCustView.rentCustomerInputField[1].getText().length() > 0) {
-						rentCustModel.setName(_rentCustView.rentCustomerInputField[1].getText());
-					}
-					if (_rentCustView.rentCustomerInputField[2].getText().length() > 0) {
-						rentCustModel.setAddress(_rentCustView.rentCustomerInputField[2].getText());
-					}
-					if (_rentCustView.rentCustomerInputField[3].getText().length() > 0) {
-						rentCustModel.setPhone(_rentCustView.rentCustomerInputField[3].getText());
-					}
-					if (_rentCustView.rentCustomerInputField[4].getText().length() > 0) {
-						rentCustModel.setEmail(_rentCustView.rentCustomerInputField[4].getText());
-					}
-
-					rentCustModel.insert(_mainView.getConn());
-					_rentCustView.fieldReset();
+				if (e.getSource() == rentCustomerView.btnInput) {
+					setModel();
+					rentCustomerModel.insert(_mainView.getConn());
+					thisView.fieldReset();
 				}
 
-				else if (e.getSource() == _rentCustView.btnDelete) {
+				else if (e.getSource() == rentCustomerView.btnDelete) {
 					if (_mainView.getCurRow() != -1) {
-						rentCustModel.delete(_mainView.getConn(),
-								_rentCustView.rentCustomerDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-						_rentCustView.fieldReset();
+						rentCustomerModel.delete(_mainView.getConn(),
+								thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						thisView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 
-				} else if (e.getSource() == _rentCustView.btnUpdate) {
+				} else if (e.getSource() == rentCustomerView.btnUpdate) {
 					if (_mainView.getCurRow() != -1) {
-						if (_rentCustView.rentCustomerInputField[0].getText().length() > 0) {
-							rentCustModel.setLicense_no(Integer.parseInt(_rentCustView.rentCustomerInputField[0].getText()));
-						} else
-							throw new NullPointerException();
-
-						if (_rentCustView.rentCustomerInputField[1].getText().length() > 0) {
-							rentCustModel.setName(_rentCustView.rentCustomerInputField[1].getText());
-						}
-						if (_rentCustView.rentCustomerInputField[2].getText().length() > 0) {
-							rentCustModel.setAddress(_rentCustView.rentCustomerInputField[2].getText());
-						}
-						if (_rentCustView.rentCustomerInputField[3].getText().length() > 0) {
-							rentCustModel.setPhone(_rentCustView.rentCustomerInputField[3].getText());
-						}
-						if (_rentCustView.rentCustomerInputField[4].getText().length() > 0) {
-							rentCustModel.setEmail(_rentCustView.rentCustomerInputField[4].getText());
-						}
-						rentCustModel.update(_mainView.getConn(),
-								_rentCustView.rentCustomerDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-						_rentCustView.fieldReset();
+						setModel();
+						rentCustomerModel.update(_mainView.getConn(),
+								thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						thisView.fieldReset();
 					} else
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
 
@@ -96,38 +99,6 @@ public class RentCustomerController {
 				JOptionPane.showMessageDialog(null, "null");
 
 			}
-		}
-	}
-
-	private class RentCustomerMouseListener extends MouseAdapter {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_rentCustView.rentCustomerDBResult.getSelectedRow());
-			_mainView.setCurCol(_rentCustView.rentCustomerDBResult.getSelectedColumn());
-		}
-
-	}
-
-	private class RentCustomerButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			_mainView.changePanel(_rentCustView);
-			_mainView.setCurRow(-1);
-			_mainView.setCurCol(-1);
-
-			ArrayList<Object[]> arr = rentCustModel.select(_mainView.getConn());
-			Object column[] = { "LICENSE_NO", "NAME", "ADDRESS", "PHONE", "EMAIL" };
-			arr.add(0, column);
-			_rentCustView.rentCustomerDefaultTable.setDataVector(null, arr.get(0));
-			for (int i = 1; i < arr.size(); i++) {
-				_rentCustView.rentCustomerDefaultTable.addRow(arr.get(i));
-			}
-			System.out.println("cust");
-			_mainView.add(AppManager.getInstance().getRentCustomerView());
-			_mainView.revalidate();
-			_mainView.repaint();
 		}
 	}
 

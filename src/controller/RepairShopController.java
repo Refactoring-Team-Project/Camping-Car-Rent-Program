@@ -10,23 +10,65 @@ import javax.swing.JOptionPane;
 
 import common.AppManager;
 import common.Constants;
+import model.CampingCarModel;
 import model.RepairShopModel;
+import view.CampingCarView;
 import view.MainView;
 import view.RepairShopView;
 
-public class RepairShopController {
-	MainView _mainView;
-	RepairShopView _repairShopView;
+public class RepairShopController extends Controller {
+
+	private RepairShopView repairShopView;
 	private RepairShopModel repairShopModel;
 
-	public RepairShopController() {
-		this._mainView = AppManager.getInstance().getView();
-		this._repairShopView = AppManager.getInstance().getRepairShopView();
-		repairShopModel = new RepairShopModel();
-		this._repairShopView.addButtonListener(new ButtonListener());
-		this._repairShopView.addMouseListener(new RepairShopMouseListener());
-//		this._mainView.addRepairShopListener(new RepairShopButtonListener());
-		this._mainView.addAdminButtonListener(Constants.REPAIRSHOP, new RepairShopButtonListener());
+	@Override
+	public void setMainView() {
+		super.setMainView();
+		this._mainView.addAdminButtonListener(Constants.REPAIRSHOP, new mainButtonListener());
+	}
+
+	@Override
+	public void initModel() {
+		dataModel = new RepairShopModel();
+		repairShopModel = (RepairShopModel) dataModel;
+	}
+
+	@Override
+	public void initView() {
+		this.thisView = AppManager.getInstance().getRepairShopView();
+		repairShopView = (RepairShopView) this.thisView;
+		this.thisView.addButtonListener(new ButtonListener());
+		this.thisView.addMouseListener(new mainMouseListener());
+	}
+
+	@Override
+	public void setColumnName() {
+		column = new Object[]{"SHOP ID", "SHOP NAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
+
+	}
+
+	@Override
+	public void setModelColumn(String column, String value) {
+		switch (column){
+			case "shopid":
+				repairShopModel.setShopid(Integer.parseInt(value));
+				break;
+			case "shopname":
+				repairShopModel.setShopid(Integer.parseInt(value));
+				break;
+			case "address":
+				repairShopModel.setAddress(value);
+				break;
+			case "phone":
+				repairShopModel.setPhone(value);
+				break;
+			case "manager_name":
+				repairShopModel.setManager_name(value);
+				break;
+			case "manager_email":
+				repairShopModel.setManager_email(value);
+				break;
+		}
 	}
 
 	private class ButtonListener implements ActionListener {
@@ -34,62 +76,24 @@ public class RepairShopController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (e.getSource() == _repairShopView.btnInput) {
-					if (_repairShopView.repairShopInputField[0].getText().length() > 0) {
-						repairShopModel.setShopid(Integer.parseInt(_repairShopView.repairShopInputField[0].getText()));
-					} else
-						throw new NullPointerException();
-					if (_repairShopView.repairShopInputField[1].getText().length() > 0) {
-						repairShopModel.setShopname(_repairShopView.repairShopInputField[1].getText());
-					}
-					if (_repairShopView.repairShopInputField[2].getText().length() > 0) {
-						repairShopModel.setAddress(_repairShopView.repairShopInputField[2].getText());
-					}
-					if (_repairShopView.repairShopInputField[3].getText().length() > 0) {
-						repairShopModel.setPhone(_repairShopView.repairShopInputField[3].getText());
-					}
-					if (_repairShopView.repairShopInputField[4].getText().length() > 0) {
-						repairShopModel.setManager_name(_repairShopView.repairShopInputField[4].getText());
-					}
-					if (_repairShopView.repairShopInputField[5].getText().length() > 0) {
-						repairShopModel.setManager_email(_repairShopView.repairShopInputField[5].getText());
-					}
-
+				if (e.getSource() == repairShopView.btnInput) {
+					setModel();
 					repairShopModel.insert(_mainView.getConn());
-
-					_repairShopView.fieldReset();
-				} else if (e.getSource() == _repairShopView.btnDelete) {
+					thisView.fieldReset();
+				} else if (e.getSource() == repairShopView.btnDelete) {
 					if (_mainView.getCurRow() != -1) {
 						repairShopModel.delete(_mainView.getConn(),
-								_repairShopView.repairShopDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-						_repairShopView.fieldReset();
+								thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						thisView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
 					}
-				} else if (e.getSource() == _repairShopView.btnUpdate) {
+				} else if (e.getSource() == repairShopView.btnUpdate) {
 					if (_mainView.getCurRow() != -1) { // 변경할 데이터를 선택한 것이 있다면
-						if (_repairShopView.repairShopInputField[0].getText().length() > 0) {
-							repairShopModel.setShopid(Integer.parseInt(_repairShopView.repairShopInputField[0].getText()));
-						} else
-							throw new NullPointerException();
-						if (_repairShopView.repairShopInputField[1].getText().length() > 0) {
-							repairShopModel.setShopname(_repairShopView.repairShopInputField[1].getText());
-						}
-						if (_repairShopView.repairShopInputField[2].getText().length() > 0) {
-							repairShopModel.setAddress(_repairShopView.repairShopInputField[2].getText());
-						}
-						if (_repairShopView.repairShopInputField[3].getText().length() > 0) {
-							repairShopModel.setPhone(_repairShopView.repairShopInputField[3].getText());
-						}
-						if (_repairShopView.repairShopInputField[4].getText().length() > 0) {
-							repairShopModel.setManager_name(_repairShopView.repairShopInputField[4].getText());
-						}
-						if (_repairShopView.repairShopInputField[5].getText().length() > 0) {
-							repairShopModel.setManager_email(_repairShopView.repairShopInputField[5].getText());
-						}
+						setModel();
 						repairShopModel.update(_mainView.getConn(),
-								_repairShopView.repairShopDBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-						_repairShopView.fieldReset();
+								thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+						thisView.fieldReset();
 					} else {
 						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
 					}
@@ -98,39 +102,6 @@ public class RepairShopController {
 			} catch (NullPointerException e2) {
 				JOptionPane.showMessageDialog(null, "null");
 			}
-		}
-
-	}
-
-	private class RepairShopMouseListener extends MouseAdapter {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_repairShopView.repairShopDBResult.getSelectedRow());
-			_mainView.setCurCol(_repairShopView.repairShopDBResult.getSelectedColumn());
-		}
-
-	}
-
-	private class RepairShopButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			_mainView.changePanel(_repairShopView);
-			_mainView.setCurRow(-1);
-			_mainView.setCurCol(-1);
-
-			ArrayList<Object[]> arr = repairShopModel.select(_mainView.getConn());
-			Object column[] = {"SHOP ID", "SHOP NAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
-			arr.add(0, column);
-			_repairShopView.repairShopDefaultTable.setDataVector(null, arr.get(0));
-			for (int i = 1; i < arr.size(); i++) {
-				_repairShopView.repairShopDefaultTable.addRow(arr.get(i));
-			}
-			System.out.println("repairShop");
-			_mainView.add(AppManager.getInstance().getRepairShopView());
-			_mainView.revalidate();
-			_mainView.repaint();
 		}
 
 	}

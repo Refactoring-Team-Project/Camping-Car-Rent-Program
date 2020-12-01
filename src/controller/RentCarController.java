@@ -29,7 +29,6 @@ public class RentCarController {
 		carCheckModel = new CarCheckModel();
 		this._rentCarView.addButtonListener(new ButtonListener());
 		this._rentCarView.addMouseListener(new RentCarMouseListener());
-//		this._mainView.addRentCarListener(new RentCarButtonListener());
 		this._mainView.addAdminButtonListener(Constants.RENTCAR, new RentCarButtonListener());
 
 	}
@@ -42,26 +41,26 @@ public class RentCarController {
 			try {
 				if (e.getSource() == _rentCarView.btnReturn) {
 					if (_mainView.getCurRow() != -1) {
-						if (_rentCarView.tf[0].getText().length() > 0) {
-							carCheckModel.setRentno(Integer.parseInt(_rentCarView.tf[0].getText()));
+						if (_rentCarView.rentCarListInputField[0].getText().length() > 0) {
+							carCheckModel.setRentno(Integer.parseInt(_rentCarView.rentCarListInputField[0].getText()));
 						}
-						if (_rentCarView.tf[1].getText().length() > 0) {
-							carCheckModel.setCarid(Integer.parseInt(_rentCarView.tf[1].getText()));
+						if (_rentCarView.rentCarListInputField[1].getText().length() > 0) {
+							carCheckModel.setCarid(Integer.parseInt(_rentCarView.rentCarListInputField[1].getText()));
 						}
-						if (_rentCarView.tf[2].getText().length() > 0) {
-							carCheckModel.setExplain_front(_rentCarView.tf[2].getText());
+						if (_rentCarView.rentCarListInputField[2].getText().length() > 0) {
+							carCheckModel.setExplain_front(_rentCarView.rentCarListInputField[2].getText());
 						}
-						if (_rentCarView.tf[3].getText().length() > 0) {
-							carCheckModel.setExplain_left(_rentCarView.tf[3].getText());
+						if (_rentCarView.rentCarListInputField[3].getText().length() > 0) {
+							carCheckModel.setExplain_left(_rentCarView.rentCarListInputField[3].getText());
 						}
-						if (_rentCarView.tf[4].getText().length() > 0) {
-							carCheckModel.setExplain_right(_rentCarView.tf[4].getText());
+						if (_rentCarView.rentCarListInputField[4].getText().length() > 0) {
+							carCheckModel.setExplain_right(_rentCarView.rentCarListInputField[4].getText());
 						}
-						if (_rentCarView.tf[5].getText().length() > 0) {
-							carCheckModel.setExplain_back(_rentCarView.tf[5].getText());
+						if (_rentCarView.rentCarListInputField[5].getText().length() > 0) {
+							carCheckModel.setExplain_back(_rentCarView.rentCarListInputField[5].getText());
 						}
-						if (_rentCarView.tf[6].getText().length() > 0) {
-							carCheckModel.setRepair_required(_rentCarView.tf[6].getText());
+						if (_rentCarView.rentCarListInputField[6].getText().length() > 0) {
+							carCheckModel.setRepair_required(_rentCarView.rentCarListInputField[6].getText());
 						} else throw new NullPointerException();
 
 						carCheckModel.insert(_mainView.getConn());
@@ -82,16 +81,16 @@ public class RentCarController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(_rentCarView.dbResult.getSelectedRow());
-			_mainView.setCurCol(_rentCarView.dbResult.getSelectedColumn());
+			_mainView.setCurRow(_rentCarView.rentCarDBResult.getSelectedRow());
+			_mainView.setCurCol(_rentCarView.rentCarDBResult.getSelectedColumn());
 
-			_rentCarView.tf[0]
-					.setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
-			_rentCarView.tf[0].setDisabledTextColor(Color.black);
+			_rentCarView.rentCarListInputField[0]
+					.setText(_rentCarView.rentCarDBResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
+			_rentCarView.rentCarListInputField[0].setDisabledTextColor(Color.black);
 
-			_rentCarView.tf[1]
-					.setText(_rentCarView.dbResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
-			_rentCarView.tf[1].setDisabledTextColor(Color.black);
+			_rentCarView.rentCarListInputField[1]
+					.setText(_rentCarView.rentCarDBResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
+			_rentCarView.rentCarListInputField[1].setDisabledTextColor(Color.black);
 		}
 	}
 
@@ -107,9 +106,9 @@ public class RentCarController {
 			Object column[] = { "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
 					"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
 			arr.add(0, column);
-			_rentCarView.model.setDataVector(null, arr.get(0));
+			_rentCarView.rentCarDefaultTable.setDataVector(null, arr.get(0));
 			for (int i = 1; i < arr.size(); i++) {
-				_rentCarView.model.addRow(arr.get(i));
+				_rentCarView.rentCarDefaultTable.addRow(arr.get(i));
 			}
 			System.out.println("rent carrrrrrrrrr");
 			_mainView.revalidate();

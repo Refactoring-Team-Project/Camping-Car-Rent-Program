@@ -14,8 +14,9 @@ import common.Constants;
 // 버튼패널, 검색버튼 변수명 변경
 
 public class MainView extends JFrame {
+	public JButton btnReset;
+	JButton btnUser;
 	JButton[] btnAdmins, btnUsers;
-	JButton btnReset, btnUser;
 	JPanel adminBtnPanel, userBtnPanel, userChangePanel;
 	JPanel[] tableBtnPanel = new JPanel[2];
 
@@ -73,7 +74,6 @@ public class MainView extends JFrame {
 		}
 
 		btnReset = new JButton("초기화");
-
 		adminBtnPanel.add(btnReset);
 
 	}
@@ -142,6 +142,10 @@ public class MainView extends JFrame {
 
 	public void addUserButtonListener(ActionListener listener) {
 		btnUser.addActionListener(listener);
+	}
+
+	public void addResetButtonListener(ActionListener listener) {
+		btnReset.addActionListener(listener);
 	}
 
 	public void addAdminButtonListener(String btnName, ActionListener listener){
