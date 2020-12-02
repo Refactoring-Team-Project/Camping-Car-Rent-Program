@@ -149,13 +149,11 @@ public class MainView extends JFrame {
 	}
 
 	public void addAdminButtonListener(String btnName, ActionListener listener){
-		int idx = Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(btnName);
-		btnOnAdminPanel[idx].addActionListener(listener);
+		btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(btnName)].addActionListener(listener);
 	}
 
 	public void addUserButtonListener(String btnName, ActionListener listener){
-		int idx = Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(btnName);
-		btnOnUserPanel[idx].addActionListener(listener);
+		btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(btnName)].addActionListener(listener);
 	}
 
 	public void addResetButtonListener(ActionListener listener) {

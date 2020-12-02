@@ -13,15 +13,11 @@ import javax.swing.JOptionPane;
 public class DbUtil {
 
 	/******메서드를 메서드 객체로 전환******/
-	public static ArrayList<Object[]> getRows(Connection conn, String sql) {
-		ResultSet rs;
-		ArrayList<Object[]> arr = new ArrayList<Object[]>();
+	public static ArrayList<Object[]> getRows(Connection conn, String sqlQuery) {
+		ArrayList<Object[]> rowList = new ArrayList<>();
 		try {
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			ResultSetMetaData rsm = rs.getMetaData();
-
-			int columnCount = rsm.getColumnCount();
+			ResultSet rs = conn.createStatement().executeQuery(sqlQuery);
+			int columnCount = rs.getMetaData().getColumnCount();
 
 			while (rs.next()) {
 				Object[] data = new Object[columnCount];
@@ -29,18 +25,17 @@ public class DbUtil {
 					data[i] = rs.getString(i + 1);
 				}
 				;
-				arr.add(data);
+				rowList.add(data);
 			}
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
-		return arr;
+		return rowList;
 	}
 
-	public static void execute(Connection conn, String sql, String[] types, Object[] values) {
+	public static void execute(Connection conn, String sqlQuery, String[] types, Object[] values) {
 		try {
-
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			PreparedStatement pstmt = conn.prepareStatement(sqlQuery);
 			if (types != null)
 				for (int i = 0; i < types.length; i++) {
 					switch (types[i]) {
