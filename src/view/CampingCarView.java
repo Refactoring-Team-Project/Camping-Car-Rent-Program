@@ -23,12 +23,12 @@ public class CampingCarView extends View {
 		AppManager.getInstance().setCampingCarView(this);
 	}
 	@Override
-	public void setInputFiledName() {
+	public void setInputFieldName() {
 		fieldName = new JLabel[Constants.CAMPINGCAR_FIELDNUM];
-		inputField = new JTextField[Constants.CAMPINGCAR_FIELDNUM];
+		inputFields = new JTextField[Constants.CAMPINGCAR_FIELDNUM];
 		for (int i = 0; i < Constants.CAMPINGCAR_FIELDNUM; i++) {
 			fieldName[i] = new JLabel(Constants.CAMPINGCAR_FIELDSTRING[i]);
-			inputField[i] = new JTextField(Constants.CAMPINGCAR_FIELDLENGTH[i]);
+			inputFields[i] = new JTextField(Constants.CAMPINGCAR_FIELDLENGTH[i]);
 		}
 	}
 

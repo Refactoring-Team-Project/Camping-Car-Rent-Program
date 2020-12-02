@@ -26,12 +26,12 @@ public class RepairShopView extends View {
 	}
 
 	@Override
-	public void setInputFiledName() {
+	public void setInputFieldName() {
 		fieldName = new JLabel[Constants.REPAIRSHOP_FIELDNUM];
-		inputField = new JTextField[Constants.REPAIRSHOP_FIELDNUM];
+		inputFields = new JTextField[Constants.REPAIRSHOP_FIELDNUM];
 		for (int i = 0; i < Constants.REPAIRSHOP_FIELDNUM; i++) {
 			fieldName[i] = new JLabel(Constants.REPAIRSHOP_FIELDSTIRNG[i]);
-			inputField[i] = new JTextField(Constants.REPAIRSHOP_FIELDLENGTH[i]);
+			inputFields[i] = new JTextField(Constants.REPAIRSHOP_FIELDLENGTH[i]);
 		}
 	}
 

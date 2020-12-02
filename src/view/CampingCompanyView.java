@@ -26,12 +26,12 @@ public class CampingCompanyView extends View{
 	}
 
 	@Override
-	public void setInputFiledName() {
+	public void setInputFieldName() {
 		fieldName = new JLabel[Constants.CAMPINGCOMPANY_FIELDNUM];
-		inputField = new JTextField[Constants.CAMPINGCOMPANY_FIELDNUM];
+		inputFields = new JTextField[Constants.CAMPINGCOMPANY_FIELDNUM];
 		for (int i = 0; i < Constants.CAMPINGCOMPANY_FIELDNUM; i++) {
 			fieldName[i] = new JLabel(Constants.CAMPINGCOMPANY_FIELDSTRING[i]);
-			inputField[i] = new JTextField(Constants.CAMPINGCOMPANY_FIELDLENGTH[i]);
+			inputFields[i] = new JTextField(Constants.CAMPINGCOMPANY_FIELDLENGTH[i]);
 		}
 	}
 

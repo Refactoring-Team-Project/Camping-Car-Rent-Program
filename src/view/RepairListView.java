@@ -26,12 +26,12 @@ public class RepairListView extends View {
 	}
 
 	@Override
-	public void setInputFiledName() {
+	public void setInputFieldName() {
 		fieldName = new JLabel[Constants.REPAIRLIST_FIELDNUM];
-		inputField = new JTextField[Constants.REPAIRLIST_FIELDNUM];
+		inputFields = new JTextField[Constants.REPAIRLIST_FIELDNUM];
 		for (int i = 0; i < Constants.REPAIRLIST_FIELDNUM; i++) {
 			fieldName[i] = new JLabel(Constants.REPAIRLIST_FIELDSTIRNG[i]);
-			inputField[i] = new JTextField(Constants.REPAIRLIST_FIELDLENGTH[i]);
+			inputFields[i] = new JTextField(Constants.REPAIRLIST_FIELDLENGTH[i]);
 		}
 	}
 

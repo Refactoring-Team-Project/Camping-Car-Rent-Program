@@ -9,15 +9,15 @@ import java.util.ArrayList;
 
 public class Model {
 
-    public ArrayList<Object[]> select(Connection conn) {
-        String sql = "";
-        return DbUtil.getRows(conn, sql);
+    public ArrayList<Object[]> select(Connection connection) {
+        String sqlQuery = "";
+        return DbUtil.getRows(connection, sqlQuery);
     }
 
-    public void insert(Connection conn) {}
+    public void insert(Connection connection) {}
 
-    public void delete(Connection conn, Object valueAt) {}
+    public void delete(Connection connection, Object valueAt) {}
 
-    public void update(Connection conn, Object valueAt) {
+    public void update(Connection connection, Object valueAt) {
     }
 }

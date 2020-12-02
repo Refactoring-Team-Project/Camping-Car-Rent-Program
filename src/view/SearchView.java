@@ -23,13 +23,13 @@ public class SearchView extends View{
 	}
 
 	@Override
-	public void initUpdatePanel() {}
+	public void initUpdateDataPanel() {}
 
 	@Override
 	public void initButtonPanel() {}
 
 	@Override
-	public void setInputFiledName() { }
+	public void setInputFieldName() { }
 
 	@Override
 	public void setButtons() { }

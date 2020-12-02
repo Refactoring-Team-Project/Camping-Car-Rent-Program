@@ -26,17 +26,17 @@ public class CarCheckView extends View {
 	}
 
 	@Override
-	public void setInputFiledName() {
+	public void setInputFieldName() {
 		fieldName = new JLabel[Constants.CARCHECK_FIELDNUM];
-		inputField = new JTextField[Constants.CARCHECK_FIELDNUM];
+		inputFields = new JTextField[Constants.CARCHECK_FIELDNUM];
 		for (int i = 0; i < Constants.CARCHECK_FIELDNUM; i++) {
 			fieldName[i] = new JLabel(Constants.CARCHECK_FIELDSTRING[i]);
-			inputField[i] = new JTextField(Constants.CARCHECK_FIELDLENGTH[i]);
+			inputFields[i] = new JTextField(Constants.CARCHECK_FIELDLENGTH[i]);
 		}
 
-		inputField[1].setEnabled(false);
-		inputField[3].setEnabled(false);
-		inputField[4].setEnabled(false);
+		inputFields[1].setEnabled(false);
+		inputFields[3].setEnabled(false);
+		inputFields[4].setEnabled(false);
 	}
 
 	@Override

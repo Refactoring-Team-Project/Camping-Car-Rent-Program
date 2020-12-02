@@ -25,12 +25,12 @@ public class RentCustomerView extends View {
 	}
 
 	@Override
-	public void setInputFiledName() {
+	public void setInputFieldName() {
 		fieldName = new JLabel[Constants.RENTCUSTOMER_FIELDNUM];
-		inputField = new JTextField[Constants.RENTCUSTOMER_FIELDNUM];
+		inputFields = new JTextField[Constants.RENTCUSTOMER_FIELDNUM];
 		for (int i = 0; i < Constants.RENTCUSTOMER_FIELDNUM; i++) {
 			fieldName[i] = new JLabel(Constants.RENTCUSTOMER_FIELDSTIRNG[i]);
-			inputField[i] = new JTextField(Constants.RENTCUSTOMER_FIELDLENGTH[i]);
+			inputFields[i] = new JTextField(Constants.RENTCUSTOMER_FIELDLENGTH[i]);
 		}
 	}
 

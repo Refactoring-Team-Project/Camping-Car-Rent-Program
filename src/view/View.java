@@ -13,18 +13,17 @@ abstract public class View extends JPanel {
     public DefaultTableModel tableModel;
     public JTable DBResult;
     JScrollPane scrollPane;
-    public JPanel updatePanel, buttonPanel;
+    public JPanel updateDataPanel, buttonPanel;
     public JButton[] buttons;
     public JLabel[] fieldName;
-    public JTextField[] inputField;
+    public JTextField[] inputFields;
 
     public View() {
         super.setLayout(new FlowLayout());
         setPreferredSize(new Dimension(780, 420));
         initScrollPane();
-        initUpdatePanel();
+        initUpdateDataPanel();
         initButtonPanel();
-        //자식 생성자에 appmanager연결 코드 넣어주기
     }
 
     public void initScrollPane() {
@@ -40,19 +39,18 @@ abstract public class View extends JPanel {
         scrollPane.setPreferredSize(new Dimension(780, 300));
     }
 
-    public void initUpdatePanel() {
-        updatePanel = new JPanel();
-        updatePanel.setPreferredSize(new Dimension(780, 60));
-        setInputFiledName();
+    public void initUpdateDataPanel() {
+        updateDataPanel = new JPanel();
+        updateDataPanel.setPreferredSize(new Dimension(780, 60));
+        setInputFieldName();
         for (int i = 0; i < fieldName.length; i++) {
-            updatePanel.add(fieldName[i]);
-            updatePanel.add(inputField[i]);
+            updateDataPanel.add(fieldName[i]);
+            updateDataPanel.add(inputFields[i]);
         }
-        add(updatePanel);
+        add(updateDataPanel);
     }
 
-    //여기서 fielidName, InputField new하고 for문으로 이름설정해주기
-    abstract public void setInputFiledName();
+    abstract public void setInputFieldName();
 
     public void initButtonPanel() {
         buttonPanel = new JPanel();
@@ -64,7 +62,6 @@ abstract public class View extends JPanel {
         buttonPanel.setPreferredSize(new Dimension(780, 50));
     }
 
-    //btnInput, Delete 같은거 여기서 new하고 buttons배열에 넣어주기
     abstract public void setButtons();
 
     public void addButtonListener(ActionListener listener) {
@@ -77,7 +74,7 @@ abstract public class View extends JPanel {
     }
 
     public void fieldReset() {
-        for (JTextField inputField : inputField) {
+        for (JTextField inputField : inputFields) {
             inputField.setText("");
         }
         repaint();

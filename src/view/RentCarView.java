@@ -26,12 +26,12 @@ public class RentCarView extends View {
 	}
 
 	@Override
-	public void setInputFiledName() {
+	public void setInputFieldName() {
 		fieldName = new JLabel[Constants.RENTCAR_FIELDNUM];
-		inputField = new JTextField[Constants.RENTCAR_FIELDNUM];
+		inputFields = new JTextField[Constants.RENTCAR_FIELDNUM];
 		for (int i = 0; i < Constants.RENTCAR_FIELDNUM; i++) {
 			fieldName[i] = new JLabel(Constants.RENTCAR_FIELDSTRING[i]);
-			inputField[i] = new JTextField(Constants.RENTCAR_FIELDLENGTH[i]);
+			inputFields[i] = new JTextField(Constants.RENTCAR_FIELDLENGTH[i]);
 		}
 	}
 
