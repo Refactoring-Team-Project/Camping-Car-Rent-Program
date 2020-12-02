@@ -14,4 +14,10 @@ public class Model {
         return DbUtil.getRows(conn, sql);
     }
 
+    public void insert(Connection conn) {}
+
+    public void delete(Connection conn, Object valueAt) {}
+
+    public void update(Connection conn, Object valueAt) {
+    }
 }

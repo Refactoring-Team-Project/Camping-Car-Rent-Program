@@ -17,6 +17,7 @@ public abstract class Controller {
     MainView _mainView;
     View thisView;
     Model dataModel;
+    Model updateModel;
     Object column[];
 
     public Controller() {
@@ -25,18 +26,24 @@ public abstract class Controller {
         initView();
         setColumnName();
     }
-
+    /*** MainView와 연결 ***/
     public void setMainView() {
         this._mainView = AppManager.getInstance().getView();
         //this._mainView.addButtonListener("", new MainButtonListener());
     }
 
+    /*** View, Model init ***/
     abstract public void initModel();
     abstract public void initView();
+
+    public void thisViewAddListener() {
+        thisView.addButtonListener(new thisViewButtonListener());
+        thisView.addMouseListener(new thisViewMouseListener());
+    }
+    /*** scrollpane tableModel에 보여질 columnName 설정* **/
     abstract public void setColumnName();
 
-    //abstract public class ButtonListener implements ActionListener {};
-
+    /*** Model에 데이터 넘겨주기 ***/
     public void setModel() {
         for(int i = 0; i< thisView.inputField.length; i++) {
             String value = thisView.inputField[i].getText();
@@ -46,17 +53,11 @@ public abstract class Controller {
             else throw new NullPointerException();
         }
     }
+
+    /*** Model 각 column에 데이터 set ***/
     abstract public void setModelColumn(String column, String value);
 
-    public class mainMouseListener extends MouseAdapter {
-        public void mouseClicked(MouseEvent e) {
-            _mainView.setCurRow(thisView.DBResult.getSelectedRow());
-            _mainView.setCurCol(thisView.DBResult.getSelectedColumn());
-            mainMouseEvent(e);
-        }
-    }
-    public void mainMouseEvent(MouseEvent e) {}
-
+    /*** MainView ButtonListener ***/
     public class mainButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -74,9 +75,54 @@ public abstract class Controller {
         _mainView.repaint();
     }
 
+    /*** ThisView Button Listener ***/
+    public class thisViewButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            thisViewButtonEvent(e);
+        }
+    }
+
+    public void thisViewButtonEvent(ActionEvent e) {}
+
+    public void inputButtonEvent() {
+        setModel();
+        updateModel.insert(_mainView.getConn());
+        thisView.fieldReset();
+    }
+
+    public void deleteButtonEvent() {
+        if (_mainView.getCurRow() != -1) {
+            updateModel.delete(_mainView.getConn(), thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+            thisView.fieldReset();
+        } else {
+            JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
+        }
+    }
+
+    public void updateButtonEvent() {
+        if(_mainView.getCurRow() != -1) {
+            setModel();
+            updateModel.update(_mainView.getConn(), thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+            thisView.fieldReset();
+        }
+    }
+
+    /*** ThisView Mouse Listener ***/
+    public class thisViewMouseListener extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            _mainView.setCurRow(thisView.DBResult.getSelectedRow());
+            _mainView.setCurCol(thisView.DBResult.getSelectedColumn());
+            thisViewMouseEvent(e);
+        }
+    }
+    public void thisViewMouseEvent(MouseEvent e) {}
+
+    /*** 설정한 columnName으로 tableModel column set ***/
     public void setDataTableColumnName() {
         thisView.tableModel.setDataVector(null, column);
     }
+    /*** tableModel에 Model에서 가져온 값 뿌려줌 ***/
     public void getDataTableValues() {
         ArrayList<Object[]> arr = dataModel.select(_mainView.getConn());
         for (int i = 0; i < arr.size(); i++) {

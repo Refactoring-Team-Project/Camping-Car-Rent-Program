@@ -31,18 +31,18 @@ public class CarCheckController extends Controller {
 
 	@Override
 	public void initModel() {
-		repairListModel = new RepairListModel();
-
 		dataModel = new CarCheckModel();
 		carCheckModel = (CarCheckModel) dataModel;
+
+		updateModel = new RepairListModel();
+		repairListModel = (RepairListModel) updateModel;
 	}
 
 	@Override
 	public void initView() {
 		this.thisView = AppManager.getInstance().getCarCheckView();
 		carCheckView = (CarCheckView) this.thisView;
-		this.thisView.addButtonListener(new ButtonListener());
-		this.thisView.addMouseListener(new mainMouseListener());
+		thisViewAddListener();
 	}
 
 	@Override
@@ -86,32 +86,28 @@ public class CarCheckController extends Controller {
 		}
 	}
 
-	private class ButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			try {
-				if (e.getSource() == carCheckView.btnRequest) {
-					if (_mainView.getCurRow() != -1) {
-						if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
-							setModel();
-							repairListModel.insert(_mainView.getConn());
-							thisView.fieldReset();
-						} else if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
-							JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
-					} else
-						JOptionPane.showMessageDialog(null, "요청할 데이터를 선택해 주세요.");
-				}
-			} catch (NullPointerException e2) {
-				JOptionPane.showMessageDialog(null, "null");
+	@Override
+	public void thisViewButtonEvent(ActionEvent e) {
+		try {
+			if (e.getSource() == carCheckView.btnRequest) {
+				if (_mainView.getCurRow() != -1) {
+					if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
+						inputButtonEvent();
+					} else if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
+						JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
+				} else
+					JOptionPane.showMessageDialog(null, "요청할 데이터를 선택해 주세요.");
 			}
+		} catch (NullPointerException e2) {
+			JOptionPane.showMessageDialog(null, "null");
 		}
-
 	}
 
+
+
 	@Override
-	public void mainMouseEvent(MouseEvent e) {
-		super.mainMouseEvent(e);
+	public void thisViewMouseEvent(MouseEvent e) {
+		super.thisViewMouseEvent(e);
 		carCheckModel.selectedData(_mainView.getConn(),
 				thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 

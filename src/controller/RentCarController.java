@@ -34,15 +34,15 @@ public class RentCarController extends Controller {
 		dataModel = new CarRentModel();
 		carRentModel = (CarRentModel) dataModel;
 
-		carCheckModel = new CarCheckModel();
+		updateModel = new CarCheckModel();
+		carCheckModel = (CarCheckModel) updateModel;
 	}
 
 	@Override
 	public void initView() {
 		this.thisView = AppManager.getInstance().getRentCarView();
 		rentCarView = (RentCarView) this.thisView;
-		this.thisView.addButtonListener(new ButtonListener());
-		this.thisView.addMouseListener(new RentCarMouseListener());
+		thisViewAddListener();
 	}
 
 	@Override
@@ -78,44 +78,33 @@ public class RentCarController extends Controller {
 	}
 
 
-	private class ButtonListener implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			try {
-				if (e.getSource() == rentCarView.btnReturn) {
-					if (_mainView.getCurRow() != -1) {
-						setModel();
-						carCheckModel.insert(_mainView.getConn());
-						thisView.fieldReset();
-						JOptionPane.showMessageDialog(null, "반환정보를 점검내역에 저장하였습니다.");
-					}
+	@Override
+	public void thisViewButtonEvent(ActionEvent e) {
+		try {
+			if (e.getSource() == rentCarView.btnReturn) {
+				if (_mainView.getCurRow() != -1) {
+					inputButtonEvent();
 				}
-			} catch (NullPointerException e1) {
-				JOptionPane.showMessageDialog(null, e1.getMessage());
-
 			}
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 
 		}
-
 	}
 
-	private class RentCarMouseListener extends MouseAdapter {
+	@Override
+	public void thisViewMouseEvent(MouseEvent e) {
+		super.thisViewMouseEvent(e);
+		rentCarView.inputField[0]
+				.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
+		rentCarView.inputField[0].setDisabledTextColor(Color.black);
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			_mainView.setCurRow(thisView.DBResult.getSelectedRow());
-			_mainView.setCurCol(thisView.DBResult.getSelectedColumn());
-
-			rentCarView.inputField[0]
-					.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
-			rentCarView.inputField[0].setDisabledTextColor(Color.black);
-
-			rentCarView.inputField[1]
-					.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
-			rentCarView.inputField[1].setDisabledTextColor(Color.black);
-		}
+		rentCarView.inputField[1]
+				.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
+		rentCarView.inputField[1].setDisabledTextColor(Color.black);
 	}
+
 
 
 }

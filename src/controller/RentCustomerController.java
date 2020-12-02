@@ -28,6 +28,7 @@ public class RentCustomerController extends Controller{
 	@Override
 	public void initModel() {
 		dataModel = new RentCustomerModel();
+		updateModel = dataModel;
 		rentCustomerModel = (RentCustomerModel) dataModel;
 	}
 
@@ -35,8 +36,7 @@ public class RentCustomerController extends Controller{
 	public void initView() {
 		this.thisView = AppManager.getInstance().getRentCustomerView();
 		rentCustomerView = (RentCustomerView) this.thisView;
-		this.thisView.addButtonListener(new ButtonListener());
-		this.thisView.addMouseListener(new mainMouseListener());
+		thisViewAddListener();
 	}
 
 	@Override
@@ -66,39 +66,20 @@ public class RentCustomerController extends Controller{
 		}
 	}
 
-	private class ButtonListener implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			try {
-				if (e.getSource() == rentCustomerView.btnInput) {
-					setModel();
-					rentCustomerModel.insert(_mainView.getConn());
-					thisView.fieldReset();
-				}
-
-				else if (e.getSource() == rentCustomerView.btnDelete) {
-					if (_mainView.getCurRow() != -1) {
-						rentCustomerModel.delete(_mainView.getConn(),
-								thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-						thisView.fieldReset();
-					} else
-						JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
-
-				} else if (e.getSource() == rentCustomerView.btnUpdate) {
-					if (_mainView.getCurRow() != -1) {
-						setModel();
-						rentCustomerModel.update(_mainView.getConn(),
-								thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
-						thisView.fieldReset();
-					} else
-						JOptionPane.showMessageDialog(null, "변경할 데이터를 선택해 주세요.");
-
-				}
-			} catch (NullPointerException e2) {
-				JOptionPane.showMessageDialog(null, "null");
-
+	@Override
+	public void thisViewButtonEvent(ActionEvent e) {
+		try {
+			if (e.getSource() == rentCustomerView.btnInput) {
+				inputButtonEvent();
+			} else if (e.getSource() == rentCustomerView.btnDelete) {
+				deleteButtonEvent();
+			} else if (e.getSource() == rentCustomerView.btnUpdate) {
+				updateButtonEvent();
 			}
+		} catch (NullPointerException e2) {
+			JOptionPane.showMessageDialog(null, "null");
+
 		}
 	}
 

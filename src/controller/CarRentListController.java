@@ -39,18 +39,18 @@ public class CarRentListController extends Controller{
 
 	@Override
 	public void initModel() {
-		carRentModel = new CarRentModel();
-
 		dataModel = new CampingCarModel();
 		campCarModel = (CampingCarModel) dataModel;
+
+		updateModel = new CarRentModel();
+		carRentModel = (CarRentModel) updateModel;
 	}
 
 	@Override
 	public void initView() {
 		this.thisView = AppManager.getInstance().getCarRentListView();
 		carRentListView = (CarRentListView) this.thisView;
-		this.thisView.addButtonListener(new ButtonListener());
-		this.thisView.addMouseListener(new mainMouseListener());
+		thisViewAddListener();
 	}
 
 	@Override
@@ -94,22 +94,18 @@ public class CarRentListController extends Controller{
 		}
 	}
 
-	private class ButtonListener implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			try {
-				if (e.getSource() == carRentListView.btnRent) {
-					if (_mainView.getCurRow() != -1) {
-						setModel();
-						carRentModel.insert(_mainView.getConn());
-						thisView.fieldReset();
-					} else
-						JOptionPane.showMessageDialog(null, "대여할 차를 선택해주세요");
-				}
-			} catch (NullPointerException e2) {
-				JOptionPane.showMessageDialog(null, "null");
+	@Override
+	public void thisViewButtonEvent(ActionEvent e) {
+		try {
+			if (e.getSource() == carRentListView.btnRent) {
+				if (_mainView.getCurRow() != -1) {
+					inputButtonEvent();
+				} else
+					JOptionPane.showMessageDialog(null, "대여할 차를 선택해주세요");
 			}
+		} catch (NullPointerException e2) {
+			JOptionPane.showMessageDialog(null, "null");
 		}
 	}
 
@@ -158,8 +154,8 @@ public class CarRentListController extends Controller{
 	}
 
 	@Override
-	public void mainMouseEvent(MouseEvent e) {
-		super.mainMouseEvent(e);
+	public void thisViewMouseEvent(MouseEvent e) {
+		super.thisViewMouseEvent(e);
 		campCarModel.selectedData(_mainView.getConn(),
 				thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
 
