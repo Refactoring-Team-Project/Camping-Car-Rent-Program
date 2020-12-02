@@ -6,18 +6,18 @@ import java.sql.SQLException;
 
 public class DatabaseConnectionModel extends Model {
 
-	 Connection conn;
+	 Connection connection;
 	 
 	  String Driver = "com.mysql.cj.jdbc.Driver";
 	  String url = "jdbc:mysql://localhost:3306/madang?&serverTimezone=Asia/Seoul&useSSL=false";
-	  String userid = "madang";
-	  String pwd = "madang";
+	  String userId = "madang";
+	  String password = "madang";
 	  
 	  public DatabaseConnectionModel() {
-		  connDB();
+		  connectionDB();
 	  }
 	  
-	  public void connDB() {
+	  public void connectionDB() {
 	      try { // 드라이버 로드
 	         Class.forName(Driver);
 	         System.out.println("드라이버 로드 완료");
@@ -26,7 +26,7 @@ public class DatabaseConnectionModel extends Model {
 	      }
 
 	      try { // 데이터베이스 연결
-	         conn = DriverManager.getConnection(url, userid, pwd);
+	         connection = DriverManager.getConnection(url, userId, password);
 	         System.out.println("데이터베이스 연결 완료");
 	      } catch (SQLException e1) {
 	         e1.printStackTrace();
@@ -35,7 +35,7 @@ public class DatabaseConnectionModel extends Model {
 	      
 	  public void closeDB() {
 	      try { // 데이터베이스 연결 종료
-	         if (conn != null) {
+	         if (connection != null) {
 	            System.out.println("데이터베이스 연결 종료");
 	         }
 	      } catch (Exception e3) {
@@ -43,8 +43,8 @@ public class DatabaseConnectionModel extends Model {
 	      }
 	   }
 	  
-	  public Connection getConn() {
-	      return conn;
+	  public Connection getConnection() {
+	      return connection;
 	   }
 
 

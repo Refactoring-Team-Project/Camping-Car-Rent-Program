@@ -7,93 +7,91 @@ import java.util.ArrayList;
 import common.DbUtil;
 
 public class RentCustomerModel extends Model{
-	int license_no;
-	String name;
-	String address;
-	String phone;
-	String email;
+	int licenseNo;
+	String customerName;
+	String customerAddress;
+	String customerContact;
+	String customerEmail;
 
-	ResultSet rs;
-
-	public ArrayList<Object[]> select(Connection conn) {
-		String sql = "SELECT * FROM Rent_Customer";
-		return DbUtil.getRows(conn, sql);
+	public ArrayList<Object[]> select(Connection connection) {
+		String sqlQuery = "SELECT * FROM Rent_Customer";
+		return DbUtil.getRows(connection, sqlQuery);
 	}
 
-	public void insert(Connection conn) {
-		String sql = "INSERT INTO Rent_Customer VALUES(?, ?, ?, ?, ?)";
+	public void insert(Connection connection) {
+		String sqlQuery = "INSERT INTO Rent_Customer VALUES(?, ?, ?, ?, ?)";
 
-		String[] types = { "int", "string", "string", "string", "string" };
-		Object[] values = { license_no, name, address, phone, email };
+		String[] dataTypes = { "int", "string", "string", "string", "string" };
+		Object[] values = { licenseNo, customerName, customerAddress, customerContact, customerEmail };
 
-		DbUtil.execute(conn, sql, types, values);
-
-	}
-
-	public void delete(Connection conn, Object object) {
-		String sql = "DELETE FROM Rent_Customer WHERE license_no = " + object.toString() + ";";
-
-		DbUtil.execute(conn, sql, null, null);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 
 	}
 
-	public void update(Connection conn, Object object) {
-		String sql = "UPDATE Rent_Customer SET license_no=?,name=?,address=?,phone=?,email=? WHERE license_no = "
+	public void delete(Connection connection, Object object) {
+		String sqlQuery = "DELETE FROM Rent_Customer WHERE license_no = " + object.toString() + ";";
+
+		DbUtil.execute(connection, sqlQuery, null, null);
+
+	}
+
+	public void update(Connection connection, Object object) {
+		String sqlQuery = "UPDATE Rent_Customer SET license_no=?,name=?,address=?,phone=?,email=? WHERE license_no = "
 				+ object.toString() + ";";
 
-		String[] types = { "int", "string", "string", "string", "string" };
-		Object[] values = { license_no, name, address, phone, email };
+		String[] dataTypes = { "int", "string", "string", "string", "string" };
+		Object[] values = { licenseNo, customerName, customerAddress, customerContact, customerEmail };
 
-		DbUtil.execute(conn, sql, types, values);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 	}
 
-	public ArrayList<Object[]> search3(Connection conn) {
-		String sql = "select rc.name, cr.license_no, count(*) as total_count, count(case when cc.repair_required = 'Y' then 1 end) as repair_count\r\n"
+	public ArrayList<Object[]> adminBlackCusRankSearch(Connection connection) {
+		String sqlQuery = "select rc.name, cr.license_no, count(*) as total_count, count(case when cc.repair_required = 'Y' then 1 end) as repair_count\r\n"
 				+ "from Car_Rent cr, Car_Check cc, Rent_Customer rc\r\n" + "where cr.rentno = cc.rentno\r\n"
 				+ "and cr.license_no = rc.license_no\r\n" + "group by cr.license_no\r\n" + "order by 4 desc;";
 
-		return DbUtil.getRows(conn, sql);
+		return DbUtil.getRows(connection, sqlQuery);
 
 	}
 
-	public int getLicense_no() {
-		return license_no;
+	public int getLicenseNo() {
+		return licenseNo;
 	}
 
-	public void setLicense_no(int license_no) {
-		this.license_no = license_no;
+	public void setLicenseNo(int licenseNo) {
+		this.licenseNo = licenseNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getCustomerAddress() {
+		return customerAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getCustomerContact() {
+		return customerContact;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setCustomerContact(String customerContact) {
+		this.customerContact = customerContact;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCustomerEmail() {
+		return customerEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
 
 }

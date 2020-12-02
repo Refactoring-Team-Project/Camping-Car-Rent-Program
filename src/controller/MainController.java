@@ -12,12 +12,12 @@ import javax.swing.*;
 
 public class MainController {
 	MainView _mainView;
-	DatabaseConnectionModel connModel;
+	DatabaseConnectionModel connectionModel;
 
 	public MainController() {
 		this._mainView = AppManager.getInstance().getView();
 		addEventListener();
-		connDB();
+		connectionDB();
 	}
 
 	public void addEventListener() {
@@ -25,9 +25,9 @@ public class MainController {
 		this._mainView.addResetButtonListener(new ResetButtonListener());
 	}
 
-	public void connDB() {
-		connModel = new DatabaseConnectionModel();
-		this._mainView.connection = connModel.getConn();
+	public void connectionDB() {
+		connectionModel = new DatabaseConnectionModel();
+		this._mainView.connection = connectionModel.getConnection();
 	}
 
 	private class UserChangeButtonListener implements ActionListener {

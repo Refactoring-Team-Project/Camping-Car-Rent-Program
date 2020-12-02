@@ -51,22 +51,22 @@ public class RepairShopController extends Controller {
 	public void setModelEachColumn(String column, String value) {
 		switch (column){
 			case "shopid":
-				repairShopModel.setShopid(Integer.parseInt(value));
+				repairShopModel.setShopId(Integer.parseInt(value));
 				break;
 			case "shopname":
-				repairShopModel.setShopid(Integer.parseInt(value));
+				repairShopModel.setShopName(value);
 				break;
 			case "address":
-				repairShopModel.setAddress(value);
+				repairShopModel.setShopAddress(value);
 				break;
 			case "phone":
-				repairShopModel.setPhone(value);
+				repairShopModel.setShopContact(value);
 				break;
 			case "manager_name":
-				repairShopModel.setManager_name(value);
+				repairShopModel.setShopManagerName(value);
 				break;
 			case "manager_email":
-				repairShopModel.setManager_email(value);
+				repairShopModel.setShopManagerEmail(value);
 				break;
 		}
 	}

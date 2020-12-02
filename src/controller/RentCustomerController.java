@@ -49,19 +49,19 @@ public class RentCustomerController extends Controller{
 	public void setModelEachColumn(String column, String value) {
 		switch (column){
 		case "license_no":
-			rentCustomerModel.setLicense_no(Integer.parseInt(value));
+			rentCustomerModel.setLicenseNo(Integer.parseInt(value));
 			break;
 		case "name":
-			rentCustomerModel.setName(value);
+			rentCustomerModel.setCustomerName(value);
 			break;
 		case "address":
-			rentCustomerModel.setAddress(value);
+			rentCustomerModel.setCustomerAddress(value);
 			break;
 		case "phone":
-			rentCustomerModel.setPhone(value);
+			rentCustomerModel.setCustomerContact(value);
 			break;
 		case "email":
-			rentCustomerModel.setEmail(value);
+			rentCustomerModel.setCustomerEmail(value);
 			break;
 		}
 	}

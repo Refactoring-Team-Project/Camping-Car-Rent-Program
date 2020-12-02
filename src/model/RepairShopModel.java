@@ -7,105 +7,103 @@ import java.util.ArrayList;
 import common.DbUtil;
 
 public class RepairShopModel extends Model {
-	int shopid;
-	String shopname;
-	String address;
-	String phone;
-	String manager_name;
-	String manager_email;
+	int shopId;
+	String shopName;
+	String shopAddress;
+	String shopContact;
+	String shopManagerName;
+	String shopManagerEmail;
 
-	ResultSet rs;
-
-	public ArrayList<Object[]> select(Connection conn) {
-		String sql = "SELECT * FROM Repairshop";
-		return DbUtil.getRows(conn, sql);
+	public ArrayList<Object[]> select(Connection connection) {
+		String sqlQuery = "SELECT * FROM Repairshop";
+		return DbUtil.getRows(connection, sqlQuery);
 
 	}
 
-	public void insert(Connection conn) {
-		String sql = "INSERT INTO Repairshop VALUES(?, ?, ?, ?, ?, ?)";
+	public void insert(Connection connection) {
+		String sqlQuery = "INSERT INTO Repairshop VALUES(?, ?, ?, ?, ?, ?)";
 
-		String[] types = { "int", "string", "string", "string", "string", "string" };
-		Object[] values = { shopid, shopname, address, phone, manager_name, manager_email };
+		String[] dataTypes = { "int", "string", "string", "string", "string", "string" };
+		Object[] values = { shopId, shopName, shopAddress, shopContact, shopManagerName, shopManagerEmail };
 
-		DbUtil.execute(conn, sql, types, values);
-
-	}
-
-	public void delete(Connection conn, Object object) {
-		String sql = "DELETE FROM RepairShop WHERE shopid = " + object.toString() + ";";
-
-		DbUtil.execute(conn, sql, null, null);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 
 	}
 
-	public void update(Connection conn, Object object) {
-		String sql = "UPDATE Repairshop SET shopid=?,shopname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE shopid = "
+	public void delete(Connection connection, Object object) {
+		String sqlQuery = "DELETE FROM RepairShop WHERE shopid = " + object.toString() + ";";
+
+		DbUtil.execute(connection, sqlQuery, null, null);
+
+	}
+
+	public void update(Connection connection, Object object) {
+		String sqlQuery = "UPDATE Repairshop SET shopid=?,shopname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE shopid = "
 				+ object.toString() + ";";
 
-		String[] types = { "int", "string", "string", "string", "string", "string" };
-		Object[] values = { shopid, shopname, address, phone, manager_name, manager_email };
+		String[] dataTypes = { "int", "string", "string", "string", "string", "string" };
+		Object[] values = { shopId, shopName, shopAddress, shopContact, shopManagerName, shopManagerEmail };
 
-		DbUtil.execute(conn, sql, types, values);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 
 	}
 
-	public ArrayList<Object[]> search4(Connection conn) {
+	public ArrayList<Object[]> adminRepairShopRankSearch(Connection connection) {
 
-		String sql = "select rs.shopid, rs.shopname, coalesce(sum(rl.repaircost), 0) as income\r\n"
+		String sqlQuery = "select rs.shopid, rs.shopname, coalesce(sum(rl.repaircost), 0) as income\r\n"
 				+ "from Repairshop rs\r\n" + "left join Repair_List rl\r\n" + "on rs.shopid = rl.shopid\r\n"
 				+ "group by rs.shopid, rs.shopname\r\n" + "order by income desc;";
 
-		return DbUtil.getRows(conn, sql);
+		return DbUtil.getRows(connection, sqlQuery);
 
 	}
 
-	public int getShopid() {
-		return shopid;
+	public int getShopId() {
+		return shopId;
 	}
 
-	public void setShopid(int shopid) {
-		this.shopid = shopid;
+	public void setShopId(int shopId) {
+		this.shopId = shopId;
 	}
 
-	public String getShopname() {
-		return shopname;
+	public String getShopName() {
+		return shopName;
 	}
 
-	public void setShopname(String shopname) {
-		this.shopname = shopname;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getShopAddress() {
+		return shopAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setShopAddress(String shopAddress) {
+		this.shopAddress = shopAddress;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getShopContact() {
+		return shopContact;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setShopContact(String shopContact) {
+		this.shopContact = shopContact;
 	}
 
-	public String getManager_name() {
-		return manager_name;
+	public String getShopManagerName() {
+		return shopManagerName;
 	}
 
-	public void setManager_name(String manager_name) {
-		this.manager_name = manager_name;
+	public void setShopManagerName(String shopManagerName) {
+		this.shopManagerName = shopManagerName;
 	}
 
-	public String getManager_email() {
-		return manager_email;
+	public String getShopManagerEmail() {
+		return shopManagerEmail;
 	}
 
-	public void setManager_email(String manager_email) {
-		this.manager_email = manager_email;
+	public void setShopManagerEmail(String shopManagerEmail) {
+		this.shopManagerEmail = shopManagerEmail;
 	}
 
 }

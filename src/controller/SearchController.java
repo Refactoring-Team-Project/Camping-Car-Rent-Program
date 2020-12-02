@@ -98,10 +98,10 @@ public class SearchController extends Controller {
 				arr = campCompModel.adminTop10CompanySearch(mainView.getConnection());
 				break;
 			case SEARCH3:
-				arr = rentCustomerModel.search3(mainView.getConnection());
+				arr = rentCustomerModel.adminBlackCusRankSearch(mainView.getConnection());
 				break;
 			case SEARCH4:
-				arr = repairShopModel.search4(mainView.getConnection());
+				arr = repairShopModel.adminRepairShopRankSearch(mainView.getConnection());
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + currentSearch);

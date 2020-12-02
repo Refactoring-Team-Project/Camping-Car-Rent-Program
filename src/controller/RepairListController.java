@@ -47,34 +47,34 @@ public class RepairListController extends Controller {
 	public void setModelEachColumn(String column, String value) {
 		switch(column) {
 			case "repairno":
-				repairListModel.setRepairno(Integer.parseInt(value));
+				repairListModel.setRepairNo(Integer.parseInt(value));
 				break;
 			case "carid":
-				repairListModel.setCarid(Integer.parseInt(value));
+				repairListModel.setCarId(Integer.parseInt(value));
 				break;
 			case "shopid":
-				repairListModel.setShopid(Integer.parseInt(value));
+				repairListModel.setShopId(Integer.parseInt(value));
 				break;
 			case "compid":
-				repairListModel.setCompid(Integer.parseInt(value));
+				repairListModel.setCompId(Integer.parseInt(value));
 				break;
 			case "license_no":
-				repairListModel.setLicense_no(Integer.parseInt(value));
+				repairListModel.setLicenseNo(Integer.parseInt(value));
 				break;
 			case "repairdetails":
-				repairListModel.setRepairdetails(value);
+				repairListModel.setRepairDetails(value);
 				break;
 			case "repairdate":
-				repairListModel.setRepairdate(value);
+				repairListModel.setRepairDate(value);
 				break;
 			case "repaircost":
-				repairListModel.setRepaircost(Integer.parseInt(value));
+				repairListModel.setRepairCost(Integer.parseInt(value));
 				break;
 			case "paymentdeadline":
-				repairListModel.setPaymentdeadline(value);
+				repairListModel.setPaymentDeadline(value);
 				break;
 			case "repairhistory":
-				repairListModel.setRepairhistory(value);
+				repairListModel.setRepairHistory(value);
 				break;
 		}
 	}

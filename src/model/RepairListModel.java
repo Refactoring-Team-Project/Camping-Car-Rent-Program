@@ -7,135 +7,133 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class RepairListModel extends Model {
-	int repairno;
-	int carid;
-	int shopid;
-	int compid;
-	int license_no;
-	String repairdetails;
-	String repairdate;
-	int repaircost;
-	String paymentdeadline;
-	String repairhistory;
+	int repairNo;
+	int carId;
+	int shopId;
+	int compId;
+	int licenseNo;
+	String repairDetails;
+	String repairDate;
+	int repairCost;
+	String paymentDeadline;
+	String repairHistory;
 
-	ResultSet rs;
+	public ArrayList<Object[]> select(Connection connection) {
 
-	public ArrayList<Object[]> select(Connection conn) {
+		String sqlQuery = "SELECT * FROM Repair_List";
 
-		String sql = "SELECT * FROM Repair_List";
-
-		return DbUtil.getRows(conn, sql);
+		return DbUtil.getRows(connection, sqlQuery);
 
 	}
 
-	public void insert(Connection conn) {
-		String sql = "INSERT INTO Repair_List(repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory) VALUES (?,?,?,?,?,?,?,?,?,?)";
+	public void insert(Connection connection) {
+		String sqlQuery = "INSERT INTO Repair_List(repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-		String[] types = {"int","int", "int", "int", "int", "string", "string" ,"int", "string", "string"};
-		Object[] values = {repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory};
+		String[] dataTypes = {"int","int", "int", "int", "int", "string", "string" ,"int", "string", "string"};
+		Object[] values = {repairNo, carId, shopId, compId, licenseNo, repairDetails, repairDate, repairCost, paymentDeadline, repairHistory};
 
-		DbUtil.execute(conn, sql, types, values);
-
-	}
-
-	public void delete(Connection conn, Object object) {
-
-		String sql = "DELETE FROM Repair_List WHERE repairno = " + object.toString() + ";";
-		DbUtil.execute(conn, sql, null, null);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 
 	}
 
-	public void update(Connection conn, Object object) {
+	public void delete(Connection connection, Object object) {
 
-		String sql = "UPDATE Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
+		String sqlQuery = "DELETE FROM Repair_List WHERE repairno = " + object.toString() + ";";
+		DbUtil.execute(connection, sqlQuery, null, null);
+
+	}
+
+	public void update(Connection connection, Object object) {
+
+		String sqlQuery = "UPDATE Repair_List SET repairno=?,carid=?,shopid=?,compid=?,license_no=?,repairdetails=?,repairdate=?,repaircost=?,paymentdeadline=?,repairhistory=? WHERE repairno = "
 				+ object.toString() + ";";
 
-		String[] types = {"int","int", "int", "int", "int", "string", "string" ,"int", "string", "string"};
-		Object[] values = {repairno, carid, shopid, compid, license_no, repairdetails, repairdate, repaircost, paymentdeadline, repairhistory};
+		String[] dataTypes = {"int","int", "int", "int", "int", "string", "string" ,"int", "string", "string"};
+		Object[] values = {repairNo, carId, shopId, compId, licenseNo, repairDetails, repairDate, repairCost, paymentDeadline, repairHistory};
 
-		DbUtil.execute(conn, sql, types, values);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 
 
 	}
 
-	public int getRepairno() {
-		return repairno;
+	public int getRepairNo() {
+		return repairNo;
 	}
 
-	public void setRepairno(int repairno) {
-		this.repairno = repairno;
+	public void setRepairNo(int repairNo) {
+		this.repairNo = repairNo;
 	}
 
-	public int getCarid() {
-		return carid;
+	public int getCarId() {
+		return carId;
 	}
 
-	public void setCarid(int carid) {
-		this.carid = carid;
+	public void setCarId(int carId) {
+		this.carId = carId;
 	}
 
-	public int getShopid() {
-		return shopid;
+	public int getShopId() {
+		return shopId;
 	}
 
-	public void setShopid(int shopid) {
-		this.shopid = shopid;
+	public void setShopId(int shopId) {
+		this.shopId = shopId;
 	}
 
-	public int getCompid() {
-		return compid;
+	public int getCompId() {
+		return compId;
 	}
 
-	public void setCompid(int compid) {
-		this.compid = compid;
+	public void setCompId(int compId) {
+		this.compId = compId;
 	}
 
-	public int getLicense_no() {
-		return license_no;
+	public int getLicenseNo() {
+		return licenseNo;
 	}
 
-	public void setLicense_no(int license_no) {
-		this.license_no = license_no;
+	public void setLicenseNo(int licenseNo) {
+		this.licenseNo = licenseNo;
 	}
 
-	public String getRepairdetails() {
-		return repairdetails;
+	public String getRepairDetails() {
+		return repairDetails;
 	}
 
-	public void setRepairdetails(String repairdetails) {
-		this.repairdetails = repairdetails;
+	public void setRepairDetails(String repairDetails) {
+		this.repairDetails = repairDetails;
 	}
 
-	public String getRepairdate() {
-		return repairdate;
+	public String getRepairDate() {
+		return repairDate;
 	}
 
-	public void setRepairdate(String repairdate) {
-		this.repairdate = repairdate;
+	public void setRepairDate(String repairDate) {
+		this.repairDate = repairDate;
 	}
 
-	public int getRepaircost() {
-		return repaircost;
+	public int getRepairCost() {
+		return repairCost;
 	}
 
-	public void setRepaircost(int repaircost) {
-		this.repaircost = repaircost;
+	public void setRepairCost(int repairCost) {
+		this.repairCost = repairCost;
 	}
 
-	public String getPaymentdeadline() {
-		return paymentdeadline;
+	public String getPaymentDeadline() {
+		return paymentDeadline;
 	}
 
-	public void setPaymentdeadline(String paymentdeadline) {
-		this.paymentdeadline = paymentdeadline;
+	public void setPaymentDeadline(String paymentDeadline) {
+		this.paymentDeadline = paymentDeadline;
 	}
 
-	public String getRepairhistory() {
-		return repairhistory;
+	public String getRepairHistory() {
+		return repairHistory;
 	}
 
-	public void setRepairhistory(String repairhistory) {
-		this.repairhistory = repairhistory;
+	public void setRepairHistory(String repairHistory) {
+		this.repairHistory = repairHistory;
 	}
 
 }
