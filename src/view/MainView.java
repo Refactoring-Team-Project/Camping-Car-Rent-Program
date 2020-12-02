@@ -17,16 +17,16 @@ import common.Constants;
 
 public class MainView extends JFrame {
 	public JButton btnReset;
-	JButton btnUser;
-	public JButton[] btnAdmins, btnUsers;
-	JPanel adminBtnPanel, userBtnPanel, userChangePanel;
-	JPanel[] tableBtnPanel = new JPanel[2];
+	JButton btnUserChange;
+	public JButton[] btnOnAdminPanel, btnOnUserPanel;
+	JPanel adminPanel, userPanel, userChangePanel;
+	JPanel[] tableBtnPanel;
 
-	public enum Admin {
+	public enum UserType {
 		관리자, 사용자
 	}
 
-	Admin admin;
+	UserType currentUserType;
 	int curRow = -1, curCol = -1;
 
 	public Connection conn;
@@ -45,49 +45,51 @@ public class MainView extends JFrame {
 	public void init() {
 		super.setLayout(new FlowLayout());
 
-		admin = Admin.관리자;
-		initChangeUserPanel();
-		initAdminButtonPanel1();
-		initUserButtonPanell();
-		tableBtnPanel[0] = adminBtnPanel;
-		tableBtnPanel[1] = userBtnPanel;
-		add(userChangePanel);
-		add(adminBtnPanel);
+		currentUserType = UserType.관리자;
+		initUserChangePanel();
+		initAdminPanel1();
+		initUserPanell();
+		tableBtnPanel = new JPanel[] {
+				adminPanel,
+				userPanel
+		};
+
+		add(tableBtnPanel[currentUserType.ordinal()]);
 
 		initPanelSize();
 	}
 
-	public void initChangeUserPanel() {
+	public void initUserChangePanel() {
 		/* 사용자 관리자 전환 panel */
-		btnUser = new JButton(admin.name());
+		btnUserChange = new JButton(currentUserType.name());
 		userChangePanel = new JPanel();
-		userChangePanel.add(btnUser);
+		userChangePanel.add(btnUserChange);
+		add(userChangePanel);
 	}
 
-	public void initAdminButtonPanel1() {
-
+	public void initAdminPanel1() {
 		/* panel 1 */
-		adminBtnPanel = new JPanel();
-		btnAdmins = new JButton[Constants.ADMIN_BUTTON_NAME.length];
+		adminPanel = new JPanel();
+		btnOnAdminPanel = new JButton[Constants.ADMIN_BUTTON_NAME.length];
 
 		for(int i=0;i<Constants.ADMIN_BUTTON_NAME.length;i++) {
-			btnAdmins[i] = new JButton(Constants.ADMIN_BUTTON_NAME[i]);
-			adminBtnPanel.add(btnAdmins[i]);
+			btnOnAdminPanel[i] = new JButton(Constants.ADMIN_BUTTON_NAME[i]);
+			adminPanel.add(btnOnAdminPanel[i]);
 		}
 
 		btnReset = new JButton("초기화");
-		adminBtnPanel.add(btnReset);
+		adminPanel.add(btnReset);
 
 	}
 
-	public void initUserButtonPanell() {
+	public void initUserPanell() {
 		/* panel 2 */
-		userBtnPanel = new JPanel();
-		btnUsers = new JButton[Constants.USER_BUTTON_NAME.length];
+		userPanel = new JPanel();
+		btnOnUserPanel = new JButton[Constants.USER_BUTTON_NAME.length];
 
 		for(int i=0;i<Constants.USER_BUTTON_NAME.length;i++) {
-			btnUsers[i] = new JButton(Constants.USER_BUTTON_NAME[i]);
-			userBtnPanel.add(btnUsers[i]);
+			btnOnUserPanel[i] = new JButton(Constants.USER_BUTTON_NAME[i]);
+			userPanel.add(btnOnUserPanel[i]);
 		}
 
 	}
@@ -95,8 +97,8 @@ public class MainView extends JFrame {
 	public void initPanelSize() {
 		/*** panel size ****/
 		userChangePanel.setPreferredSize(new Dimension(780, 50));
-		adminBtnPanel.setPreferredSize(new Dimension(780, 80));
-		userBtnPanel.setPreferredSize(new Dimension(780, 80));
+		adminPanel.setPreferredSize(new Dimension(780, 80));
+		userPanel.setPreferredSize(new Dimension(780, 80));
 	}
 
 	public Connection getConn() {
@@ -121,44 +123,46 @@ public class MainView extends JFrame {
 
 	public void changeUser() {
 
-		if (admin.name().equals("관리자")) { // 관리자 모드
-			admin = Admin.사용자;
-		} else if (admin.name().equals("사용자")) { // 사용자 모드
-			admin = Admin.관리자;
+		if (currentUserType.name().equals("관리자")) { // 관리자 모드
+			currentUserType = UserType.사용자;
+		} else if (currentUserType.name().equals("사용자")) { // 사용자 모드
+			currentUserType = UserType.관리자;
 		}
-		btnUser.setText(admin.name());
+		btnUserChange.setText(currentUserType.name());
+		changePanel(null);
 	}
 
 	public void changePanel(JPanel view) {
 		this.getContentPane().removeAll();
 		this.getContentPane().add(userChangePanel, 0);
-		this.getContentPane().add(tableBtnPanel[admin.ordinal()], 1);
-		if (view != null)
-			this.getContentPane().add(view, 2);
+		this.getContentPane().add(tableBtnPanel[currentUserType.ordinal()], 1);
+		if (view != null) this.getContentPane().add(view, 2);
 
 		setCurCol(-1);
 		setCurRow(-1);
 
-		this.getContentPane().repaint();
+		revalidate();
+		repaint();
 	}
 
 	public void addUserButtonListener(ActionListener listener) {
-		btnUser.addActionListener(listener);
+		btnUserChange.addActionListener(listener);
+	}
+
+	public void addAdminButtonListener(String btnName, ActionListener listener){
+		int idx = Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(btnName);
+		btnOnAdminPanel[idx].addActionListener(listener);
+	}
+
+	public void addUserButtonListener(String btnName, ActionListener listener){
+		int idx = Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(btnName);
+		btnOnUserPanel[idx].addActionListener(listener);
 	}
 
 	public void addResetButtonListener(ActionListener listener) {
 		btnReset.addActionListener(listener);
 	}
 
-	public void addAdminButtonListener(String btnName, ActionListener listener){
-		int idx = Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(btnName);
-		btnAdmins[idx].addActionListener(listener);
-	}
-
-	public void addUserButtonListener(String btnName, ActionListener listener){
-		int idx = Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(btnName);
-		btnUsers[idx].addActionListener(listener);
-	}
 
 
 }

@@ -31,11 +31,7 @@ public class MainController {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			
 			_mainView.changeUser();
-			_mainView.changePanel(null);
-		
 		}
 		
 	}

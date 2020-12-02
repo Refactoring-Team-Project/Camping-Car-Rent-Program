@@ -70,9 +70,6 @@ public abstract class Controller {
 
         setDataTableColumnName();
         getDataTableValues();
-
-        _mainView.revalidate();
-        _mainView.repaint();
     }
 
     /*** ThisView Button Listener ***/

@@ -111,18 +111,18 @@ public class CarRentListController extends Controller{
 
 	@Override
 	public void mainViewButtonEvent(ActionEvent e) {
-		if (e.getSource() == _mainView.btnUsers[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.RENTLIST)]) {
+		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.RENTLIST)]) {
 			currentList = RENTABLE.ALLLIST;
 		}
-		if (e.getSource() == _mainView.btnUsers[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
+		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
 			input = carRentListView.searchInput("원하는 최대 금액을 입력해주세요");
 			currentList = RENTABLE.SEARCH1;
 		}
-		if (e.getSource() == _mainView.btnUsers[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
+		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
 			input = carRentListView.searchInput("원하는 최소 제조년도를 입력해주세요");
 			currentList = RENTABLE.SEARCH2;
 		}
-		if (e.getSource() == _mainView.btnUsers[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
+		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
 			input = carRentListView.searchInput("원하는 최대 주행거리를 입력해주세요");
 			currentList = RENTABLE.SEARCH3;
 		}

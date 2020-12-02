@@ -69,17 +69,17 @@ public class SearchController extends Controller {
 
 	@Override
 	public void mainViewButtonEvent(ActionEvent e) {
-		if (e.getSource() == _mainView.btnAdmins[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
+		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
 			input = searchView.searchInput("원하는 날짜를 입력해주세요");
 			currentSearch = SEARCH.SEARCH1;
 		}
-		if (e.getSource() == _mainView.btnAdmins[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
+		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
 			currentSearch = SEARCH.SEARCH2;
 		}
-		if (e.getSource() == _mainView.btnAdmins[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
+		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
 			currentSearch = SEARCH.SEARCH3;
 		}
-		if (e.getSource() == _mainView.btnAdmins[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH4)]) {
+		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH4)]) {
 			currentSearch = SEARCH.SEARCH4;
 		}
 
