@@ -1,15 +1,12 @@
 package controller;
 
-import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import common.AppManager;
 import common.Constants;
 import model.RepairListModel;
-import view.MainView;
 import view.RepairListView;
 
 public class RepairListController extends Controller {

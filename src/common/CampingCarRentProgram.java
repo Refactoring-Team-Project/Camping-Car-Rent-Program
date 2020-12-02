@@ -25,7 +25,6 @@ public class CampingCarRentProgram {
 
 	public static void main(String[] args) {
 
-		// SimplePainterController ����
 		MainView primary = new MainView();
 		MainController mc = new MainController();
 

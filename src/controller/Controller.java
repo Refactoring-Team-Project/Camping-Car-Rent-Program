@@ -1,7 +1,6 @@
 package controller;
 
 import common.AppManager;
-import common.Constants;
 import model.Model;
 import view.MainView;
 import view.View;
@@ -28,7 +27,7 @@ public abstract class Controller {
     }
     /*** MainView와 연결 ***/
     public void setMainView() {
-        this.mainView = AppManager.getInstance().getView();
+        this.mainView = AppManager.getInstance().getMainView();
         //this.mainView.addButtonListener("", new MainButtonListener());
     }
 

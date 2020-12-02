@@ -1,7 +1,6 @@
 package controller;
 
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -9,11 +8,10 @@ import common.AppManager;
 import common.Constants;
 import model.CampingCarModel;
 import view.CampingCarView;
-import view.MainView;
 
 public class CampingCarController extends Controller {
 
-	private CampingCarView campinCarView;
+	private CampingCarView campingCarView;
 	private CampingCarModel campingCarModel;
 
 	@Override
@@ -31,7 +29,7 @@ public class CampingCarController extends Controller {
 	@Override
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getCampingCarView();
-		campinCarView = (CampingCarView) this.connectedView;
+		campingCarView = (CampingCarView) this.connectedView;
 		connectedViewAddListener();
 	}
 
@@ -80,11 +78,11 @@ public class CampingCarController extends Controller {
 	@Override
 	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
-			if (e.getSource() == campinCarView.btnInput) {
+			if (e.getSource() == campingCarView.btnInput) {
 				inputButtonEvent();
-			} else if (e.getSource() == campinCarView.btnDelete) {
+			} else if (e.getSource() == campingCarView.btnDelete) {
 				deleteButtonEvent();
-			} else if (e.getSource() == campinCarView.btnUpdate) {
+			} else if (e.getSource() == campingCarView.btnUpdate) {
 				updateButtonEvent();
 			}
 		} catch (NullPointerException e1) {

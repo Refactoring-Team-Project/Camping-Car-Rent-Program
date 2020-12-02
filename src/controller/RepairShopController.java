@@ -1,19 +1,12 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import common.AppManager;
 import common.Constants;
-import model.CampingCarModel;
 import model.RepairShopModel;
-import view.CampingCarView;
-import view.MainView;
 import view.RepairShopView;
 
 public class RepairShopController extends Controller {

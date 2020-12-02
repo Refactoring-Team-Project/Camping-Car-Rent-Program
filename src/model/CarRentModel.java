@@ -3,7 +3,6 @@ package model;
 import common.DbUtil;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;

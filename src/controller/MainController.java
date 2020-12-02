@@ -15,7 +15,7 @@ public class MainController {
 	DatabaseConnectionModel connectionModel;
 
 	public MainController() {
-		this._mainView = AppManager.getInstance().getView();
+		this._mainView = AppManager.getInstance().getMainView();
 		addEventListener();
 		connectionDB();
 	}

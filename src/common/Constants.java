@@ -1,6 +1,5 @@
 package common;
 
-import javax.swing.*;
 public class Constants {
 
     public static final String CAMPCOMP = "Camping_Company";

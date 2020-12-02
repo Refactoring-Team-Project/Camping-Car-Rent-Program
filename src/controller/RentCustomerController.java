@@ -1,17 +1,12 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import common.AppManager;
 import common.Constants;
 import model.RentCustomerModel;
-import view.MainView;
 import view.RentCustomerView;
 
 public class RentCustomerController extends Controller{
