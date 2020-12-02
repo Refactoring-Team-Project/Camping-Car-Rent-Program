@@ -32,7 +32,7 @@ public class MainView extends JFrame {
 
 	public MainView() {
 		super("refactoring");
-		AppManager.getInstance().setView(this);
+		AppManager.getInstance().setMainView(this);
 
 		init();
 

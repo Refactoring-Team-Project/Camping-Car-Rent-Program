@@ -2,20 +2,14 @@ package controller;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import common.AppManager;
 import common.Constants;
-import model.CampingCarModel;
 import model.CarCheckModel;
 import model.CarRentModel;
-import view.CampingCarView;
-import view.MainView;
 import view.RentCarView;
 
 public class RentCarController extends Controller {

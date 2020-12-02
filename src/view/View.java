@@ -1,8 +1,5 @@
 package view;
 
-import common.AppManager;
-import common.Constants;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

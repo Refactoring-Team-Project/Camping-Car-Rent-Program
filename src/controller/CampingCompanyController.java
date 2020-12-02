@@ -1,7 +1,6 @@
 package controller;
 
 import java.awt.event.*;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -9,7 +8,6 @@ import common.AppManager;
 import common.Constants;
 import model.CampingCompanyModel;
 import view.CampingCompanyView;
-import view.MainView;
 
 public class CampingCompanyController extends Controller {
 

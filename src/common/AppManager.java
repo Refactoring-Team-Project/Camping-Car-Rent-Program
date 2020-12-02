@@ -3,111 +3,103 @@ package common;
 import view.*;
 
 public class AppManager {
-	private static AppManager s_instance; // AppManager �ڽ��� ��Ÿ���� ����
-	private MainView _view; // SimplePainterView�� �״�� �޾ƿͼ� ���� �� ����
-	private CampingCompanyView _campingcompview; // DrawingPanelView�� �״�� �޾ƿͼ� ���� �� ����
-	private RentCustomerView _rentcustview;
-	private CarCheckView _carchkview;
-	private RepairShopView _repairshopview;
-	private RepairListView _repairlistview;
-	private CampingCarView _campingcarview;
-	private RentCarView _rentcarview;
-	private SearchView _searchview;
-	private CarRentListView _carrentlistview;
-	
-	public MainView getView() { // AppManager�� ���� SimplePainterView�� �����Ϸ� �Ҷ� �� SimplePainterView��
-								// ��ȯ�� �� �Լ�
-		return _view;
-	} // getView()
+	private static AppManager s_instance;
+	private MainView mainView;
+	private CampingCompanyView campingCompanyView;
+	private RentCustomerView rentCustomerView;
+	private CarCheckView carCheckView;
+	private RepairShopView repairShopView;
+	private RepairListView repairListView;
+	private CampingCarView campingCarView;
+	private RentCarView rentCarView;
+	private SearchView searchView;
+	private CarRentListView carRentListView;
+
+	public MainView getMainView() {
+		return mainView;
+	}
 	
 	public CampingCarView getCampingCarView() {
-		return _campingcarview;
+		return campingCarView;
 	}
 	
 	public RentCarView getRentCarView() {
-		return _rentcarview;
+		return rentCarView;
 	}
 
-	public CampingCompanyView getCampingCompanyView() {// AppManager�� ���� DrawingPanelView�� �����Ϸ� �Ҷ� ��
-														// DrawingPanelView�� ��ȯ�� �� �Լ�
-		return _campingcompview;
+	public CampingCompanyView getCampingCompanyView() {
+		return campingCompanyView;
 	} 
 
 	public RentCustomerView getRentCustomerView() {
-		return _rentcustview;
+		return rentCustomerView;
 	}
 
 	public CarCheckView getCarCheckView() {
-		return _carchkview;
+		return carCheckView;
 	}
 
 	public RepairShopView getRepairShopView() {
-		return _repairshopview;
+		return repairShopView;
 	}
 
 	public RepairListView getRepairListView() {
-		return _repairlistview;
+		return repairListView;
 	}
 	
 	public SearchView getSearchView() {
-		return _searchview;
+		return searchView;
 	}
 	
 	public CarRentListView getCarRentListView() {
-		return _carrentlistview;
+		return carRentListView;
 	}
 	
-	public void setView(MainView view) { // AppManager�� ���� SimplePainterView�� ������ �� �ֵ��� AppManager��
-											// SimplePainterView�� ������� �Լ�
-		_view = view;
-	} // setView()
+	public void setMainView(MainView mainView) {
+		this.mainView = mainView;
+	}
 
-	public void setCampingCompanyView(CampingCompanyView campingcompview) { // AppManager�� ���� DrawingPanelView��
-																			// ������ �� �ֵ��� AppManager��
-																			// DrawingPanelView�� ������� �Լ�
-		_campingcompview = campingcompview;
-	} // setDrawView()
+	public void setCampingCompanyView(CampingCompanyView campingCompanyView) {
+		this.campingCompanyView = campingCompanyView;
+	}
 
 	public void setRentCustomerView(RentCustomerView rentCustomerView) {
-
-		_rentcustview = rentCustomerView;
+		this.rentCustomerView = rentCustomerView;
 	}
 
 	public void setCarCheckView(CarCheckView carCheckView) {
-
-		_carchkview = carCheckView;
+		this.carCheckView = carCheckView;
 	}
 
-	public void setRepairShopView(RepairShopView repairshopview) {
-		_repairshopview = repairshopview;
+	public void setRepairShopView(RepairShopView repairShopView) {
+		this.repairShopView = repairShopView;
 	}
 
-	public void setRepairListView(RepairListView repairlistview) {
-		_repairlistview = repairlistview;
+	public void setRepairListView(RepairListView repairListView) {
+		this.repairListView = repairListView;
 	}
 	
-	public void setCampingCarView(CampingCarView campingcarview) { // AppManager�� ���� DrawingPanelView�� ������ �� �ֵ��� AppManager��
-		_campingcarview = campingcarview;
+	public void setCampingCarView(CampingCarView campingCarView) {
+		this.campingCarView = campingCarView;
 	}
 	
 	public void setRentCarView(RentCarView rentcarview) {
-		_rentcarview = rentcarview;
+		this.rentCarView = rentcarview;
 	}
 
 	public void setSearchView(SearchView searchView) {
-		_searchview = searchView;
+		this.searchView = searchView;
 	}
 	
-	public void setCarRentListView(CarRentListView carrentlistView) {
-		_carrentlistview = carrentlistView;
+	public void setCarRentListView(CarRentListView carRentListView) {
+		this.carRentListView = carRentListView;
 	}
 	
 	public static AppManager getInstance() {
-
-		if (s_instance == null) // ó�� ȣ��Ǿ��ٸ� ��ü������ ���� �� AppMananger�� ���� �������ְ� ��ȯ
+		if (s_instance == null)
 			s_instance = new AppManager();
 		return s_instance;
 
-	} // getInstance()
+	}
 
 }

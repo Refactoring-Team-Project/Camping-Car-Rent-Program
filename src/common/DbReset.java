@@ -165,7 +165,6 @@ public class DbReset {
                 stmt.execute(s);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -302,7 +301,6 @@ public class DbReset {
                 stmt.execute(s);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         sql.clear();
@@ -362,7 +360,6 @@ public class DbReset {
                 stmt.execute(s);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         sql.clear();
@@ -432,7 +429,6 @@ public class DbReset {
                 stmt.execute(s);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         sql.clear();
@@ -496,7 +492,6 @@ public class DbReset {
                 stmt.execute(s);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         sql.clear();
@@ -555,7 +550,6 @@ public class DbReset {
                 stmt.execute(s);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         sql.clear();
@@ -615,7 +609,6 @@ public class DbReset {
                 stmt.execute(s);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         sql.clear();
