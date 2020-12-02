@@ -11,110 +11,109 @@ import javax.swing.JOptionPane;
 import common.DbUtil;
 
 public class CampingCarModel extends Model {
-	int carid;
-	String carname;
-	int carno;
-	int seat;
-	String manufacturer;
-	int manu_year;
-	int drivingdistance;
-	int rentcost;
-	int compid;
-	String registdate;
+	int carId;
+	String carName;
+	int carNo;
+	int carSeatNum;
+	String carManufacturer;
+	int carManufacturingYear;
+	int drivingDistance;
+	int carRentCost;
+	int companyId;
+	String carRegistrationDate;
 
-	int selected_carid;
-	int selected_compid;
+	int selectedCarId;
+	int selectedCompanyId;
 
-	ResultSet rs;
+	ResultSet resultSet;
 
-	public ArrayList<Object[]> select(Connection conn) {
-		String sql = "SELECT * FROM Camping_Car";
-		return DbUtil.getRows(conn, sql);
+	public ArrayList<Object[]> select(Connection connection) {
+		String sqlQuery = "SELECT * FROM Camping_Car";
+		return DbUtil.getRows(connection, sqlQuery);
 	}
 
-	public void insert(Connection conn) {
-		String sql = "INSERT INTO Camping_Car VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public void insert(Connection connection) {
+		String sqlQuery = "INSERT INTO Camping_Car VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		String[] types = { "int", "string", "int", "int", "string", "int", "int", "int", "int", "string" };
-		Object[] values = { carid, carname, carno, seat, manufacturer, manu_year, drivingdistance, rentcost, compid,
-				registdate };
+		String[] dataTypes = { "int", "string", "int", "int", "string", "int", "int", "int", "int", "string" };
+		Object[] values = { carId, carName, carNo, carSeatNum, carManufacturer, carManufacturingYear, drivingDistance, carRentCost, companyId, carRegistrationDate };
 
-		DbUtil.execute(conn, sql, types, values);
-
-	}
-
-	public void delete(Connection conn, Object object) {
-		String sql = "DELETE FROM Camping_Car WHERE carid = " + object.toString() + ";";
-
-		DbUtil.execute(conn, sql, null, null);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 
 	}
 
-	public void update(Connection conn, Object object) {
+	public void delete(Connection connection, Object object) {
+		String sqlQuery = "DELETE FROM Camping_Car WHERE carid = " + object.toString() + ";";
 
-		String sql = "UPDATE Camping_Car SET carid=?,carname=?,carno=?,seat=?,manufacturer=?,manu_year=?,drivingdistance=?,rentcost=?,compid=?,registdate=? WHERE carid = "
+		DbUtil.execute(connection, sqlQuery, null, null);
+
+	}
+
+	public void update(Connection connection, Object object) {
+
+		String sqlQuery = "UPDATE Camping_Car SET carid=?,carname=?,carno=?,seat=?,manufacturer=?,manu_year=?,drivingdistance=?,rentcost=?,compid=?,registdate=? WHERE carid = "
 				+ object.toString() + ";";
 
-		String[] types = { "int", "string", "int", "int", "string", "int", "int", "int", "int", "string" };
-		Object[] values = { carid, carname, carno, seat, manufacturer, manu_year, drivingdistance, rentcost, compid,
-				registdate };
+		String[] dataTypes = { "int", "string", "int", "int", "string", "int", "int", "int", "int", "string" };
+		Object[] values = { carId, carName, carNo, carSeatNum, carManufacturer, carManufacturingYear, drivingDistance, carRentCost, companyId, carRegistrationDate };
 
-		DbUtil.execute(conn, sql, types, values);
+
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 	}
 
-	public ArrayList<Object[]> selectRentAble(Connection conn) {
-		String sql = "select c.carid, c.carname, c.carno, c.seat, c.manufacturer, c.manu_year, c.drivingdistance, c.rentcost, c.compid, c.registdate\r\n"
+	public ArrayList<Object[]> selectRentAble(Connection connection) {
+		String sqlQuery = "select c.carid, c.carname, c.carno, c.seat, c.manufacturer, c.manu_year, c.drivingdistance, c.rentcost, c.compid, c.registdate\r\n"
 				+ "from Camping_Car c\r\n" + "where not exists (select 1 from Car_Rent r\r\n"
 				+ "left join Car_Check cc on r.rentno = cc.rentno\r\n" + "where r.carid = c.carid\r\n"
 				+ "and cc.rentno is null\r\n" + ")\r\n" + "order by carid;";
-		return DbUtil.getRows(conn, sql);
+		return DbUtil.getRows(connection, sqlQuery);
 	}
 
-	public ArrayList<Object[]> search1(Connection conn, String maxPrice) {
+	public ArrayList<Object[]> userPriceSearch(Connection connection, String maxPrice) {
 		if (!maxPrice.isBlank()) {
-			String sql = "select * from Camping_car c where c.rentcost <= " + maxPrice + " and "
+			String sqlQuery = "select * from Camping_car c where c.rentcost <= " + maxPrice + " and "
 					+ "c.carid not in (select r.carid from Car_Rent r "
 					+ "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
 
-			return DbUtil.getRows(conn, sql);
+			return DbUtil.getRows(connection, sqlQuery);
 		} else
 			JOptionPane.showMessageDialog(null, "금액을 입력하세요");
 		return new ArrayList<Object[]>();
 	}
 
-	public ArrayList<Object[]> search2(Connection conn, String year) {
-		if (!year.isBlank()) {
-			String sql = "select * from Camping_car c where c.manu_year >= " + year + " and "
+	public ArrayList<Object[]> userManufacturingYearSearch(Connection connection, String manufactureYear) {
+		if (!manufactureYear.isBlank()) {
+			String sqlQuery = "select * from Camping_car c where c.manu_year >= " + manufactureYear + " and "
 					+ "c.carid not in (select r.carid from Car_Rent r "
 					+ "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
 
-			return DbUtil.getRows(conn, sql);
+			return DbUtil.getRows(connection, sqlQuery);
 		} else
 			JOptionPane.showMessageDialog(null, "년도를 입력하세요");
 		return new ArrayList<Object[]>();
 	}
 
-	public ArrayList<Object[]> search3(Connection conn, String distance) {
+	public ArrayList<Object[]> userMileageSearch(Connection connection, String distance) {
 		if (!distance.isBlank()) {
-			String sql = "select * from Camping_car c where c.drivingdistance <= " + distance + " and "
+			String sqlQuery = "select * from Camping_car c where c.drivingdistance <= " + distance + " and "
 					+ "c.carid not in (select r.carid from Car_Rent r "
 					+ "where r.rentno not in (select rentno from Car_Check)) order by carid;\n";
 
-			return DbUtil.getRows(conn, sql);
+			return DbUtil.getRows(connection, sqlQuery);
 		} else
 			JOptionPane.showMessageDialog(null, "거리를 입력하세요");
 		return new ArrayList<Object[]>();
 	}
 
-	public void selectedData(Connection conn, Object object) {
+	public void selectedData(Connection connection, Object object) {
 		try {
-			String sql = "select carid, compid from Camping_Car where carid = " + object.toString() + ";";
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			String sqlQuery = "select carid, compid from Camping_Car where carid = " + object.toString() + ";";
+			Statement statement = connection.createStatement();
+			resultSet = statement.executeQuery(sqlQuery);
 
-			while (rs.next()) {
-				selected_carid = rs.getInt(1);
-				selected_compid = rs.getInt(2);
+			while (resultSet.next()) {
+				selectedCarId = resultSet.getInt(1);
+				selectedCompanyId = resultSet.getInt(2);
 			}
 
 		} catch (SQLException e1) {
@@ -123,92 +122,92 @@ public class CampingCarModel extends Model {
 	}
 
 
-	public int getSelectedCarid() {
-		return selected_carid;
+	public int getSelectedCarId() {
+		return selectedCarId;
 	}
 
-	public int getSelectedCompid() {
-		return selected_compid;
+	public int getSelectedCompanyId() {
+		return selectedCompanyId;
 	}
 
-	public int getCarid() {
-		return carid;
+	public int getCarId() {
+		return carId;
 	}
 
-	public void setCarid(int carid) {
-		this.carid = carid;
+	public void setCarId(int carId) {
+		this.carId = carId;
 	}
 
-	public String getCarname() {
-		return carname;
+	public String getCarName() {
+		return carName;
 	}
 
-	public void setCarname(String carname) {
-		this.carname = carname;
+	public void setCarName(String carName) {
+		this.carName = carName;
 	}
 
-	public int getCarno() {
-		return carno;
+	public int getCarNo() {
+		return carNo;
 	}
 
-	public void setCarno(int carno) {
-		this.carno = carno;
+	public void setCarNo(int carNo) {
+		this.carNo = carNo;
 	}
 
-	public int getSeat() {
-		return seat;
+	public int getCarSeatNum() {
+		return carSeatNum;
 	}
 
-	public void setSeat(int seat) {
-		this.seat = seat;
+	public void setCarSeatNum(int carSeatNum) {
+		this.carSeatNum = carSeatNum;
 	}
 
-	public String getManufacturer() {
-		return manufacturer;
+	public String getCarManufacturer() {
+		return carManufacturer;
 	}
 
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
+	public void setCarManufacturer(String carManufacturer) {
+		this.carManufacturer = carManufacturer;
 	}
 
-	public int getManu_year() {
-		return manu_year;
+	public int getCarManufacturingYear() {
+		return carManufacturingYear;
 	}
 
-	public void setManu_year(int manu_year) {
-		this.manu_year = manu_year;
+	public void setCarManufacturingYear(int carManufacturingYear) {
+		this.carManufacturingYear = carManufacturingYear;
 	}
 
-	public int getDrivingdistance() {
-		return drivingdistance;
+	public int getDrivingDistance() {
+		return drivingDistance;
 	}
 
-	public void setDrivingdistance(int drivingdistance) {
-		this.drivingdistance = drivingdistance;
+	public void setDrivingDistance(int drivingDistance) {
+		this.drivingDistance = drivingDistance;
 	}
 
-	public int getRentcost() {
-		return rentcost;
+	public int getCarRentCost() {
+		return carRentCost;
 	}
 
-	public void setRentcost(int rentcost) {
-		this.rentcost = rentcost;
+	public void setCarRentCost(int carRentCost) {
+		this.carRentCost = carRentCost;
 	}
 
-	public int getCompid() {
-		return compid;
+	public int getCompanyId() {
+		return companyId;
 	}
 
-	public void setCompid(int compid) {
-		this.compid = compid;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
-	public String getRegistdate() {
-		return registdate;
+	public String getCarRegistrationDate() {
+		return carRegistrationDate;
 	}
 
-	public void setRegistdate(String registdate) {
-		this.registdate = registdate;
+	public void setCarRegistrationDate(String carRegistrationDate) {
+		this.carRegistrationDate = carRegistrationDate;
 	}
 
 }

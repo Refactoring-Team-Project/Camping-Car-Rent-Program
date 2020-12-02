@@ -92,10 +92,10 @@ public class SearchController extends Controller {
 		ArrayList<Object[]> arr;
 		switch(currentSearch) {
 			case SEARCH1:
-				arr = carRentModel.search1(mainView.getConnection(), input);
+				arr = carRentModel.adminNoReturnCarSearch(mainView.getConnection(), input);
 				break;
 			case SEARCH2:
-				arr = campCompModel.search2(mainView.getConnection());
+				arr = campCompModel.adminTop10CompanySearch(mainView.getConnection());
 				break;
 			case SEARCH3:
 				arr = rentCustomerModel.search3(mainView.getConnection());

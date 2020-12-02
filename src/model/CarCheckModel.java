@@ -9,45 +9,45 @@ import java.util.ArrayList;
 import common.DbUtil;
 
 public class CarCheckModel extends Model {
-	int rentno;
-	int carid;
-	String explain_front;
-	String explain_left;
-	String explain_right;
-	String explain_back;
-	String repair_required;
+	int rentNo;
+	int carId;
+	String frontDetail;
+	String leftDetail;
+	String rigntDetail;
+	String backDetail;
+	String repairRequired;
 
-	int selected_carid;
-	int selected_compid;
-	int selected_license_no;
+	int selectedCarId;
+	int selectedCompanyId;
+	int selectedLicenseNo;
 
-	ResultSet rs;
+	ResultSet resultSet;
 
-	public ArrayList<Object[]> select(Connection conn) {
-		String sql = "SELECT * FROM Car_Check c order by c.rentno";
-		return DbUtil.getRows(conn, sql);
+	public ArrayList<Object[]> select(Connection connection) {
+		String sqlQuery = "SELECT * FROM Car_Check c order by c.rentno";
+		return DbUtil.getRows(connection, sqlQuery);
 	}
 
-	public void insert(Connection conn) {
-		String sql = "INSERT INTO Car_Check VALUES(?, ?, ?, ?, ?, ?, ?)";
+	public void insert(Connection connection) {
+		String sqlQuery = "INSERT INTO Car_Check VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-		String[] types = { "int", "int", "string", "string", "string", "string", "string" };
-		Object[] values = { rentno, carid, explain_front, explain_left, explain_right, explain_back, repair_required };
+		String[] dataTypes = { "int", "int", "string", "string", "string", "string", "string" };
+		Object[] values = { rentNo, carId, frontDetail, leftDetail, rigntDetail, backDetail, repairRequired };
 
-		DbUtil.execute(conn, sql, types, values);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 
 	}
 
-	public void selectedData(Connection conn, Object object) {
+	public void selectedData(Connection connection, Object object) {
 		try {
-			String sql = "select carid, compid, license_no from Car_Rent where rentno = " + object.toString() + ";";
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			String sqlQuery = "select carid, compid, license_no from Car_Rent where rentno = " + object.toString() + ";";
+			Statement statement = connection.createStatement();
+			resultSet = statement.executeQuery(sqlQuery);
 
-			while (rs.next()) {
-				selected_carid = rs.getInt(1);
-				selected_compid = rs.getInt(2);
-				selected_license_no = rs.getInt(3);
+			while (resultSet.next()) {
+				selectedCarId = resultSet.getInt(1);
+				selectedCompanyId = resultSet.getInt(2);
+				selectedLicenseNo = resultSet.getInt(3);
 			}
 
 		} catch (SQLException e1) {
@@ -55,72 +55,72 @@ public class CarCheckModel extends Model {
 		}
 	}
 
-	public int getSelectedCarid() {
-		return selected_carid;
+	public int getSelectedCarId() {
+		return selectedCarId;
 	}
 
-	public int getSelectedCompid() {
-		return selected_compid;
+	public int getSelectedCompanyId() {
+		return selectedCompanyId;
 	}
 
-	public int getSelectedLicense_no() {
-		return selected_license_no;
+	public int getSelectedLicenseNo() {
+		return selectedLicenseNo;
 	}
 
-	public int getRentno() {
-		return rentno;
+	public int getRentNo() {
+		return rentNo;
 	}
 
-	public void setRentno(int rentno) {
-		this.rentno = rentno;
+	public void setRentNo(int rentNo) {
+		this.rentNo = rentNo;
 	}
 
-	public int getCarid() {
-		return carid;
+	public int getCarId() {
+		return carId;
 	}
 
-	public void setCarid(int carid) {
-		this.carid = carid;
+	public void setCarId(int carId) {
+		this.carId = carId;
 	}
 
-	public String getExplain_front() {
-		return explain_front;
+	public String getFrontDetail() {
+		return frontDetail;
 	}
 
-	public void setExplain_front(String explain_front) {
-		this.explain_front = explain_front;
+	public void setFrontDetail(String frontDetail) {
+		this.frontDetail = frontDetail;
 	}
 
-	public String getExplain_left() {
-		return explain_left;
+	public String getLeftDetail() {
+		return leftDetail;
 	}
 
-	public void setExplain_left(String explain_left) {
-		this.explain_left = explain_left;
+	public void setLeftDetail(String leftDetail) {
+		this.leftDetail = leftDetail;
 	}
 
-	public String getExplain_right() {
-		return explain_right;
+	public String getRigntDetail() {
+		return rigntDetail;
 	}
 
-	public void setExplain_right(String explain_right) {
-		this.explain_right = explain_right;
+	public void setRigntDetail(String rigntDetail) {
+		this.rigntDetail = rigntDetail;
 	}
 
-	public String getExplain_back() {
-		return explain_back;
+	public String getBackDetail() {
+		return backDetail;
 	}
 
-	public void setExplain_back(String explain_back) {
-		this.explain_back = explain_back;
+	public void setBackDetail(String backDetail) {
+		this.backDetail = backDetail;
 	}
 
-	public String getRepair_required() {
-		return repair_required;
+	public String getRepairRequired() {
+		return repairRequired;
 	}
 
-	public void setRepair_required(String repair_required) {
-		this.repair_required = repair_required;
+	public void setRepairRequired(String repairRequired) {
+		this.repairRequired = repairRequired;
 	}
 
 }

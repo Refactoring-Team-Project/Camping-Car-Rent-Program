@@ -7,89 +7,87 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class CampingCompanyModel extends Model {
-	int compid;
-	String compname;
-	String address;
-	String phone;
-	String manager_name;
-	String manager_email;
-	
-	ResultSet rs; 
-	
-	public ArrayList<Object[]> select(Connection conn) {
-		String sql = "SELECT * FROM Camping_Company";
-		return DbUtil.getRows(conn, sql);
+	int companyId;
+	String companyName;
+	String companyAddress;
+	String companyContact;
+	String companyManagerName;
+	String companyManagerEmail;
+
+	public ArrayList<Object[]> select(Connection connection) {
+		String sqlQuery = "SELECT * FROM Camping_Company";
+		return DbUtil.getRows(connection, sqlQuery);
 	}
 	
-	public void insert(Connection conn) {
-		String sql = "INSERT INTO Camping_Company(compid, compname, address, phone, manager_name, manager_email) VALUES(?, ?, ?, ?, ?, ?)";
+	public void insert(Connection connection) {
+		String sqlQuery = "INSERT INTO Camping_Company(compid, compname, address, phone, manager_name, manager_email) VALUES(?, ?, ?, ?, ?, ?)";
 
-		String[] types = {"int", "string", "string", "string", "string", "string"};
-		Object[] values = {compid, compname, address, phone, manager_name, manager_email};
+		String[] dataTypes = {"int", "string", "string", "string", "string", "string"};
+		Object[] values = {companyId, companyName, companyAddress, companyContact, companyManagerName, companyManagerEmail};
 
-		DbUtil.execute(conn, sql, types, values);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 	}
 	
-	public void delete(Connection conn, Object object) {
-		String sql = "DELETE FROM Camping_Company WHERE compid = " + object.toString() + ";";
-		DbUtil.execute(conn, sql, null, null);
+	public void delete(Connection connection, Object object) {
+		String sqlQuery = "DELETE FROM Camping_Company WHERE compid = " + object.toString() + ";";
+		DbUtil.execute(connection, sqlQuery, null, null);
 	}
 
-	public void update(Connection conn, Object object) {
-		String sql = "UPDATE Camping_Company SET compid=?,compname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE compid = "
+	public void update(Connection connection, Object object) {
+		String sqlQuery = "UPDATE Camping_Company SET compid=?,compname=?,address=?,phone=?,manager_name=?,manager_email=? WHERE compid = "
 				+ object.toString() + ";";
 
-		String[] types = {"int", "string", "string", "string", "string", "string"};
-		Object[] values = {compid, compname, address, phone, manager_name, manager_email};
+		String[] dataTypes = {"int", "string", "string", "string", "string", "string"};
+		Object[] values = {companyId, companyName, companyAddress, companyContact, companyManagerName, companyManagerEmail};
 
-		DbUtil.execute(conn, sql, types, values);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 	}
 	
-	public ArrayList<Object[]> search2(Connection conn) {
-		String sql = "select cc.compid, cc.compname, coalesce(count(*), 0) as rental_count\r\n" +
+	public ArrayList<Object[]> adminTop10CompanySearch(Connection connection) {
+		String sqlQuery = "select cc.compid, cc.compname, coalesce(count(*), 0) as rental_count\r\n" +
 				"from Camping_Company cc\r\n" +
 				"left join Car_Rent cr\r\n" +
 				"on cc.compid = cr.compid\r\n" +
 				"group by cc.compid, cc.compname\r\n" +
 				"order by 3 desc\r\n" +
 				"limit 0, 10;";
-		return DbUtil.getRows(conn, sql);
+		return DbUtil.getRows(connection, sqlQuery);
 	}
 	
-	public int getCompid() {
-		return compid;
+	public int getCompanyId() {
+		return companyId;
 	}
-	public void setCompid(int compid) {
-		this.compid = compid;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
-	public String getCompname() {
-		return compname;
+	public String getCompanyName() {
+		return companyName;
 	}
-	public void setCompname(String compname) {
-		this.compname = compname;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
-	public String getAddress() {
-		return address;
+	public String getCompanyAddress() {
+		return companyAddress;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
 	}
-	public String getPhone() {
-		return phone;
+	public String getCompanyContact() {
+		return companyContact;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setCompanyContact(String companyContact) {
+		this.companyContact = companyContact;
 	}
-	public String getManager_name() {
-		return manager_name;
+	public String getCompanyManagerName() {
+		return companyManagerName;
 	}
-	public void setManager_name(String manager_name) {
-		this.manager_name = manager_name;
+	public void setCompanyManagerName(String companyManagerName) {
+		this.companyManagerName = companyManagerName;
 	}
-	public String getManager_email() {
-		return manager_email;
+	public String getCompanyManagerEmail() {
+		return companyManagerEmail;
 	}
-	public void setManager_email(String manager_mail) {
-		this.manager_email = manager_mail;
+	public void setCompanyManagerEmail(String companyManagerEmail) {
+		this.companyManagerEmail = companyManagerEmail;
 	}
 }

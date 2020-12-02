@@ -45,22 +45,22 @@ public class CampingCompanyController extends Controller {
 	public void setModelEachColumn(String column, String value) {
 		switch (column) {
 			case "compid":
-				campingCompanyModel.setCompid(Integer.parseInt(value));
+				campingCompanyModel.setCompanyId(Integer.parseInt(value));
 				break;
 			case "compname":
-				campingCompanyModel.setCompname(value);
+				campingCompanyModel.setCompanyName(value);
 				break;
 			case "address":
-				campingCompanyModel.setAddress(value);
+				campingCompanyModel.setCompanyAddress(value);
 				break;
 			case "phone":
-				campingCompanyModel.setPhone(value);
+				campingCompanyModel.setCompanyContact(value);
 				break;
 			case "manager_name":
-				campingCompanyModel.setManager_name(value);
+				campingCompanyModel.setCompanyManagerName(value);
 				break;
 			case "manager_email":
-				campingCompanyModel.setManager_email(value);
+				campingCompanyModel.setCompanyManagerEmail(value);
 				break;
 		}
 	}

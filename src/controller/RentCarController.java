@@ -54,25 +54,25 @@ public class RentCarController extends Controller {
 	public void setModelEachColumn(String column, String value) {
 		switch(column){
 			case "rentno":
-				carCheckModel.setRentno(Integer.parseInt(value));
+				carCheckModel.setRentNo(Integer.parseInt(value));
 				break;
 			case "carid":
-				carCheckModel.setCarid(Integer.parseInt(value));
+				carCheckModel.setCarId(Integer.parseInt(value));
 				break;
 			case "explain_front":
-				carCheckModel.setExplain_front(value);
+				carCheckModel.setFrontDetail(value);
 				break;
 			case "explain_left":
-				carCheckModel.setExplain_left(value);
+				carCheckModel.setLeftDetail(value);
 				break;
 			case "explain_right":
-				carCheckModel.setExplain_right(value);
+				carCheckModel.setRigntDetail(value);
 				break;
 			case "explain_back":
-				carCheckModel.setExplain_back(value);
+				carCheckModel.setBackDetail(value);
 				break;
 			case "repair_required":
-				carCheckModel.setRepair_required(value);
+				carCheckModel.setRepairRequired(value);
 				break;
 		}
 	}

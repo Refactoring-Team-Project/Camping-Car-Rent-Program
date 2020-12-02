@@ -44,34 +44,34 @@ public class CampingCarController extends Controller {
 	public void setModelEachColumn(String column, String value) {
 		switch(column) {
 			case "carid":
-				campingCarModel.setCarid(Integer.parseInt(value));
+				campingCarModel.setCarId(Integer.parseInt(value));
 				break;
 			case "carname":
-				campingCarModel.setCarname(value);
+				campingCarModel.setCarName(value);
 				break;
 			case "carno":
-				campingCarModel.setCarno(Integer.parseInt(value));
+				campingCarModel.setCarNo(Integer.parseInt(value));
 				break;
 			case "seat":
-				campingCarModel.setSeat(Integer.parseInt(value));
+				campingCarModel.setCarSeatNum(Integer.parseInt(value));
 				break;
 			case "manufacturer":
-				campingCarModel.setManufacturer(value);
+				campingCarModel.setCarManufacturer(value);
 				break;
 			case "manu_year":
-				campingCarModel.setManu_year(Integer.parseInt(value));
+				campingCarModel.setCarManufacturingYear(Integer.parseInt(value));
 				break;
 			case "drivingdistance":
-				campingCarModel.setDrivingdistance(Integer.parseInt(value));
+				campingCarModel.setDrivingDistance(Integer.parseInt(value));
 				break;
 			case "rentcost":
-				campingCarModel.setRentcost(Integer.parseInt(value));
+				campingCarModel.setCarRentCost(Integer.parseInt(value));
 				break;
 			case "compid":
-				campingCarModel.setCompid(Integer.parseInt(value));
+				campingCarModel.setCompanyId(Integer.parseInt(value));
 				break;
 			case "registdate":
-				campingCarModel.setRegistdate(value);
+				campingCarModel.setCarRegistrationDate(value);
 				break;
 		}
 

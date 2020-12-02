@@ -111,13 +111,13 @@ public class CarCheckController extends Controller {
 		carCheckModel.selectedData(mainView.getConnection(),
 				connectedView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 0));
 
-		connectedView.inputFields[1].setText(Integer.toString(carCheckModel.getSelectedCarid()));
+		connectedView.inputFields[1].setText(Integer.toString(carCheckModel.getSelectedCarId()));
 		connectedView.inputFields[1].setDisabledTextColor(Color.black);
 
-		connectedView.inputFields[3].setText(Integer.toString(carCheckModel.getSelectedCompid()));
+		connectedView.inputFields[3].setText(Integer.toString(carCheckModel.getSelectedCompanyId()));
 		connectedView.inputFields[3].setDisabledTextColor(Color.black);
 
-		connectedView.inputFields[4].setText(Integer.toString(carCheckModel.getSelectedLicense_no()));
+		connectedView.inputFields[4].setText(Integer.toString(carCheckModel.getSelectedLicenseNo()));
 		connectedView.inputFields[4].setDisabledTextColor(Color.black);
 	}
 

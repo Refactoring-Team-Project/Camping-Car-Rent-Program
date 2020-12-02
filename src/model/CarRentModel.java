@@ -9,80 +9,79 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CarRentModel extends Model {
-	int rentno;
-	int carid;
-	int license_no;
-	int compid;
-	String rentdate;
-	int rentalperiod;
+	int rentNo;
+	int carId;
+	int licenseNo;
+	int companyId;
+	String rentDate;
+	int rentalPeriod;
 	int charge;
-	String paymentdeadline;
-	String billhistory;
-	String billhistorycost;
-	
-	ResultSet rs;
+	String paymentDeadline;
+	String billHistory;
+	String billHistoryCost;
+
 	public ArrayList<Object[]> select(Connection conn) {
-		String sql = "SELECT * FROM Car_Rent";
-		return DbUtil.getRows(conn, sql);
+		String sqlQuery = "SELECT * FROM Car_Rent";
+		return DbUtil.getRows(conn, sqlQuery);
 	}
 
 
-	public void insert(Connection conn) {
-		String sql = "INSERT INTO Car_Rent(rentno, carid, license_no, compid, rentdate, rentalperiod, charge, paymentdeadline, billhistory, billhistorycost) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public void insert(Connection connection) {
+		String sqlQuery = "INSERT INTO Car_Rent(rentno, carid, license_no, compid, rentdate, rentalperiod, charge, paymentdeadline, billhistory, billhistorycost) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		String[] types = { "int", "int", "int", "int", "string", "int", "int", "string", "string", "string" };
-		Object[] values = { rentno, carid, license_no, compid, rentdate, rentalperiod, charge, paymentdeadline, billhistory,
-				billhistorycost };
+		String[] dataTypes = { "int", "int", "int", "int", "string", "int", "int", "string", "string", "string" };
+		Object[] values = { rentNo, carId, licenseNo, companyId, rentDate, rentalPeriod, charge, paymentDeadline, billHistory,
+				billHistoryCost };
 
-		DbUtil.execute(conn, sql, types, values);
+		DbUtil.execute(connection, sqlQuery, dataTypes, values);
 	}
 	
-	public ArrayList<Object[]> search1(Connection conn, String day) {
+	public ArrayList<Object[]> adminNoReturnCarSearch(Connection connection, String day) {
 		if(!day.isBlank() && (day.matches("\\d{4}-\\d{2}-\\d{2}"))) {
-			  String sql = "select *\r\n" +
+			  String sqlQuery = "select *\r\n" +
 					"from Car_Rent r\r\n" +
 					"where r.rentno not in (select c.rentno from Car_Check c) and date_format('"+day+"', '%Y-%m-%d') > date_add(r.rentdate, interval rentalperiod day);";
 
-			  return DbUtil.getRows(conn, sql);
+			  return DbUtil.getRows(connection, sqlQuery);
 		} else JOptionPane.showMessageDialog(null, "날짜형식(yyyy-mm-dd)를 맞춰 입력해주십시오");
 		return new ArrayList<Object[]>();
 	}
 	
-	public int getRentno() {
-		return rentno;
+	public int getRentNo() {
+		return rentNo;
 	}
-	public void setRentno(int rentno) {
-		this.rentno = rentno;
+	public void setRentNo(int rentNo) {
+		this.rentNo = rentNo;
 	}
-	public int getCarid() {
-		return carid;
+	public int getCarId() {
+		return carId;
 	}
-	public void setCarid(int carid) {
-		this.carid = carid;
+	public void setCarId(int carId) {
+		this.carId = carId;
 	}
-	public int getLicense_no() {
-		return license_no;
+	public int getLicenseNo() {
+		return licenseNo;
 	}
-	public void setLicense_no(int license_no) {
-		this.license_no = license_no;
+	public void setLicenseNo(int licenseNo) {
+		this.licenseNo = licenseNo;
 	}
-	public int getCompid() {
-		return compid;
+	public int getCompanyId() {
+		return companyId;
 	}
-	public void setCompid(int compid) {
-		this.compid = compid;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
-	public String getRentdate() {
-		return rentdate;
+	public String getRentDate() {
+		return rentDate;
 	}
-	public void setRentdate(String rentdata) {
-		this.rentdate = rentdata;
+	public void setRentDate(String rentDate) {
+		this.rentDate = rentDate;
 	}
-	public int getRentalperiod() {
-		return rentalperiod;
+	public int getRentalPeriod() {
+		return rentalPeriod;
 	}
-	public void setRentalperiod(int rentalperiod) {
-		this.rentalperiod = rentalperiod;
+	public void setRentalPeriod(int rentalPeriod) {
+		this.rentalPeriod = rentalPeriod;
 	}
 	public int getCharge() {
 		return charge;
@@ -90,22 +89,22 @@ public class CarRentModel extends Model {
 	public void setCharge(int charge) {
 		this.charge = charge;
 	}
-	public String getPaymentdeadline() {
-		return paymentdeadline;
+	public String getPaymentDeadline() {
+		return paymentDeadline;
 	}
-	public void setPaymentdeadline(String paymentdeadline) {
-		this.paymentdeadline = paymentdeadline;
+	public void setPaymentDeadline(String paymentDeadline) {
+		this.paymentDeadline = paymentDeadline;
 	}
-	public String getBillhistory() {
-		return billhistory;
+	public String getBillHistory() {
+		return billHistory;
 	}
-	public void setBillhistory(String billhistory) {
-		this.billhistory = billhistory;
+	public void setBillHistory(String billHistory) {
+		this.billHistory = billHistory;
 	}
-	public String getBillhistorycost() {
-		return billhistorycost;
+	public String getBillHistoryCost() {
+		return billHistoryCost;
 	}
-	public void setBillhistorycost(String billhistorycost) {
-		this.billhistorycost = billhistorycost;
+	public void setBillHistoryCost(String billHistoryCost) {
+		this.billHistoryCost = billHistoryCost;
 	}
 }

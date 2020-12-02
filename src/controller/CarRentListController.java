@@ -62,34 +62,34 @@ public class CarRentListController extends Controller{
 	public void setModelEachColumn(String column, String value) {
 		switch (column) {
 			case "rentno":
-				carRentModel.setRentno(Integer.parseInt(value));
+				carRentModel.setRentNo(Integer.parseInt(value));
 				break;
 			case "carid":
-				carRentModel.setCarid(Integer.parseInt(value));
+				carRentModel.setCarId(Integer.parseInt(value));
 				break;
 			case "license-no":
-				carRentModel.setLicense_no(Integer.parseInt(value));
+				carRentModel.setLicenseNo(Integer.parseInt(value));
 				break;
 			case "compid":
-				carRentModel.setCompid(Integer.parseInt(value));
+				carRentModel.setCompanyId(Integer.parseInt(value));
 				break;
 			case "rent_date":
-				carRentModel.setRentdate(value);
+				carRentModel.setRentDate(value);
 				break;
 			case "rentalperiod":
-				carRentModel.setRentalperiod(Integer.parseInt(value));
+				carRentModel.setRentalPeriod(Integer.parseInt(value));
 				break;
 			case "charge":
 				carRentModel.setCharge(Integer.parseInt(value));
 				break;
 			case "paymentdeadline":
-				carRentModel.setPaymentdeadline(value);
+				carRentModel.setPaymentDeadline(value);
 				break;
 			case "billhistory":
-				carRentModel.setBillhistory(value);
+				carRentModel.setBillHistory(value);
 				break;
 			case "billhistorycost":
-				carRentModel.setBillhistorycost(value);
+				carRentModel.setBillHistoryCost(value);
 				break;
 		}
 	}
@@ -137,13 +137,13 @@ public class CarRentListController extends Controller{
 				arr = campCarModel.selectRentAble(mainView.getConnection());
 				break;
 			case SEARCH1:
-				arr = campCarModel.search1(mainView.getConnection(), input);
+				arr = campCarModel.userPriceSearch(mainView.getConnection(), input);
 				break;
 			case SEARCH2:
-				arr = campCarModel.search2(mainView.getConnection(), input);
+				arr = campCarModel.userManufacturingYearSearch(mainView.getConnection(), input);
 				break;
 			case SEARCH3:
-				arr = campCarModel.search3(mainView.getConnection(), input);
+				arr = campCarModel.userMileageSearch(mainView.getConnection(), input);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + currentList);
@@ -159,10 +159,10 @@ public class CarRentListController extends Controller{
 		campCarModel.selectedData(mainView.getConnection(),
 				connectedView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 0));
 
-		connectedView.inputFields[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
+		connectedView.inputFields[1].setText(Integer.toString(campCarModel.getSelectedCarId()));
 		connectedView.inputFields[1].setDisabledTextColor(Color.black);
 
-		connectedView.inputFields[3].setText(Integer.toString(campCarModel.getSelectedCompid()));
+		connectedView.inputFields[3].setText(Integer.toString(campCarModel.getSelectedCompanyId()));
 		connectedView.inputFields[3].setDisabledTextColor(Color.black);
 	}
 
