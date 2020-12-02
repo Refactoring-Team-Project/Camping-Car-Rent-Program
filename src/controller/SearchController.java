@@ -32,10 +32,10 @@ public class SearchController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.SEARCH1, new mainButtonListener());
-		this._mainView.addAdminButtonListener(Constants.SEARCH2, new mainButtonListener());
-		this._mainView.addAdminButtonListener(Constants.SEARCH3, new mainButtonListener());
-		this._mainView.addAdminButtonListener(Constants.SEARCH4, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.SEARCH1, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.SEARCH2, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.SEARCH3, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.SEARCH4, new mainButtonListener());
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class SearchController extends Controller {
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getSearchView();
-		searchView = (SearchView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getSearchView();
+		searchView = (SearchView) this.connectedView;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class SearchController extends Controller {
 				{"NAME", "LICENSE NO", "TOTAL RENTAL COUNT", "REPAIR COUNT"},
 				{"SHOP ID", "SHOP NAME", "INCOME"}
 		};
-		column = columns[0];
+		columnName = columns[0];
 	}
 
 	@Override
@@ -69,21 +69,21 @@ public class SearchController extends Controller {
 
 	@Override
 	public void mainViewButtonEvent(ActionEvent e) {
-		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
+		if (e.getSource() == mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
 			input = searchView.searchInput("원하는 날짜를 입력해주세요");
 			currentSearch = SEARCH.SEARCH1;
 		}
-		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
+		if (e.getSource() == mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
 			currentSearch = SEARCH.SEARCH2;
 		}
-		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
+		if (e.getSource() == mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
 			currentSearch = SEARCH.SEARCH3;
 		}
-		if (e.getSource() == _mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH4)]) {
+		if (e.getSource() == mainView.btnOnAdminPanel[Arrays.asList(Constants.ADMIN_BUTTON_NAME).indexOf(Constants.SEARCH4)]) {
 			currentSearch = SEARCH.SEARCH4;
 		}
 
-		column = columns[currentSearch.ordinal()];
+		columnName = columns[currentSearch.ordinal()];
 		super.mainViewButtonEvent(e);
 	}
 
@@ -92,22 +92,22 @@ public class SearchController extends Controller {
 		ArrayList<Object[]> arr;
 		switch(currentSearch) {
 			case SEARCH1:
-				arr = carRentModel.search1(_mainView.getConn(), input);
+				arr = carRentModel.search1(mainView.getConn(), input);
 				break;
 			case SEARCH2:
-				arr = campCompModel.search2(_mainView.getConn());
+				arr = campCompModel.search2(mainView.getConn());
 				break;
 			case SEARCH3:
-				arr = rentCustomerModel.search3(_mainView.getConn());
+				arr = rentCustomerModel.search3(mainView.getConn());
 				break;
 			case SEARCH4:
-				arr = repairShopModel.search4(_mainView.getConn());
+				arr = repairShopModel.search4(mainView.getConn());
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + currentSearch);
 		}
 		for (int i = 0; i < arr.size(); i++) {
-			thisView.tableModel.addRow(arr.get(i));
+			connectedView.tableModelOnScrollPane.addRow(arr.get(i));
 		}
 	}
 }

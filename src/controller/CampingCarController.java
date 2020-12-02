@@ -19,25 +19,25 @@ public class CampingCarController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.CAMPCAR, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.CAMPCAR, new mainButtonListener());
 	}
 	@Override
 	public void initModel() {
-		dataModel = new CampingCarModel();
-		updateModel = dataModel;
-		campingCarModel = (CampingCarModel) dataModel;
+		getDataModel = new CampingCarModel();
+		setDataModel = getDataModel;
+		campingCarModel = (CampingCarModel) getDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getCampingCarView();
-		campinCarView = (CampingCarView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getCampingCarView();
+		campinCarView = (CampingCarView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+		columnName = new Object[]{"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
 	}
 
 	@Override

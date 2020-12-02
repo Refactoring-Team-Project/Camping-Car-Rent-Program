@@ -19,26 +19,26 @@ public class CampingCompanyController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.CAMPCOMP, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.CAMPCOMP, new mainButtonListener());
 	}
 
 	@Override
 	public void initModel() {
-		dataModel = new CampingCompanyModel();
-		updateModel = dataModel;
-		campingCompanyModel = (CampingCompanyModel) dataModel;
+		getDataModel = new CampingCompanyModel();
+		setDataModel = getDataModel;
+		campingCompanyModel = (CampingCompanyModel) getDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getCampingCompanyView();
-		campingCompanyView = (CampingCompanyView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getCampingCompanyView();
+		campingCompanyView = (CampingCompanyView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{"COMPID", "COMPNAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
+		columnName = new Object[]{"COMPID", "COMPNAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
 	}
 
 	@Override

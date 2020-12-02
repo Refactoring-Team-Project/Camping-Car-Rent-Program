@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

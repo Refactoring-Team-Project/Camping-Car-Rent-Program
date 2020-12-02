@@ -26,28 +26,28 @@ public class CarCheckController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.CARCHECK, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.CARCHECK, new mainButtonListener());
 	}
 
 	@Override
 	public void initModel() {
-		dataModel = new CarCheckModel();
-		carCheckModel = (CarCheckModel) dataModel;
+		getDataModel = new CarCheckModel();
+		carCheckModel = (CarCheckModel) getDataModel;
 
-		updateModel = new RepairListModel();
-		repairListModel = (RepairListModel) updateModel;
+		setDataModel = new RepairListModel();
+		repairListModel = (RepairListModel) setDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getCarCheckView();
-		carCheckView = (CarCheckView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getCarCheckView();
+		carCheckView = (CarCheckView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{"RENT NO", "CAR ID", "FRONT EX", "LEFT EX", "RIGHT EX", "BACK EX", "REPAIR REQUIRED"};
+		columnName = new Object[]{"RENT NO", "CAR ID", "FRONT EX", "LEFT EX", "RIGHT EX", "BACK EX", "REPAIR REQUIRED"};
 	}
 
 	@Override
@@ -90,10 +90,10 @@ public class CarCheckController extends Controller {
 	public void thisViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == carCheckView.btnRequest) {
-				if (_mainView.getCurRow() != -1) {
-					if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("Y")) {
+				if (mainView.getCurRow() != -1) {
+					if (carCheckView.DBResult.getModel().getValueAt(mainView.getCurRow(), 6).equals("Y")) {
 						inputButtonEvent();
-					} else if (carCheckView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 6).equals("N"))
+					} else if (carCheckView.DBResult.getModel().getValueAt(mainView.getCurRow(), 6).equals("N"))
 						JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
 				} else
 					JOptionPane.showMessageDialog(null, "요청할 데이터를 선택해 주세요.");
@@ -108,17 +108,17 @@ public class CarCheckController extends Controller {
 	@Override
 	public void thisViewMouseEvent(MouseEvent e) {
 		super.thisViewMouseEvent(e);
-		carCheckModel.selectedData(_mainView.getConn(),
-				thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+		carCheckModel.selectedData(mainView.getConn(),
+				connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
 
-		thisView.inputField[1].setText(Integer.toString(carCheckModel.getSelectedCarid()));
-		thisView.inputField[1].setDisabledTextColor(Color.black);
+		connectedView.inputFields[1].setText(Integer.toString(carCheckModel.getSelectedCarid()));
+		connectedView.inputFields[1].setDisabledTextColor(Color.black);
 
-		thisView.inputField[3].setText(Integer.toString(carCheckModel.getSelectedCompid()));
-		thisView.inputField[3].setDisabledTextColor(Color.black);
+		connectedView.inputFields[3].setText(Integer.toString(carCheckModel.getSelectedCompid()));
+		connectedView.inputFields[3].setDisabledTextColor(Color.black);
 
-		thisView.inputField[4].setText(Integer.toString(carCheckModel.getSelectedLicense_no()));
-		thisView.inputField[4].setDisabledTextColor(Color.black);
+		connectedView.inputFields[4].setText(Integer.toString(carCheckModel.getSelectedLicense_no()));
+		connectedView.inputFields[4].setDisabledTextColor(Color.black);
 	}
 
 

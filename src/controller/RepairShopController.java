@@ -24,26 +24,26 @@ public class RepairShopController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.REPAIRSHOP, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.REPAIRSHOP, new mainButtonListener());
 	}
 
 	@Override
 	public void initModel() {
-		dataModel = new RepairShopModel();
-		updateModel = dataModel;
-		repairShopModel = (RepairShopModel) dataModel;
+		getDataModel = new RepairShopModel();
+		setDataModel = getDataModel;
+		repairShopModel = (RepairShopModel) getDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getRepairShopView();
-		repairShopView = (RepairShopView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getRepairShopView();
+		repairShopView = (RepairShopView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{"SHOP ID", "SHOP NAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
+		columnName = new Object[]{"SHOP ID", "SHOP NAME", "ADDRESS", "PHONE", "MANAGER NAME", "MANAGER EMAIL"};
 
 	}
 

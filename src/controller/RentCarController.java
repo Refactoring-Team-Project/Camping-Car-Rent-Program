@@ -26,28 +26,28 @@ public class RentCarController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.RENTCAR, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.RENTCAR, new mainButtonListener());
 	}
 
 	@Override
 	public void initModel() {
-		dataModel = new CarRentModel();
-		carRentModel = (CarRentModel) dataModel;
+		getDataModel = new CarRentModel();
+		carRentModel = (CarRentModel) getDataModel;
 
-		updateModel = new CarCheckModel();
-		carCheckModel = (CarCheckModel) updateModel;
+		setDataModel = new CarCheckModel();
+		carCheckModel = (CarCheckModel) setDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getRentCarView();
-		rentCarView = (RentCarView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getRentCarView();
+		rentCarView = (RentCarView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{ "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
+		columnName = new Object[]{ "RENT NO", "CAR ID", "LICENSE NO", "COMP ID", "RENT DATE", "RENTAL PERIOD", "CHARGE",
 				"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
 	}
 	@Override
@@ -83,7 +83,7 @@ public class RentCarController extends Controller {
 	public void thisViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == rentCarView.btnReturn) {
-				if (_mainView.getCurRow() != -1) {
+				if (mainView.getCurRow() != -1) {
 					inputButtonEvent();
 				}
 			}
@@ -96,13 +96,11 @@ public class RentCarController extends Controller {
 	@Override
 	public void thisViewMouseEvent(MouseEvent e) {
 		super.thisViewMouseEvent(e);
-		rentCarView.inputField[0]
-				.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0).toString());
-		rentCarView.inputField[0].setDisabledTextColor(Color.black);
 
-		rentCarView.inputField[1]
-				.setText(thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 1).toString());
-		rentCarView.inputField[1].setDisabledTextColor(Color.black);
+		for(int i=0; i<2; i++) {
+			rentCarView.inputFields[i].setText(connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), i).toString());
+			rentCarView.inputFields[0].setDisabledTextColor(Color.black);
+		}
 	}
 
 

@@ -31,31 +31,31 @@ public class CarRentListController extends Controller{
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addUserButtonListener(Constants.RENTLIST, new mainButtonListener());
-		this._mainView.addUserButtonListener(Constants.SEARCH1, new mainButtonListener());
-		this._mainView.addUserButtonListener(Constants.SEARCH2, new mainButtonListener());
-		this._mainView.addUserButtonListener(Constants.SEARCH3, new mainButtonListener());
+		this.mainView.addUserButtonListener(Constants.RENTLIST, new mainButtonListener());
+		this.mainView.addUserButtonListener(Constants.SEARCH1, new mainButtonListener());
+		this.mainView.addUserButtonListener(Constants.SEARCH2, new mainButtonListener());
+		this.mainView.addUserButtonListener(Constants.SEARCH3, new mainButtonListener());
 	}
 
 	@Override
 	public void initModel() {
-		dataModel = new CampingCarModel();
-		campCarModel = (CampingCarModel) dataModel;
+		getDataModel = new CampingCarModel();
+		campCarModel = (CampingCarModel) getDataModel;
 
-		updateModel = new CarRentModel();
-		carRentModel = (CarRentModel) updateModel;
+		setDataModel = new CarRentModel();
+		carRentModel = (CarRentModel) setDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getCarRentListView();
-		carRentListView = (CarRentListView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getCarRentListView();
+		carRentListView = (CarRentListView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
+		columnName = new Object[]{"CARID", "CARNAME", "CARNO", "SEAT", "MANUFACTURER", "MANU YEAR", "DRIVING DISTANCE", "RENTCOST", "COMPID", "REGISTDATE"};
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class CarRentListController extends Controller{
 	public void thisViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == carRentListView.btnRent) {
-				if (_mainView.getCurRow() != -1) {
+				if (mainView.getCurRow() != -1) {
 					inputButtonEvent();
 				} else
 					JOptionPane.showMessageDialog(null, "대여할 차를 선택해주세요");
@@ -111,18 +111,18 @@ public class CarRentListController extends Controller{
 
 	@Override
 	public void mainViewButtonEvent(ActionEvent e) {
-		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.RENTLIST)]) {
+		if (e.getSource() == mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.RENTLIST)]) {
 			currentList = RENTABLE.ALLLIST;
 		}
-		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
+		if (e.getSource() == mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH1)]) {
 			input = carRentListView.searchInput("원하는 최대 금액을 입력해주세요");
 			currentList = RENTABLE.SEARCH1;
 		}
-		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
+		if (e.getSource() == mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH2)]) {
 			input = carRentListView.searchInput("원하는 최소 제조년도를 입력해주세요");
 			currentList = RENTABLE.SEARCH2;
 		}
-		if (e.getSource() == _mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
+		if (e.getSource() == mainView.btnOnUserPanel[Arrays.asList(Constants.USER_BUTTON_NAME).indexOf(Constants.SEARCH3)]) {
 			input = carRentListView.searchInput("원하는 최대 주행거리를 입력해주세요");
 			currentList = RENTABLE.SEARCH3;
 		}
@@ -134,36 +134,36 @@ public class CarRentListController extends Controller{
 		ArrayList<Object[]> arr;
 		switch(currentList) {
 			case ALLLIST:
-				arr = campCarModel.selectRentAble(_mainView.getConn());
+				arr = campCarModel.selectRentAble(mainView.getConn());
 				break;
 			case SEARCH1:
-				arr = campCarModel.search1(_mainView.getConn(), input);
+				arr = campCarModel.search1(mainView.getConn(), input);
 				break;
 			case SEARCH2:
-				arr = campCarModel.search2(_mainView.getConn(), input);
+				arr = campCarModel.search2(mainView.getConn(), input);
 				break;
 			case SEARCH3:
-				arr = campCarModel.search3(_mainView.getConn(), input);
+				arr = campCarModel.search3(mainView.getConn(), input);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + currentList);
 		}
 		for (int i = 0; i < arr.size(); i++) {
-			thisView.tableModel.addRow(arr.get(i));
+			connectedView.tableModelOnScrollPane.addRow(arr.get(i));
 		}
 	}
 
 	@Override
 	public void thisViewMouseEvent(MouseEvent e) {
 		super.thisViewMouseEvent(e);
-		campCarModel.selectedData(_mainView.getConn(),
-				thisView.DBResult.getModel().getValueAt(_mainView.getCurRow(), 0));
+		campCarModel.selectedData(mainView.getConn(),
+				connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
 
-		thisView.inputField[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
-		thisView.inputField[1].setDisabledTextColor(Color.black);
+		connectedView.inputFields[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
+		connectedView.inputFields[1].setDisabledTextColor(Color.black);
 
-		thisView.inputField[3].setText(Integer.toString(campCarModel.getSelectedCompid()));
-		thisView.inputField[3].setDisabledTextColor(Color.black);
+		connectedView.inputFields[3].setText(Integer.toString(campCarModel.getSelectedCompid()));
+		connectedView.inputFields[3].setDisabledTextColor(Color.black);
 	}
 
 }

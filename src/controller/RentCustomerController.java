@@ -22,26 +22,26 @@ public class RentCustomerController extends Controller{
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.CUSTOMER, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.CUSTOMER, new mainButtonListener());
 	}
 
 	@Override
 	public void initModel() {
-		dataModel = new RentCustomerModel();
-		updateModel = dataModel;
-		rentCustomerModel = (RentCustomerModel) dataModel;
+		getDataModel = new RentCustomerModel();
+		setDataModel = getDataModel;
+		rentCustomerModel = (RentCustomerModel) getDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getRentCustomerView();
-		rentCustomerView = (RentCustomerView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getRentCustomerView();
+		rentCustomerView = (RentCustomerView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{ "LICENSE_NO", "NAME", "ADDRESS", "PHONE", "EMAIL" };
+		columnName = new Object[]{ "LICENSE_NO", "NAME", "ADDRESS", "PHONE", "EMAIL" };
 
 	}
 

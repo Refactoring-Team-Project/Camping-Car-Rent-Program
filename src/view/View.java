@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 abstract public class View extends JPanel {
-    public DefaultTableModel tableModel;
+    public DefaultTableModel tableModelOnScrollPane;
     public JTable DBResult;
     JScrollPane scrollPane;
     public JPanel updateDataPanel, buttonPanel;
@@ -27,12 +27,12 @@ abstract public class View extends JPanel {
     }
 
     public void initScrollPane() {
-        tableModel = new DefaultTableModel() {
+        tableModelOnScrollPane = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        DBResult = new JTable(tableModel);
+        DBResult = new JTable(tableModelOnScrollPane);
         DBResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scrollPane = new JScrollPane(DBResult);
         add(scrollPane);

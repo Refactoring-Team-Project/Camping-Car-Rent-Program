@@ -20,26 +20,26 @@ public class RepairListController extends Controller {
 	@Override
 	public void setMainView() {
 		super.setMainView();
-		this._mainView.addAdminButtonListener(Constants.REPAIRLIST, new mainButtonListener());
+		this.mainView.addAdminButtonListener(Constants.REPAIRLIST, new mainButtonListener());
 	}
 
 	@Override
 	public void initModel() {
-		dataModel = new RepairListModel();
-		updateModel = dataModel;
-		repairListModel = (RepairListModel) dataModel;
+		getDataModel = new RepairListModel();
+		setDataModel = getDataModel;
+		repairListModel = (RepairListModel) getDataModel;
 	}
 
 	@Override
-	public void initView() {
-		this.thisView = AppManager.getInstance().getRepairListView();
-		repairListView = (RepairListView) this.thisView;
+	public void initConnectedView() {
+		this.connectedView = AppManager.getInstance().getRepairListView();
+		repairListView = (RepairListView) this.connectedView;
 		thisViewAddListener();
 	}
 
 	@Override
 	public void setColumnName() {
-		column = new Object[]{ "REPAIR NO", "CAR ID", "SHOP ID", "COMP ID", "LICENSE NO", "REPAIR DETAILS",
+		columnName = new Object[]{ "REPAIR NO", "CAR ID", "SHOP ID", "COMP ID", "LICENSE NO", "REPAIR DETAILS",
 				"REPAIR DATE", "REPAIR COST", "PAYMENT DEADLINE", "REPAIRHISTORY" };
 	}
 
