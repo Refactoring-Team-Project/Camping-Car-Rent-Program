@@ -48,7 +48,7 @@ public class RepairShopController extends Controller {
 	}
 
 	@Override
-	public void setModelColumn(String column, String value) {
+	public void setModelEachColumn(String column, String value) {
 		switch (column){
 			case "shopid":
 				repairShopModel.setShopid(Integer.parseInt(value));

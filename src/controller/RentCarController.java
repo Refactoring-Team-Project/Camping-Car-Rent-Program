@@ -51,7 +51,7 @@ public class RentCarController extends Controller {
 				"PAYMENT DEADLINE", "BILL HISTORY", "BILL HISTORY COST" };
 	}
 	@Override
-	public void setModelColumn(String column, String value) {
+	public void setModelEachColumn(String column, String value) {
 		switch(column){
 			case "rentno":
 				carCheckModel.setRentno(Integer.parseInt(value));

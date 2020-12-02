@@ -51,7 +51,7 @@ public class CarCheckController extends Controller {
 	}
 
 	@Override
-	public void setModelColumn(String column, String value) {
+	public void setModelEachColumn(String column, String value) {
 		switch (column) {
 			case "repairno":
 				repairListModel.setRepairno(Integer.parseInt(value));

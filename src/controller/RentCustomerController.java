@@ -46,7 +46,7 @@ public class RentCustomerController extends Controller{
 	}
 
 	@Override
-	public void setModelColumn(String column, String value) {
+	public void setModelEachColumn(String column, String value) {
 		switch (column){
 		case "license_no":
 			rentCustomerModel.setLicense_no(Integer.parseInt(value));

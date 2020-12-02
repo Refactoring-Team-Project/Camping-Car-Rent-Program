@@ -42,7 +42,7 @@ public class CampingCompanyController extends Controller {
 	}
 
 	@Override
-	public void setModelColumn(String column, String value) {
+	public void setModelEachColumn(String column, String value) {
 		switch (column) {
 			case "compid":
 				campingCompanyModel.setCompid(Integer.parseInt(value));

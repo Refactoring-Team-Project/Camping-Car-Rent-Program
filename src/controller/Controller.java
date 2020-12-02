@@ -48,14 +48,14 @@ public abstract class Controller {
         for(int i = 0; i< connectedView.inputFields.length; i++) {
             String value = connectedView.inputFields[i].getText();
             if(value.length() > 0) {
-                setModelColumn(connectedView.fieldName[i].getText(), value);
+                setModelEachColumn(connectedView.fieldName[i].getText(), value);
             }
             else throw new NullPointerException();
         }
     }
 
     /*** Model 각 column에 데이터 set ***/
-    abstract public void setModelColumn(String column, String value);
+    abstract public void setModelEachColumn(String column, String value);
 
     /*** MainView ButtonListener ***/
     public class mainButtonListener implements ActionListener {

@@ -59,7 +59,7 @@ public class CarRentListController extends Controller{
 	}
 
 	@Override
-	public void setModelColumn(String column, String value) {
+	public void setModelEachColumn(String column, String value) {
 		switch (column) {
 			case "rentno":
 				carRentModel.setRentno(Integer.parseInt(value));

@@ -65,7 +65,7 @@ public class SearchController extends Controller {
 	}
 
 	@Override
-	public void setModelColumn(String column, String value) { }
+	public void setModelEachColumn(String column, String value) { }
 
 	@Override
 	public void mainViewButtonEvent(ActionEvent e) {
