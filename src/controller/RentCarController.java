@@ -42,7 +42,7 @@ public class RentCarController extends Controller {
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getRentCarView();
 		rentCarView = (RentCarView) this.connectedView;
-		thisViewAddListener();
+		connectedViewAddListener();
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class RentCarController extends Controller {
 
 
 	@Override
-	public void thisViewButtonEvent(ActionEvent e) {
+	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == rentCarView.btnReturn) {
 				if (mainView.getCurRow() != -1) {
@@ -94,8 +94,8 @@ public class RentCarController extends Controller {
 	}
 
 	@Override
-	public void thisViewMouseEvent(MouseEvent e) {
-		super.thisViewMouseEvent(e);
+	public void connectedViewMouseEvent(MouseEvent e) {
+		super.connectedViewMouseEvent(e);
 
 		for(int i=0; i<2; i++) {
 			rentCarView.inputFields[i].setText(connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), i).toString());

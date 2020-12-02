@@ -36,7 +36,7 @@ public class RentCustomerController extends Controller{
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getRentCustomerView();
 		rentCustomerView = (RentCustomerView) this.connectedView;
-		thisViewAddListener();
+		connectedViewAddListener();
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class RentCustomerController extends Controller{
 
 
 	@Override
-	public void thisViewButtonEvent(ActionEvent e) {
+	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == rentCustomerView.btnInput) {
 				inputButtonEvent();

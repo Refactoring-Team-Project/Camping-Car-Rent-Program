@@ -50,7 +50,7 @@ public class CarRentListController extends Controller{
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getCarRentListView();
 		carRentListView = (CarRentListView) this.connectedView;
-		thisViewAddListener();
+		connectedViewAddListener();
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class CarRentListController extends Controller{
 
 
 	@Override
-	public void thisViewButtonEvent(ActionEvent e) {
+	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == carRentListView.btnRent) {
 				if (mainView.getCurRow() != -1) {
@@ -154,8 +154,8 @@ public class CarRentListController extends Controller{
 	}
 
 	@Override
-	public void thisViewMouseEvent(MouseEvent e) {
-		super.thisViewMouseEvent(e);
+	public void connectedViewMouseEvent(MouseEvent e) {
+		super.connectedViewMouseEvent(e);
 		campCarModel.selectedData(mainView.getConn(),
 				connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
 

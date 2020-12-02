@@ -36,9 +36,9 @@ public abstract class Controller {
     abstract public void initModel();
     abstract public void initConnectedView();
 
-    public void thisViewAddListener() {
-        connectedView.addButtonListener(new thisViewButtonListener());
-        connectedView.addMouseListener(new thisViewMouseListener());
+    public void connectedViewAddListener() {
+        connectedView.addButtonListener(new connectedViewButtonListener());
+        connectedView.addMouseListener(new connectedViewMouseListener());
     }
     /*** scrollpane tableModel에 보여질 columnName 설정* **/
     abstract public void setColumnName();
@@ -73,14 +73,14 @@ public abstract class Controller {
     }
 
     /*** ThisView Button Listener ***/
-    public class thisViewButtonListener implements ActionListener {
+    public class connectedViewButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            thisViewButtonEvent(e);
+            connectedViewButtonEvent(e);
         }
     }
 
-    public void thisViewButtonEvent(ActionEvent e) {}
+    public void connectedViewButtonEvent(ActionEvent e) {}
 
     public void inputButtonEvent() {
         setModel();
@@ -106,14 +106,14 @@ public abstract class Controller {
     }
 
     /*** ThisView Mouse Listener ***/
-    public class thisViewMouseListener extends MouseAdapter {
+    public class connectedViewMouseListener extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
             mainView.setCurRow(connectedView.DBResult.getSelectedRow());
             mainView.setCurCol(connectedView.DBResult.getSelectedColumn());
-            thisViewMouseEvent(e);
+            connectedViewMouseEvent(e);
         }
     }
-    public void thisViewMouseEvent(MouseEvent e) {}
+    public void connectedViewMouseEvent(MouseEvent e) {}
 
     /*** 설정한 columnName으로 tableModel column set ***/
     public void setDataTableColumnName() {

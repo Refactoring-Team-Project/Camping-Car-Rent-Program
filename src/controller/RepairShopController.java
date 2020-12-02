@@ -38,7 +38,7 @@ public class RepairShopController extends Controller {
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getRepairShopView();
 		repairShopView = (RepairShopView) this.connectedView;
-		thisViewAddListener();
+		connectedViewAddListener();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class RepairShopController extends Controller {
 
 
 	@Override
-	public void thisViewButtonEvent(ActionEvent e) {
+	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == repairShopView.btnInput) {
 				inputButtonEvent();

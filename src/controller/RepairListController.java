@@ -34,7 +34,7 @@ public class RepairListController extends Controller {
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getRepairListView();
 		repairListView = (RepairListView) this.connectedView;
-		thisViewAddListener();
+		connectedViewAddListener();
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class RepairListController extends Controller {
 
 
 	@Override
-	public void thisViewButtonEvent(ActionEvent e) {
+	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == repairListView.btnDelete) {
 				deleteButtonEvent();

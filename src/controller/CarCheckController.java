@@ -42,7 +42,7 @@ public class CarCheckController extends Controller {
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getCarCheckView();
 		carCheckView = (CarCheckView) this.connectedView;
-		thisViewAddListener();
+		connectedViewAddListener();
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class CarCheckController extends Controller {
 	}
 
 	@Override
-	public void thisViewButtonEvent(ActionEvent e) {
+	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == carCheckView.btnRequest) {
 				if (mainView.getCurRow() != -1) {
@@ -106,8 +106,8 @@ public class CarCheckController extends Controller {
 
 
 	@Override
-	public void thisViewMouseEvent(MouseEvent e) {
-		super.thisViewMouseEvent(e);
+	public void connectedViewMouseEvent(MouseEvent e) {
+		super.connectedViewMouseEvent(e);
 		carCheckModel.selectedData(mainView.getConn(),
 				connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
 

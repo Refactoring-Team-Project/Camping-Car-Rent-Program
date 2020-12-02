@@ -33,7 +33,7 @@ public class CampingCompanyController extends Controller {
 	public void initConnectedView() {
 		this.connectedView = AppManager.getInstance().getCampingCompanyView();
 		campingCompanyView = (CampingCompanyView) this.connectedView;
-		thisViewAddListener();
+		connectedViewAddListener();
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class CampingCompanyController extends Controller {
 
 
 	@Override
-	public void thisViewButtonEvent(ActionEvent e) {
+	public void connectedViewButtonEvent(ActionEvent e) {
 
 		try {
 			if (e.getSource() == campingCompanyView.btnInput) {
