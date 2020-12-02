@@ -90,10 +90,10 @@ public class CarCheckController extends Controller {
 	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == carCheckView.btnRequest) {
-				if (mainView.getCurRow() != -1) {
-					if (carCheckView.DBResult.getModel().getValueAt(mainView.getCurRow(), 6).equals("Y")) {
+				if (mainView.getCurrentRow() != -1) {
+					if (carCheckView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 6).equals("Y")) {
 						inputButtonEvent();
-					} else if (carCheckView.DBResult.getModel().getValueAt(mainView.getCurRow(), 6).equals("N"))
+					} else if (carCheckView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 6).equals("N"))
 						JOptionPane.showMessageDialog(null, "데이터 선택이 잘못되었습니다.");
 				} else
 					JOptionPane.showMessageDialog(null, "요청할 데이터를 선택해 주세요.");
@@ -108,8 +108,8 @@ public class CarCheckController extends Controller {
 	@Override
 	public void connectedViewMouseEvent(MouseEvent e) {
 		super.connectedViewMouseEvent(e);
-		carCheckModel.selectedData(mainView.getConn(),
-				connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
+		carCheckModel.selectedData(mainView.getConnection(),
+				connectedView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 0));
 
 		connectedView.inputFields[1].setText(Integer.toString(carCheckModel.getSelectedCarid()));
 		connectedView.inputFields[1].setDisabledTextColor(Color.black);

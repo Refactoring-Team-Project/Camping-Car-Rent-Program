@@ -83,7 +83,7 @@ public class RentCarController extends Controller {
 	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == rentCarView.btnReturn) {
-				if (mainView.getCurRow() != -1) {
+				if (mainView.getCurrentRow() != -1) {
 					inputButtonEvent();
 				}
 			}
@@ -98,7 +98,7 @@ public class RentCarController extends Controller {
 		super.connectedViewMouseEvent(e);
 
 		for(int i=0; i<2; i++) {
-			rentCarView.inputFields[i].setText(connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), i).toString());
+			rentCarView.inputFields[i].setText(connectedView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), i).toString());
 			rentCarView.inputFields[0].setDisabledTextColor(Color.black);
 		}
 	}

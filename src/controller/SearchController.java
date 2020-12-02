@@ -92,16 +92,16 @@ public class SearchController extends Controller {
 		ArrayList<Object[]> arr;
 		switch(currentSearch) {
 			case SEARCH1:
-				arr = carRentModel.search1(mainView.getConn(), input);
+				arr = carRentModel.search1(mainView.getConnection(), input);
 				break;
 			case SEARCH2:
-				arr = campCompModel.search2(mainView.getConn());
+				arr = campCompModel.search2(mainView.getConnection());
 				break;
 			case SEARCH3:
-				arr = rentCustomerModel.search3(mainView.getConn());
+				arr = rentCustomerModel.search3(mainView.getConnection());
 				break;
 			case SEARCH4:
-				arr = repairShopModel.search4(mainView.getConn());
+				arr = repairShopModel.search4(mainView.getConnection());
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + currentSearch);

@@ -84,13 +84,13 @@ public abstract class Controller {
 
     public void inputButtonEvent() {
         setModel();
-        setDataModel.insert(mainView.getConn());
+        setDataModel.insert(mainView.getConnection());
         connectedView.fieldReset();
     }
 
     public void deleteButtonEvent() {
-        if (mainView.getCurRow() != -1) {
-            setDataModel.delete(mainView.getConn(), connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
+        if (mainView.getCurrentRow() != -1) {
+            setDataModel.delete(mainView.getConnection(), connectedView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 0));
             connectedView.fieldReset();
         } else {
             JOptionPane.showMessageDialog(null, "삭제할 데이터를 선택해 주세요.");
@@ -98,9 +98,9 @@ public abstract class Controller {
     }
 
     public void updateButtonEvent() {
-        if(mainView.getCurRow() != -1) {
+        if(mainView.getCurrentRow() != -1) {
             setModel();
-            setDataModel.update(mainView.getConn(), connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
+            setDataModel.update(mainView.getConnection(), connectedView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 0));
             connectedView.fieldReset();
         }
     }
@@ -108,8 +108,8 @@ public abstract class Controller {
     /*** ThisView Mouse Listener ***/
     public class connectedViewMouseListener extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
-            mainView.setCurRow(connectedView.DBResult.getSelectedRow());
-            mainView.setCurCol(connectedView.DBResult.getSelectedColumn());
+            mainView.setCurrentRow(connectedView.DBResult.getSelectedRow());
+            mainView.setCurrentCol(connectedView.DBResult.getSelectedColumn());
             connectedViewMouseEvent(e);
         }
     }
@@ -121,7 +121,7 @@ public abstract class Controller {
     }
     /*** tableModel에 Model에서 가져온 값 뿌려줌 ***/
     public void getDataTableValues() {
-        ArrayList<Object[]> arr = getDataModel.select(mainView.getConn());
+        ArrayList<Object[]> arr = getDataModel.select(mainView.getConnection());
         for (int i = 0; i < arr.size(); i++) {
             connectedView.tableModelOnScrollPane.addRow(arr.get(i));
         }

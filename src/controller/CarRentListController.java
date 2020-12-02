@@ -99,7 +99,7 @@ public class CarRentListController extends Controller{
 	public void connectedViewButtonEvent(ActionEvent e) {
 		try {
 			if (e.getSource() == carRentListView.btnRent) {
-				if (mainView.getCurRow() != -1) {
+				if (mainView.getCurrentRow() != -1) {
 					inputButtonEvent();
 				} else
 					JOptionPane.showMessageDialog(null, "대여할 차를 선택해주세요");
@@ -134,16 +134,16 @@ public class CarRentListController extends Controller{
 		ArrayList<Object[]> arr;
 		switch(currentList) {
 			case ALLLIST:
-				arr = campCarModel.selectRentAble(mainView.getConn());
+				arr = campCarModel.selectRentAble(mainView.getConnection());
 				break;
 			case SEARCH1:
-				arr = campCarModel.search1(mainView.getConn(), input);
+				arr = campCarModel.search1(mainView.getConnection(), input);
 				break;
 			case SEARCH2:
-				arr = campCarModel.search2(mainView.getConn(), input);
+				arr = campCarModel.search2(mainView.getConnection(), input);
 				break;
 			case SEARCH3:
-				arr = campCarModel.search3(mainView.getConn(), input);
+				arr = campCarModel.search3(mainView.getConnection(), input);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + currentList);
@@ -156,8 +156,8 @@ public class CarRentListController extends Controller{
 	@Override
 	public void connectedViewMouseEvent(MouseEvent e) {
 		super.connectedViewMouseEvent(e);
-		campCarModel.selectedData(mainView.getConn(),
-				connectedView.DBResult.getModel().getValueAt(mainView.getCurRow(), 0));
+		campCarModel.selectedData(mainView.getConnection(),
+				connectedView.DBResult.getModel().getValueAt(mainView.getCurrentRow(), 0));
 
 		connectedView.inputFields[1].setText(Integer.toString(campCarModel.getSelectedCarid()));
 		connectedView.inputFields[1].setDisabledTextColor(Color.black);

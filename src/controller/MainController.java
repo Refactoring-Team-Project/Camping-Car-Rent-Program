@@ -27,7 +27,7 @@ public class MainController {
 
 	public void connDB() {
 		connModel = new DatabaseConnectionModel();
-		this._mainView.conn = connModel.getConn();
+		this._mainView.connection = connModel.getConn();
 	}
 
 	private class UserChangeButtonListener implements ActionListener {
@@ -47,7 +47,7 @@ public class MainController {
 				{
 					_mainView.changePanel(null);
 					JOptionPane.showMessageDialog(null,"초기화 완료");
-					DbReset.initDB(_mainView.getConn());
+					DbReset.initDB(_mainView.getConnection());
 				}
 
 			} catch (NullPointerException e1) {
