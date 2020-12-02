@@ -26,9 +26,9 @@ public class MainView extends JFrame {
 	}
 
 	UserType currentUserType;
-	int curRow = -1, curCol = -1;
+	int currentRow = -1, currentCol = -1;
 
-	public Connection conn;
+	public Connection connection;
 
 	public MainView() {
 		super("refactoring");
@@ -100,24 +100,24 @@ public class MainView extends JFrame {
 		userPanel.setPreferredSize(new Dimension(780, 80));
 	}
 
-	public Connection getConn() {
-		return conn;
+	public Connection getConnection() {
+		return connection;
 	}
 
-	public int getCurRow() {
-		return curRow;
+	public int getCurrentRow() {
+		return currentRow;
 	}
 
-	public void setCurRow(int selectedRow) {
-		curRow = selectedRow;
+	public void setCurrentRow(int selectedRow) {
+		currentRow = selectedRow;
 	}
 
-	public int getCurCol() {
-		return curCol;
+	public int getCurrentCol() {
+		return currentCol;
 	}
 
-	public void setCurCol(int selectedCol) {
-		curCol = selectedCol;
+	public void setCurrentCol(int selectedCol) {
+		currentCol = selectedCol;
 	}
 
 	public void changeUser() {
@@ -137,8 +137,8 @@ public class MainView extends JFrame {
 		this.getContentPane().add(tableBtnPanel[currentUserType.ordinal()], 1);
 		if (view != null) this.getContentPane().add(view, 2);
 
-		setCurCol(-1);
-		setCurRow(-1);
+		setCurrentCol(-1);
+		setCurrentRow(-1);
 
 		revalidate();
 		repaint();
