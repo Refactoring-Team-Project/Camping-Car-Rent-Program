@@ -145,7 +145,7 @@ public class MainView extends JFrame {
 		repaint();
 	}
 
-	public void addUserButtonListener(ActionListener listener) {
+	public void addUserChangeButtonListener(ActionListener listener) {
 		btnUserChange.addActionListener(listener);
 	}
 

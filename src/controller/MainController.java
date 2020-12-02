@@ -13,28 +13,32 @@ import javax.swing.*;
 public class MainController {
 	MainView _mainView;
 	DatabaseConnectionModel connModel;
-	
-	
+
 	public MainController() {
 		this._mainView = AppManager.getInstance().getView();
-		
-		this._mainView.addUserButtonListener(new UserButtonListener());
-		this._mainView.addResetButtonListener(new ResetButtonListener());
+		addEventListener();
+		connDB();
+	}
 
+	public void addEventListener() {
+		this._mainView.addUserChangeButtonListener(new UserChangeButtonListener());
+		this._mainView.addResetButtonListener(new ResetButtonListener());
+	}
+
+	public void connDB() {
 		connModel = new DatabaseConnectionModel();
 		this._mainView.conn = connModel.getConn();
-		//this._campCompView.addUserButtonListener(new UserButtonListener());
-	
 	}
-	
-	private class UserButtonListener implements ActionListener {
-		
+
+	private class UserChangeButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			_mainView.changeUser();
 		}
-		
 	}
+
+
+	/**** Refactoring X - 교수님 위한 초기화 코드 ***/
 	public class ResetButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
