@@ -11,29 +11,29 @@ import view.MainView;
 import javax.swing.*;
 
 public class MainController {
-	MainView _mainView;
+	MainView mainView;
 	DatabaseConnectionModel connectionModel;
 
 	public MainController() {
-		this._mainView = AppManager.getInstance().getMainView();
+		this.mainView = AppManager.getInstance().getMainView();
 		addEventListener();
 		connectionDB();
 	}
 
 	public void addEventListener() {
-		this._mainView.addUserChangeButtonListener(new UserChangeButtonListener());
-		this._mainView.addResetButtonListener(new ResetButtonListener());
+		this.mainView.addUserChangeButtonListener(new UserChangeButtonListener());
+		this.mainView.addResetButtonListener(new ResetButtonListener());
 	}
 
 	public void connectionDB() {
 		connectionModel = new DatabaseConnectionModel();
-		this._mainView.connection = connectionModel.getConnection();
+		this.mainView.connection = connectionModel.getConnection();
 	}
 
 	private class UserChangeButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			_mainView.changeUser();
+			mainView.changeUser();
 		}
 	}
 
@@ -43,11 +43,11 @@ public class MainController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				if (e.getSource() == _mainView.btnReset)
+				if (e.getSource() == mainView.btnReset)
 				{
-					_mainView.changePanel(null);
+					mainView.changePanel(null);
 					JOptionPane.showMessageDialog(null,"초기화 완료");
-					DbReset.initDB(_mainView.getConnection());
+					DbReset.initDB(mainView.getConnection());
 				}
 
 			} catch (NullPointerException e1) {
