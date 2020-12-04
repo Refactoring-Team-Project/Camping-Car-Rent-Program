@@ -23,7 +23,7 @@ public class CarRentListController extends Controller{
 	RENTABLE currentList;
 	String input;
 
-	CarRentListView carRentListView;
+	private CarRentListView carRentListView;
 	private CampingCarModel campCarModel;
 	private CarRentModel carRentModel;
 
